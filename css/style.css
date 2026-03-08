@@ -370,147 +370,132 @@ img {
   gap: 40px;
   padding: 48px;
   background: linear-gradient(135deg, var(--bg-card) 0%, rgba(26, 26, 36, 0.8) 100%);
-  border: 1px solid rgba(34, 197, 94, 0.2);
+  border: 1px solid rgba(129, 140, 248, 0.25);
 }
 
 .app-card-featured:hover {
-  border-color: rgba(34, 197, 94, 0.4);
+  border-color: rgba(129, 140, 248, 0.4);
 }
 
-/* Phone Mockup */
+/* KasaBende: uygulama mavi tonları */
+.app-card-kasabende {
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.app-card-kasabende:hover {
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+.app-icon-kasabende {
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%) !important;
+}
+
+.app-badge-kasabende {
+  background: rgba(59, 130, 246, 0.2) !important;
+  color: #93c5fd !important;
+}
+
+/* App Preview */
 .app-preview {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
-.phone-frame {
-  width: 280px;
-  height: 560px;
-  background: #1a1a24;
-  border-radius: 40px;
-  padding: 12px;
-  box-shadow: 
-    0 0 0 2px rgba(255, 255, 255, 0.1),
-    0 40px 80px rgba(0, 0, 0, 0.5);
+.kasabende-highlights {
+  display: grid;
+  gap: 14px;
+  margin-top: 20px;
 }
 
-.phone-screen {
+.kasabende-item {
+  padding: 16px 18px;
+  background: rgba(20, 43, 110, 0.35);
+  border: 1px solid rgba(129, 140, 248, 0.25);
+  border-radius: 16px;
+}
+
+.kasabende-item h4 {
+  font-size: 0.98rem;
+  margin-bottom: 6px;
+  color: #dbeafe;
+}
+
+.kasabende-item p {
+  color: #b9c7df;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.app-preview-kasabende {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 20px 0;
+}
+
+.kasabende-gallery {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 0;
+  position: relative;
+}
+
+.gallery-phone {
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  background: #0c1a4a;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-phone img {
+  display: block;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, #0f1419 0%, #1a2332 100%);
-  border-radius: 32px;
-  overflow: hidden;
+  object-fit: cover;
 }
 
-.mock-app {
-  padding: 20px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+.phone-center {
+  width: 220px;
+  height: 440px;
+  z-index: 3;
+  position: relative;
 }
 
-.mock-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
+.phone-left {
+  width: 180px;
+  height: 360px;
+  z-index: 2;
+  margin-right: -40px;
+  transform: perspective(800px) rotateY(12deg) scale(0.92);
+  opacity: 0.9;
 }
 
-.mock-title {
-  font-weight: 700;
-  font-size: 1.1rem;
+.phone-right {
+  width: 180px;
+  height: 360px;
+  z-index: 2;
+  margin-left: -40px;
+  transform: perspective(800px) rotateY(-12deg) scale(0.92);
+  opacity: 0.9;
 }
 
-.mock-date {
-  font-size: 0.75rem;
-  color: var(--text-muted);
+.gallery-phone:hover {
+  transform: scale(1.03);
+  z-index: 10;
+  opacity: 1;
 }
 
-.mock-balance {
-  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 16px;
+.phone-left:hover {
+  transform: perspective(800px) rotateY(12deg) scale(1);
 }
 
-.mock-label {
-  display: block;
-  font-size: 0.75rem;
-  opacity: 0.8;
-  margin-bottom: 4px;
-}
-
-.mock-amount {
-  font-size: 1.75rem;
-  font-weight: 700;
-}
-
-.mock-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.mock-stat {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  padding: 14px;
-}
-
-.mock-stat-label {
-  display: block;
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  margin-bottom: 4px;
-}
-
-.mock-stat-value {
-  font-weight: 600;
-  font-size: 0.95rem;
-}
-
-.mock-stat-income .mock-stat-value {
-  color: #22c55e;
-}
-
-.mock-stat-expense .mock-stat-value {
-  color: #f87171;
-}
-
-.mock-transactions {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.mock-tx {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 10px;
-}
-
-.mock-tx-name {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-}
-
-.mock-tx-amount {
-  font-weight: 600;
-  font-size: 0.85rem;
-}
-
-.mock-tx-amount.positive {
-  color: #22c55e;
-}
-
-.mock-tx-amount.negative {
-  color: #f87171;
+.phone-right:hover {
+  transform: perspective(800px) rotateY(-12deg) scale(1);
 }
 
 /* Coming Soon Cards */
@@ -848,6 +833,10 @@ img {
   .app-card-featured {
     grid-template-columns: 1fr 1fr;
   }
+
+  .kasabende-highlights {
+    grid-template-columns: 1fr 1fr;
+  }
   
   .about-grid {
     grid-template-columns: 1fr 1fr;
@@ -866,6 +855,17 @@ img {
   .app-card-featured {
     grid-column: span 3;
     grid-template-columns: 1.2fr 1fr;
+  }
+
+  .phone-center {
+    width: 240px;
+    height: 480px;
+  }
+
+  .phone-left,
+  .phone-right {
+    width: 200px;
+    height: 400px;
   }
   
   .app-card-soon {
@@ -886,9 +886,28 @@ img {
     font-size: 2.5rem;
   }
   
-  .phone-frame {
-    width: 240px;
-    height: 480px;
+  .app-card {
+    padding: 24px;
+  }
+
+  .app-card-featured {
+    padding: 28px;
+  }
+
+  .kasabende-gallery {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .phone-left,
+  .phone-right {
+    display: none;
+  }
+
+  .phone-center {
+    width: 200px;
+    height: 400px;
+    transform: none;
   }
   
   .contact-box {
