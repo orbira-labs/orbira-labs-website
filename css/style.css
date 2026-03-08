@@ -1027,22 +1027,28 @@ img {
   }
 
   .app-card-featured {
-    padding: 28px;
+    padding: 20px;
   }
 
   .kasabende-gallery {
     margin-bottom: 24px;
   }
 
-  .phone-left,
-  .phone-right {
-    display: none;
+  .phone-center {
+    width: 140px;
+    height: 280px;
   }
 
-  .phone-center {
-    width: 180px;
-    height: 360px;
-    transform: none;
+  .phone-left,
+  .phone-right {
+    width: 110px;
+    height: 220px;
+    margin-right: -20px;
+  }
+
+  .phone-right {
+    margin-right: 0;
+    margin-left: -20px;
   }
   
   .contact-box {
