@@ -361,7 +361,7 @@ export default function PrivacyPage() {
                 </p>
                 <div className="mt-4 p-4 bg-background-tertiary rounded-lg border border-border">
                   <p className="text-foreground font-medium">Orbira Labs</p>
-                  <p className="mt-2">E-posta: hello@orbiralabs.com</p>
+                  <p className="mt-2">E-posta: seyyitaliperseorganization@gmail.com</p>
                 </div>
               </section>
 
@@ -373,17 +373,11 @@ export default function PrivacyPage() {
                 <p className="leading-relaxed">
                   Gizlilikle ilgili her türlü soru, talep, şikayet veya haklarınızı kullanmak için:
                 </p>
-                <div className="mt-4 p-4 bg-background-tertiary rounded-lg border border-border space-y-2">
+                <div className="mt-4 p-4 bg-background-tertiary rounded-lg border border-border">
                   <p>
                     <strong className="text-foreground">E-posta:</strong>{" "}
                     <a href="mailto:seyyitaliperseorganization@gmail.com" className="text-brand-primary hover:underline">
                       seyyitaliperseorganization@gmail.com
-                    </a>
-                  </p>
-                  <p>
-                    <strong className="text-foreground">Genel İletişim:</strong>{" "}
-                    <a href="mailto:hello@orbiralabs.com" className="text-brand-primary hover:underline">
-                      hello@orbiralabs.com
                     </a>
                   </p>
                 </div>

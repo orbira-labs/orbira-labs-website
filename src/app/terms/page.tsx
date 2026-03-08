@@ -38,8 +38,8 @@ export default function TermsPage() {
                 </p>
                 <p className="leading-relaxed mt-2">
                   İletişim:{" "}
-                  <a href="mailto:hello@orbiralabs.com" className="text-brand-primary hover:underline">
-                    hello@orbiralabs.com
+                  <a href="mailto:seyyitaliperseorganization@gmail.com" className="text-brand-primary hover:underline">
+                    seyyitaliperseorganization@gmail.com
                   </a>
                 </p>
               </section>
