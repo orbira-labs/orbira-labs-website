@@ -47,26 +47,26 @@ export function Hero() {
 
           {/* CTAs */}
           <motion.div
-            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
+            className="flex flex-row items-center justify-center gap-3 sm:gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <Link href="#products" className="w-full sm:w-auto">
+            <Link href="#products" className="flex-1 sm:flex-none">
               <Button variant="primary" size="lg" className="w-full sm:w-auto">
                 Ürünleri keşfet
               </Button>
             </Link>
-            <Link href="#about" className="w-full sm:w-auto">
+            <Link href="#about" className="flex-1 sm:flex-none">
               <Button variant="secondary" size="lg" className="w-full sm:w-auto">
                 Orbira Labs&apos;i tanı
               </Button>
             </Link>
           </motion.div>
 
-          {/* Scroll indicator - hidden on very small screens */}
+          {/* Scroll indicator */}
           <motion.div
-            className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 hidden sm:block"
+            className="flex justify-center mt-10 sm:mt-12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.8 }}
