@@ -1,13 +1,40 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Container, SectionHeader, Card, Badge } from "@/components/ui";
+import { Container, SectionHeader, Card, Badge, OrbitalBackground } from "@/components/ui";
 import { PRODUCTS } from "@/lib/constants";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring" as const,
+      stiffness: 100,
+      damping: 15,
+    },
+  },
+};
 
 export function ProductEcosystem() {
   return (
-    <section className="section-padding relative" id="products">
-      <Container>
+    <section className="section-padding relative overflow-hidden" id="products">
+      <OrbitalBackground variant="subtle" />
+      
+      <Container className="relative z-10">
         <SectionHeader
           tag="Product Ecosystem"
           title="Bir marka sistemi içinde"
@@ -15,27 +42,35 @@ export function ProductEcosystem() {
           description="Her ürün, düşünülmüş bir ekosistem içinde kendi değerini taşır. Farklı kategorilerde, tutarlı bir deneyim."
         />
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-5">
-          {PRODUCTS.map((product, index) => (
+        <motion.div 
+          className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-5"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+        >
+          {PRODUCTS.map((product) => (
             <motion.div
               key={product.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
+              variants={itemVariants}
+              whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              whileTap={{ scale: 0.98 }}
+              className="touch-highlight"
             >
               <Card 
                 variant={product.status === "live" ? "featured" : "default"}
                 className="h-full group"
               >
                 <div className="flex flex-col h-full">
-                  {/* Mobile: stacked layout, Desktop: side by side */}
                   <div className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-3 lg:gap-4 mb-2 sm:mb-3 lg:mb-4">
-                    <div 
-                      className={`w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-xl lg:rounded-2xl bg-gradient-to-br ${product.gradient} flex items-center justify-center text-lg sm:text-xl lg:text-2xl flex-shrink-0 transition-transform duration-300 group-hover:scale-110 shadow-lg`}
+                    <motion.div 
+                      className={`w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-xl lg:rounded-2xl bg-gradient-to-br ${product.gradient} flex items-center justify-center text-lg sm:text-xl lg:text-2xl flex-shrink-0 shadow-lg`}
+                      whileHover={{ scale: 1.15, rotate: 5 }}
+                      whileTap={{ scale: 1.1 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     >
                       {product.icon}
-                    </div>
+                    </motion.div>
                     <div className="flex-1 min-w-0">
                       <h4 className="font-semibold text-sm sm:text-base lg:text-lg text-foreground leading-tight mb-1">
                         {product.name}
@@ -50,7 +85,7 @@ export function ProductEcosystem() {
               </Card>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </Container>
     </section>
   );
