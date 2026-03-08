@@ -1,9 +1,0 @@
-export { Header } from "./Header";
-export { Hero } from "./Hero";
-export { BrandThesis } from "./BrandThesis";
-export { FeaturedProduct } from "./FeaturedProduct";
-export { ProductEcosystem } from "./ProductEcosystem";
-export { Approach } from "./Approach";
-export { Founder } from "./Founder";
-export { Contact } from "./Contact";
-export { Footer } from "./Footer";
