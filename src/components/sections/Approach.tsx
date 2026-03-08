@@ -4,6 +4,21 @@ import { motion } from "framer-motion";
 import { Container, SectionHeader, OrbitalBackground } from "@/components/ui";
 import { PROCESS_STEPS } from "@/lib/constants";
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 40, scale: 0.9 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring" as const,
+      stiffness: 80,
+      damping: 15,
+      delay: i * 0.15,
+    },
+  }),
+};
+
 export function Approach() {
   return (
     <section className="section-padding relative overflow-hidden" id="approach">
@@ -21,21 +36,35 @@ export function Approach() {
             <motion.div
               key={step.step}
               className="relative"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              custom={index}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ y: -8, transition: { duration: 0.25 } }}
+              whileTap={{ scale: 0.97 }}
             >
               {/* Connection line - desktop only */}
               {index < PROCESS_STEPS.length - 1 && (
-                <div className="hidden lg:block absolute top-8 left-full w-full h-px bg-gradient-to-r from-border to-transparent z-0" />
+                <motion.div 
+                  className="hidden lg:block absolute top-8 left-full w-full h-px bg-gradient-to-r from-border to-transparent z-0"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.3 + index * 0.15 }}
+                  style={{ originX: 0 }}
+                />
               )}
               
-              <div className="relative bg-background-secondary rounded-xl sm:rounded-2xl p-3 sm:p-4 lg:p-6 border border-border h-full transition-all duration-300 hover:border-border-hover hover:-translate-y-1">
-                {/* Step number */}
-                <div className="mb-2 sm:mb-3 lg:mb-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground-subtle/30">
+              <div className="relative bg-background-secondary rounded-xl sm:rounded-2xl p-3 sm:p-4 lg:p-6 border border-border h-full transition-all duration-300 hover:border-border-hover hover:shadow-lg hover:shadow-brand-primary/5 touch-highlight">
+                {/* Step number with glow */}
+                <motion.div 
+                  className="mb-2 sm:mb-3 lg:mb-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground-subtle/30"
+                  whileHover={{ scale: 1.1, color: "rgba(99, 102, 241, 0.4)" }}
+                  transition={{ duration: 0.2 }}
+                >
                   {step.step}
-                </div>
+                </motion.div>
                 
                 <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-foreground mb-1.5 sm:mb-2 lg:mb-3">
                   {step.title}
