@@ -17,6 +17,7 @@ const footerLinks = {
   legal: [
     { label: "Gizlilik Politikası", href: "/privacy" },
     { label: "Kullanım Koşulları", href: "/terms" },
+    { label: "Destek", href: "/support" },
   ],
 };
 
