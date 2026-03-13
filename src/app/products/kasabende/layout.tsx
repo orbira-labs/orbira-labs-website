@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "KasaBende - Modern Kasa ve Operasyon Yönetimi | Orbira Labs",
-  description: "Küçük ve orta ölçekli işletmeler için modern kasa takibi, alacak-verecek yönetimi, tahsilat ve gün sonu sayımı. iOS ve Android'de ücretsiz.",
+  description: "Küçük ve orta ölçekli işletmeler için modern kasa takibi, alacak-verecek yönetimi, tahsilat ve gün sonu sayımı. iOS ve Android'de 1 sene ücretsiz.",
   keywords: [
     "kasa takip",
     "tahsilat",

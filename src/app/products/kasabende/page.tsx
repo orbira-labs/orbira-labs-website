@@ -156,7 +156,7 @@ export default function KasaBendePage() {
                     📱 iOS & Android&apos;de
                   </div>
                   <div className="px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-sm text-emerald-400">
-                    ✓ Ücretsiz Kullanım
+                    ✓ 1 Sene Ücretsiz
                   </div>
                 </div>
               </motion.div>
@@ -550,7 +550,7 @@ export default function KasaBendePage() {
                 </h2>
                 
                 <p className="text-lg text-foreground-muted mb-8 max-w-lg mx-auto">
-                  Şimdi indirin, ücretsiz kullanmaya başlayın. İşletmenizi modern araçlarla yönetin.
+                  Şimdi indirin, 1 sene ücretsiz kullanmaya başlayın. İşletmenizi modern araçlarla yönetin.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
