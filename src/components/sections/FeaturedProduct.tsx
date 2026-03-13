@@ -34,8 +34,14 @@ export function FeaturedProduct() {
             {/* Content */}
             <div className="flex flex-col justify-center order-2 lg:order-1">
               <div className="flex items-center gap-3 mb-4 sm:mb-6">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-xl sm:text-2xl flex-shrink-0">
-                  ₺
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl overflow-hidden flex-shrink-0 shadow-lg shadow-indigo-500/20">
+                  <Image
+                    src="/images/kasabende-icon.png"
+                    alt="KasaBende"
+                    width={56}
+                    height={56}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div>
                   <h3 className="text-xl sm:text-2xl font-semibold text-foreground">

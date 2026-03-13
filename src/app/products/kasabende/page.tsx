@@ -111,8 +111,14 @@ export default function KasaBendePage() {
                 transition={{ duration: 0.7 }}
               >
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-3xl shadow-lg shadow-emerald-500/20">
-                    ₺
+                  <div className="w-16 h-16 rounded-2xl overflow-hidden shadow-lg shadow-indigo-500/20">
+                    <Image
+                      src="/images/kasabende-icon.png"
+                      alt="KasaBende"
+                      width={64}
+                      height={64}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <div>
                     <h1 className="text-4xl sm:text-5xl font-bold text-foreground">
@@ -529,8 +535,14 @@ export default function KasaBendePage() {
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-teal-500/5 pointer-events-none" />
               
               <div className="relative z-10">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-4xl mx-auto mb-6 shadow-lg shadow-emerald-500/20">
-                  ₺
+                <div className="w-20 h-20 rounded-2xl overflow-hidden mx-auto mb-6 shadow-lg shadow-indigo-500/20">
+                  <Image
+                    src="/images/kasabende-icon.png"
+                    alt="KasaBende"
+                    width={80}
+                    height={80}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 
                 <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
