@@ -47,15 +47,6 @@ export const PRODUCTS: Product[] = [
     href: "/products/kasabende",
   },
   {
-    id: "beslenme",
-    name: "Beslenme & Sağlık",
-    description: "Sağlıklı beslenme alışkanlıkları için kişiselleştirilmiş takip ve öneriler.",
-    status: "in-progress",
-    category: "health",
-    icon: "🥗",
-    gradient: "from-green-500 to-emerald-600",
-  },
-  {
     id: "kadin-sagligi",
     name: "Kadın Sağlığı",
     description: "Döngü takibi ve kadın sağlığına özel içeriklerle bilinçli yaşam.",
@@ -63,6 +54,15 @@ export const PRODUCTS: Product[] = [
     category: "health",
     icon: "🌸",
     gradient: "from-pink-500 to-rose-600",
+  },
+  {
+    id: "kisilik-uyumluluk",
+    name: "Kişilik & Uyumluluk",
+    description: "Kişilik testleri ve uyumluluk analizleri ile kendinizi ve ilişkilerinizi keşfedin.",
+    status: "concept",
+    category: "lifestyle",
+    icon: "🧠",
+    gradient: "from-cyan-500 to-blue-600",
   },
   {
     id: "fal-burclar",
@@ -74,15 +74,6 @@ export const PRODUCTS: Product[] = [
     gradient: "from-violet-500 to-purple-600",
   },
   {
-    id: "fitness",
-    name: "Fitness",
-    description: "Kişisel antrenman programları ve fitness hedeflerine ulaşma rehberi.",
-    status: "concept",
-    category: "health",
-    icon: "💪",
-    gradient: "from-blue-500 to-indigo-600",
-  },
-  {
     id: "okey",
     name: "101 Okey",
     description: "Arkadaşlarla online okey deneyimi ve sosyal oyun keyfi.",
@@ -90,6 +81,15 @@ export const PRODUCTS: Product[] = [
     category: "entertainment",
     icon: "🎴",
     gradient: "from-orange-500 to-red-600",
+  },
+  {
+    id: "beslenme",
+    name: "Beslenme & Sağlık",
+    description: "Sağlıklı beslenme alışkanlıkları için kişiselleştirilmiş takip ve öneriler.",
+    status: "concept",
+    category: "health",
+    icon: "🥗",
+    gradient: "from-green-500 to-emerald-600",
   },
 ];
 

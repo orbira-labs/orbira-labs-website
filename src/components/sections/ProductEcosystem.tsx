@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Container, SectionHeader, Card, Badge, OrbitalBackground } from "@/components/ui";
 import { PRODUCTS } from "@/lib/constants";
 
@@ -63,14 +64,31 @@ export function ProductEcosystem() {
               >
                 <div className="flex flex-col h-full">
                   <div className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-3 lg:gap-4 mb-2 sm:mb-3 lg:mb-4">
-                    <motion.div 
-                      className={`w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-xl lg:rounded-2xl bg-gradient-to-br ${product.gradient} flex items-center justify-center text-lg sm:text-xl lg:text-2xl flex-shrink-0 shadow-lg`}
-                      whileHover={{ scale: 1.15, rotate: 5 }}
-                      whileTap={{ scale: 1.1 }}
-                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    >
-                      {product.icon}
-                    </motion.div>
+                    {product.id === "kasabende" ? (
+                      <motion.div 
+                        className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-xl lg:rounded-2xl overflow-hidden flex-shrink-0 shadow-lg"
+                        whileHover={{ scale: 1.15, rotate: 5 }}
+                        whileTap={{ scale: 1.1 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      >
+                        <Image
+                          src="/images/kasabende-icon.png"
+                          alt="KasaBende"
+                          width={56}
+                          height={56}
+                          className="w-full h-full object-cover"
+                        />
+                      </motion.div>
+                    ) : (
+                      <motion.div 
+                        className={`w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-xl lg:rounded-2xl bg-gradient-to-br ${product.gradient} flex items-center justify-center text-lg sm:text-xl lg:text-2xl flex-shrink-0 shadow-lg`}
+                        whileHover={{ scale: 1.15, rotate: 5 }}
+                        whileTap={{ scale: 1.1 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      >
+                        {product.icon}
+                      </motion.div>
+                    )}
                     <div className="flex-1 min-w-0">
                       <h4 className="font-semibold text-sm sm:text-base lg:text-lg text-foreground leading-tight mb-1">
                         {product.name}

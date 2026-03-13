@@ -1,0 +1,9 @@
+---
+description: Git commit/push behavior - only when explicitly requested
+alwaysApply: true
+---
+
+# Git Workflow
+
+- **Commit ve push yapma** — Kullanıcı açıkça "commit et", "push et" veya benzeri talep etmedikçe `git commit` ve `git push` çalıştırma.
+- **Kısa ve öz** — Bu konuyla ilgili yanıtları kısa tut.
