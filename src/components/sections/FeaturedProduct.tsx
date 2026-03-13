@@ -66,7 +66,7 @@ export function FeaturedProduct() {
                 ))}
               </div>
 
-              <Link href="#" className="w-full sm:w-fit">
+              <Link href="/products/kasabende" className="w-full sm:w-fit">
                 <Button variant="primary" size="lg" className="w-full sm:w-auto">
                   Ürün sayfasını incele
                 </Button>

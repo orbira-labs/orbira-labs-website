@@ -44,7 +44,7 @@ export const PRODUCTS: Product[] = [
     icon: "₺",
     gradient: "from-emerald-500 to-teal-600",
     features: ["Gelir Takibi", "Firma Rehberi", "Çoklu Kanal Kasa", "Operasyon Akışı"],
-    href: "#",
+    href: "/products/kasabende",
   },
   {
     id: "beslenme",
