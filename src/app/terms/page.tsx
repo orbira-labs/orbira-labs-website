@@ -38,8 +38,8 @@ export default function TermsPage() {
                 </p>
                 <p className="leading-relaxed mt-2">
                   İletişim:{" "}
-                  <a href="mailto:seyyitaliperseorganization@gmail.com" className="text-brand-primary hover:underline">
-                    seyyitaliperseorganization@gmail.com
+                  <a href="mailto:info@orbiralabs.com" className="text-brand-primary hover:underline">
+                    info@orbiralabs.com
                   </a>
                 </p>
               </section>
@@ -304,8 +304,8 @@ export default function TermsPage() {
                 </p>
                 <p className="leading-relaxed mt-4">
                   <strong className="text-foreground">E-posta:</strong>{" "}
-                  <a href="mailto:seyyitaliperseorganization@gmail.com" className="text-brand-primary hover:underline">
-                    seyyitaliperseorganization@gmail.com
+                  <a href="mailto:info@orbiralabs.com" className="text-brand-primary hover:underline">
+                    info@orbiralabs.com
                   </a>
                 </p>
               </section>

@@ -2,7 +2,7 @@ export const SITE_CONFIG = {
   name: "Orbira Labs",
   description: "Orbira Labs, günlük yaşamı ve iş süreçlerini kolaylaştıran dijital ürünler geliştiren bağımsız bir product lab'dir.",
   url: "https://orbiralabs.com",
-  email: "seyyitaliperseorganization@gmail.com",
+  email: "info@orbiralabs.com",
   tagline: "Sade ürünler. Akıcı deneyimler.",
 };
 

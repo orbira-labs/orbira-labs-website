@@ -361,7 +361,7 @@ export default function PrivacyPage() {
                 </p>
                 <div className="mt-4 p-4 bg-background-tertiary rounded-lg border border-border">
                   <p className="text-foreground font-medium">Orbira Labs</p>
-                  <p className="mt-2">E-posta: seyyitaliperseorganization@gmail.com</p>
+                  <p className="mt-2">E-posta: info@orbiralabs.com</p>
                 </div>
               </section>
 
@@ -376,8 +376,8 @@ export default function PrivacyPage() {
                 <div className="mt-4 p-4 bg-background-tertiary rounded-lg border border-border">
                   <p>
                     <strong className="text-foreground">E-posta:</strong>{" "}
-                    <a href="mailto:seyyitaliperseorganization@gmail.com" className="text-brand-primary hover:underline">
-                      seyyitaliperseorganization@gmail.com
+                    <a href="mailto:info@orbiralabs.com" className="text-brand-primary hover:underline">
+                      info@orbiralabs.com
                     </a>
                   </p>
                 </div>
