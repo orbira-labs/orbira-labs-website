@@ -52,15 +52,20 @@ export function Founder() {
                   {FOUNDER.experience.map((exp, index) => (
                     <motion.div
                       key={exp.company}
-                      className="flex flex-col items-center text-center p-3 sm:p-4 rounded-lg sm:rounded-xl bg-white/5 border border-border transition-all duration-300 hover:border-brand-primary/50 hover:bg-white/10 hover:-translate-y-1"
+                      className="group flex flex-col items-center text-center p-3 sm:p-4 rounded-lg sm:rounded-xl bg-white/5 border border-border transition-all duration-300 hover:border-brand-primary/50 hover:bg-white/10 hover:-translate-y-1"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.4, delay: index * 0.08 }}
                     >
-                      <span className="text-sm sm:text-base font-semibold text-foreground mb-0.5 sm:mb-1">
-                        {exp.company}
-                      </span>
+                      <div className="flex items-center gap-1.5 mb-0.5 sm:mb-1">
+                        <span className="text-sm sm:text-base font-semibold text-foreground">
+                          {exp.company}
+                        </span>
+                        <span className="text-xs sm:text-sm opacity-70 group-hover:opacity-100 transition-opacity">
+                          {exp.flag}
+                        </span>
+                      </div>
                       <span className="text-[10px] sm:text-xs text-foreground-subtle leading-tight">
                         {exp.domain}
                       </span>

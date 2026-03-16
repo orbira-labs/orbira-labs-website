@@ -13,7 +13,7 @@ export const NAV_LINKS = [
   { href: "#contact", label: "İletişim" },
 ];
 
-export type ProductStatus = "live" | "in-progress" | "concept";
+export type ProductStatus = "live" | "in-progress" | "concept" | "testing";
 
 export interface Product {
   id: string;
@@ -26,6 +26,7 @@ export interface Product {
   features?: string[];
   href?: string;
   logo?: string;
+  screenshots?: string[];
 }
 
 export const PRODUCT_CATEGORIES = [
@@ -40,12 +41,18 @@ export const PRODUCTS: Product[] = [
     id: "kasabende",
     name: "KasaBende",
     description: "Küçük ve orta ölçekli işletmeler için modern kasa ve operasyon yönetimi.",
-    status: "live",
+    status: "testing",
     category: "business",
     icon: "₺",
     gradient: "from-emerald-500 to-teal-600",
     features: ["Gelir Takibi", "Firma Rehberi", "Çoklu Kanal Kasa", "Operasyon Akışı"],
     href: "/products/kasabende",
+    logo: "/images/kasabende-icon.png",
+    screenshots: [
+      "/images/kasabende-firms.png",
+      "/images/kasabende-overview.png",
+      "/images/kasabende-cash.png",
+    ],
   },
   {
     id: "moodumuz",
@@ -151,10 +158,10 @@ export const FOUNDER = {
   bio: "Global ölçekte farklı sektörlerde mobil ve web uygulama geliştirme deneyimine sahip yazılım mühendisi.",
   image: "/images/founder.png",
   experience: [
-    { company: "Nesine", domain: "İddaa Platformu" },
-    { company: "SwissSign", domain: "Dijital Sertifika & PKI" },
-    { company: "Mercury", domain: "Sağlık & Lojistik" },
-    { company: "Ejada", domain: "IT Çözümleri" },
-    { company: "Eachlabs", domain: "AI Model Marketplace" },
+    { company: "Nesine", domain: "İddaa Platformu", country: "Türkiye", flag: "🇹🇷" },
+    { company: "SwissSign", domain: "Dijital Sertifika & PKI", country: "İsviçre", flag: "🇨🇭" },
+    { company: "Mercury", domain: "Sağlık & Lojistik", country: "ABD", flag: "🇺🇸" },
+    { company: "Ejada", domain: "IT Çözümleri", country: "KSA", flag: "🇸🇦" },
+    { company: "Eachlabs", domain: "AI Model Marketplace", country: "Türkiye", flag: "🇹🇷" },
   ],
 };

@@ -11,6 +11,10 @@ const statusConfig = {
     label: "Live",
     className: "bg-status-live/15 text-status-live border-status-live/30",
   },
+  testing: {
+    label: "Testing",
+    className: "bg-amber-500/15 text-amber-400 border-amber-500/30",
+  },
   "in-progress": {
     label: "In Progress",
     className: "bg-status-progress/15 text-status-progress border-status-progress/30",
@@ -32,7 +36,7 @@ export function Badge({ status, className }: BadgeProps) {
         className
       )}
     >
-      {status === "live" && (
+      {(status === "live" || status === "testing") && (
         <span className="w-1.5 h-1.5 bg-current rounded-full animate-pulse" />
       )}
       {config.label}

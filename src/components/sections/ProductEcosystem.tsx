@@ -64,7 +64,7 @@ export function ProductEcosystem() {
               >
                 <div className="flex flex-col h-full">
                   <div className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-3 lg:gap-4 mb-2 sm:mb-3 lg:mb-4">
-                    {product.id === "kasabende" ? (
+                    {product.logo ? (
                       <motion.div 
                         className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-xl lg:rounded-2xl overflow-hidden flex-shrink-0 shadow-lg"
                         whileHover={{ scale: 1.15, rotate: 5 }}
@@ -72,8 +72,8 @@ export function ProductEcosystem() {
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
                       >
                         <Image
-                          src="/images/kasabende-icon.png"
-                          alt="KasaBende"
+                          src={product.logo}
+                          alt={product.name}
                           width={56}
                           height={56}
                           className="w-full h-full object-cover"
