@@ -269,24 +269,24 @@ export default function KasaBendePage() {
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
               {FEATURES.map((feature, index) => (
                 <motion.div
                   key={feature.title}
-                  className="group p-6 rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10 hover:border-emerald-500/30 transition-all duration-300"
+                  className="group p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10 hover:border-emerald-500/30 transition-all duration-300"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
                   whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 >
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-500/20 to-teal-500/10 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-gradient-to-br from-emerald-500/20 to-teal-500/10 flex items-center justify-center text-xl sm:text-2xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
+                  <h3 className="text-sm sm:text-xl font-semibold text-foreground mb-1 sm:mb-2">
                     {feature.title}
                   </h3>
-                  <p className="text-foreground-muted leading-relaxed">
+                  <p className="text-xs sm:text-base text-foreground-muted leading-relaxed">
                     {feature.description}
                   </p>
                 </motion.div>
@@ -298,78 +298,89 @@ export default function KasaBendePage() {
         {/* Business Modes Section */}
         <section className="section-padding relative bg-gradient-to-b from-transparent via-emerald-500/[0.02] to-transparent">
           <Container>
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-6">
-                  İş Modelleri
+            <motion.div
+              className="text-center mb-10"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-6">
+                İş Modelleri
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+                Perakende mi, Toptancı mı?{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
+                  Size uygun mod
                 </span>
-                <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">
-                  Perakende mi, Toptancı mı?{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
-                    Size uygun mod
-                  </span>
-                </h2>
-                <p className="text-lg text-foreground-muted mb-8 leading-relaxed">
-                  İşletme türünüze göre özelleştirilmiş deneyim. Perakendeciler için günlük kasa sayımı, 
-                  toptancılar için firma bazlı tahsilat takibi.
-                </p>
+              </h2>
+              <p className="text-base sm:text-lg text-foreground-muted max-w-2xl mx-auto">
+                İşletme türünüze göre özelleştirilmiş deneyim. Perakendeciler için günlük kasa sayımı, 
+                toptancılar için firma bazlı tahsilat takibi.
+              </p>
+            </motion.div>
 
-                <div className="space-y-4">
-                  <div className="p-5 rounded-xl bg-gradient-to-r from-emerald-500/10 to-transparent border border-emerald-500/20">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center text-lg">
-                        🏪
-                      </div>
-                      <h3 className="text-lg font-semibold text-foreground">Perakende Modu</h3>
-                    </div>
-                    <p className="text-foreground-muted text-sm ml-13">
-                      Günlük satış, akşam kasa sayımı. Hareketler sabah 05:00&apos;te kasaya yansır.
-                    </p>
+            <div className="grid sm:grid-cols-2 gap-4 mb-8">
+              <motion.div
+                className="p-4 sm:p-5 rounded-xl bg-gradient-to-r from-emerald-500/10 to-transparent border border-emerald-500/20"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center text-lg flex-shrink-0">
+                    🏪
                   </div>
-
-                  <div className="p-5 rounded-xl bg-gradient-to-r from-blue-500/10 to-transparent border border-blue-500/20">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-lg">
-                        🏭
-                      </div>
-                      <h3 className="text-lg font-semibold text-foreground">Toptancı Modu</h3>
-                    </div>
-                    <p className="text-foreground-muted text-sm ml-13">
-                      Firmalara satış, tahsilat takibi. Sistem günü otomatik kapatır.
-                    </p>
-                  </div>
+                  <h3 className="text-base sm:text-lg font-semibold text-foreground">Perakende Modu</h3>
                 </div>
+                <p className="text-foreground-muted text-sm pl-[52px]">
+                  Günlük satış, akşam kasa sayımı. Hareketler sabah 05:00&apos;te kasaya yansır.
+                </p>
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                className="p-4 sm:p-5 rounded-xl bg-gradient-to-r from-blue-500/10 to-transparent border border-blue-500/20"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
               >
-                <div className="p-6 rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10">
-                  <h3 className="text-lg font-semibold text-foreground mb-4">Desteklenen İşletme Türleri</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {BUSINESS_TYPES.map((type) => (
-                      <span
-                        key={type}
-                        className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-sm text-foreground-muted hover:border-emerald-500/30 hover:text-emerald-400 transition-colors cursor-default"
-                      >
-                        {type}
-                      </span>
-                    ))}
-                    <span className="px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-sm text-emerald-400">
-                      + Daha fazlası
-                    </span>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-lg flex-shrink-0">
+                    🏭
                   </div>
+                  <h3 className="text-base sm:text-lg font-semibold text-foreground">Toptancı Modu</h3>
                 </div>
+                <p className="text-foreground-muted text-sm pl-[52px]">
+                  Firmalara satış, tahsilat takibi. Sistem günü otomatik kapatır.
+                </p>
               </motion.div>
             </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <div className="p-4 sm:p-6 rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10">
+                <h3 className="text-base sm:text-lg font-semibold text-foreground mb-4">Desteklenen İşletme Türleri</h3>
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-2">
+                  {BUSINESS_TYPES.map((type) => (
+                    <span
+                      key={type}
+                      className="px-2 sm:px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs sm:text-sm text-foreground-muted hover:border-emerald-500/30 hover:text-emerald-400 transition-colors cursor-default text-center"
+                    >
+                      {type}
+                    </span>
+                  ))}
+                  <span className="px-2 sm:px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs sm:text-sm text-emerald-400 text-center">
+                    + Daha fazlası
+                  </span>
+                </div>
+              </div>
+            </motion.div>
           </Container>
         </section>
 
@@ -397,7 +408,7 @@ export default function KasaBendePage() {
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
               {[
                 { src: "/images/kasabende-overview.png", title: "Günlük Özet", desc: "Tüm bakiyeler tek bakışta" },
                 { src: "/images/kasabende-firms.png", title: "Firma Rehberi", desc: "Alacak-verecek takibi" },
@@ -412,8 +423,8 @@ export default function KasaBendePage() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <div className="relative aspect-[9/19] rounded-2xl overflow-hidden bg-gradient-to-b from-zinc-700 to-zinc-900 p-1 mb-4 group-hover:shadow-xl group-hover:shadow-emerald-500/10 transition-shadow duration-300">
-                    <div className="w-full h-full rounded-[14px] bg-zinc-950 overflow-hidden relative">
+                  <div className="relative aspect-[9/19] rounded-xl sm:rounded-2xl overflow-hidden bg-gradient-to-b from-zinc-700 to-zinc-900 p-0.5 sm:p-1 mb-3 sm:mb-4 group-hover:shadow-xl group-hover:shadow-emerald-500/10 transition-shadow duration-300">
+                    <div className="w-full h-full rounded-[10px] sm:rounded-[14px] bg-zinc-950 overflow-hidden relative">
                       <Image
                         src={screen.src}
                         alt={screen.title}
@@ -422,8 +433,8 @@ export default function KasaBendePage() {
                       />
                     </div>
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-1">{screen.title}</h3>
-                  <p className="text-sm text-foreground-muted">{screen.desc}</p>
+                  <h3 className="text-sm sm:text-lg font-semibold text-foreground mb-0.5 sm:mb-1">{screen.title}</h3>
+                  <p className="text-xs sm:text-sm text-foreground-muted">{screen.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -454,19 +465,19 @@ export default function KasaBendePage() {
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
               {ONBOARDING_STEPS.map((item, index) => (
                 <motion.div
                   key={item.step}
-                  className="relative p-6 rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10"
+                  className="relative p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <div className="text-5xl font-bold text-emerald-500/20 mb-4">{item.step}</div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">{item.title}</h3>
-                  <p className="text-foreground-muted text-sm leading-relaxed">{item.description}</p>
+                  <div className="text-3xl sm:text-5xl font-bold text-emerald-500/20 mb-2 sm:mb-4">{item.step}</div>
+                  <h3 className="text-sm sm:text-xl font-semibold text-foreground mb-1 sm:mb-2">{item.title}</h3>
+                  <p className="text-foreground-muted text-xs sm:text-sm leading-relaxed">{item.description}</p>
                   
                   {index < ONBOARDING_STEPS.length - 1 && (
                     <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-gradient-to-r from-emerald-500/50 to-transparent" />
@@ -498,23 +509,23 @@ export default function KasaBendePage() {
               </h2>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-3 sm:gap-6">
               {TIPS.map((tip, index) => (
                 <motion.div
                   key={tip.title}
-                  className="p-6 rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10 hover:border-cyan-500/30 transition-colors duration-300"
+                  className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10 hover:border-cyan-500/30 transition-colors duration-300"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <div className="flex items-start justify-between mb-3">
-                    <h3 className="text-lg font-semibold text-foreground">{tip.title}</h3>
-                    <span className="px-2 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 text-xs">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2 sm:mb-3">
+                    <h3 className="text-sm sm:text-lg font-semibold text-foreground">{tip.title}</h3>
+                    <span className="px-2 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 text-[10px] sm:text-xs w-fit flex-shrink-0">
                       {tip.mode}
                     </span>
                   </div>
-                  <p className="text-foreground-muted leading-relaxed">{tip.description}</p>
+                  <p className="text-xs sm:text-base text-foreground-muted leading-relaxed">{tip.description}</p>
                 </motion.div>
               ))}
             </div>

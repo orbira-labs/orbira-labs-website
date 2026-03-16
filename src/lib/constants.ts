@@ -25,6 +25,7 @@ export interface Product {
   gradient: string;
   features?: string[];
   href?: string;
+  logo?: string;
 }
 
 export const PRODUCT_CATEGORIES = [
@@ -47,13 +48,14 @@ export const PRODUCTS: Product[] = [
     href: "/products/kasabende",
   },
   {
-    id: "kadin-sagligi",
-    name: "Kadın Sağlığı",
+    id: "moodumuz",
+    name: "Moodumuz",
     description: "Döngü takibi ve kadın sağlığına özel içeriklerle bilinçli yaşam.",
     status: "in-progress",
     category: "health",
-    icon: "🌸",
-    gradient: "from-pink-500 to-rose-600",
+    icon: "🌿",
+    gradient: "from-[#7A8471] to-[#5d6357]",
+    logo: "/images/moodumuz-logo.png",
   },
   {
     id: "kisilik-uyumluluk",
