@@ -57,12 +57,19 @@ export const PRODUCTS: Product[] = [
   {
     id: "moodumuz",
     name: "Moodumuz",
-    description: "Döngü takibi ve kadın sağlığına özel içeriklerle bilinçli yaşam.",
-    status: "in-progress",
+    description: "Döngünü anlayan, seni yargılamayan arkadaşın. Regl döngüsü takibi, ruh hali günlüğü ve kişiselleştirilmiş öneriler.",
+    status: "testing",
     category: "health",
     icon: "🌿",
-    gradient: "from-[#7A8471] to-[#5d6357]",
-    logo: "/images/moodumuz-logo.png",
+    gradient: "from-[#7A8471] to-[#5C6455]",
+    features: ["Döngü Takibi", "Ruh Hali Günlüğü", "Kişisel Öneriler", "Gizlilik Odaklı"],
+    href: "/products/moodumuz",
+    logo: "/images/moodumuz-icon.png",
+    screenshots: [
+      "/images/moodumuz-home.png",
+      "/images/moodumuz-checkin.png",
+      "/images/moodumuz-insights.png",
+    ],
   },
   {
     id: "kisilik-uyumluluk",

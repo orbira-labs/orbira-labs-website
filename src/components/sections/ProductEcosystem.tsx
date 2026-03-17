@@ -31,26 +31,30 @@ const itemVariants = {
 };
 
 export function ProductEcosystem() {
+  const upcomingProducts = PRODUCTS.filter((p) => !p.href);
+
+  if (upcomingProducts.length === 0) return null;
+
   return (
     <section className="section-padding relative overflow-hidden" id="products">
       <OrbitalBackground variant="subtle" />
       
       <Container className="relative z-10">
         <SectionHeader
-          tag="Product Ecosystem"
-          title="Bir marka sistemi içinde"
-          titleHighlight="çoklu ürün."
-          description="Her ürün, düşünülmüş bir ekosistem içinde kendi değerini taşır. Farklı kategorilerde, tutarlı bir deneyim."
+          tag="Yakında"
+          title="Geliştirme aşamasındaki"
+          titleHighlight="diğer ürünler"
+          description="Planlanan ve konsept aşamasındaki ürünlerimiz. Ekosistemimiz büyüyor."
         />
 
         <motion.div 
-          className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-5"
+          className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
         >
-          {PRODUCTS.map((product) => (
+          {upcomingProducts.map((product) => (
             <motion.div
               key={product.id}
               variants={itemVariants}
@@ -59,44 +63,44 @@ export function ProductEcosystem() {
               className="touch-highlight"
             >
               <Card 
-                variant={product.status === "live" ? "featured" : "default"}
+                variant="default"
                 className="h-full group"
               >
                 <div className="flex flex-col h-full">
-                  <div className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-3 lg:gap-4 mb-2 sm:mb-3 lg:mb-4">
+                  <div className="flex items-center gap-3 mb-3">
                     {product.logo ? (
                       <motion.div 
-                        className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-xl lg:rounded-2xl overflow-hidden flex-shrink-0 shadow-lg"
-                        whileHover={{ scale: 1.15, rotate: 5 }}
-                        whileTap={{ scale: 1.1 }}
+                        className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl overflow-hidden flex-shrink-0 shadow-lg"
+                        whileHover={{ scale: 1.1, rotate: 3 }}
+                        whileTap={{ scale: 1.05 }}
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
                       >
                         <Image
                           src={product.logo}
                           alt={product.name}
-                          width={56}
-                          height={56}
+                          width={44}
+                          height={44}
                           className="w-full h-full object-cover"
                         />
                       </motion.div>
                     ) : (
                       <motion.div 
-                        className={`w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-xl lg:rounded-2xl bg-gradient-to-br ${product.gradient} flex items-center justify-center text-lg sm:text-xl lg:text-2xl flex-shrink-0 shadow-lg`}
-                        whileHover={{ scale: 1.15, rotate: 5 }}
-                        whileTap={{ scale: 1.1 }}
+                        className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br ${product.gradient} flex items-center justify-center text-lg sm:text-xl flex-shrink-0 shadow-lg`}
+                        whileHover={{ scale: 1.1, rotate: 3 }}
+                        whileTap={{ scale: 1.05 }}
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
                       >
                         {product.icon}
                       </motion.div>
                     )}
                     <div className="flex-1 min-w-0">
-                      <h4 className="font-semibold text-sm sm:text-base lg:text-lg text-foreground leading-tight mb-1">
+                      <h4 className="font-semibold text-sm sm:text-base text-foreground leading-tight mb-0.5 truncate">
                         {product.name}
                       </h4>
                       <Badge status={product.status} />
                     </div>
                   </div>
-                  <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed flex-1">
+                  <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed flex-1 line-clamp-2">
                     {product.description}
                   </p>
                 </div>

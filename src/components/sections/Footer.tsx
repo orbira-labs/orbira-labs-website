@@ -7,7 +7,7 @@ import { SITE_CONFIG, NAV_LINKS, PRODUCTS } from "@/lib/constants";
 const footerLinks = {
   products: PRODUCTS.slice(0, 4).map((p) => ({
     label: p.name,
-    href: `#products`,
+    href: p.href || `#products`,
   })),
   company: [
     { label: "Hakkımızda", href: "#about" },

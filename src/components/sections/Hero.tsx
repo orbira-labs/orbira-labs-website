@@ -84,7 +84,7 @@ export function Hero() {
             variants={fadeInUp}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <Link href="#products" className="flex-1 sm:flex-none">
+            <Link href="#featured" className="flex-1 sm:flex-none">
               <motion.div
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
