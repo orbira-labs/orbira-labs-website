@@ -179,7 +179,7 @@ export default function MoodumuzPage() {
                 transition={{ duration: 0.7, delay: 0.2 }}
               >
                 <div className="relative">
-                  {/* Main Phone - Home Screen - Larger on mobile */}
+                  {/* Main Phone - Home Screen */}
                   <motion.div
                     className="relative z-20"
                     animate={{ y: [0, -12, 0] }}
@@ -189,9 +189,9 @@ export default function MoodumuzPage() {
                       ease: "easeInOut",
                     }}
                   >
-                    <div className="w-[240px] h-[500px] sm:w-[260px] sm:h-[540px] lg:w-[280px] lg:h-[580px] rounded-[2.5rem] bg-gradient-to-b from-zinc-800 to-zinc-900 p-[3px] shadow-2xl shadow-black/40">
-                      <div className="w-full h-full rounded-[2.35rem] overflow-hidden relative bg-black">
-                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-black rounded-b-2xl z-10" />
+                    <div className="w-[180px] h-[380px] sm:w-[240px] sm:h-[500px] lg:w-[280px] lg:h-[580px] rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-b from-zinc-800 to-zinc-900 p-[2px] sm:p-[3px] shadow-2xl shadow-black/40">
+                      <div className="w-full h-full rounded-[1.85rem] sm:rounded-[2.35rem] overflow-hidden relative bg-black">
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 sm:w-24 h-4 sm:h-6 bg-black rounded-b-xl sm:rounded-b-2xl z-10" />
                         <Image
                           src="/images/moodumuz-home.png"
                           alt="Moodumuz Ana Ekran"
@@ -203,9 +203,9 @@ export default function MoodumuzPage() {
                     </div>
                   </motion.div>
 
-                  {/* Secondary Phone - Horoscope (behind, left) */}
+                  {/* Secondary Phone - Horoscope (behind, left) - Now visible on mobile too */}
                   <motion.div
-                    className="absolute -left-16 sm:-left-20 lg:-left-24 top-12 z-10 hidden sm:block"
+                    className="absolute -left-10 sm:-left-20 lg:-left-24 top-8 sm:top-12 z-10"
                     animate={{ y: [0, -8, 0] }}
                     transition={{
                       duration: 4.5,
@@ -214,8 +214,8 @@ export default function MoodumuzPage() {
                       delay: 0.5,
                     }}
                   >
-                    <div className="w-[160px] h-[340px] lg:w-[180px] lg:h-[380px] rounded-[1.8rem] bg-gradient-to-b from-zinc-800 to-zinc-900 p-[2px] shadow-xl shadow-black/30 opacity-80 hover:opacity-100 transition-opacity duration-300">
-                      <div className="w-full h-full rounded-[1.7rem] overflow-hidden relative bg-black">
+                    <div className="w-[100px] h-[210px] sm:w-[160px] sm:h-[340px] lg:w-[180px] lg:h-[380px] rounded-[1.2rem] sm:rounded-[1.8rem] bg-gradient-to-b from-zinc-800 to-zinc-900 p-[2px] shadow-xl shadow-black/30 opacity-75 sm:opacity-80 hover:opacity-100 transition-opacity duration-300">
+                      <div className="w-full h-full rounded-[1.1rem] sm:rounded-[1.7rem] overflow-hidden relative bg-black">
                         <Image
                           src="/images/moodumuz-horoscope.png"
                           alt="Kozmik Rehber"
@@ -226,9 +226,9 @@ export default function MoodumuzPage() {
                     </div>
                   </motion.div>
 
-                  {/* Third Phone - Sana Özel (behind, right) */}
+                  {/* Third Phone - Sana Özel (behind, right) - Now visible on mobile too */}
                   <motion.div
-                    className="absolute -right-12 sm:-right-16 lg:-right-20 top-16 z-10 hidden sm:block"
+                    className="absolute -right-8 sm:-right-16 lg:-right-20 top-10 sm:top-16 z-10"
                     animate={{ y: [0, -10, 0] }}
                     transition={{
                       duration: 5,
@@ -237,8 +237,8 @@ export default function MoodumuzPage() {
                       delay: 1,
                     }}
                   >
-                    <div className="w-[150px] h-[320px] lg:w-[170px] lg:h-[360px] rounded-[1.6rem] bg-gradient-to-b from-zinc-800 to-zinc-900 p-[2px] shadow-xl shadow-black/30 opacity-70 hover:opacity-100 transition-opacity duration-300">
-                      <div className="w-full h-full rounded-[1.5rem] overflow-hidden relative bg-black">
+                    <div className="w-[95px] h-[200px] sm:w-[150px] sm:h-[320px] lg:w-[170px] lg:h-[360px] rounded-[1.1rem] sm:rounded-[1.6rem] bg-gradient-to-b from-zinc-800 to-zinc-900 p-[2px] shadow-xl shadow-black/30 opacity-65 sm:opacity-70 hover:opacity-100 transition-opacity duration-300">
+                      <div className="w-full h-full rounded-[1rem] sm:rounded-[1.5rem] overflow-hidden relative bg-black">
                         <Image
                           src="/images/moodumuz-sana-ozel.png"
                           alt="Sana Özel"
@@ -250,9 +250,9 @@ export default function MoodumuzPage() {
                   </motion.div>
                 </div>
 
-                {/* Floating decorative elements - repositioned for mobile */}
+                {/* Floating decorative elements */}
                 <motion.div
-                  className="absolute -top-4 -right-2 sm:-top-4 sm:-right-4 w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-[#7A8471]/30 to-[#5C6455]/20 border border-[#7A8471]/30 backdrop-blur-xl flex items-center justify-center text-2xl sm:text-3xl shadow-lg"
+                  className="absolute -top-2 right-4 sm:-top-4 sm:-right-4 w-12 h-12 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-gradient-to-br from-[#7A8471]/30 to-[#5C6455]/20 border border-[#7A8471]/30 backdrop-blur-xl flex items-center justify-center text-xl sm:text-3xl shadow-lg"
                   animate={{ 
                     rotate: [0, 5, 0, -5, 0],
                     scale: [1, 1.05, 1],
@@ -262,7 +262,7 @@ export default function MoodumuzPage() {
                   🌸
                 </motion.div>
                 <motion.div
-                  className="absolute -bottom-4 -left-2 sm:-bottom-4 sm:-left-4 w-12 h-12 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br from-purple-500/30 to-violet-500/20 border border-purple-500/30 backdrop-blur-xl flex items-center justify-center text-xl sm:text-2xl shadow-lg"
+                  className="absolute -bottom-2 left-4 sm:-bottom-4 sm:-left-4 w-10 h-10 sm:w-16 sm:h-16 rounded-lg sm:rounded-xl bg-gradient-to-br from-purple-500/30 to-violet-500/20 border border-purple-500/30 backdrop-blur-xl flex items-center justify-center text-lg sm:text-2xl shadow-lg"
                   animate={{ 
                     rotate: [0, -5, 0, 5, 0],
                     scale: [1, 1.08, 1],
@@ -272,7 +272,7 @@ export default function MoodumuzPage() {
                   🔮
                 </motion.div>
                 <motion.div
-                  className="absolute top-1/2 -right-4 sm:-right-12 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br from-amber-500/20 to-orange-500/10 border border-amber-500/20 backdrop-blur-xl flex items-center justify-center text-lg sm:text-xl hidden sm:flex"
+                  className="absolute top-1/2 -right-2 sm:-right-12 w-8 h-8 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br from-amber-500/20 to-orange-500/10 border border-amber-500/20 backdrop-blur-xl flex items-center justify-center text-sm sm:text-xl"
                   animate={{ 
                     y: [0, -10, 0],
                     opacity: [0.6, 1, 0.6],
@@ -703,54 +703,56 @@ export default function MoodumuzPage() {
               </p>
             </motion.div>
 
-            {/* Mobile: Horizontal scroll, SM+: 2 columns, LG: 4 columns */}
-            <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 overflow-x-auto sm:overflow-visible pb-4 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0 snap-x snap-mandatory sm:snap-none hide-scrollbar">
+            {/* Premium 2x2 Grid - No scroll */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
               {CYCLE_PHASES.map((phase, index) => (
                 <motion.div
                   key={phase.name}
-                  className={`group flex-shrink-0 w-[280px] sm:w-auto snap-center p-5 sm:p-5 rounded-2xl bg-gradient-to-br ${phase.color} border ${phase.borderColor} hover:border-opacity-60 transition-all duration-300`}
+                  className={`group relative p-4 sm:p-5 rounded-2xl bg-gradient-to-br ${phase.color} border ${phase.borderColor} hover:border-opacity-60 transition-all duration-300 overflow-hidden`}
                   initial={{ opacity: 0, y: 30, scale: 0.95 }}
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 >
-                  <div className="flex items-center gap-3 mb-3">
-                    <motion.div 
-                      className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-2xl flex-shrink-0 group-hover:bg-white/15 transition-colors duration-300"
-                      whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      {phase.icon}
-                    </motion.div>
-                    <div>
-                      <h3 className="text-base sm:text-lg font-semibold text-foreground group-hover:text-white transition-colors duration-300">
-                        {phase.name}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-foreground-muted">
-                        {phase.days}
+                  {/* Subtle glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  <div className="relative z-10">
+                    {/* Icon and title row */}
+                    <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                      <motion.div 
+                        className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/10 flex items-center justify-center text-xl sm:text-2xl flex-shrink-0 group-hover:bg-white/15 transition-colors duration-300"
+                        whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        {phase.icon}
+                      </motion.div>
+                      <div className="min-w-0">
+                        <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-foreground group-hover:text-white transition-colors duration-300 leading-tight">
+                          {phase.name}
+                        </h3>
+                        <p className="text-[10px] sm:text-xs text-foreground-muted">
+                          {phase.days}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {/* Description - hidden on mobile, shown on larger screens */}
+                    <p className="hidden sm:block text-foreground-muted text-sm mb-2 leading-relaxed line-clamp-2">
+                      {phase.description}
+                    </p>
+                    
+                    {/* Archetype badge */}
+                    <div className="flex items-center gap-1.5 mt-2 sm:mt-0">
+                      <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-white/40" />
+                      <p className="text-[10px] sm:text-xs text-foreground-subtle">
+                        <span className="text-foreground-muted font-medium">{phase.archetype}</span>
                       </p>
                     </div>
                   </div>
-                  <p className="text-foreground-muted text-sm sm:text-base mb-3 leading-relaxed">
-                    {phase.description}
-                  </p>
-                  <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
-                    <p className="text-xs sm:text-sm text-foreground-subtle italic">
-                      Arketip: <span className="text-foreground-muted">{phase.archetype}</span>
-                    </p>
-                  </div>
                 </motion.div>
               ))}
-            </div>
-
-            {/* Mobile scroll hint */}
-            <div className="flex items-center justify-center gap-2 mt-4 sm:hidden text-foreground-subtle">
-              <svg className="w-4 h-4 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-              <span className="text-xs">Kaydır</span>
             </div>
           </Container>
         </section>
