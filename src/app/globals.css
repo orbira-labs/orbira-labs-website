@@ -232,22 +232,39 @@ body {
   transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Section spacing */
+/* Section spacing - optimized for mobile */
 .section-padding {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+
+@media (min-width: 640px) {
+  .section-padding {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
 }
 
 @media (min-width: 768px) {
+  .section-padding {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+@media (min-width: 1024px) {
   .section-padding {
     padding-top: 8rem;
     padding-bottom: 8rem;
   }
 }
 
-@media (min-width: 1024px) {
-  .section-padding {
-    padding-top: 10rem;
-    padding-bottom: 10rem;
-  }
+/* Hide scrollbar for horizontal scroll areas on mobile */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }
