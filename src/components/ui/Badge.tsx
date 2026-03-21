@@ -8,7 +8,7 @@ interface BadgeProps {
 
 const statusConfig = {
   live: {
-    label: "Live",
+    label: "Canlı",
     className: "bg-status-live/15 text-status-live border-status-live/30",
   },
   testing: {

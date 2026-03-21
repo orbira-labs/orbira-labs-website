@@ -124,7 +124,7 @@ export default function KasaBendePage() {
                     <h1 className="text-4xl sm:text-5xl font-bold text-foreground">
                       KasaBende
                     </h1>
-                    <Badge status="testing" className="mt-2" />
+                    <Badge status="live" className="mt-2" />
                   </div>
                 </div>
 

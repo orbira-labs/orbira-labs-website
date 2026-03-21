@@ -41,7 +41,7 @@ export const PRODUCTS: Product[] = [
     id: "kasabende",
     name: "KasaBende",
     description: "Küçük ve orta ölçekli işletmeler için modern kasa ve operasyon yönetimi.",
-    status: "testing",
+    status: "live",
     category: "business",
     icon: "₺",
     gradient: "from-emerald-500 to-teal-600",

@@ -128,9 +128,9 @@ export function FeaturedProduct() {
       <Container className="relative z-10">
         <SectionHeader
           tag="Aktif Ürünler"
-          title="Test aşamasındaki"
+          title="Yayında olan"
           titleHighlight="ürünlerimiz"
-          description="Şu anda aktif olarak geliştirdiğimiz ve test ettiğimiz ürünler. Geri bildirimleriniz bizim için çok değerli."
+          description="Aktif olarak kullanıma sunduğumuz ve geliştirmeye devam ettiğimiz ürünler."
         />
 
         <div className="grid md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
