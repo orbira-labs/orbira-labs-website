@@ -32,6 +32,7 @@ export interface Product {
 export const PRODUCT_CATEGORIES = [
   { id: "business", name: "İş & Operasyon" },
   { id: "health", name: "Sağlık & Yaşam" },
+  { id: "education", name: "Eğitim" },
   { id: "lifestyle", name: "Lifestyle" },
   { id: "entertainment", name: "Oyun & Eğlence" },
 ];
@@ -72,13 +73,13 @@ export const PRODUCTS: Product[] = [
     ],
   },
   {
-    id: "kisilik-uyumluluk",
-    name: "Kişilik & Uyumluluk",
-    description: "Kişilik testleri ve uyumluluk analizleri ile kendinizi ve ilişkilerinizi keşfedin.",
-    status: "concept",
-    category: "lifestyle",
-    icon: "🧠",
-    gradient: "from-cyan-500 to-blue-600",
+    id: "cep-hocam",
+    name: "Cep Hocam",
+    description: "Yapay zeka destekli ödev ve soru çözüm asistanı. Fotoğraf çek, anında çözüm al.",
+    status: "in-progress",
+    category: "education",
+    icon: "📚",
+    gradient: "from-blue-500 to-indigo-600",
   },
   {
     id: "fal-burclar",
@@ -90,22 +91,22 @@ export const PRODUCTS: Product[] = [
     gradient: "from-violet-500 to-purple-600",
   },
   {
-    id: "okey",
-    name: "101 Okey",
+    id: "ebeveyn-halim",
+    name: "EbeveynHalim",
+    description: "Ebeveynler için çocuk gelişimi takibi ve rehberlik uygulaması.",
+    status: "concept",
+    category: "health",
+    icon: "👶",
+    gradient: "from-pink-500 to-rose-600",
+  },
+  {
+    id: "kiraathanem",
+    name: "Kıraathanem",
     description: "Arkadaşlarla online okey deneyimi ve sosyal oyun keyfi.",
     status: "concept",
     category: "entertainment",
     icon: "🎴",
     gradient: "from-orange-500 to-red-600",
-  },
-  {
-    id: "beslenme",
-    name: "Beslenme & Sağlık",
-    description: "Sağlıklı beslenme alışkanlıkları için kişiselleştirilmiş takip ve öneriler.",
-    status: "concept",
-    category: "health",
-    icon: "🥗",
-    gradient: "from-green-500 to-emerald-600",
   },
 ];
 

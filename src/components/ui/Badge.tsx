@@ -16,7 +16,7 @@ const statusConfig = {
     className: "bg-amber-500/15 text-amber-400 border-amber-500/30",
   },
   "in-progress": {
-    label: "In Progress",
+    label: "Geliştiriliyor",
     className: "bg-status-progress/15 text-status-progress border-status-progress/30",
   },
   concept: {
