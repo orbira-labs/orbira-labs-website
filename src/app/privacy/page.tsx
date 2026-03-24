@@ -20,7 +20,7 @@ export default function PrivacyPage() {
             </h1>
             
             <p className="text-foreground-muted leading-relaxed mb-8">
-              Son Güncelleme: 8 Mart 2026
+              Son Güncelleme: 24 Mart 2026
             </p>
 
             <p className="text-foreground-muted leading-relaxed mb-8">
@@ -199,10 +199,77 @@ export default function PrivacyPage() {
                 </p>
               </section>
 
-              {/* 6. Çerezler ve Benzeri Teknolojiler */}
+              {/* 6. Moodumuz Uygulaması – Yapay Zeka ve Veri Kullanımı */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  6. Çerezler ve Benzeri Teknolojiler
+                  6. Moodumuz Uygulaması – Yapay Zeka ve Veri Kullanımı
+                </h2>
+                <p className="leading-relaxed mb-4">
+                  Moodumuz uygulaması, kullanıcılara kişiselleştirilmiş içerik sunmak amacıyla yapay zeka teknolojisinden yararlanmaktadır. Bu bölüm, yapay zekanın nasıl kullanıldığını ve kullanıcı verilerinin bu süreçteki rolünü şeffaf biçimde açıklamaktadır.
+                </p>
+
+                <div className="mb-6">
+                  <h3 className="text-xl font-medium text-foreground mb-3">
+                    a) Yapay Zekanın Kullanım Amacı
+                  </h3>
+                  <p className="leading-relaxed mb-3">
+                    Yapay zeka yalnızca şu iki özellikte kullanılmaktadır:
+                  </p>
+                  <ul className="list-disc list-inside space-y-2 ml-4">
+                    <li>
+                      <strong className="text-foreground">Sana Özel (Haftalık Öneriler):</strong> Regl döngüsü fazlarına ve günlük ruh hali ile enerji trendlerine göre kişiselleştirilmiş aktivite ve öneri içerikleri üretilmektedir.
+                    </li>
+                    <li>
+                      <strong className="text-foreground">Burçlar:</strong> Her burç ve döngü fazına özel günlük yorum içerikleri üretilmektedir.
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h3 className="text-xl font-medium text-foreground mb-3">
+                    b) Kullanıcı Verisi Yapay Zekaya Gönderilmez
+                  </h3>
+                  <div className="p-4 bg-background-tertiary rounded-lg border border-border mb-3">
+                    <p className="text-foreground font-medium">
+                      Moodumuz, kullanıcılara ait hiçbir kişisel veriyi (ad, doğum tarihi, konum, ruh hali kayıtları vb.) herhangi bir yapay zeka servisine <strong>göndermez</strong>.
+                    </p>
+                  </div>
+                  <p className="leading-relaxed">
+                    Yapay zeka içerikleri, Orbira Labs tarafından önceden üretilerek Moodumuz veritabanında saklanmaktadır. Uygulama, kullanıcının burç bilgisi ve döngü fazına göre bu hazır içerikleri veritabanından çekerek göstermektedir. Süreç boyunca kullanıcıya ait herhangi bir veri üçüncü taraf bir yapay zeka servisine iletilmemektedir.
+                  </p>
+                </div>
+
+                <div className="mb-6">
+                  <h3 className="text-xl font-medium text-foreground mb-3">
+                    c) Toplanan Veriler ve Kullanım Amaçları
+                  </h3>
+                  <ul className="list-disc list-inside space-y-2 ml-4">
+                    <li>
+                      <strong className="text-foreground">Doğum Tarihi:</strong> Kullanıcının burç bilgisini hesaplamak ve regl döngüsü fazını doğru belirlemek için kullanılmaktadır. Bu bilgi olmadan kişiselleştirilmiş burç yorumları ve döngüye özgü öneriler sunulamamaktadır.
+                    </li>
+                    <li>
+                      <strong className="text-foreground">İl ve İlçe:</strong> Kullanıcının bulunduğu bölgeye ait güncel hava durumu verilerini (sıcaklık, yağış, bulutluluk vb.) çekmek için kullanılmaktadır. Bilimsel çalışmalar hava koşullarının ruh hali ve enerji üzerinde doğrudan etkisi olduğunu göstermekte olup bu bilgi regl döngüsü ve mood takibini anlamlı kılmaktadır. Hava durumu verileri Open-Meteo gibi açık kaynaklı, kişisel veri içermeyen servislerden alınmaktadır.
+                    </li>
+                    <li>
+                      <strong className="text-foreground">Ruh Hali ve Enerji Kayıtları:</strong> Haftalık öneri ve kişisel mesajların kişiselleştirilmesinde kullanılmaktadır. Bu veriler yalnızca cihazda ve Orbira Labs altyapısında işlenmekte; hiçbir üçüncü tarafla paylaşılmamaktadır.
+                    </li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-medium text-foreground mb-3">
+                    d) Yapay Zeka Servis Sağlayıcısı
+                  </h3>
+                  <p className="leading-relaxed">
+                    Moodumuz içeriklerinin üretiminde kullanılan yapay zeka altyapısı, Orbira Labs tarafından işletilmektedir. İçerik üretimi sürecinde yalnızca anonim ve kullanıcıya bağlanamayan şablonlar (döngü fazı, burç) kullanılmakta; bireysel kullanıcı verileri bu süreçte yer almamaktadır.
+                  </p>
+                </div>
+              </section>
+
+              {/* 7. Çerezler ve Benzeri Teknolojiler */}
+              <section>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">
+                  7. Çerezler ve Benzeri Teknolojiler
                 </h2>
                 <p className="leading-relaxed mb-4">
                   Web sitemizde ve bağlantılı servislerimizde çerezler (cookies), piksel etiketleri, yerel depolama ve benzeri teknolojiler kullanılabilir. Bu teknolojiler şu amaçlarla kullanılır:
@@ -219,10 +286,10 @@ export default function PrivacyPage() {
                 </p>
               </section>
 
-              {/* 7. Veri Saklama Süresi */}
+              {/* 8. Veri Saklama Süresi */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  7. Veri Saklama Süresi
+                  8. Veri Saklama Süresi
                 </h2>
                 <p className="leading-relaxed mb-4">
                   Kişisel veriler, işlenme amaçları için gerekli olan süre boyunca veya ilgili yasal yükümlülüklerin gerektirdiği süre kadar saklanır. Genel saklama süreleri:
@@ -239,10 +306,10 @@ export default function PrivacyPage() {
                 </p>
               </section>
 
-              {/* 8. Veri Güvenliği */}
+              {/* 9. Veri Güvenliği */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  8. Veri Güvenliği
+                  9. Veri Güvenliği
                 </h2>
                 <p className="leading-relaxed mb-4">
                   Orbira Labs, kişisel verileri yetkisiz erişim, kayıp, kötüye kullanım, değiştirme veya ifşaya karşı korumak için <strong className="text-foreground">endüstri standardı güvenlik önlemleri</strong> uygular:
@@ -261,10 +328,10 @@ export default function PrivacyPage() {
                 </p>
               </section>
 
-              {/* 9. Kullanıcı Hakları */}
+              {/* 10. Kullanıcı Hakları */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  9. Kullanıcı Hakları
+                  10. Kullanıcı Hakları
                 </h2>
                 <p className="leading-relaxed mb-4">
                   6698 sayılı KVKK ve ilgili mevzuat kapsamında, kişisel verilerinizle ilgili aşağıdaki haklara sahipsiniz:
@@ -285,20 +352,20 @@ export default function PrivacyPage() {
                 </p>
               </section>
 
-              {/* 10. Çocukların Gizliliği */}
+              {/* 11. Çocukların Gizliliği */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  10. Çocukların Gizliliği
+                  11. Çocukların Gizliliği
                 </h2>
                 <p className="leading-relaxed">
                   Hizmetlerimiz doğrudan <strong className="text-foreground">13 yaş altındaki çocuklara yönelik değildir</strong>. 13 yaşından küçük çocuklardan bilerek kişisel veri toplamıyoruz. Eğer bir ebeveyn veya vasi olarak çocuğunuzun bize kişisel veri sağladığını fark ederseniz, lütfen bizimle iletişime geçin. Böyle bir verinin farkında olmadan toplandığını öğrenmemiz halinde, gerekli silme işlemlerini derhal gerçekleştireceğiz.
                 </p>
               </section>
 
-              {/* 11. Uluslararası Veri Aktarımı */}
+              {/* 12. Uluslararası Veri Aktarımı */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  11. Uluslararası Veri Aktarımı
+                  12. Uluslararası Veri Aktarımı
                 </h2>
                 <p className="leading-relaxed mb-4">
                   Kullandığımız servis sağlayıcıların altyapısına bağlı olarak verileriniz, <strong className="text-foreground">Türkiye dışındaki sunucularda</strong> işlenebilir veya saklanabilir. Bu tür veri aktarımlarında:
@@ -311,50 +378,50 @@ export default function PrivacyPage() {
                 </ul>
               </section>
 
-              {/* 12. Veri İhlali Bildirimi */}
+              {/* 13. Veri İhlali Bildirimi */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  12. Veri İhlali Bildirimi
+                  13. Veri İhlali Bildirimi
                 </h2>
                 <p className="leading-relaxed">
                   Kişisel verilerinizi etkileyen bir güvenlik ihlali tespit edilmesi halinde, <strong className="text-foreground">yasal süreler içinde</strong> (72 saat) Kişisel Verileri Koruma Kurulu&apos;na bildirimde bulunulacak ve ihlalden etkilenen kullanıcılar mümkün olan en kısa sürede bilgilendirilecektir. Bildirimde ihlalin niteliği, etkilenen veri kategorileri, olası sonuçları ve alınan önlemler yer alacaktır.
                 </p>
               </section>
 
-              {/* 13. Otomatik Karar Alma */}
+              {/* 14. Otomatik Karar Alma */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  13. Otomatik Karar Alma ve Profilleme
+                  14. Otomatik Karar Alma ve Profilleme
                 </h2>
                 <p className="leading-relaxed">
                   Hizmetlerimizde kullanıcı deneyimini iyileştirmek amacıyla otomatik karar alma süreçleri kullanılabilir. Bu süreçler hakkında bilgi alma ve itiraz etme hakkınız saklıdır. Önemli kararların alınmasında tamamen otomatik sistemlere dayanılmamakta, insan denetimi sağlanmaktadır.
                 </p>
               </section>
 
-              {/* 14. Pazarlama İletişimi */}
+              {/* 15. Pazarlama İletişimi */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  14. Pazarlama İletişimi
+                  15. Pazarlama İletişimi
                 </h2>
                 <p className="leading-relaxed">
                   Orbira Labs, kullanıcılara yalnızca <strong className="text-foreground">açık onayları dahilinde</strong> pazarlama iletişimi gönderir. Pazarlama e-postalarından istediğiniz zaman çıkabilirsiniz. Ancak hizmetlerinizle ilgili önemli bilgilendirmeler (güvenlik uyarıları, hesap bildirimleri, yasal değişiklikler) pazarlama iletişimi kapsamında değerlendirilmez ve bunlardan çıkış yapılamaz.
                 </p>
               </section>
 
-              {/* 15. Politika Güncellemeleri */}
+              {/* 16. Politika Güncellemeleri */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  15. Politika Güncellemeleri
+                  16. Politika Güncellemeleri
                 </h2>
                 <p className="leading-relaxed">
                   Bu Gizlilik Politikası zaman zaman güncellenebilir. Önemli değişiklikler yapılması halinde, kullanıcıları <strong className="text-foreground">e-posta, uygulama içi bildirim veya web sitesinde duyuru</strong> yoluyla bilgilendirmeye çalışacağız. Güncel metin bu sayfada yayımlandığı anda yürürlüğe girer. Değişikliklerden sonra hizmetleri kullanmaya devam etmeniz, güncel politikayı kabul ettiğiniz anlamına gelir.
                 </p>
               </section>
 
-              {/* 16. Veri Sorumlusu */}
+              {/* 17. Veri Sorumlusu */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  16. Veri Sorumlusu
+                  17. Veri Sorumlusu
                 </h2>
                 <p className="leading-relaxed">
                   Kişisel verilerinizin işlenmesinden sorumlu veri sorumlusu:
@@ -365,10 +432,10 @@ export default function PrivacyPage() {
                 </div>
               </section>
 
-              {/* 17. İletişim */}
+              {/* 18. İletişim */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  17. İletişim
+                  18. İletişim
                 </h2>
                 <p className="leading-relaxed">
                   Gizlilikle ilgili her türlü soru, talep, şikayet veya haklarınızı kullanmak için:
