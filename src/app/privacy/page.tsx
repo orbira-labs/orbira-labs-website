@@ -20,7 +20,7 @@ export default function PrivacyPage() {
             </h1>
             
             <p className="text-foreground-muted leading-relaxed mb-8">
-              Son Güncelleme: 24 Mart 2026
+              Son Güncelleme: 26 Mart 2026
             </p>
 
             <p className="text-foreground-muted leading-relaxed mb-8">
@@ -266,10 +266,86 @@ export default function PrivacyPage() {
                 </div>
               </section>
 
-              {/* 7. Çerezler ve Benzeri Teknolojiler */}
+              {/* 7. KasaBende Uygulaması – Abonelik ve Satın Alma Verileri */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  7. Çerezler ve Benzeri Teknolojiler
+                  7. KasaBende Uygulaması – Abonelik ve Satın Alma Verileri
+                </h2>
+                <p className="leading-relaxed mb-4">
+                  KasaBende uygulaması, işletme yönetimi ve kasa takibi için tasarlanmış bir mobil uygulamadır. Bu bölüm, uygulama içi satın almalar ve abonelik sistemi kapsamında toplanan verileri açıklamaktadır.
+                </p>
+
+                <div className="mb-6">
+                  <h3 className="text-xl font-medium text-foreground mb-3">
+                    a) Toplanan Satın Alma Verileri
+                  </h3>
+                  <p className="leading-relaxed mb-3">
+                    KasaBende Pro abonelik sistemi kapsamında aşağıdaki veriler toplanmaktadır:
+                  </p>
+                  <ul className="list-disc list-inside space-y-2 ml-4">
+                    <li>
+                      <strong className="text-foreground">Satın Alma Geçmişi:</strong> Abonelik başlangıç tarihi, yenileme tarihleri, abonelik türü (aylık/yıllık) ve abonelik durumu (aktif/iptal/süresi dolmuş)
+                    </li>
+                    <li>
+                      <strong className="text-foreground">Abonelik Kimliği:</strong> App Store veya Google Play tarafından sağlanan anonim işlem tanımlayıcıları
+                    </li>
+                    <li>
+                      <strong className="text-foreground">Ürün Bilgisi:</strong> Satın alınan abonelik planı ve fiyatlandırma bilgisi
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h3 className="text-xl font-medium text-foreground mb-3">
+                    b) Ödeme Bilgileri
+                  </h3>
+                  <div className="p-4 bg-background-tertiary rounded-lg border border-border mb-3">
+                    <p className="text-foreground font-medium">
+                      KasaBende, kredi kartı numarası, CVV veya banka hesap bilgileri gibi hassas ödeme bilgilerini <strong>toplamaz ve saklamaz</strong>.
+                    </p>
+                  </div>
+                  <p className="leading-relaxed">
+                    Tüm ödeme işlemleri Apple App Store veya Google Play Store üzerinden güvenli bir şekilde gerçekleştirilmektedir. Orbira Labs, bu platformların ödeme altyapısını kullanır ve ödeme bilgilerine doğrudan erişimi yoktur.
+                  </p>
+                </div>
+
+                <div className="mb-6">
+                  <h3 className="text-xl font-medium text-foreground mb-3">
+                    c) Verilerin Kullanım Amaçları
+                  </h3>
+                  <ul className="list-disc list-inside space-y-2 ml-4">
+                    <li>
+                      <strong className="text-foreground">Abonelik Yönetimi:</strong> Pro özelliklerin etkinleştirilmesi ve yönetilmesi
+                    </li>
+                    <li>
+                      <strong className="text-foreground">Hesap Senkronizasyonu:</strong> Farklı cihazlarda abonelik durumunun tutarlı kalması
+                    </li>
+                    <li>
+                      <strong className="text-foreground">Müşteri Desteği:</strong> Abonelikle ilgili sorunların çözümlenmesi
+                    </li>
+                    <li>
+                      <strong className="text-foreground">Yasal Uyum:</strong> Fatura ve muhasebe kayıtlarının tutulması
+                    </li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-medium text-foreground mb-3">
+                    d) Üçüncü Taraf Abonelik Servisi
+                  </h3>
+                  <p className="leading-relaxed">
+                    KasaBende, abonelik yönetimi için <strong className="text-foreground">RevenueCat</strong> servisini kullanmaktadır. RevenueCat, Apple ve Google platformlarıyla entegre çalışan bir abonelik yönetim platformudur. RevenueCat&apos;in veri işleme politikaları için:{" "}
+                    <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener noreferrer" className="text-brand-primary hover:underline">
+                      RevenueCat Gizlilik Politikası
+                    </a>
+                  </p>
+                </div>
+              </section>
+
+              {/* 8. Çerezler ve Benzeri Teknolojiler */}
+              <section>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">
+                  8. Çerezler ve Benzeri Teknolojiler
                 </h2>
                 <p className="leading-relaxed mb-4">
                   Web sitemizde ve bağlantılı servislerimizde çerezler (cookies), piksel etiketleri, yerel depolama ve benzeri teknolojiler kullanılabilir. Bu teknolojiler şu amaçlarla kullanılır:
@@ -286,10 +362,10 @@ export default function PrivacyPage() {
                 </p>
               </section>
 
-              {/* 8. Veri Saklama Süresi */}
+              {/* 9. Veri Saklama Süresi */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  8. Veri Saklama Süresi
+                  9. Veri Saklama Süresi
                 </h2>
                 <p className="leading-relaxed mb-4">
                   Kişisel veriler, işlenme amaçları için gerekli olan süre boyunca veya ilgili yasal yükümlülüklerin gerektirdiği süre kadar saklanır. Genel saklama süreleri:
@@ -306,10 +382,10 @@ export default function PrivacyPage() {
                 </p>
               </section>
 
-              {/* 9. Veri Güvenliği */}
+              {/* 10. Veri Güvenliği */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  9. Veri Güvenliği
+                  10. Veri Güvenliği
                 </h2>
                 <p className="leading-relaxed mb-4">
                   Orbira Labs, kişisel verileri yetkisiz erişim, kayıp, kötüye kullanım, değiştirme veya ifşaya karşı korumak için <strong className="text-foreground">endüstri standardı güvenlik önlemleri</strong> uygular:
@@ -328,10 +404,10 @@ export default function PrivacyPage() {
                 </p>
               </section>
 
-              {/* 10. Kullanıcı Hakları */}
+              {/* 11. Kullanıcı Hakları */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  10. Kullanıcı Hakları
+                  11. Kullanıcı Hakları
                 </h2>
                 <p className="leading-relaxed mb-4">
                   6698 sayılı KVKK ve ilgili mevzuat kapsamında, kişisel verilerinizle ilgili aşağıdaki haklara sahipsiniz:
@@ -352,20 +428,20 @@ export default function PrivacyPage() {
                 </p>
               </section>
 
-              {/* 11. Çocukların Gizliliği */}
+              {/* 12. Çocukların Gizliliği */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  11. Çocukların Gizliliği
+                  12. Çocukların Gizliliği
                 </h2>
                 <p className="leading-relaxed">
                   Hizmetlerimiz doğrudan <strong className="text-foreground">13 yaş altındaki çocuklara yönelik değildir</strong>. 13 yaşından küçük çocuklardan bilerek kişisel veri toplamıyoruz. Eğer bir ebeveyn veya vasi olarak çocuğunuzun bize kişisel veri sağladığını fark ederseniz, lütfen bizimle iletişime geçin. Böyle bir verinin farkında olmadan toplandığını öğrenmemiz halinde, gerekli silme işlemlerini derhal gerçekleştireceğiz.
                 </p>
               </section>
 
-              {/* 12. Uluslararası Veri Aktarımı */}
+              {/* 13. Uluslararası Veri Aktarımı */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  12. Uluslararası Veri Aktarımı
+                  13. Uluslararası Veri Aktarımı
                 </h2>
                 <p className="leading-relaxed mb-4">
                   Kullandığımız servis sağlayıcıların altyapısına bağlı olarak verileriniz, <strong className="text-foreground">Türkiye dışındaki sunucularda</strong> işlenebilir veya saklanabilir. Bu tür veri aktarımlarında:
@@ -378,50 +454,50 @@ export default function PrivacyPage() {
                 </ul>
               </section>
 
-              {/* 13. Veri İhlali Bildirimi */}
+              {/* 14. Veri İhlali Bildirimi */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  13. Veri İhlali Bildirimi
+                  14. Veri İhlali Bildirimi
                 </h2>
                 <p className="leading-relaxed">
                   Kişisel verilerinizi etkileyen bir güvenlik ihlali tespit edilmesi halinde, <strong className="text-foreground">yasal süreler içinde</strong> (72 saat) Kişisel Verileri Koruma Kurulu&apos;na bildirimde bulunulacak ve ihlalden etkilenen kullanıcılar mümkün olan en kısa sürede bilgilendirilecektir. Bildirimde ihlalin niteliği, etkilenen veri kategorileri, olası sonuçları ve alınan önlemler yer alacaktır.
                 </p>
               </section>
 
-              {/* 14. Otomatik Karar Alma */}
+              {/* 15. Otomatik Karar Alma */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  14. Otomatik Karar Alma ve Profilleme
+                  15. Otomatik Karar Alma ve Profilleme
                 </h2>
                 <p className="leading-relaxed">
                   Hizmetlerimizde kullanıcı deneyimini iyileştirmek amacıyla otomatik karar alma süreçleri kullanılabilir. Bu süreçler hakkında bilgi alma ve itiraz etme hakkınız saklıdır. Önemli kararların alınmasında tamamen otomatik sistemlere dayanılmamakta, insan denetimi sağlanmaktadır.
                 </p>
               </section>
 
-              {/* 15. Pazarlama İletişimi */}
+              {/* 16. Pazarlama İletişimi */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  15. Pazarlama İletişimi
+                  16. Pazarlama İletişimi
                 </h2>
                 <p className="leading-relaxed">
                   Orbira Labs, kullanıcılara yalnızca <strong className="text-foreground">açık onayları dahilinde</strong> pazarlama iletişimi gönderir. Pazarlama e-postalarından istediğiniz zaman çıkabilirsiniz. Ancak hizmetlerinizle ilgili önemli bilgilendirmeler (güvenlik uyarıları, hesap bildirimleri, yasal değişiklikler) pazarlama iletişimi kapsamında değerlendirilmez ve bunlardan çıkış yapılamaz.
                 </p>
               </section>
 
-              {/* 16. Politika Güncellemeleri */}
+              {/* 17. Politika Güncellemeleri */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  16. Politika Güncellemeleri
+                  17. Politika Güncellemeleri
                 </h2>
                 <p className="leading-relaxed">
                   Bu Gizlilik Politikası zaman zaman güncellenebilir. Önemli değişiklikler yapılması halinde, kullanıcıları <strong className="text-foreground">e-posta, uygulama içi bildirim veya web sitesinde duyuru</strong> yoluyla bilgilendirmeye çalışacağız. Güncel metin bu sayfada yayımlandığı anda yürürlüğe girer. Değişikliklerden sonra hizmetleri kullanmaya devam etmeniz, güncel politikayı kabul ettiğiniz anlamına gelir.
                 </p>
               </section>
 
-              {/* 17. Veri Sorumlusu */}
+              {/* 18. Veri Sorumlusu */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  17. Veri Sorumlusu
+                  18. Veri Sorumlusu
                 </h2>
                 <p className="leading-relaxed">
                   Kişisel verilerinizin işlenmesinden sorumlu veri sorumlusu:
@@ -432,10 +508,10 @@ export default function PrivacyPage() {
                 </div>
               </section>
 
-              {/* 18. İletişim */}
+              {/* 19. İletişim */}
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  18. İletişim
+                  19. İletişim
                 </h2>
                 <p className="leading-relaxed">
                   Gizlilikle ilgili her türlü soru, talep, şikayet veya haklarınızı kullanmak için:
