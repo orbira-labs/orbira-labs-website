@@ -20,7 +20,7 @@ export default function TermsPage() {
             </h1>
             
             <p className="text-foreground-muted leading-relaxed mb-8">
-              Son Güncelleme: 8 Mart 2026
+              Son Güncelleme: 29 Mart 2026
             </p>
 
             <p className="text-foreground-muted leading-relaxed mb-8">
@@ -222,6 +222,37 @@ export default function TermsPage() {
                   </Link>{" "}
                   içinde açıklanır. Hizmeti kullanarak ilgili politikayı da okuduğunuzu ve kabul ettiğinizi beyan etmiş olursunuz.
                 </p>
+              </section>
+
+              {/* 14.1 Yapay Zeka Destekli Özellikler */}
+              <section>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">
+                  14.1 Yapay Zeka Destekli Özellikler
+                </h2>
+                <p className="leading-relaxed mb-4">
+                  Bazı hizmetlerimiz, kişiselleştirilmiş içerik ve öneriler sunmak amacıyla yapay zeka teknolojisinden yararlanmaktadır. Bu özellikleri kullanarak aşağıdakileri kabul etmiş olursunuz:
+                </p>
+                <ul className="list-disc list-inside space-y-2 ml-4">
+                  <li>
+                    <strong className="text-foreground">Açık Rıza:</strong> Yapay zeka ile veri işleme gerektiren özellikler (örn. Mood Pro Kişisel Dönüşüm Programı), yalnızca açık rızanız alındıktan sonra etkinleştirilir.
+                  </li>
+                  <li>
+                    <strong className="text-foreground">İşleme Amacı:</strong> Verileriniz yalnızca size özel içerik ve öneriler üretmek amacıyla işlenir; reklam, profilleme veya model eğitimi için kullanılmaz.
+                  </li>
+                  <li>
+                    <strong className="text-foreground">Üçüncü Taraf Sağlayıcılar:</strong> Yapay zeka işlemleri için OpenAI gibi üçüncü taraf servis sağlayıcıları kullanılabilir. Bu sağlayıcıların veri işleme politikaları için{" "}
+                    <Link href="/privacy" className="text-brand-primary hover:underline">
+                      Gizlilik Politikası
+                    </Link>{" "}
+                    incelenmelidir.
+                  </li>
+                  <li>
+                    <strong className="text-foreground">Rıza Geri Çekme:</strong> Yapay zeka veri işleme rızanızı istediğiniz zaman uygulama ayarlarından geri çekebilirsiniz. Rıza geri çekildiğinde ilgili özellikler devre dışı kalır.
+                  </li>
+                  <li>
+                    <strong className="text-foreground">Sonuçların Niteliği:</strong> Yapay zeka tarafından üretilen içerikler bilgilendirme amaçlıdır ve profesyonel tıbbi, psikolojik veya beslenme danışmanlığı yerine geçmez.
+                  </li>
+                </ul>
               </section>
 
               {/* 15. Üçüncü Taraf Hizmetler */}

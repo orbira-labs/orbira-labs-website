@@ -20,7 +20,7 @@ export default function PrivacyPage() {
             </h1>
             
             <p className="text-foreground-muted leading-relaxed mb-8">
-              Son Güncelleme: 26 Mart 2026
+              Son Güncelleme: 29 Mart 2026
             </p>
 
             <p className="text-foreground-muted leading-relaxed mb-8">
@@ -210,10 +210,10 @@ export default function PrivacyPage() {
 
                 <div className="mb-6">
                   <h3 className="text-xl font-medium text-foreground mb-3">
-                    a) Yapay Zekanın Kullanım Amacı
+                    a) Yapay Zekanın Kullanım Amaçları
                   </h3>
                   <p className="leading-relaxed mb-3">
-                    Yapay zeka yalnızca şu iki özellikte kullanılmaktadır:
+                    Yapay zeka aşağıdaki özelliklerde kullanılmaktadır:
                   </p>
                   <ul className="list-disc list-inside space-y-2 ml-4">
                     <li>
@@ -222,21 +222,44 @@ export default function PrivacyPage() {
                     <li>
                       <strong className="text-foreground">Burçlar:</strong> Her burç ve döngü fazına özel günlük yorum içerikleri üretilmektedir.
                     </li>
+                    <li>
+                      <strong className="text-foreground">Mood Pro – Kişisel Dönüşüm Programı:</strong> Premium üyelik kapsamında sunulan 12 aylık kişiselleştirilmiş program. Bu özellik, kullanıcının açık rızası ile analiz cevaplarını ve görev geçmişini yapay zeka ile işleyerek beslenme, hareket, uyku, zihinsel sağlık ve sosyal ilişkiler alanlarında kişiye özel görevler ve öneriler üretir.
+                    </li>
                   </ul>
                 </div>
 
                 <div className="mb-6">
                   <h3 className="text-xl font-medium text-foreground mb-3">
-                    b) Kullanıcı Verisi Yapay Zekaya Gönderilmez
+                    b) Veri İşleme Yaklaşımı
                   </h3>
-                  <div className="p-4 bg-background-tertiary rounded-lg border border-border mb-3">
-                    <p className="text-foreground font-medium">
-                      Moodumuz, kullanıcılara ait hiçbir kişisel veriyi (ad, doğum tarihi, konum, ruh hali kayıtları vb.) herhangi bir yapay zeka servisine <strong>göndermez</strong>.
+                  
+                  <div className="p-4 bg-background-tertiary rounded-lg border border-border mb-4">
+                    <p className="text-foreground font-medium mb-2">Ücretsiz Özellikler</p>
+                    <p className="text-foreground-muted">
+                      Sana Özel ve Burçlar özelliklerinde kullanıcılara ait hiçbir kişisel veri yapay zeka servisine gönderilmez. Bu içerikler Orbira Labs tarafından önceden üretilerek veritabanında saklanır ve kullanıcının burç/döngü fazına göre gösterilir.
                     </p>
                   </div>
-                  <p className="leading-relaxed">
-                    Yapay zeka içerikleri, Orbira Labs tarafından önceden üretilerek Moodumuz veritabanında saklanmaktadır. Uygulama, kullanıcının burç bilgisi ve döngü fazına göre bu hazır içerikleri veritabanından çekerek göstermektedir. Süreç boyunca kullanıcıya ait herhangi bir veri üçüncü taraf bir yapay zeka servisine iletilmemektedir.
-                  </p>
+
+                  <div className="p-4 bg-background-tertiary rounded-lg border border-border">
+                    <p className="text-foreground font-medium mb-2">Mood Pro – Kişisel Dönüşüm Programı</p>
+                    <p className="text-foreground-muted mb-3">
+                      Bu premium özellik, kişiselleştirilmiş program üretebilmek için kullanıcı verilerini yapay zeka ile işlemeyi gerektirir. Bu işlem yalnızca kullanıcının <strong className="text-foreground">açık rızası</strong> alındıktan sonra gerçekleştirilir.
+                    </p>
+                    <p className="text-foreground-muted mb-2"><strong className="text-foreground">İşlenen veriler:</strong></p>
+                    <ul className="list-disc list-inside space-y-1 ml-4 text-foreground-muted">
+                      <li>Analiz anketindeki cevaplar (hedefler, yaşam tarzı, tercihler)</li>
+                      <li>Görev tamamlama geçmişi ve geri bildirimler</li>
+                      <li>Döngü fazı ve genel wellness verileri</li>
+                    </ul>
+                    <p className="text-foreground-muted mt-3 mb-2"><strong className="text-foreground">Güvenceler:</strong></p>
+                    <ul className="list-disc list-inside space-y-1 ml-4 text-foreground-muted">
+                      <li>Veriler yalnızca program üretimi için kullanılır</li>
+                      <li>Üçüncü taraflarla paylaşılmaz</li>
+                      <li>Reklamcılık amacıyla işlenmez</li>
+                      <li>Yapay zeka modeli eğitimi için kullanılmaz</li>
+                      <li>İstediğiniz zaman rızanızı geri çekebilirsiniz</li>
+                    </ul>
+                  </div>
                 </div>
 
                 <div className="mb-6">
@@ -260,8 +283,19 @@ export default function PrivacyPage() {
                   <h3 className="text-xl font-medium text-foreground mb-3">
                     d) Yapay Zeka Servis Sağlayıcısı
                   </h3>
-                  <p className="leading-relaxed">
-                    Moodumuz içeriklerinin üretiminde kullanılan yapay zeka altyapısı, Orbira Labs tarafından işletilmektedir. İçerik üretimi sürecinde yalnızca anonim ve kullanıcıya bağlanamayan şablonlar (döngü fazı, burç) kullanılmakta; bireysel kullanıcı verileri bu süreçte yer almamaktadır.
+                  <p className="leading-relaxed mb-3">
+                    Moodumuz, yapay zeka işlemleri için <strong className="text-foreground">OpenAI GPT-4o</strong> modelini kullanmaktadır. OpenAI&apos;nin veri işleme politikası gereği:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 ml-4">
+                    <li>API üzerinden gönderilen veriler model eğitimi için kullanılmaz</li>
+                    <li>Veriler 30 gün içinde OpenAI sistemlerinden silinir</li>
+                    <li>OpenAI, verileri kötüye kullanım tespiti dışında saklamaz</li>
+                  </ul>
+                  <p className="leading-relaxed mt-3">
+                    Detaylı bilgi için:{" "}
+                    <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-brand-primary hover:underline">
+                      OpenAI Gizlilik Politikası
+                    </a>
                   </p>
                 </div>
               </section>
