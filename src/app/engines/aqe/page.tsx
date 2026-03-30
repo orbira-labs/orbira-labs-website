@@ -8,8 +8,8 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 
 const CAPABILITIES = [
   {
-    title: "Akıllı Yönlendirme",
-    description: "Her yanıt, bir sonraki soruyu belirler. Soru akışı, seni tanıdıkça daha anlamlı hale gelir.",
+    title: "Dynamic Routing",
+    description: "Decision tree değil, probabilistic graph. Her yanıt, olasılık uzayını yeniden şekillendirir.",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -17,8 +17,8 @@ const CAPABILITIES = [
     ),
   },
   {
-    title: "Sıfır Tekrar",
-    description: "Daha önce yanıtladığın veya gereksiz sorular sorulmaz. Her soru bir amaca hizmet eder. Zamanın değerli.",
+    title: "Entropy Minimization",
+    description: "Her soru, bilgi entropisi minimize edecek şekilde seçilir. Maksimum bilgi kazanımı, minimum soru.",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <path d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -26,8 +26,8 @@ const CAPABILITIES = [
     ),
   },
   {
-    title: "Bağlam Farkındalığı",
-    description: "Sadece yanıtı değil, arkasındaki bağlamı da anlar. \"Yorgunum\" demek farklı, Pazartesi sabahı yorgun olmak farklı.",
+    title: "Context Embeddings",
+    description: "Temporal ve spatial bağlam, yanıt embedding'lerine entegre edilir. Aynı kelime, farklı bağlamlarda farklı anlam.",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
@@ -35,8 +35,8 @@ const CAPABILITIES = [
     ),
   },
   {
-    title: "HAE Entegrasyonu",
-    description: "Human Analysis Engine ile tam entegrasyon. AQE'nin topladığı her veri, HAE'nin analiz edeceği bir girdi.",
+    title: "Cross-Engine Sync",
+    description: "HAE ile bidirectional data flow. AQE toplar, HAE analiz eder, sonuçlar AQE'yi optimize eder.",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <path d="M12 2L2 7l10 5 10-5-10-5z" />
@@ -49,25 +49,25 @@ const CAPABILITIES = [
 
 const QUESTION_TIERS = [
   { 
-    name: "Temel Sorular", 
-    desc: "Her kullanıcıya sorulan, profil temeli oluşturan sorular.", 
-    count: "Katman 1",
+    name: "Foundation Layer", 
+    desc: "Cold start için gerekli baseline vektörü oluşturur.", 
+    count: "L1",
     color: "from-emerald-500/20 to-emerald-500/5",
     borderColor: "border-emerald-500/30",
     dotColor: "bg-emerald-400"
   },
   { 
-    name: "Adaptif Sorular", 
-    desc: "Önceki yanıtlara göre tetiklenen, derinleştiren sorular.", 
-    count: "Katman 2",
+    name: "Adaptive Layer", 
+    desc: "Response pattern'e göre dinamik olarak tetiklenir.", 
+    count: "L2",
     color: "from-violet-500/20 to-violet-500/5",
     borderColor: "border-violet-500/30",
     dotColor: "bg-violet-400"
   },
   { 
-    name: "Keşif Soruları", 
-    desc: "Belirli örüntüler tespit edildiğinde açılan özel sorular.", 
-    count: "Katman 3",
+    name: "Deep Exploration", 
+    desc: "Anomaly detection sonrası aktive olan keşif protokolü.", 
+    count: "L3",
     color: "from-amber-500/20 to-amber-500/5",
     borderColor: "border-amber-500/30",
     dotColor: "bg-amber-400"
@@ -75,24 +75,24 @@ const QUESTION_TIERS = [
 ];
 
 const FLOW_STEPS = [
-  { label: "Başlangıç", sublabel: "Profil temeli" },
-  { label: "Adaptasyon", sublabel: "Dinamik yönlendirme" },
-  { label: "Derinleşme", sublabel: "Bağlamsal keşif" },
-  { label: "Tamamlanma", sublabel: "Optimal veri seti" },
+  { label: "Init", sublabel: "Cold start protocol" },
+  { label: "Route", sublabel: "Probability weighting" },
+  { label: "Explore", sublabel: "Pattern deep-dive" },
+  { label: "Converge", sublabel: "Optimal stopping" },
 ];
 
 const STATS = [
-  { value: "Geniş", label: "Soru Havuzu", desc: "Kapsamlı ve çeşitli sorular" },
-  { value: "Kişiye Özel", label: "Akış", desc: "Her kullanıcıya farklı yol" },
-  { value: "3", label: "Katman", desc: "Temel → Adaptif → Keşif" },
-  { value: "HAE", label: "Entegre", desc: "Tam motor senkronizasyonu" },
+  { value: "∞", label: "Path Variants", desc: "Unique question sequences" },
+  { value: "3-Tier", label: "Architecture", desc: "Multi-layer routing" },
+  { value: "<2s", label: "Route Time", desc: "Real-time path selection" },
+  { value: "HAE", label: "Sync", desc: "Bidirectional data flow" },
 ];
 
 const HOW_IT_WORKS = [
-  { step: "01", title: "Akıllı Başlangıç", desc: "Herkes aynı temel sorularla başlar. Bu sorular, sistemin seni tanıması için gerekli minimum bilgiyi toplar." },
-  { step: "02", title: "Dinamik Yönlendirme", desc: "Her yanıt, bir sonraki soruyu etkiler. \"Stresli\" dersen stres kaynaklarını sorar, \"enerjik\" dersen aktivite tercihlerini." },
-  { step: "03", title: "Bağlamsal Derinleşme", desc: "Belirli örüntüler tespit edildiğinde, özel soru zincirleri açılır. Yüzeysel değil, anlamlı veri." },
-  { step: "04", title: "Optimal Durdurma", desc: "Yeterli veri toplandığında, gereksiz soru sormadan durur. Minimum soru, maksimum içgörü." },
+  { step: "01", title: "Cold Start Protocol", desc: "Baseline feature vector oluşturmak için minimum viable question set. Zero-knowledge state'den profile transition." },
+  { step: "02", title: "Probabilistic Routing", desc: "Her response, sonraki sorunun probability distribution'ını yeniden hesaplar. Bayesian inference ile path optimization." },
+  { step: "03", title: "Pattern Deep-Dive", desc: "Anomaly veya correlation tespit edildiğinde aktive olan exploration mode. Signal amplification için derinleşme." },
+  { step: "04", title: "Optimal Stopping", desc: "Information gain threshold'a ulaşıldığında convergence. Diminishing returns noktasında akıllı sonlandırma." },
 ];
 
 const fadeInUp = (delay = 0) => ({
@@ -165,17 +165,16 @@ export default function AQEPage() {
               <p className="text-lg sm:text-xl lg:text-2xl text-foreground-muted mb-2">Adaptive Question Engine</p>
 
               <p className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-foreground mb-6 leading-tight">
-                Sana{" "}
+                Her kullanıcıya{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-purple-400 to-indigo-400">
-                  adapte olan
-                </span>{" "}
-                sorular.
+                  unique path
+                </span>
               </p>
 
               <p className="text-base sm:text-lg text-foreground-muted max-w-2xl mx-auto leading-relaxed mb-10">
-                Geleneksel anketler herkese aynı soruları sorar. AQE farklı. 
-                Seni tanıdıkça soruları değiştirir, gereksiz olanları atlar, 
-                önemli olanlarda derinleşir. Minimum soru, maksimum anlam.
+                Static survey'ler linear path izler. AQE, probabilistic routing ile 
+                her kullanıcıya farklı bir yolculuk sunar. Entropy minimization, 
+                maximum information gain.
               </p>
 
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20">
@@ -239,7 +238,7 @@ export default function AQEPage() {
                   <div className="mb-10 sm:mb-14">
                     <div className="flex items-center gap-2 mb-6 sm:mb-8">
                       <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/10" />
-                      <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-foreground-subtle">Adaptif Akış</span>
+                      <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-foreground-subtle">Adaptive Flow Pipeline</span>
                       <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10" />
                     </div>
 
@@ -271,7 +270,7 @@ export default function AQEPage() {
                   <div className="mb-8 sm:mb-12">
                     <div className="flex items-center gap-2 mb-6">
                       <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/10" />
-                      <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-foreground-subtle">Soru Katmanları</span>
+                      <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-foreground-subtle">Question Layers</span>
                       <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10" />
                     </div>
 
@@ -320,18 +319,18 @@ export default function AQEPage() {
                             <path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
                         </div>
-                        <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">Yönlendirme Çekirdeği</h3>
-                        <p className="text-sm text-foreground-muted mb-4">Dinamik soru seçimi, bağlam farkındalığı, akıllı durdurma.</p>
+                        <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">Routing Core</h3>
+                        <p className="text-sm text-foreground-muted mb-4">Bayesian inference, entropy calculation, optimal path selection.</p>
                         
                         <div className="flex items-center justify-center gap-4 text-xs sm:text-sm">
                           <div className="flex items-center gap-1.5">
                             <div className="w-2 h-2 rounded-full bg-emerald-400" />
-                            <span className="text-foreground-muted">Minimum soru</span>
+                            <span className="text-foreground-muted">Min entropy</span>
                           </div>
                           <span className="text-foreground-subtle">•</span>
                           <div className="flex items-center gap-1.5">
                             <div className="w-2 h-2 rounded-full bg-violet-400" />
-                            <span className="text-foreground-muted">Maksimum veri</span>
+                            <span className="text-foreground-muted">Max information</span>
                           </div>
                         </div>
                       </div>
@@ -347,9 +346,9 @@ export default function AQEPage() {
         <section className="section-padding relative">
           <Container size="narrow">
             <motion.div className="text-center mb-10 sm:mb-14" {...fadeInUp()}>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Nasıl Çalışır?</h2>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Processing Pipeline</h2>
               <p className="text-foreground-muted max-w-xl mx-auto">
-                Geleneksel anketlerin aksine, AQE her kullanıcıya farklı bir yolculuk sunar.
+                Cold start'tan convergence'a kadar adaptive question flow.
               </p>
             </motion.div>
 
@@ -379,8 +378,8 @@ export default function AQEPage() {
           
           <Container>
             <motion.div className="text-center mb-10 sm:mb-14" {...fadeInUp()}>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Temel Yetenekler</h2>
-              <p className="text-foreground-muted max-w-xl mx-auto">Geleneksel anketlerin ötesinde, akıllı bir deneyim.</p>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Core Capabilities</h2>
+              <p className="text-foreground-muted max-w-xl mx-auto">Static survey'lerin ötesinde, intelligent question orchestration.</p>
             </motion.div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
@@ -433,13 +432,13 @@ export default function AQEPage() {
                   </div>
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-3">Tam Entegrasyon</h3>
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-3">Bidirectional Sync</h3>
                 <p className="text-foreground-muted max-w-md mx-auto mb-4">
-                  AQE'nin topladığı her yanıt, HAE'nin analiz edeceği bir girdi. 
-                  İki motor birlikte çalışarak sana özel, derinlemesine içgörüler üretir.
+                  AQE response data'sı HAE'ye akar, HAE insights'ı AQE routing'i optimize eder.
+                  Continuous feedback loop ile mutual enhancement.
                 </p>
-                <p className="text-sm text-foreground-subtle">
-                  Soru → Yanıt → Analiz → İçgörü → Kişiselleştirme
+                <p className="text-sm text-foreground-subtle font-mono">
+                  Query → Response → Analysis → Insight → Optimization
                 </p>
               </div>
             </motion.div>
