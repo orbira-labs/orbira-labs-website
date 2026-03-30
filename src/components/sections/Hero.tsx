@@ -93,7 +93,7 @@ export function Hero() {
                 </Button>
               </motion.div>
             </Link>
-            <Link href="#about" className="flex-1 sm:flex-none">
+            <Link href="/about" className="flex-1 sm:flex-none">
               <motion.div
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}

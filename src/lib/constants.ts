@@ -9,7 +9,7 @@ export const SITE_CONFIG = {
 export const NAV_LINKS = [
   { href: "#products", label: "Ürünler" },
   { href: "#approach", label: "Yaklaşım" },
-  { href: "#about", label: "Hakkımızda" },
+  { href: "/about", label: "Hakkımızda" },
   { href: "#contact", label: "İletişim" },
 ];
 
@@ -173,3 +173,47 @@ export const FOUNDER = {
     { company: "Eachlabs", domain: "AI Model Marketplace", country: "Türkiye", flag: "🇹🇷" },
   ],
 };
+
+export const TEAM_MEMBERS = [
+  {
+    name: "Seyyit Ali Perse",
+    role: "Kurucu & Geliştirici",
+    image: "/images/founder.png",
+    shortBio: "Tek başına dört farklı uygulamayı sıfırdan tasarlayıp App Store'a taşıyan, sınır tanımayan iş bitirici.",
+    fullBio: `Tek başına dört farklı uygulamayı sıfırdan tasarlayıp App Store'a taşıyan, "yapılamaz" denileni yapan geliştirici. KasaBende, Moodumuz ve diğer ürünler, bu vizyonun somut kanıtları.
+
+Human Analysis Engine™ (HAE) - insanı anlamak için tasarladığı teknoloji. Üç katmanlı yapısıyla biyolojik sinyalleri, davranış kalıplarını ve bağlamsal verileri birleştiriyor. Sonuç: %95 doğrulukla kişiye özel analiz. Genel tahminler değil, birey bazlı içgörüler.
+
+Adaptive Learning ve Cross-domain Fusion alanlarında geliştirdiği yaklaşımlar, farklı veri kaynaklarını tek bir anlam haritasında birleştiriyor. Her etkileşim sistemi güçlendiriyor, zaman geçtikçe tahminler keskinleşiyor.
+
+"Sınırlarım yok" demek kolay; dört uygulamayı tek başına çıkarmak zor. Karmaşıklığı sadeleştirmek, görünmezi görünür kılmak onun uzmanlık alanı.`,
+    experience: FOUNDER.experience,
+    highlights: ["4 Yayınlanmış Uygulama", "HAE™ Teknolojisi", "Global Deneyim"],
+  },
+  {
+    name: "Ayçin Akyel",
+    role: "Operasyon Yöneticisi",
+    image: "/images/aycin.jpg",
+    shortBio: "Fikirleri eyleme dönüştüren stratejist. Kullanıcı geri bildirimlerini değerli içgörüye çeviren analitik zeka.",
+    fullBio: `Fikirleri eyleme dönüştüren stratejist. Kullanıcı geri bildirimlerini güçlü süzgeçlerden geçirerek ekibe sunan, ham veriyi değerli içgörüye çeviren analitik zeka.
+
+İnsanlarla iletişimi ve empati yeteneği, ürünlerin kullanıcı odaklı kalmasını sağlıyor. Bir özelliğin teknik olarak mümkün olması yetmez; gerçekten işe yaraması gerekir. Bu dengeyi kuran kişi.
+
+Operasyon süreçlerinde detaycı yaklaşımı, projelerin zamanında ve kaliteli teslim edilmesinin garantisi.`,
+    experience: [],
+    highlights: ["Kullanıcı Odaklı", "Stratejik Planlama", "Operasyon Yönetimi"],
+  },
+  {
+    name: "Burak Gündüz",
+    role: "Yazılım Geliştirici",
+    image: "/images/burak-placeholder.jpg",
+    shortBio: "Her şeyi yapabilecek kapasiteye sahip, analitik düşüncenin somutlaşmış hali.",
+    fullBio: `Her şeyi yapabilecek kapasiteye sahip, analitik düşüncenin somutlaşmış hali. Karmaşık sistemleri parçalara ayırıp yeniden kurma yeteneği, ekibin teknik omurgasını oluşturuyor.
+
+Kod yazmak onun için sadece bir araç; asıl hedef, sürdürülebilir ve ölçeklenebilir çözümler üretmek. Problemlere farklı açılardan yaklaşan, detaylarda kaybolmadan büyük resmi gören geliştirici.`,
+    experience: [],
+    highlights: ["Full-stack Geliştirme", "Analitik Düşünce", "Ölçeklenebilir Sistemler"],
+  },
+];
+
+export const TEAM_TAGLINE = "Üç farklı perspektif, tek hedef: İşe yarayan ürünler.";

@@ -10,7 +10,7 @@ const footerLinks = {
     href: p.href || `#products`,
   })),
   company: [
-    { label: "Hakkımızda", href: "#about" },
+    { label: "Hakkımızda", href: "/about" },
     { label: "Yaklaşım", href: "#approach" },
     { label: "İletişim", href: "#contact" },
     { label: "Hizmet Başvurusu", href: "/apply" },
