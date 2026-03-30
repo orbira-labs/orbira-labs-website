@@ -3,8 +3,9 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Container, Badge, Button } from "@/components/ui";
+import { Container, Button } from "@/components/ui";
 import { Header, Footer } from "@/components/sections";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const FEATURES = [
   {
@@ -36,12 +37,6 @@ const FEATURES = [
     title: "Trend Analizi",
     description:
       "Ruh hali ve enerji trendlerini izle. Döngü-duygu bağlantılarını keşfet, kalıplarını anla.",
-  },
-  {
-    icon: "🔒",
-    title: "Tam Gizlilik",
-    description:
-      "Veriler sadece sana ait. Kimseyle paylaşılmaz, istediğin zaman tamamen silebilirsin.",
   },
 ];
 
@@ -109,134 +104,173 @@ const CYCLE_PHASES = [
 
 const ENGINE_FEATURES = [
   {
-    icon: "🧬",
-    title: "Çok Katmanlı Profil Analizi",
-    description: "Döngü verilerin, duygusal kalıpların ve astrolojik profilin tek bir akıllı sistemde birleşir.",
+    title: "Seni Tanıyor",
+    description: "Kullandıkça sana uyum sağlayan bir zeka. Her gün biraz daha sen.",
+    icon: (
+      <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+        <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" />
+      </svg>
+    ),
   },
   {
-    icon: "🔮",
-    title: "Bağlamsal Zeka",
-    description: "Motor sadece verini değil, o anki bağlamını da anlıyor. Döngü fazın, mevsim, hava durumu — hepsi hesapta.",
+    title: "Anı Okuyor",
+    description: "Döngü fazın, mevsim, ruh halin — o anki bağlamını anlıyor.",
+    icon: (
+      <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+        <circle cx="12" cy="12" r="3" /><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+      </svg>
+    ),
   },
   {
-    icon: "⚡",
-    title: "Gerçek Zamanlı Adaptasyon",
-    description: "Her check-in'de motor seni daha iyi tanıyor. Öneriler zamanla sana özel hale geliyor.",
+    title: "Öğrenmeyi Bırakmıyor",
+    description: "Her check-in yeni bir veri. Öneriler zamanla sadece sana özel.",
+    icon: (
+      <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+      </svg>
+    ),
   },
   {
-    icon: "🎯",
-    title: "Kişiselleştirilmiş İçgörüler",
-    description: "Genel tavsiyeler yerine, tam olarak senin için üretilmiş içgörüler ve öneriler.",
+    title: "Genel Değil, Senin",
+    description: "Herkes için aynı tavsiyeler yok. Sadece senin verinden üretiliyor.",
+    icon: (
+      <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z" /><circle cx="12" cy="12" r="3" />
+      </svg>
+    ),
   },
 ];
 
+const fadeInUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.5, delay },
+});
+
 export default function MoodumuzPage() {
+  const isMobile = useIsMobile();
+
   return (
     <>
       <Header />
       <main className="pt-20 overflow-hidden">
-        {/* Hero Section - Mobile First */}
-        <section className="relative min-h-[90vh] flex items-center py-12 sm:py-8">
+        {/* Hero Section — Mobile: compact header + screenshot carousel / Desktop: full layout */}
+        <section className="relative py-8 lg:min-h-[90vh] lg:flex lg:items-center lg:py-8">
           <div className="absolute inset-0 bg-gradient-to-br from-[#7A8471]/10 via-transparent to-[#5C6455]/5 pointer-events-none" />
 
           <Container className="relative z-10">
-            <div className="flex flex-col lg:grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
-              {/* Phone mockup - Hero görsel */}
+            {/* ── Mobile Hero ── */}
+            <div className="lg:hidden">
+              {/* App identity */}
               <motion.div
-                className="relative flex items-center justify-center order-1 lg:order-2 w-full"
-                initial={{ opacity: 0, scale: 0.9 }}
+                className="text-center mb-6"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+              >
+                <div className="flex items-center gap-3 justify-center mb-3">
+                  <div className="w-12 h-12 rounded-xl overflow-hidden shadow-lg shadow-[#7A8471]/20">
+                    <Image src="/images/moodumuz-icon.png" alt="Moodumuz" width={48} height={48} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="text-left">
+                    <h1 className="text-xl font-bold text-foreground">Moodumuz</h1>
+
+                  </div>
+                </div>
+                <p className="text-lg font-semibold text-foreground leading-tight">
+                  Döngünü Anlayan,{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7A8471] to-[#9BA392]">
+                    Seni Tanıyan
+                  </span>{" "}
+                  Arkadaşın
+                </p>
+                <p className="text-xs text-foreground-muted mt-2 leading-relaxed max-w-xs mx-auto">
+                  Seni yargılamayan, döngünü takip eden, burcuna göre kozmik rehberlik sunan dijital arkadaşın.
+                </p>
+              </motion.div>
+
+              {/* Screenshot carousel — small phones */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.15 }}
+              >
+                <div className="flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory hide-scrollbar">
+                  {SCREENSHOTS.map((ss) => (
+                    <div key={ss.label} className="flex-shrink-0 w-[130px] snap-center">
+                      <div className="relative w-full aspect-[9/19] rounded-2xl bg-gradient-to-b from-zinc-700 to-zinc-900 p-[2px] shadow-lg shadow-black/30 mb-2">
+                        <div className="w-full h-full rounded-[14px] overflow-hidden relative bg-black">
+                          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-3 bg-black rounded-b-lg z-10" />
+                          <Image src={ss.src} alt={ss.alt} fill className="object-cover object-top" />
+                        </div>
+                      </div>
+                      <p className="text-[10px] text-foreground-muted font-medium text-center">{ss.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+            </div>
+
+            {/* ── Desktop Hero ── */}
+            <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center">
+              {/* Phone mockups */}
+              <motion.div
+                className="relative flex items-center justify-center order-2 w-full"
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.7, delay: 0.2 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
               >
                 <div className="relative">
-                  {/* Main Phone - Home Screen */}
                   <motion.div
                     className="relative z-20"
                     animate={{ y: [0, -12, 0] }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                   >
-                    <div className="w-[200px] h-[420px] sm:w-[260px] sm:h-[540px] lg:w-[300px] lg:h-[620px] rounded-[2.5rem] sm:rounded-[3rem] bg-gradient-to-b from-zinc-800 to-zinc-900 p-[3px] sm:p-[4px] shadow-2xl shadow-black/50">
-                      <div className="w-full h-full rounded-[2.3rem] sm:rounded-[2.8rem] overflow-hidden relative bg-black">
-                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 sm:w-28 h-5 sm:h-7 bg-black rounded-b-2xl z-10" />
-                        <Image
-                          src="/images/moodumuz-home-new.png"
-                          alt="Moodumuz Ana Ekran"
-                          fill
-                          className="object-cover object-top"
-                          priority
-                        />
+                    <div className="w-[300px] h-[620px] rounded-[3rem] bg-gradient-to-b from-zinc-800 to-zinc-900 p-[4px] shadow-2xl shadow-black/50">
+                      <div className="w-full h-full rounded-[2.8rem] overflow-hidden relative bg-black">
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-7 bg-black rounded-b-2xl z-10" />
+                        <Image src="/images/moodumuz-home-new.png" alt="Moodumuz Ana Ekran" fill className="object-cover object-top" priority />
                       </div>
                     </div>
                   </motion.div>
 
-                  {/* Secondary Phone - Horoscope */}
                   <motion.div
-                    className="absolute -left-8 sm:-left-16 lg:-left-20 top-12 sm:top-16 z-10"
+                    className="absolute -left-20 top-16 z-10"
                     animate={{ y: [0, -8, 0] }}
-                    transition={{
-                      duration: 4.5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 0.5,
-                    }}
+                    transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
                   >
-                    <div className="w-[110px] h-[230px] sm:w-[170px] sm:h-[360px] lg:w-[190px] lg:h-[400px] rounded-[1.5rem] sm:rounded-[2rem] bg-gradient-to-b from-zinc-800 to-zinc-900 p-[2px] sm:p-[3px] shadow-xl shadow-black/40 opacity-80 hover:opacity-100 transition-opacity duration-300">
-                      <div className="w-full h-full rounded-[1.4rem] sm:rounded-[1.9rem] overflow-hidden relative bg-black">
-                        <Image
-                          src="/images/moodumuz-horoscope-new.png"
-                          alt="Kozmik Rehber"
-                          fill
-                          className="object-cover object-top"
-                        />
+                    <div className="w-[190px] h-[400px] rounded-[2rem] bg-gradient-to-b from-zinc-800 to-zinc-900 p-[3px] shadow-xl shadow-black/40 opacity-80">
+                      <div className="w-full h-full rounded-[1.9rem] overflow-hidden relative bg-black">
+                        <Image src="/images/moodumuz-horoscope-new.png" alt="Kozmik Rehber" fill className="object-cover object-top" />
                       </div>
                     </div>
                   </motion.div>
 
-                  {/* Third Phone - Pro */}
                   <motion.div
-                    className="absolute -right-6 sm:-right-12 lg:-right-16 top-14 sm:top-20 z-10"
+                    className="absolute -right-16 top-20 z-10"
                     animate={{ y: [0, -10, 0] }}
-                    transition={{
-                      duration: 5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 1,
-                    }}
+                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                   >
-                    <div className="w-[100px] h-[210px] sm:w-[160px] sm:h-[340px] lg:w-[180px] lg:h-[380px] rounded-[1.3rem] sm:rounded-[1.8rem] bg-gradient-to-b from-zinc-800 to-zinc-900 p-[2px] sm:p-[3px] shadow-xl shadow-black/40 opacity-70 hover:opacity-100 transition-opacity duration-300">
-                      <div className="w-full h-full rounded-[1.2rem] sm:rounded-[1.7rem] overflow-hidden relative bg-black">
-                        <Image
-                          src="/images/moodumuz-pro.png"
-                          alt="Pro Yolculuk"
-                          fill
-                          className="object-cover object-top"
-                        />
+                    <div className="w-[180px] h-[380px] rounded-[1.8rem] bg-gradient-to-b from-zinc-800 to-zinc-900 p-[3px] shadow-xl shadow-black/40 opacity-70">
+                      <div className="w-full h-full rounded-[1.7rem] overflow-hidden relative bg-black">
+                        <Image src="/images/moodumuz-pro.png" alt="Pro Yolculuk" fill className="object-cover object-top" />
                       </div>
                     </div>
                   </motion.div>
                 </div>
 
-                {/* Floating decorative elements */}
                 <motion.div
-                  className="absolute -top-4 right-2 sm:-top-6 sm:right-0 w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-[#7A8471]/30 to-[#5C6455]/20 border border-[#7A8471]/30 backdrop-blur-xl flex items-center justify-center text-2xl sm:text-3xl shadow-lg"
-                  animate={{ 
-                    rotate: [0, 5, 0, -5, 0],
-                    scale: [1, 1.05, 1],
-                  }}
+                  className="absolute -top-6 right-0 w-20 h-20 rounded-2xl bg-gradient-to-br from-[#7A8471]/30 to-[#5C6455]/20 border border-[#7A8471]/30 backdrop-blur-xl flex items-center justify-center text-3xl shadow-lg"
+                  animate={{ rotate: [0, 5, 0, -5, 0], scale: [1, 1.05, 1] }}
                   transition={{ duration: 6, repeat: Infinity }}
                 >
                   🌸
                 </motion.div>
                 <motion.div
-                  className="absolute -bottom-4 left-2 sm:-bottom-6 sm:left-0 w-12 h-12 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br from-purple-500/30 to-violet-500/20 border border-purple-500/30 backdrop-blur-xl flex items-center justify-center text-xl sm:text-2xl shadow-lg"
-                  animate={{ 
-                    rotate: [0, -5, 0, 5, 0],
-                    scale: [1, 1.08, 1],
-                  }}
+                  className="absolute -bottom-6 left-0 w-16 h-16 rounded-xl bg-gradient-to-br from-purple-500/30 to-violet-500/20 border border-purple-500/30 backdrop-blur-xl flex items-center justify-center text-2xl shadow-lg"
+                  animate={{ rotate: [0, -5, 0, 5, 0], scale: [1, 1.08, 1] }}
                   transition={{ duration: 5, repeat: Infinity, delay: 0.5 }}
                 >
                   🔮
@@ -245,30 +279,22 @@ export default function MoodumuzPage() {
 
               {/* Text content */}
               <motion.div
-                className="order-2 lg:order-1 text-center lg:text-left"
+                className="order-1 text-left"
                 initial={{ opacity: 0, x: -40 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7 }}
               >
-                <div className="flex items-center gap-3 sm:gap-4 mb-5 sm:mb-6 justify-center lg:justify-start">
-                  <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-2xl overflow-hidden shadow-lg shadow-[#7A8471]/20">
-                    <Image
-                      src="/images/moodumuz-icon.png"
-                      alt="Moodumuz"
-                      width={72}
-                      height={72}
-                      className="w-full h-full object-cover"
-                    />
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-18 h-18 rounded-2xl overflow-hidden shadow-lg shadow-[#7A8471]/20">
+                    <Image src="/images/moodumuz-icon.png" alt="Moodumuz" width={72} height={72} className="w-full h-full object-cover" />
                   </div>
                   <div>
-                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
-                      Moodumuz
-                    </h1>
-                    <Badge status="testing" className="mt-1.5 sm:mt-2" />
+                    <h1 className="text-5xl font-bold text-foreground">Moodumuz</h1>
+
                   </div>
                 </div>
 
-                <p className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-foreground mb-4 sm:mb-5 leading-tight">
+                <p className="text-4xl font-semibold text-foreground mb-5 leading-tight">
                   Döngünü Anlayan,{" "}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7A8471] to-[#9BA392]">
                     Seni Tanıyan
@@ -276,291 +302,256 @@ export default function MoodumuzPage() {
                   Arkadaşın
                 </p>
 
-                <p className="text-base sm:text-lg lg:text-xl text-foreground-muted mb-8 sm:mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                <p className="text-xl text-foreground-muted mb-10 leading-relaxed max-w-xl">
                   Seni yargılamayan, döngünü takip eden, burcuna göre kozmik
                   rehberlik sunan ve her gün sana özel içerik üreten dijital
                   arkadaşın.
                 </p>
 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <div className="flex gap-4">
                   <Link href="#human-analysis-engine">
-                    <Button
-                      variant="primary"
-                      size="lg"
-                      className="bg-[#7A8471] hover:bg-[#6a7462] w-full sm:w-auto text-base"
-                    >
+                    <Button variant="primary" size="lg" className="bg-[#7A8471] hover:bg-[#6a7462] text-base">
                       Teknolojiyi Keşfet
                     </Button>
                   </Link>
                   <Link href="#features">
-                    <Button variant="secondary" size="lg" className="w-full sm:w-auto text-base">
+                    <Button variant="secondary" size="lg" className="text-base">
                       Özellikleri Gör
                     </Button>
                   </Link>
                 </div>
 
-                <div className="mt-8 sm:mt-10 flex items-center gap-4 justify-center lg:justify-start flex-wrap">
-                  <div className="px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm text-foreground-muted">
-                    📱 iOS & Android
-                  </div>
-                  <div className="px-4 py-2.5 rounded-xl bg-[#7A8471]/10 border border-[#7A8471]/20 text-sm text-[#9BA392]">
-                    ✓ Temel Özellikler Ücretsiz
-                  </div>
-                </div>
               </motion.div>
             </div>
           </Container>
         </section>
 
-        {/* Human Analysis Engine Section - The Star of the Show */}
+        {/* Human Analysis Engine Section */}
         <section
           className="section-padding relative overflow-hidden"
           id="human-analysis-engine"
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#7A8471]/[0.05] to-transparent pointer-events-none" />
-          
-          {/* Animated background orbs */}
-          <motion.div 
-            className="absolute top-20 -left-32 w-64 h-64 bg-[#7A8471]/10 rounded-full blur-3xl"
-            animate={{ 
-              x: [0, 50, 0],
-              y: [0, 30, 0],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          />
-          <motion.div 
-            className="absolute bottom-20 -right-32 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"
-            animate={{ 
-              x: [0, -40, 0],
-              y: [0, -50, 0],
-              scale: [1, 1.3, 1],
-            }}
-            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#7A8471]/[0.03] to-transparent pointer-events-none" />
+
+          {/* Subtle scan lines - desktop only */}
+          {!isMobile && (
+            <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{
+              backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(122,132,113,0.5) 2px, rgba(122,132,113,0.5) 3px)`,
+            }} />
+          )}
 
           <Container>
-            <motion.div
-              className="text-center mb-10 sm:mb-16"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <motion.span 
-                className="inline-block px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase bg-gradient-to-r from-[#7A8471]/20 to-purple-500/20 text-[#9BA392] border border-[#7A8471]/30 mb-6"
-                animate={{ 
-                  boxShadow: ["0 0 20px rgba(122, 132, 113, 0)", "0 0 30px rgba(122, 132, 113, 0.3)", "0 0 20px rgba(122, 132, 113, 0)"],
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >
-                Yeni Nesil Teknoloji
-              </motion.span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-5 sm:mb-6 leading-tight">
-                Human Analysis Engine™
+            {/* Header */}
+            <motion.div className="text-center mb-10 sm:mb-20" {...fadeInUp()}>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#7A8471]/10 border border-[#7A8471]/20 mb-5 sm:mb-8">
+                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#9BA392]" />
+                <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-[#9BA392]">
+                  Orbira Labs Technology
+                </span>
+              </div>
+              <h2 className="text-2xl sm:text-4xl lg:text-6xl font-bold text-foreground mb-4 sm:mb-6 leading-[1.1] tracking-tight">
+                Human Analysis
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7A8471] via-[#9BA392] to-[#7A8471]">
+                  Engine™
+                </span>
               </h2>
-              <p className="text-lg sm:text-xl lg:text-2xl text-foreground-muted max-w-3xl mx-auto leading-relaxed px-4">
-                Global standartlarda geliştirilen, çok katmanlı yapay zeka destekli
-                <span className="text-[#9BA392] font-medium"> kişiselleştirme motoru.</span>
+              <p className="text-sm sm:text-lg lg:text-xl text-foreground-muted max-w-2xl mx-auto leading-relaxed">
+                Her katmanı AI ile desteklenen, modüler bir analiz mimarisi.
+                <br className="hidden sm:block" />
+                <span className="text-[#9BA392]">%95 oranında</span> kişiye özel profil çıkarımı.
               </p>
             </motion.div>
 
-            {/* Engine Visualization - Mobile Optimized */}
-            <motion.div
-              className="relative mb-12 sm:mb-16"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            >
-              <div className="relative p-6 sm:p-10 lg:p-14 rounded-3xl bg-gradient-to-br from-[#7A8471]/10 via-purple-500/5 to-[#5C6455]/10 border border-[#7A8471]/20 backdrop-blur-sm overflow-hidden">
-                {/* Animated grid pattern */}
-                <div className="absolute inset-0 opacity-10">
-                  <div className="absolute inset-0" style={{
-                    backgroundImage: `radial-gradient(circle at 1px 1px, rgba(122, 132, 113, 0.5) 1px, transparent 0)`,
-                    backgroundSize: '32px 32px'
-                  }} />
+            {/* Architecture Diagram */}
+            <motion.div className="relative mb-10 sm:mb-20" {...fadeInUp(0.1)}>
+              <div className="relative rounded-2xl sm:rounded-3xl border border-white/[0.06] bg-[#0c0c0e] overflow-hidden">
+                {/* Top bar */}
+                <div className="flex items-center gap-2 px-4 py-2.5 sm:px-6 sm:py-3 border-b border-white/[0.06] bg-white/[0.02]">
+                  <div className="flex gap-1.5">
+                    <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white/10" />
+                    <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white/10" />
+                    <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white/10" />
+                  </div>
+                  <div className="flex-1 flex justify-center">
+                    <span className="text-[10px] sm:text-xs font-mono text-foreground-subtle tracking-wide">hae.core.engine</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                    <span className="text-[10px] sm:text-xs font-mono text-green-400/70">live</span>
+                  </div>
                 </div>
 
-                <div className="relative z-10">
-                  {/* Main headline */}
-                  <div className="text-center mb-10 sm:mb-14">
-                    <motion.div
-                      className="inline-flex items-center gap-3 sm:gap-4 px-6 py-4 rounded-2xl bg-black/30 border border-white/10 mb-6"
-                      animate={{ 
-                        scale: [1, 1.02, 1],
-                      }}
-                      transition={{ duration: 4, repeat: Infinity }}
-                    >
-                      <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse" />
-                      <span className="text-sm sm:text-base text-foreground-muted font-medium">
-                        Sürekli Öğrenen Sistem
-                      </span>
-                    </motion.div>
-                    
-                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-4">
-                      Seni Gerçekten Anlayan Tek Uygulama
-                    </h3>
-                    <p className="text-base sm:text-lg text-foreground-muted max-w-2xl mx-auto">
-                      Geleneksel döngü uygulamaları sadece tarih sayar. Moodumuz&apos;un Human Analysis Engine&apos;i 
-                      senin benzersiz kalıplarını, duygusal döngülerini ve astrolojik profilini 
-                      <span className="text-[#9BA392]"> tek bir akıllı sistemde birleştiriyor.</span>
-                    </p>
-                  </div>
-
-                  {/* Flow visualization - Vertical on mobile */}
-                  <div className="flex flex-col lg:flex-row items-center justify-center gap-4 sm:gap-6 mb-10 sm:mb-14">
-                    {[
-                      { label: "Döngü Verilerin", icon: "🌸", color: "from-rose-500/30 to-rose-600/20" },
-                      { label: "Duygusal Kalıpların", icon: "💭", color: "from-blue-500/30 to-blue-600/20" },
-                      { label: "Astrolojik Profilin", icon: "✨", color: "from-purple-500/30 to-purple-600/20" },
-                    ].map((item, index) => (
-                      <motion.div
-                        key={item.label}
-                        className="flex items-center gap-3 sm:gap-4"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: index * 0.15 }}
-                      >
-                        <motion.div 
-                          className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br ${item.color} border border-white/10 flex items-center justify-center text-2xl sm:text-3xl`}
-                          whileHover={{ scale: 1.1, rotate: 5 }}
-                        >
-                          {item.icon}
-                        </motion.div>
-                        <span className="text-sm sm:text-base text-foreground font-medium">{item.label}</span>
-                        {index < 2 && (
-                          <motion.div 
-                            className="hidden lg:flex items-center text-[#7A8471]/50 mx-2"
-                            animate={{ x: [0, 5, 0] }}
-                            transition={{ duration: 1.5, repeat: Infinity }}
-                          >
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                            </svg>
-                          </motion.div>
-                        )}
-                        {index < 2 && (
-                          <motion.div 
-                            className="lg:hidden flex items-center justify-center text-[#7A8471]/50 my-1"
-                            animate={{ y: [0, 3, 0] }}
-                            transition={{ duration: 1.5, repeat: Infinity }}
-                          >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                            </svg>
-                          </motion.div>
-                        )}
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  {/* Central engine visualization */}
-                  <motion.div 
-                    className="flex justify-center mb-10 sm:mb-14"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                  >
-                    <div className="relative">
-                      <motion.div 
-                        className="w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-gradient-to-br from-[#7A8471] to-[#5C6455] flex items-center justify-center shadow-2xl shadow-[#7A8471]/30"
-                        animate={{ 
-                          boxShadow: [
-                            "0 0 40px rgba(122, 132, 113, 0.3)",
-                            "0 0 60px rgba(122, 132, 113, 0.5)",
-                            "0 0 40px rgba(122, 132, 113, 0.3)"
-                          ],
-                        }}
-                        transition={{ duration: 3, repeat: Infinity }}
-                      >
-                        <div className="text-center">
-                          <div className="text-4xl sm:text-5xl mb-1">🧠</div>
-                          <span className="text-xs sm:text-sm text-white/80 font-medium">HAE™</span>
-                        </div>
-                      </motion.div>
-                      
-                      {/* Orbiting elements */}
-                      <motion.div 
-                        className="absolute -top-4 -right-4 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-lg sm:text-xl"
-                        animate={{ 
-                          rotate: 360,
-                        }}
-                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                        style={{ transformOrigin: "50px 50px" }}
-                      >
-                        ✨
-                      </motion.div>
-                      <motion.div 
-                        className="absolute -bottom-2 -left-6 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-rose-500/20 border border-rose-500/30 flex items-center justify-center text-base sm:text-lg"
-                        animate={{ 
-                          scale: [1, 1.2, 1],
-                        }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                      >
-                        💫
-                      </motion.div>
+                <div className="p-5 sm:p-10 lg:p-14">
+                  {/* Data Layer */}
+                  <div className="mb-6 sm:mb-10">
+                    <div className="flex items-center gap-2 mb-3 sm:mb-5">
+                      <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/10" />
+                      <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.15em] text-foreground-subtle px-2 sm:px-3">Data Streams</span>
+                      <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10" />
                     </div>
-                  </motion.div>
+                    <div className="grid grid-cols-3 gap-2 sm:gap-4">
+                      {[
+                        { label: "Biyolojik Sinyaller", sub: "bio_signals", color: "from-rose-500/15 to-rose-500/5", borderColor: "border-rose-500/20", iconColor: "text-rose-400",
+                          icon: <svg className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}><path d="M22 12h-4l-3 9L9 3l-3 9H2" /></svg>
+                        },
+                        { label: "Davranış Kalıpları", sub: "behavior_map", color: "from-blue-500/15 to-blue-500/5", borderColor: "border-blue-500/20", iconColor: "text-blue-400",
+                          icon: <svg className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
+                        },
+                        { label: "Kozmik Harita", sub: "astro_matrix", color: "from-violet-500/15 to-violet-500/5", borderColor: "border-violet-500/20", iconColor: "text-violet-400",
+                          icon: <svg className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /></svg>
+                        },
+                      ].map((input) => (
+                        <motion.div
+                          key={input.sub}
+                          className={`relative p-3 sm:p-5 rounded-xl sm:rounded-2xl bg-gradient-to-b ${input.color} border ${input.borderColor} text-center group`}
+                          whileHover={isMobile ? {} : { y: -3, transition: { duration: 0.2 } }}
+                        >
+                          <div className={`w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-black/30 border border-white/10 flex items-center justify-center mx-auto mb-2 sm:mb-3 ${input.iconColor}`}>
+                            {input.icon}
+                          </div>
+                          <p className="text-xs sm:text-sm font-medium text-foreground mb-0.5 sm:mb-1 leading-tight">{input.label}</p>
+                          <p className="text-[9px] sm:text-xs font-mono text-foreground-subtle hidden sm:block">{input.sub}</p>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
 
-                  {/* Output arrow */}
-                  <div className="flex justify-center mb-6">
-                    <motion.div 
-                      className="flex flex-col items-center text-[#7A8471]"
-                      animate={{ y: [0, 8, 0] }}
-                      transition={{ duration: 2, repeat: Infinity }}
+                  {/* Connection */}
+                  <div className="flex justify-center mb-4 sm:mb-6">
+                    <div className="flex flex-col items-center gap-1">
+                      <div className="w-px h-4 sm:h-6 bg-gradient-to-b from-white/20 to-white/5" />
+                      <div className="flex items-center gap-1">
+                        <div className="w-1 h-1 rounded-full bg-[#9BA392]/60" />
+                        <div className="w-1 h-1 rounded-full bg-[#9BA392]/40" />
+                        <div className="w-1 h-1 rounded-full bg-[#9BA392]/20" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Multi-layer Processing */}
+                  <div className="mb-4 sm:mb-6">
+                    <div className="flex items-center gap-2 mb-3 sm:mb-5">
+                      <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/10" />
+                      <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.15em] text-foreground-subtle px-2 sm:px-3">Multi-layer Processing</span>
+                      <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10" />
+                    </div>
+
+                    <div className="space-y-2 sm:space-y-3 max-w-lg mx-auto">
+                      {[
+                        { layer: "L1", name: "Pattern Layer", desc: "Kalıplarını keşfeder", color: "border-rose-500/20" },
+                        { layer: "L2", name: "Emotion Layer", desc: "Duygusal döngünü çözer", color: "border-blue-500/20" },
+                        { layer: "L3", name: "Context Layer", desc: "Bağlamını birleştirir", color: "border-violet-500/20" },
+                      ].map((l) => (
+                        <div key={l.layer} className={`flex items-center gap-2.5 sm:gap-4 p-2.5 sm:p-4 rounded-xl bg-white/[0.02] border ${l.color}`}>
+                          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-black/40 border border-white/[0.06] flex items-center justify-center flex-shrink-0">
+                            <span className="text-[9px] sm:text-[11px] font-mono font-bold text-[#9BA392]">{l.layer}</span>
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <span className="text-xs sm:text-sm font-semibold text-foreground">{l.name}</span>
+                            <span className="text-foreground-subtle mx-1.5 hidden sm:inline">—</span>
+                            <br className="sm:hidden" />
+                            <span className="text-[10px] sm:text-xs text-foreground-muted">{l.desc}</span>
+                          </div>
+                          <div className="px-1.5 py-0.5 sm:px-2 sm:py-1 rounded bg-[#7A8471]/10 border border-[#7A8471]/20 flex-shrink-0">
+                            <span className="text-[8px] sm:text-[10px] font-mono text-[#9BA392]">AI-assisted</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Connection */}
+                  <div className="flex justify-center mb-4 sm:mb-6">
+                    <div className="flex flex-col items-center gap-1">
+                      <div className="flex items-center gap-1">
+                        <div className="w-1 h-1 rounded-full bg-[#9BA392]/20" />
+                        <div className="w-1 h-1 rounded-full bg-[#9BA392]/40" />
+                        <div className="w-1 h-1 rounded-full bg-[#9BA392]/60" />
+                      </div>
+                      <div className="w-px h-4 sm:h-6 bg-gradient-to-b from-white/5 to-white/20" />
+                    </div>
+                  </div>
+
+                  {/* Fusion Core */}
+                  <div className="mb-4 sm:mb-6">
+                    <motion.div
+                      className="relative mx-auto max-w-md p-4 sm:p-6 rounded-2xl border border-[#7A8471]/30 bg-gradient-to-b from-[#7A8471]/10 to-transparent overflow-hidden"
+                      animate={isMobile ? {} : {
+                        borderColor: ["rgba(122,132,113,0.3)", "rgba(122,132,113,0.5)", "rgba(122,132,113,0.3)"],
+                      }}
+                      transition={isMobile ? {} : { duration: 4, repeat: Infinity, ease: "easeInOut" }}
                     >
-                      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                      </svg>
+                      {!isMobile && (
+                        <div className="absolute inset-0 opacity-[0.04]" style={{
+                          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(155,163,146,0.8) 1px, transparent 0)`,
+                          backgroundSize: '20px 20px'
+                        }} />
+                      )}
+                      <div className="relative z-10 flex items-center gap-3 sm:gap-4">
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br from-[#7A8471] to-[#5C6455] flex items-center justify-center shadow-lg shadow-[#7A8471]/20 flex-shrink-0">
+                          <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                            <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" />
+                          </svg>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-0.5 sm:mb-1">
+                            <h3 className="text-sm sm:text-lg font-bold text-foreground tracking-tight">Fusion Layer</h3>
+                            <span className="text-[8px] sm:text-[10px] font-mono text-[#9BA392] bg-[#7A8471]/10 px-1.5 py-0.5 rounded">HAE™</span>
+                          </div>
+                          <p className="text-[10px] sm:text-sm text-foreground-muted">
+                            Tüm katmanları birleştirip kopukluğu sıfıra indiren bağlam motoru.
+                          </p>
+                        </div>
+                      </div>
                     </motion.div>
+                  </div>
+
+                  {/* Connection */}
+                  <div className="flex justify-center mb-4 sm:mb-6">
+                    <div className="flex flex-col items-center gap-1">
+                      <div className="w-px h-4 sm:h-6 bg-gradient-to-b from-white/5 to-white/20" />
+                    </div>
                   </div>
 
                   {/* Output */}
-                  <motion.div 
-                    className="text-center p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-[#7A8471]/20 via-purple-500/10 to-[#7A8471]/20 border border-[#7A8471]/30"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.5 }}
-                  >
-                    <h4 className="text-lg sm:text-xl font-bold text-foreground mb-2">
-                      🎯 Sadece Sana Özel İçgörüler
-                    </h4>
-                    <p className="text-sm sm:text-base text-foreground-muted">
-                      Kopyala-yapıştır tavsiyeler değil, senin verilerinden üretilen gerçek kişiselleştirme.
-                    </p>
-                  </motion.div>
+                  <div>
+                    <div className="flex items-center gap-2 mb-3 sm:mb-5">
+                      <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/10" />
+                      <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.15em] text-foreground-subtle px-2 sm:px-3">Output</span>
+                      <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10" />
+                    </div>
+                    <div className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-r from-[#7A8471]/10 via-[#7A8471]/5 to-[#7A8471]/10 border border-[#7A8471]/20 text-center">
+                      <p className="text-sm sm:text-lg font-semibold text-foreground mb-1">
+                        %95 doğrulukla senin analiz profilin
+                      </p>
+                      <p className="text-[10px] sm:text-sm text-foreground-muted">
+                        Başka kimseninki gibi olmayan, sadece sana ait sonuçlar.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </motion.div>
 
-            {/* Engine Features Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+            {/* Engine Capabilities */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
               {ENGINE_FEATURES.map((feature, index) => (
                 <motion.div
                   key={feature.title}
-                  className="group p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10 hover:border-[#7A8471]/40 transition-all duration-300"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                  className="group p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#7A8471]/30 transition-all duration-300"
+                  {...fadeInUp(index * 0.08)}
+                  whileHover={isMobile ? {} : { y: -3, transition: { duration: 0.2 } }}
                 >
-                  <div className="flex items-start gap-4 sm:gap-5">
-                    <motion.div 
-                      className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-[#7A8471]/20 to-[#5C6455]/10 flex items-center justify-center text-3xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
-                      whileHover={{ rotate: 5 }}
-                    >
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#7A8471]/10 border border-[#7A8471]/20 flex items-center justify-center text-[#9BA392] flex-shrink-0 group-hover:bg-[#7A8471]/15 transition-colors duration-300">
                       {feature.icon}
-                    </motion.div>
+                    </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2">
+                      <h3 className="text-sm sm:text-base font-semibold text-foreground mb-1 sm:mb-1.5">
                         {feature.title}
                       </h3>
-                      <p className="text-sm sm:text-base text-foreground-muted leading-relaxed">
+                      <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed">
                         {feature.description}
                       </p>
                     </div>
@@ -569,26 +560,21 @@ export default function MoodumuzPage() {
               ))}
             </div>
 
-            {/* Tech badges */}
+            {/* Specs bar */}
             <motion.div 
-              className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-10 sm:mt-14"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 }}
+              className="mt-8 sm:mt-14 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-8 sm:gap-y-3"
+              {...fadeInUp(0.3)}
             >
-              {["Modern AI Altyapısı", "Güvenli & Gizli", "Sürekli Gelişen", "Bağlam Farkındalığı"].map((badge, index) => (
-                <motion.span 
-                  key={badge}
-                  className="px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-white/5 border border-white/10 text-foreground-muted"
-                  whileHover={{ scale: 1.05, borderColor: "rgba(122, 132, 113, 0.5)" }}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
-                >
-                  {badge}
-                </motion.span>
+              {[
+                { label: "Katman", value: "3-layer" },
+                { label: "Doğruluk", value: "~95%" },
+                { label: "Mimari", value: "Modular" },
+                { label: "Her katman", value: "AI-assisted" },
+              ].map((spec) => (
+                <div key={spec.label} className="flex items-center gap-1.5 sm:gap-2">
+                  <span className="text-[10px] sm:text-xs font-mono text-foreground-subtle uppercase tracking-wide">{spec.label}</span>
+                  <span className="text-[10px] sm:text-xs font-mono text-[#9BA392] font-medium">{spec.value}</span>
+                </div>
               ))}
             </motion.div>
           </Container>
@@ -597,48 +583,39 @@ export default function MoodumuzPage() {
         {/* Features Section */}
         <section className="section-padding relative" id="features">
           <Container>
-            <motion.div
-              className="text-center mb-10 sm:mb-16"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-[#7A8471]/10 text-[#9BA392] border border-[#7A8471]/20 mb-6">
+            <motion.div className="text-center mb-8 sm:mb-16" {...fadeInUp()}>
+              <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-[#7A8471]/10 text-[#9BA392] border border-[#7A8471]/20 mb-4 sm:mb-6">
                 Özellikler
               </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3 sm:mb-4">
                 Sana özel{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7A8471] to-[#5C6455]">
                   deneyim
                 </span>
               </h2>
-              <p className="text-base sm:text-lg text-foreground-muted max-w-2xl mx-auto px-4">
+              <p className="text-sm sm:text-lg text-foreground-muted max-w-2xl mx-auto">
                 Döngü takibinden AI destekli kozmik rehberliğe, kendini daha iyi
                 anlamak için ihtiyacın olan her şey.
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {FEATURES.map((feature, index) => (
                 <motion.div
                   key={feature.title}
-                  className="group p-6 rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10 hover:border-[#7A8471]/30 transition-all duration-300"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
-                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                  className="group p-5 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10 hover:border-[#7A8471]/30 transition-all duration-300"
+                  {...fadeInUp(index * 0.05)}
+                  whileHover={isMobile ? {} : { y: -5, transition: { duration: 0.2 } }}
                 >
-                  <div className="flex items-start gap-4">
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#7A8471]/20 to-[#5C6455]/10 flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-gradient-to-br from-[#7A8471]/20 to-[#5C6455]/10 flex items-center justify-center text-xl sm:text-2xl flex-shrink-0">
                       {feature.icon}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2">
+                      <h3 className="text-base sm:text-xl font-semibold text-foreground mb-1 sm:mb-2">
                         {feature.title}
                       </h3>
-                      <p className="text-sm sm:text-base text-foreground-muted leading-relaxed">
+                      <p className="text-xs sm:text-base text-foreground-muted leading-relaxed">
                         {feature.description}
                       </p>
                     </div>
@@ -649,41 +626,30 @@ export default function MoodumuzPage() {
           </Container>
         </section>
 
-        {/* App Gallery Section */}
-        <section className="section-padding relative overflow-hidden">
+        {/* App Gallery Section — desktop only (mobile has carousel in hero) */}
+        <section className="section-padding relative overflow-hidden hidden lg:block">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#7A8471]/[0.03] to-transparent pointer-events-none" />
           <Container>
-            <motion.div
-              className="text-center mb-10 sm:mb-16"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
+            <motion.div className="text-center mb-16" {...fadeInUp()}>
               <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-[#7A8471]/10 text-[#9BA392] border border-[#7A8471]/20 mb-6">
                 Uygulama
               </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              <h2 className="text-4xl font-bold text-foreground mb-4">
                 İçeriden{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7A8471] to-[#9BA392]">
                   bir bakış
                 </span>
               </h2>
-              <p className="text-base sm:text-lg text-foreground-muted max-w-xl mx-auto px-4">
+              <p className="text-lg text-foreground-muted max-w-xl mx-auto">
                 Sade tasarım, kolay kullanım. Her detay senin için düşünüldü.
               </p>
             </motion.div>
 
-            {/* Mobile optimized gallery */}
-            <div className="flex sm:grid sm:grid-cols-4 gap-5 sm:gap-6 overflow-x-auto sm:overflow-visible pb-6 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0 snap-x snap-mandatory sm:snap-none hide-scrollbar">
+            <div className="grid grid-cols-4 gap-6">
               {SCREENSHOTS.map((ss, index) => (
                 <motion.div
                   key={ss.label}
-                  className="flex-shrink-0 w-[220px] sm:w-auto snap-center"
-                  initial={{ opacity: 0, y: 30, scale: 0.9 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  {...fadeInUp(index * 0.1)}
                 >
                   <motion.div
                     className="group cursor-pointer"
@@ -692,29 +658,15 @@ export default function MoodumuzPage() {
                     <div className="relative w-full aspect-[9/19] rounded-[2rem] bg-gradient-to-b from-zinc-700 to-zinc-900 p-[3px] shadow-xl shadow-black/30 group-hover:shadow-2xl group-hover:shadow-[#7A8471]/20 transition-shadow duration-300 mb-4">
                       <div className="w-full h-full rounded-[1.85rem] overflow-hidden relative bg-black">
                         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-5 bg-black rounded-b-xl z-10" />
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        <Image
-                          src={ss.src}
-                          alt={ss.alt}
-                          fill
-                          className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                        />
+                        <Image src={ss.src} alt={ss.alt} fill className="object-cover object-top" />
                       </div>
                     </div>
-                    <p className="text-sm sm:text-base text-foreground-muted font-medium text-center group-hover:text-foreground transition-colors duration-300">
+                    <p className="text-base text-foreground-muted font-medium text-center group-hover:text-foreground transition-colors duration-300">
                       {ss.label}
                     </p>
                   </motion.div>
                 </motion.div>
               ))}
-            </div>
-
-            {/* Mobile scroll hint */}
-            <div className="flex items-center justify-center gap-2 mt-4 sm:hidden text-foreground-subtle">
-              <svg className="w-4 h-4 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-              <span className="text-xs">Kaydır</span>
             </div>
           </Container>
         </section>
@@ -722,55 +674,40 @@ export default function MoodumuzPage() {
         {/* Cycle Phases Section */}
         <section className="section-padding relative bg-gradient-to-b from-transparent via-[#7A8471]/[0.02] to-transparent">
           <Container>
-            <motion.div
-              className="text-center mb-8 sm:mb-12"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-rose-500/10 text-rose-400 border border-rose-500/20 mb-6">
+            <motion.div className="text-center mb-6 sm:mb-12" {...fadeInUp()}>
+              <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-rose-500/10 text-rose-400 border border-rose-500/20 mb-4 sm:mb-6">
                 Döngü Fazları
               </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3 sm:mb-4">
                 Her fazı{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-orange-400">
                   anla ve yaşa
                 </span>
               </h2>
-              <p className="text-base sm:text-lg text-foreground-muted max-w-2xl mx-auto px-4">
+              <p className="text-sm sm:text-lg text-foreground-muted max-w-2xl mx-auto">
                 Döngünün her fazında farklı ihtiyaçların var. Moodumuz sana her
                 fazda özel öneriler sunar.
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
               {CYCLE_PHASES.map((phase, index) => (
                 <motion.div
                   key={phase.name}
-                  className={`group relative p-5 sm:p-6 rounded-2xl bg-gradient-to-br ${phase.color} border ${phase.borderColor} hover:border-opacity-60 transition-all duration-300 overflow-hidden`}
-                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                  className={`group relative p-3.5 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br ${phase.color} border ${phase.borderColor} transition-all duration-300 overflow-hidden`}
+                  {...fadeInUp(index * 0.1)}
+                  whileHover={isMobile ? {} : { y: -5, transition: { duration: 0.2 } }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
                   <div className="relative z-10">
-                    <div className="flex items-center gap-3 mb-3">
-                      <motion.div 
-                        className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/10 flex items-center justify-center text-2xl sm:text-3xl flex-shrink-0 group-hover:bg-white/15 transition-colors duration-300"
-                        whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
-                        transition={{ duration: 0.5 }}
-                      >
+                    <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                      <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-white/10 flex items-center justify-center text-xl sm:text-3xl flex-shrink-0">
                         {phase.icon}
-                      </motion.div>
+                      </div>
                       <div className="min-w-0">
-                        <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-foreground group-hover:text-white transition-colors duration-300 leading-tight">
+                        <h3 className="text-xs sm:text-base lg:text-lg font-semibold text-foreground leading-tight">
                           {phase.name}
                         </h3>
-                        <p className="text-xs text-foreground-muted">
+                        <p className="text-[10px] sm:text-xs text-foreground-muted">
                           {phase.days}
                         </p>
                       </div>
@@ -782,79 +719,8 @@ export default function MoodumuzPage() {
                     
                     <div className="flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
-                      <p className="text-xs text-foreground-subtle">
+                      <p className="text-[10px] sm:text-xs text-foreground-subtle">
                         <span className="text-foreground-muted font-medium">{phase.archetype}</span>
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </Container>
-        </section>
-
-        {/* Privacy Section */}
-        <section className="section-padding relative">
-          <Container>
-            <motion.div
-              className="text-center mb-8 sm:mb-12"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-violet-500/10 text-violet-400 border border-violet-500/20 mb-6">
-                Gizlilik
-              </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">
-                Verinin{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-purple-400">
-                  tamamen sana ait
-                </span>
-              </h2>
-              <p className="text-base sm:text-lg text-foreground-muted max-w-2xl mx-auto px-4">
-                Gizliliğin bizim için en önemli öncelik. Kişisel verilerin güvende ve sadece senin kontrolünde.
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6">
-              {[
-                {
-                  icon: "👁️",
-                  title: "Sadece Sen Görebilirsin",
-                  description: "Verilerine yalnızca sen erişebilirsin.",
-                },
-                {
-                  icon: "🔐",
-                  title: "Şifreli Veri Saklama",
-                  description:
-                    "Tüm veriler endüstri standardı şifreleme ile korunuyor.",
-                },
-                {
-                  icon: "🗑️",
-                  title: "İstediğin Zaman Sil",
-                  description:
-                    "Tüm verilerini dilediğin an kalıcı olarak silebilirsin.",
-                },
-              ].map((point, index) => (
-                <motion.div
-                  key={point.title}
-                  className="p-6 rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <div className="flex items-start gap-4 sm:flex-col sm:items-center sm:text-center">
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-violet-500/20 to-purple-500/10 flex items-center justify-center text-2xl flex-shrink-0 sm:mb-3">
-                      {point.icon}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-lg font-semibold text-foreground mb-2">
-                        {point.title}
-                      </h3>
-                      <p className="text-sm sm:text-base text-foreground-muted leading-relaxed">
-                        {point.description}
                       </p>
                     </div>
                   </div>
@@ -868,35 +734,27 @@ export default function MoodumuzPage() {
         <section className="section-padding relative overflow-hidden">
           <Container size="narrow">
             <motion.div
-              className="relative p-8 sm:p-12 lg:p-16 rounded-3xl bg-gradient-to-br from-[#7A8471]/15 via-[#5C6455]/10 to-[#7A8471]/5 border border-[#7A8471]/30 text-center overflow-hidden"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              className="relative p-6 sm:p-12 lg:p-16 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#7A8471]/15 via-[#5C6455]/10 to-[#7A8471]/5 border border-[#7A8471]/30 text-center overflow-hidden"
+              {...fadeInUp()}
             >
-              <motion.div 
-                className="absolute top-0 left-0 w-64 h-64 bg-[#7A8471]/10 rounded-full blur-3xl"
-                animate={{ 
-                  x: [0, 30, 0],
-                  y: [0, -20, 0],
-                }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <motion.div 
-                className="absolute bottom-0 right-0 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl"
-                animate={{ 
-                  x: [0, -20, 0],
-                  y: [0, 30, 0],
-                }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              />
+              {/* Background blurs - desktop only */}
+              {!isMobile && (
+                <>
+                  <motion.div 
+                    className="absolute top-0 left-0 w-64 h-64 bg-[#7A8471]/10 rounded-full blur-3xl"
+                    animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                  />
+                  <motion.div 
+                    className="absolute bottom-0 right-0 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl"
+                    animate={{ x: [0, -20, 0], y: [0, 30, 0] }}
+                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  />
+                </>
+              )}
 
               <div className="relative z-10">
-                <motion.div 
-                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl overflow-hidden mx-auto mb-6 shadow-2xl shadow-[#7A8471]/30"
-                  whileHover={{ scale: 1.05, rotate: 3 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
+                <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-2xl sm:rounded-3xl overflow-hidden mx-auto mb-4 sm:mb-6 shadow-2xl shadow-[#7A8471]/30">
                   <Image
                     src="/images/moodumuz-icon.png"
                     alt="Moodumuz"
@@ -904,100 +762,64 @@ export default function MoodumuzPage() {
                     height={96}
                     className="w-full h-full object-cover"
                   />
-                </motion.div>
+                </div>
 
-                <motion.h2 
-                  className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                >
+                <h2 className="text-xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3 sm:mb-4">
                   Kendini Daha İyi Anla
-                </motion.h2>
+                </h2>
 
-                <motion.p 
-                  className="text-base sm:text-lg text-foreground-muted mb-8 max-w-lg mx-auto"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                >
+                <p className="text-sm sm:text-lg text-foreground-muted mb-6 sm:mb-8 max-w-lg mx-auto">
                   Şimdi indir, döngünü takip etmeye başla. Human Analysis Engine™ ile kişiselleştirilmiş deneyim.
-                </motion.p>
+                </p>
 
-                <motion.div 
-                  className="flex flex-col sm:flex-row items-center justify-center gap-4"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                >
-                  <motion.a
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+                  <a
                     href="#"
-                    className="flex items-center gap-3 px-6 py-4 rounded-xl bg-black/80 backdrop-blur-sm border border-white/20 hover:border-white/40 hover:bg-black transition-all duration-300 w-full sm:w-auto justify-center"
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
+                    className="flex items-center gap-3 px-5 py-3.5 sm:px-6 sm:py-4 rounded-xl bg-black/80 backdrop-blur-sm border border-white/20 hover:border-white/40 hover:bg-black transition-all duration-300 w-full sm:w-auto justify-center"
                   >
-                    <svg
-                      className="w-7 h-7"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
+                    <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
                     </svg>
                     <div className="text-left">
-                      <div className="text-xs text-foreground-muted uppercase tracking-wide">
+                      <div className="text-[10px] sm:text-xs text-foreground-muted uppercase tracking-wide">
                         App Store&apos;dan
                       </div>
-                      <div className="text-base font-semibold">İndirin</div>
+                      <div className="text-sm sm:text-base font-semibold">İndirin</div>
                     </div>
-                  </motion.a>
+                  </a>
 
-                  <motion.a
+                  <a
                     href="#"
-                    className="flex items-center gap-3 px-6 py-4 rounded-xl bg-black/80 backdrop-blur-sm border border-white/20 hover:border-white/40 hover:bg-black transition-all duration-300 w-full sm:w-auto justify-center"
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
+                    className="flex items-center gap-3 px-5 py-3.5 sm:px-6 sm:py-4 rounded-xl bg-black/80 backdrop-blur-sm border border-white/20 hover:border-white/40 hover:bg-black transition-all duration-300 w-full sm:w-auto justify-center"
                   >
-                    <svg
-                      className="w-6 h-6"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
+                    <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
                     </svg>
                     <div className="text-left">
-                      <div className="text-xs text-foreground-muted uppercase tracking-wide">
+                      <div className="text-[10px] sm:text-xs text-foreground-muted uppercase tracking-wide">
                         Google Play&apos;den
                       </div>
-                      <div className="text-base font-semibold">İndirin</div>
+                      <div className="text-sm sm:text-base font-semibold">İndirin</div>
                     </div>
-                  </motion.a>
-                </motion.div>
+                  </a>
+                </div>
 
-                <motion.p 
-                  className="mt-8 text-sm text-foreground-subtle"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.5 }}
-                >
+                <p className="mt-6 sm:mt-8 text-xs sm:text-sm text-foreground-subtle">
                   Powered by{" "}
                   <span className="text-foreground-muted font-medium">Orbira Labs</span>
-                </motion.p>
+                </p>
               </div>
             </motion.div>
           </Container>
         </section>
 
         {/* Back to home */}
-        <section className="pb-16 sm:pb-20">
+        <section className="pb-12 sm:pb-20">
           <Container>
             <div className="flex justify-center">
               <Link
                 href="/"
-                className="text-brand-primary hover:underline inline-flex items-center gap-2 text-base py-2"
+                className="text-brand-primary hover:underline inline-flex items-center gap-2 text-sm sm:text-base py-2"
               >
                 <svg
                   className="w-4 h-4"
