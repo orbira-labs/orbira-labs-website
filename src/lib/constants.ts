@@ -67,9 +67,9 @@ export const PRODUCTS: Product[] = [
     href: "/products/moodumuz",
     logo: "/images/moodumuz-icon.png",
     screenshots: [
-      "/images/moodumuz-home.png",
-      "/images/moodumuz-checkin.png",
-      "/images/moodumuz-insights.png",
+      "/images/moodumuz-home-new.png",
+      "/images/moodumuz-horoscope-new.png",
+      "/images/moodumuz-pro.png",
     ],
   },
   {
