@@ -177,43 +177,56 @@ export const FOUNDER = {
 export const TEAM_MEMBERS = [
   {
     name: "Seyyit Ali Perse",
-    role: "Kurucu & Geliştirici",
+    role: "Kurucu & Ürün Mühendisi",
     image: "/images/founder.png",
-    shortBio: "Tek başına dört farklı uygulamayı sıfırdan tasarlayıp App Store'a taşıyan, sınır tanımayan iş bitirici.",
-    fullBio: `Tek başına dört farklı uygulamayı sıfırdan tasarlayıp App Store'a taşıyan, "yapılamaz" denileni yapan geliştirici. KasaBende, Moodumuz ve diğer ürünler, bu vizyonun somut kanıtları.
+    shortBio: "Orbira Labs'ı kuran ve ürün vizyonunu şekillendiren isim.",
+    fullBio: `Orbira Labs'ı kuran ve ürün vizyonunu şekillendiren isim. Mobil ve web uygulamaları uçtan uca tasarlayıp geliştiriyor. KasaBende ve Moodumuz dahil birden fazla ürünü sıfırdan yayına taşıdı.
 
-Human Analysis Engine™ (HAE) - insanı anlamak için tasarladığı teknoloji. Üç katmanlı yapısıyla biyolojik sinyalleri, davranış kalıplarını ve bağlamsal verileri birleştiriyor. Sonuç: %95 doğrulukla kişiye özel analiz. Genel tahminler değil, birey bazlı içgörüler.
-
-Adaptive Learning ve Cross-domain Fusion alanlarında geliştirdiği yaklaşımlar, farklı veri kaynaklarını tek bir anlam haritasında birleştiriyor. Her etkileşim sistemi güçlendiriyor, zaman geçtikçe tahminler keskinleşiyor.
-
-"Sınırlarım yok" demek kolay; dört uygulamayı tek başına çıkarmak zor. Karmaşıklığı sadeleştirmek, görünmezi görünür kılmak onun uzmanlık alanı.`,
+Ürün geliştirme sürecinde tasarım, mühendislik ve kullanıcı deneyimini bir arada düşünüyor. AI destekli sistemler ve veri odaklı çözümler üzerine çalışıyor. Karmaşık problemleri sade ve işlevsel ürünlere dönüştürmek konusunda deneyimli.`,
     experience: FOUNDER.experience,
-    highlights: ["4 Yayınlanmış Uygulama", "HAE™ Teknolojisi", "Global Deneyim"],
-  },
-  {
-    name: "Ayçin Akyel",
-    role: "Operasyon Yöneticisi",
-    image: "/images/aycin.jpg",
-    shortBio: "Fikirleri eyleme dönüştüren stratejist. Kullanıcı geri bildirimlerini değerli içgörüye çeviren analitik zeka.",
-    fullBio: `Fikirleri eyleme dönüştüren stratejist. Kullanıcı geri bildirimlerini güçlü süzgeçlerden geçirerek ekibe sunan, ham veriyi değerli içgörüye çeviren analitik zeka.
-
-İnsanlarla iletişimi ve empati yeteneği, ürünlerin kullanıcı odaklı kalmasını sağlıyor. Bir özelliğin teknik olarak mümkün olması yetmez; gerçekten işe yaraması gerekir. Bu dengeyi kuran kişi.
-
-Operasyon süreçlerinde detaycı yaklaşımı, projelerin zamanında ve kaliteli teslim edilmesinin garantisi.`,
-    experience: [],
-    highlights: ["Kullanıcı Odaklı", "Stratejik Planlama", "Operasyon Yönetimi"],
   },
   {
     name: "Burak Gündüz",
-    role: "Yazılım Geliştirici",
+    role: "Teknik Kurucu & Mühendislik Lideri",
     image: "/images/burak-placeholder.jpg",
-    shortBio: "Her şeyi yapabilecek kapasiteye sahip, analitik düşüncenin somutlaşmış hali.",
-    fullBio: `Her şeyi yapabilecek kapasiteye sahip, analitik düşüncenin somutlaşmış hali. Karmaşık sistemleri parçalara ayırıp yeniden kurma yeteneği, ekibin teknik omurgasını oluşturuyor.
+    shortBio: "Ekibin teknik omurgasını oluşturan isim.",
+    fullBio: `Ekibin teknik omurgasını oluşturan isim. Frontend, backend ve sistem mimarisi konularında geniş bir deneyime sahip. Farklı sektörlerde, farklı ölçeklerde projeler geliştirdi.
 
-Kod yazmak onun için sadece bir araç; asıl hedef, sürdürülebilir ve ölçeklenebilir çözümler üretmek. Problemlere farklı açılardan yaklaşan, detaylarda kaybolmadan büyük resmi gören geliştirici.`,
+Sadece kod yazmıyor; ürün kararlarına teknik perspektiften katkı sağlıyor, mimari tercihler yapıyor ve sistemlerin uzun vadede sürdürülebilir kalmasını sağlıyor. Analitik düşünce yapısı ve detaylara hakimiyetiyle projelerin teknik kalitesini belirliyor.`,
     experience: [],
-    highlights: ["Full-stack Geliştirme", "Analitik Düşünce", "Ölçeklenebilir Sistemler"],
+  },
+  {
+    name: "Ayçin Akyel",
+    role: "Operasyon & Proje Yöneticisi",
+    image: "/images/aycin.jpg",
+    shortBio: "Ekibin akışını ve organizasyonunu yöneten isim.",
+    fullBio: `Ekibin akışını ve organizasyonunu yöneten isim. Projelerin zamanında, doğru kapsamda ve koordineli ilerlemesini sağlıyor.
+
+Kullanıcı geri bildirimlerini topluyor, önceliklendiriyor ve ekibe anlamlı şekilde aktarıyor. İletişim ve planlama konusundaki güçlü yönleri, ürün geliştirme sürecinin kesintisiz ilerlemesine katkı sağlıyor.`,
+    experience: [],
   },
 ];
 
-export const TEAM_TAGLINE = "Üç farklı perspektif, tek hedef: İşe yarayan ürünler.";
+export const TEAM_TAGLINE = "Dijital ürünler inşa ediyoruz.";
+
+export const ABOUT_CONTENT = {
+  intro: "Orbira Labs, web, mobil ve AI odaklı dijital ürünler geliştiren bağımsız bir product lab. Amacımız yazılım yazmak değil; gerçekten kullanılan, değer üreten ve zaman içinde ayakta kalan ürünler inşa etmek.",
+  introSub: "Tasarım ve mühendislik burada ayrı disiplinler olarak değil, aynı sürecin parçaları olarak çalışıyor. Her ürün kararı bu iki bakış açısının kesişiminde şekilleniyor.",
+  approach: {
+    title: "Yaklaşımımız",
+    content: `İyi ürünler sadece fikirle çıkmaz. Doğru execution, tutarlı teknik kararlar ve kullanıcıyı merkeze alan bir tasarım süreci gerektirir.
+
+Sadelik bizim için bir tercih. Gereksiz karmaşıklığı çıkarmak, özü korumak ve her özelliğin gerçekten bir işe yaramasını sağlamak temel prensiplerimiz arasında. Modern teknolojileri araç olarak kullanıyoruz, amaç olarak değil.
+
+Küçük bir ekibiz ama bakış açımız bütünlüklü. Ürün düşüncesi, arayüz tasarımı, sistem mimarisi ve operasyon birlikte ilerliyor.`,
+  },
+  howWeWork: {
+    title: "Nasıl Çalışıyoruz",
+    content: `Her proje gerçek bir ihtiyaçtan doğuyor. Varsayımlarla değil, gözlemlerle başlıyoruz. Hızlı iterasyonlar yapıyor, geri bildirimleri erken alıyor ve ürünü kullanıcıyla birlikte şekillendiriyoruz.
+
+Teknik tarafta sürdürülebilir ve ölçeklenebilir sistemler kuruyoruz. Bugün çalışan ama yarın çökecek çözümler yerine, uzun vadede büyüyebilecek yapılar tercih ediyoruz.
+
+Kod kalitesi, test edilebilirlik ve dokümantasyon bizim için lüks değil, standart.`,
+  },
+  closing: "Orbira Labs olarak inandığımız şey basit: Doğru insanlar, doğru yaklaşım ve tutarlı çalışmayla küçük ekipler büyük işler çıkarabilir.",
+};

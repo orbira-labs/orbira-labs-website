@@ -4,6 +4,7 @@ export { BrandThesis } from "./BrandThesis";
 export { FeaturedProduct } from "./FeaturedProduct";
 export { ProductEcosystem } from "./ProductEcosystem";
 export { Approach } from "./Approach";
+export { Engines } from "./Engines";
 export { Founder } from "./Founder";
 export { Contact } from "./Contact";
 export { Footer } from "./Footer";

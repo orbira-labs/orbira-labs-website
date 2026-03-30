@@ -5,6 +5,7 @@ import {
   FeaturedProduct,
   ProductEcosystem,
   Approach,
+  Engines,
   Founder,
   Contact,
   Footer,
@@ -20,6 +21,7 @@ export default function Home() {
         <FeaturedProduct />
         <ProductEcosystem />
         <Approach />
+        <Engines />
         <Founder />
         <Contact />
       </main>
