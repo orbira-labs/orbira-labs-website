@@ -406,37 +406,6 @@ export default function HAEPage() {
           </Container>
         </section>
 
-        {/* How it works */}
-        <section className="section-padding relative">
-          <Container size="narrow">
-            <motion.div className="text-center mb-10" {...fadeInUp()}>
-              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">Nasıl Çalışır?</h2>
-            </motion.div>
-
-            <div className="space-y-6">
-              {[
-                { step: "01", title: "Veri Toplama", desc: "Günlük check-in'lerinden, döngü verilerinden ve davranış kalıplarından anlamlı sinyaller çıkarılır." },
-                { step: "02", title: "Örüntü Keşfi", desc: "Yapay zeka, binlerce parametre arasındaki gizli bağlantıları tespit eder. Sen fark etmeden önce." },
-                { step: "03", title: "Profil Oluşturma", desc: "Tüm veriler birleşerek sana özel, dinamik bir profil oluşturur. Her gün biraz daha doğru." },
-                { step: "04", title: "Kişisel İçgörüler", desc: "Profilin, sana özel öneriler ve tahminler üretir. Genel değil, sadece sana ait." },
-              ].map((item, index) => (
-                <motion.div
-                  key={item.step}
-                  className="flex gap-4 sm:gap-6"
-                  {...fadeInUp(index * 0.1)}
-                >
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-[#7A8471]/10 border border-[#7A8471]/20 flex items-center justify-center flex-shrink-0">
-                    <span className="text-sm sm:text-base font-mono font-bold text-[#9BA392]">{item.step}</span>
-                  </div>
-                  <div>
-                    <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1">{item.title}</h3>
-                    <p className="text-sm sm:text-base text-foreground-muted">{item.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </Container>
-        </section>
 
         {/* Quote */}
         <section className="section-padding relative">
