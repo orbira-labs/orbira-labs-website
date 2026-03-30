@@ -59,16 +59,16 @@ const ANALYSIS_DOMAINS = [
 ];
 
 const SIGNALS = [
-  { label: "Biyolojik Sinyaller", sub: "Döngü, enerji, uyku kalitesi", delay: 0 },
-  { label: "Davranış Kalıpları", sub: "Alışkanlıklar, tercihler, rutinler", delay: 0.1 },
-  { label: "Bağlam Verileri", sub: "Zaman, konum, çevresel faktörler", delay: 0.2 },
+  { label: "Biyolojik Sinyaller", delay: 0 },
+  { label: "Davranış Kalıpları", delay: 0.1 },
+  { label: "Bağlam Verileri", delay: 0.2 },
 ];
 
 const PROCESSING_LAYERS = [
-  { name: "Veri Toplama", desc: "Ham sinyallerin standardizasyonu" },
-  { name: "Örüntü Keşfi", desc: "Gizli bağlantıların tespiti" },
-  { name: "Bağlam Analizi", desc: "Çevresel faktörlerin entegrasyonu" },
-  { name: "Profil Sentezi", desc: "Tüm katmanların birleşimi" },
+  { name: "Veri Toplama" },
+  { name: "Örüntü Keşfi" },
+  { name: "Bağlam Analizi" },
+  { name: "Profil Sentezi" },
 ];
 
 const STATS = [
@@ -238,14 +238,11 @@ export default function HAEPage() {
                           transition={{ duration: 0.5, delay: signal.delay }}
                           whileHover={isMobile ? {} : { y: -3, borderColor: "rgba(122,132,113,0.3)" }}
                         >
-                          <div className="flex items-start gap-3">
+                          <div className="flex items-center gap-3">
                             <div className="w-10 h-10 rounded-lg bg-[#7A8471]/10 border border-[#7A8471]/20 flex items-center justify-center flex-shrink-0">
                               <div className="w-2 h-2 rounded-full bg-[#9BA392] group-hover:animate-pulse" />
                             </div>
-                            <div>
-                              <p className="text-sm font-medium text-foreground mb-0.5">{signal.label}</p>
-                              <p className="text-xs text-foreground-muted">{signal.sub}</p>
-                            </div>
+                            <p className="text-sm font-medium text-foreground">{signal.label}</p>
                           </div>
                         </motion.div>
                       ))}
@@ -281,8 +278,7 @@ export default function HAEPage() {
                           <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-[#7A8471]/10 border border-[#7A8471]/20 flex items-center justify-center">
                             <span className="text-xs font-mono text-[#9BA392]">{index + 1}</span>
                           </div>
-                          <p className="text-xs sm:text-sm font-medium text-foreground mb-0.5">{layer.name}</p>
-                          <p className="text-[10px] sm:text-xs text-foreground-muted">{layer.desc}</p>
+                          <p className="text-xs sm:text-sm font-medium text-foreground">{layer.name}</p>
                         </motion.div>
                       ))}
                     </div>
