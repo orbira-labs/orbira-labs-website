@@ -10,9 +10,7 @@ const ENGINES = [
     id: "hae",
     name: "Human Analysis Engine",
     shortName: "HAE",
-    tagline: "Kullanıcı profilini oluşturur",
-    description:
-      "Çoklu sinyal kaynaklarından kişiselleştirilmiş profil üretir.",
+    description: "Multi-layer profile synthesis. Deep pattern recognition.",
     status: "active",
     version: "3.0",
     color: "from-[#7A8471] to-[#5C6455]",
@@ -20,8 +18,8 @@ const ENGINES = [
     bgColor: "from-[#7A8471]/5 to-[#5C6455]/5",
     iconBg: "bg-gradient-to-br from-[#7A8471] to-[#5C6455]",
     specs: [
-      { label: "Doğruluk", value: "~%94" },
-      { label: "Kapsam", value: "%88" },
+      { label: "Accuracy", value: "~94%" },
+      { label: "Coverage", value: "88%" },
     ],
     icon: (
       <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
@@ -35,9 +33,7 @@ const ENGINES = [
     id: "aqe",
     name: "Adaptive Question Engine",
     shortName: "AQE",
-    tagline: "Daha az soru, daha çok anlam",
-    description:
-      "Akıllı soru akışıyla gereksiz soruları atlar, önemli olanlarda derinleşir.",
+    description: "Probabilistic routing. Entropy minimization.",
     status: "active",
     version: "1.0",
     color: "from-violet-500 to-indigo-600",
@@ -45,8 +41,8 @@ const ENGINES = [
     bgColor: "from-violet-500/5 to-indigo-500/5",
     iconBg: "bg-gradient-to-br from-violet-500 to-indigo-600",
     specs: [
-      { label: "Adaptif", value: "Akış" },
-      { label: "Katman", value: "3-tier" },
+      { label: "Routing", value: "Adaptive" },
+      { label: "Layers", value: "3-tier" },
     ],
     icon: (
       <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
@@ -178,29 +174,6 @@ export function Engines() {
             </div>
           </motion.div>
 
-          {/* View All Link */}
-          <motion.div
-            initial={{ opacity: 0, y: isMobile ? 12 : 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: isMobile ? 0.2 : 0.4, delay: 0.3 }}
-            className="flex items-center justify-center sm:col-span-1 lg:col-span-1"
-          >
-            <Link
-              href="/engines"
-              className="group inline-flex items-center gap-2 text-sm text-foreground-muted hover:text-foreground transition-colors duration-300"
-            >
-              <span>Tümünü gör</span>
-              <svg
-                className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-          </motion.div>
         </div>
       </Container>
     </section>

@@ -8,6 +8,7 @@ export const SITE_CONFIG = {
 
 export const NAV_LINKS = [
   { href: "#products", label: "Ürünler" },
+  { href: "/engines", label: "Hybrid Motorlar" },
   { href: "#approach", label: "Yaklaşım" },
   { href: "/about", label: "Hakkımızda" },
   { href: "#contact", label: "İletişim" },
