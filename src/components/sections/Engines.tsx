@@ -10,9 +10,9 @@ const ENGINES = [
     id: "hae",
     name: "Human Analysis Engine",
     shortName: "HAE",
-    tagline: "Profile Synthesis",
+    tagline: "Kullanıcı profilini oluşturur",
     description:
-      "Multi-layer hybrid mimari.",
+      "Çoklu sinyal kaynaklarından kişiselleştirilmiş profil üretir.",
     status: "active",
     version: "3.0",
     color: "from-[#7A8471] to-[#5C6455]",
@@ -20,8 +20,8 @@ const ENGINES = [
     bgColor: "from-[#7A8471]/5 to-[#5C6455]/5",
     iconBg: "bg-gradient-to-br from-[#7A8471] to-[#5C6455]",
     specs: [
-      { label: "Deep", value: "Pipeline" },
-      { label: "High", value: "Precision" },
+      { label: "Doğruluk", value: "~%94" },
+      { label: "Kapsam", value: "%88" },
     ],
     icon: (
       <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
@@ -35,9 +35,9 @@ const ENGINES = [
     id: "aqe",
     name: "Adaptive Question Engine",
     shortName: "AQE",
-    tagline: "Query Orchestration",
+    tagline: "Daha az soru, daha çok anlam",
     description:
-      "Dynamic routing. Cross-engine senkron.",
+      "Akıllı soru akışıyla gereksiz soruları atlar, önemli olanlarda derinleşir.",
     status: "active",
     version: "1.0",
     color: "from-violet-500 to-indigo-600",
@@ -45,8 +45,8 @@ const ENGINES = [
     bgColor: "from-violet-500/5 to-indigo-500/5",
     iconBg: "bg-gradient-to-br from-violet-500 to-indigo-600",
     specs: [
-      { label: "Adaptive", value: "Flow" },
-      { label: "Smart", value: "Routing" },
+      { label: "Adaptif", value: "Akış" },
+      { label: "Katman", value: "3-tier" },
     ],
     icon: (
       <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
@@ -63,9 +63,9 @@ export function Engines() {
     <section className="section-padding relative" id="engines">
       <Container className="relative z-10">
         <SectionHeader
-          tag="Technology"
+          tag="Teknoloji"
           title="Engines"
-          description="Hybrid AI-algorithmic sistemler. Cross-engine learning. Daha az API çağrısı, daha çok zeka."
+          description="Ürünlerimize güç veren yapay zeka motorları."
         />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">

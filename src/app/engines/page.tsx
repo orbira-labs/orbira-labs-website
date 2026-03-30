@@ -11,9 +11,8 @@ const ENGINES = [
     id: "hae",
     name: "Human Analysis Engine",
     shortName: "HAE",
-    tagline: "İnsanı anlamak için tasarlandı",
-    description:
-      "Biyolojik sinyaller, davranış kalıpları ve psikolojik profilleri birleştiren çok katmanlı analiz mimarisi. Hibrit AI-Algoritma yapısı.",
+    tagline: "Profil sentezi",
+    description: "Çoklu sinyal kaynaklarından kişiselleştirilmiş profil üretir.",
     status: "active",
     version: "3.0",
     color: "from-[#7A8471] to-[#5C6455]",
@@ -21,9 +20,8 @@ const ENGINES = [
     bgColor: "from-[#7A8471]/10 to-[#5C6455]/5",
     iconBg: "bg-gradient-to-br from-[#7A8471] to-[#5C6455]",
     specs: [
-      { label: "Katman", value: "8-layer" },
-      { label: "Trait", value: "250+" },
-      { label: "Mimari", value: "Hybrid AI" },
+      { label: "Doğruluk", value: "~%94" },
+      { label: "Kapsam", value: "%88" },
     ],
     icon: (
       <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
@@ -38,9 +36,8 @@ const ENGINES = [
     id: "aqe",
     name: "Adaptive Question Engine",
     shortName: "AQE",
-    tagline: "Her kullanıcıya özel, akıllı soru akışı",
-    description:
-      "200+ soru havuzundan kullanıcıya en uygun 80-120 soruyu dinamik olarak seçen akıllı soru motoru. HAE ile tam entegre.",
+    tagline: "Akıllı soru akışı",
+    description: "Daha az soru, daha çok anlam. HAE ile tam entegre.",
     status: "active",
     version: "1.0",
     color: "from-violet-500 to-indigo-600",
@@ -48,9 +45,8 @@ const ENGINES = [
     bgColor: "from-violet-500/10 to-indigo-500/5",
     iconBg: "bg-gradient-to-br from-violet-500 to-indigo-600",
     specs: [
-      { label: "Havuz", value: "200+" },
-      { label: "Hedef", value: "80-120" },
-      { label: "Tier", value: "3-tier" },
+      { label: "Katman", value: "3-tier" },
+      { label: "Adaptif", value: "Akış" },
     ],
     icon: (
       <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
@@ -112,12 +108,8 @@ export default function EnginesPage() {
                 </span>
               </h1>
               
-              <p className="text-base sm:text-xl lg:text-2xl text-foreground-muted leading-relaxed mb-2">
-                İnsan odaklı AI altyapısı
-              </p>
-              <p className="text-sm sm:text-base text-foreground-subtle max-w-xl mx-auto">
-                Hybrid AI-algorithmic sistemler. Cross-engine feedback döngüleri. 
-                Her motor öğrenir, her çıktı bir sonrakini besler. Daha az API çağrısı, daha çok zeka.
+              <p className="text-base sm:text-xl lg:text-2xl text-foreground-muted leading-relaxed">
+                Ürünlerimize güç veren yapay zeka motorları
               </p>
             </motion.div>
           </Container>
@@ -275,34 +267,29 @@ export default function EnginesPage() {
                 </span>
               </div>
 
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4 sm:mb-6 leading-tight">
-                AI&apos;ı körlemesine{" "}
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-8 sm:mb-12 leading-tight">
+                Teknoloji,{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-emerald-400">
-                  çağırmıyoruz.
+                  insana hizmet etmeli.
                 </span>
               </h2>
-
-              <p className="text-sm sm:text-lg text-foreground-muted leading-relaxed max-w-2xl mx-auto mb-8 sm:mb-12">
-                Sormadan önce düşünen motorlar. Inference maliyetini artıran değil, azaltan algoritmalar.
-                Recursive learning — her çıktı, bir sonraki döngünün girdisi.
-              </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
                 {[
                   {
-                    icon: "⚡",
-                    title: "Hybrid Architecture",
-                    description: "AI + deterministik algoritmalar. İkisinin de en iyisi.",
+                    icon: "🎯",
+                    title: "Odaklı",
+                    description: "Tek iş, iyi iş.",
                   },
                   {
-                    icon: "🔄",
-                    title: "Cross-Engine Learning",
-                    description: "Motorlar birbirini besler. Closed-loop optimizasyon.",
+                    icon: "🔗",
+                    title: "Entegre",
+                    description: "Birlikte daha güçlü.",
                   },
                   {
-                    icon: "📉",
-                    title: "Cost-Aware Inference",
-                    description: "API çağrılarını minimize et. Signal extraction'ı maksimize et.",
+                    icon: "📈",
+                    title: "Gelişen",
+                    description: "Kullandıkça öğrenir.",
                   },
                 ].map((item, index) => (
                   <motion.div

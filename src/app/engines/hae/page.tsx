@@ -8,8 +8,8 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 
 const CAPABILITIES = [
   {
-    title: "Deep Pattern Recognition",
-    description: "High-dimensional feature space'lerde non-linear korelasyon keşfi. Yüzlerce sinyal, tek bir unified representation'da birleşir.",
+    title: "Örüntü Tanıma",
+    description: "Yüzeyde görünmeyen bağlantıları keşfeder. Binlerce sinyal, tek bir profilde birleşir.",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <circle cx="12" cy="12" r="3" />
@@ -19,8 +19,8 @@ const CAPABILITIES = [
     ),
   },
   {
-    title: "Temporal Coherence",
-    description: "Değişken zaman pencerelerinde state tracking. Geçmiş, şimdi ve projeksiyon — tek inference pass'te birleşir.",
+    title: "Zaman Tutarlılığı",
+    description: "Anlık değil, bütünsel değerlendirme. Geçmiş, şimdi ve gelecek tek bir perspektifte.",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <path d="M12 2L2 7l10 5 10-5-10-5z" />
@@ -30,8 +30,8 @@ const CAPABILITIES = [
     ),
   },
   {
-    title: "Adaptive Convergence",
-    description: "Sürekli feedback loop'larla kendini geliştiren precision. Model confidence, etkileşim yoğunluğuyla logaritmik artar.",
+    title: "Kendini Geliştirme",
+    description: "Her etkileşimde daha keskin. Kullanıldıkça öğrenen, zamanla daha doğru sonuçlar veren sistem.",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <circle cx="12" cy="12" r="10" />
@@ -41,8 +41,8 @@ const CAPABILITIES = [
     ),
   },
   {
-    title: "Edge-First Architecture",
-    description: "Differential privacy ile on-device inference. Sadece anonimleştirilmiş gradient'ler cihazı terk eder. Sıfır ham veri maruziyeti.",
+    title: "Gizlilik Odaklı",
+    description: "Hassas veriler cihazında kalır. Sunuculara sadece işlenmiş özetler gider.",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
@@ -53,29 +53,29 @@ const CAPABILITIES = [
 ];
 
 const ANALYSIS_DOMAINS = [
-  { name: "Somatic Layer", desc: "Fizyolojik sinyal işleme", color: "from-emerald-500/20 to-emerald-500/5", borderColor: "border-emerald-500/30" },
-  { name: "Cognitive Layer", desc: "Latent state çıkarımı", color: "from-violet-500/20 to-violet-500/5", borderColor: "border-violet-500/30" },
-  { name: "Behavioral Layer", desc: "Pattern extraction & clustering", color: "from-amber-500/20 to-amber-500/5", borderColor: "border-amber-500/30" },
+  { name: "Fiziksel Katman", desc: "Biyolojik sinyal işleme", color: "from-emerald-500/20 to-emerald-500/5", borderColor: "border-emerald-500/30" },
+  { name: "Bilişsel Katman", desc: "Durum ve bağlam çıkarımı", color: "from-violet-500/20 to-violet-500/5", borderColor: "border-violet-500/30" },
+  { name: "Davranışsal Katman", desc: "Kalıp ve tercih analizi", color: "from-amber-500/20 to-amber-500/5", borderColor: "border-amber-500/30" },
 ];
 
 const SIGNALS = [
-  { label: "Signal Vectors", sub: "Multi-modal biyometrik akışlar", delay: 0 },
-  { label: "Graph Mapping", sub: "Davranışsal topoloji çıkarımı", delay: 0.1 },
-  { label: "Context Matrix", sub: "Temporal-spatial embedding'ler", delay: 0.2 },
+  { label: "Biyolojik Sinyaller", sub: "Döngü, enerji, uyku kalitesi", delay: 0 },
+  { label: "Davranış Kalıpları", sub: "Alışkanlıklar, tercihler, rutinler", delay: 0.1 },
+  { label: "Bağlam Verileri", sub: "Zaman, konum, çevresel faktörler", delay: 0.2 },
 ];
 
 const PROCESSING_LAYERS = [
-  { name: "Signal Normalization", desc: "Ham girdi standardizasyonu" },
-  { name: "Feature Extraction", desc: "Latent pattern keşfi" },
-  { name: "Contextual Embedding", desc: "Cross-domain füzyon" },
-  { name: "Profile Synthesis", desc: "Multi-layer agregasyon" },
+  { name: "Veri Toplama", desc: "Ham sinyallerin standardizasyonu" },
+  { name: "Örüntü Keşfi", desc: "Gizli bağlantıların tespiti" },
+  { name: "Bağlam Analizi", desc: "Çevresel faktörlerin entegrasyonu" },
+  { name: "Profil Sentezi", desc: "Tüm katmanların birleşimi" },
 ];
 
 const STATS = [
-  { value: "250+", label: "Feature Dimensions", desc: "High-dimensional trait uzayı" },
-  { value: "8", label: "Processing Layers", desc: "Deep pipeline mimarisi" },
-  { value: "<1s", label: "Inference Time", desc: "Real-time işleme kapasitesi" },
-  { value: "95%+", label: "Profile Accuracy", desc: "Convergence sonrası hassasiyet" },
+  { value: "3.000+", label: "Parametre", desc: "Her profil için değerlendirilen faktör" },
+  { value: "%88", label: "Kapsam", desc: "Hedef kitleye ulaşım oranı" },
+  { value: "<1sn", label: "Yanıt Süresi", desc: "Gerçek zamanlı işleme" },
+  { value: "~%94", label: "Doğruluk", desc: "Profil tahmin hassasiyeti" },
 ];
 
 const fadeInUp = (delay = 0) => ({
@@ -158,9 +158,8 @@ export default function HAEPage() {
               </p>
 
               <p className="text-base sm:text-lg text-foreground-muted max-w-2xl mx-auto leading-relaxed mb-10">
-                Geleneksel analitiklerin ötesine geçen hybrid AI-algorithmic mimari. 
-                Yüzlerce feature'ı işler, gizli korelasyonları keşfeder, 
-                her bireyi unique high-dimensional profile olarak değerlendirir.
+                Çoklu veri kaynaklarından anlam çıkaran, her kullanıcıyı benzersiz bir profil olarak modelleyen analiz motoru. 
+                Binlerce parametreyi işler, gizli bağlantıları keşfeder.
               </p>
 
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20">
@@ -321,8 +320,8 @@ export default function HAEPage() {
                             <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" />
                           </svg>
                         </div>
-                        <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">Fusion Core</h3>
-                        <p className="text-sm text-foreground-muted">Tüm katmanların birleştiği nokta. Profile synthesis burada gerçekleşir.</p>
+                        <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">Analiz Çekirdeği</h3>
+                        <p className="text-sm text-foreground-muted">Tüm katmanların birleştiği nokta. Profil sentezi burada gerçekleşir.</p>
                       </div>
                     </div>
                   </motion.div>
@@ -347,8 +346,8 @@ export default function HAEPage() {
                       <div className="w-2 h-2 rounded-full bg-emerald-400" />
                       <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider">Output Ready</span>
                     </div>
-                    <p className="text-base sm:text-lg font-semibold text-foreground mb-1">Personalized Profile Vector</p>
-                    <p className="text-sm text-foreground-muted">Unique embedding'ler. Birey-spesifik insight'lar. Sıfır genelleme.</p>
+                    <p className="text-base sm:text-lg font-semibold text-foreground mb-1">Kişiselleştirilmiş Profil</p>
+                    <p className="text-sm text-foreground-muted">Sana özel içgörüler ve öneriler. Genel değil, bireysel.</p>
                   </motion.div>
                 </div>
               </div>
@@ -360,9 +359,9 @@ export default function HAEPage() {
         <section className="section-padding relative">
           <Container>
             <motion.div className="text-center mb-10 sm:mb-14" {...fadeInUp()}>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Analysis Domains</h2>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Analiz Alanları</h2>
               <p className="text-foreground-muted max-w-xl mx-auto">
-                Üç ortogonal katman. Bağımsız işleme, unified sentez.
+                Üç temel alan, sonsuz kombinasyon. Her alan kendi içinde derinleşir, birlikte bütünleşir.
               </p>
             </motion.div>
 
@@ -388,8 +387,8 @@ export default function HAEPage() {
           
           <Container>
             <motion.div className="text-center mb-10 sm:mb-14" {...fadeInUp()}>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Core Capabilities</h2>
-              <p className="text-foreground-muted max-w-xl mx-auto">Yılların Ar-Ge&apos;si, tek bir sistemde damıtıldı.</p>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Temel Yetenekler</h2>
+              <p className="text-foreground-muted max-w-xl mx-auto">Yılların Ar-Ge&apos;si, tek bir sistemde.</p>
             </motion.div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
@@ -415,15 +414,15 @@ export default function HAEPage() {
         <section className="section-padding relative">
           <Container size="narrow">
             <motion.div className="text-center mb-10" {...fadeInUp()}>
-              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">Pipeline Overview</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">Nasıl Çalışır?</h2>
             </motion.div>
 
             <div className="space-y-6">
               {[
-                { step: "01", title: "Signal Ingestion", desc: "Ham multi-modal input'lar yakalanır, validate edilir ve standardize tensor representation'lara dönüştürülür." },
-                { step: "02", title: "Feature Discovery", desc: "Unsupervised pattern extraction ile latent yapılar ortaya çıkar. Korelasyonlar, explicit labeling'den önce yüzeye çıkar." },
-                { step: "03", title: "Profile Crystallization", desc: "Cross-layer embedding'ler unified, dinamik profile vector'de birleşir. Sürekli refine edilir, asla statik değil." },
-                { step: "04", title: "Insight Generation", desc: "Profile state, personalized inference'ı yönlendirir. Çıktılar birey-spesifik, popülasyon ortalaması değil." },
+                { step: "01", title: "Veri Toplama", desc: "Günlük check-in'lerinden, döngü verilerinden ve davranış kalıplarından anlamlı sinyaller çıkarılır." },
+                { step: "02", title: "Örüntü Keşfi", desc: "Yapay zeka, binlerce parametre arasındaki gizli bağlantıları tespit eder. Sen fark etmeden önce." },
+                { step: "03", title: "Profil Oluşturma", desc: "Tüm veriler birleşerek sana özel, dinamik bir profil oluşturur. Her gün biraz daha doğru." },
+                { step: "04", title: "Kişisel İçgörüler", desc: "Profilin, sana özel öneriler ve tahminler üretir. Genel değil, sadece sana ait." },
               ].map((item, index) => (
                 <motion.div
                   key={item.step}
@@ -449,8 +448,8 @@ export default function HAEPage() {
             <motion.div className="text-center py-8 sm:py-12" {...fadeInUp()}>
               <div className="text-4xl sm:text-5xl mb-6 opacity-20">&ldquo;</div>
               <p className="text-xl sm:text-2xl lg:text-3xl font-medium text-foreground leading-relaxed mb-6">
-                AI&apos;ı körlemesine çağırmıyoruz.<br />
-                <span className="text-[#9BA392]">Önce düşünüyoruz, sonra soruyoruz.</span>
+                Teknoloji insanı anlamalı,<br />
+                <span className="text-[#9BA392]">insan teknolojiyi değil.</span>
               </p>
               <p className="text-sm text-foreground-subtle">— HAE Felsefesi</p>
             </motion.div>
