@@ -81,6 +81,49 @@ export function PageBackground() {
           animate={{ opacity: [0.5, 0.9, 0.5] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         />
+
+        {/* Mobil: Statik Solucan Deliği — Ortada */}
+        <div 
+          className="absolute top-[35%] left-1/2 -translate-x-1/2"
+          style={{ perspective: "300px" }}
+        >
+          <div
+            className="w-[100px] h-[100px] rounded-full border border-white/[0.08]"
+            style={{ 
+              transform: "rotateX(60deg)",
+              boxShadow: "inset 0 0 20px rgba(139, 92, 246, 0.15)"
+            }}
+          />
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60px] h-[60px] rounded-full border border-white/[0.05]"
+            style={{ transform: "rotateX(60deg)" }}
+          />
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full"
+            style={{
+              background: "radial-gradient(circle, rgba(139, 92, 246, 0.8) 0%, transparent 70%)",
+              boxShadow: "0 0 12px 4px rgba(139, 92, 246, 0.3)",
+            }}
+          />
+        </div>
+
+        {/* Mobil: Statik Organik Blob */}
+        <div
+          className="absolute top-[45%] left-[5%] w-[100px] h-[90px]"
+          style={{
+            background: "radial-gradient(ellipse 60% 50% at 40% 50%, rgba(99, 102, 241, 0.12) 0%, rgba(139, 92, 246, 0.06) 50%, transparent 80%)",
+            borderRadius: "60% 40% 50% 50% / 50% 60% 40% 50%",
+            filter: "blur(1px)",
+          }}
+        />
+
+        {/* Mobil: Statik Daire/Halka */}
+        <div
+          className="absolute top-[78%] left-[60%] w-[60px] h-[60px] rounded-full border border-brand-primary/10"
+          style={{
+            boxShadow: "0 0 20px 5px rgba(99, 102, 241, 0.08), inset 0 0 15px rgba(139, 92, 246, 0.05)",
+          }}
+        />
       </div>
     );
   }
@@ -190,13 +233,19 @@ export function PageBackground() {
         transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 2 }}
       />
 
-      {/* Wormhole — tek halka, perspective ile elips, merkezde glow noktası */}
-      <div className="absolute top-[22%] left-[16%] md:left-[20%]" style={{ perspective: "400px" }}>
+      {/* Wormhole 1 — merkez, ana dönen spiral */}
+      <div className="absolute top-[30%] left-1/2 -translate-x-1/2" style={{ perspective: "400px" }}>
         <motion.div
           className="w-[160px] h-[160px] md:w-[260px] md:h-[260px] rounded-full border border-white/[0.07]"
           style={{ transformStyle: "preserve-3d", rotateX: "58deg" }}
           animate={{ rotate: 360 }}
           transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+        />
+        <motion.div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] md:w-[160px] md:h-[160px] rounded-full border border-white/[0.04]"
+          style={{ transformStyle: "preserve-3d", rotateX: "58deg" }}
+          animate={{ rotate: -360 }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         />
         <motion.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 md:w-3 md:h-3 rounded-full"
@@ -208,6 +257,101 @@ export function PageBackground() {
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
+
+      {/* Wormhole 2 — sağ alt, daha küçük */}
+      <div className="absolute bottom-[25%] right-[12%]" style={{ perspective: "350px" }}>
+        <motion.div
+          className="w-[120px] h-[120px] md:w-[180px] md:h-[180px] rounded-full border border-white/[0.05]"
+          style={{ transformStyle: "preserve-3d", rotateX: "65deg" }}
+          animate={{ rotate: -360 }}
+          transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+        />
+        <motion.div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70px] h-[70px] md:w-[110px] md:h-[110px] rounded-full border border-white/[0.03]"
+          style={{ transformStyle: "preserve-3d", rotateX: "65deg" }}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+        />
+        <motion.div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 md:w-2 md:h-2 rounded-full"
+          style={{
+            background: "radial-gradient(circle, rgba(99, 102, 241, 0.8) 0%, transparent 70%)",
+            boxShadow: "0 0 12px 4px rgba(99, 102, 241, 0.2)",
+          }}
+          animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.9, 0.5] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        />
+      </div>
+
+      {/* Organik Blob 1 — sol orta, şekil değiştiren */}
+      <motion.div
+        className="absolute top-[40%] left-[5%] w-[180px] h-[160px] md:w-[280px] md:h-[240px]"
+        style={{
+          background: "radial-gradient(ellipse 70% 60% at 40% 50%, rgba(99, 102, 241, 0.12) 0%, rgba(139, 92, 246, 0.06) 50%, transparent 80%)",
+          filter: "blur(2px)",
+        }}
+        animate={{
+          borderRadius: [
+            "60% 40% 50% 50% / 50% 60% 40% 50%",
+            "40% 60% 60% 40% / 60% 40% 60% 40%",
+            "50% 50% 40% 60% / 40% 50% 50% 60%",
+            "60% 40% 50% 50% / 50% 60% 40% 50%",
+          ],
+          x: [0, 15, -10, 0],
+          y: [0, -10, 15, 0],
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Organik Blob 2 — sağ üst, daha küçük */}
+      <motion.div
+        className="absolute top-[15%] right-[8%] w-[120px] h-[100px] md:w-[180px] md:h-[150px]"
+        style={{
+          background: "radial-gradient(ellipse 65% 55% at 50% 45%, rgba(139, 92, 246, 0.10) 0%, rgba(167, 139, 250, 0.05) 55%, transparent 80%)",
+          filter: "blur(1px)",
+        }}
+        animate={{
+          borderRadius: [
+            "40% 60% 55% 45% / 55% 45% 55% 45%",
+            "55% 45% 40% 60% / 45% 55% 45% 55%",
+            "45% 55% 60% 40% / 60% 40% 60% 40%",
+            "40% 60% 55% 45% / 55% 45% 55% 45%",
+          ],
+          scale: [1, 1.08, 0.95, 1],
+        }}
+        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+      />
+
+      {/* Daire/Halka 1 — pulse eden büyük halka */}
+      <motion.div
+        className="absolute top-[60%] left-[30%] w-[100px] h-[100px] md:w-[160px] md:h-[160px] rounded-full border border-brand-primary/10"
+        style={{
+          boxShadow: "0 0 30px 8px rgba(99, 102, 241, 0.08), inset 0 0 20px rgba(139, 92, 246, 0.05)",
+        }}
+        animate={{
+          scale: [1, 1.15, 1],
+          opacity: [0.4, 0.7, 0.4],
+          borderColor: [
+            "rgba(99, 102, 241, 0.1)",
+            "rgba(139, 92, 246, 0.15)",
+            "rgba(99, 102, 241, 0.1)",
+          ],
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Daire/Halka 2 — daha küçük, farklı ritim */}
+      <motion.div
+        className="absolute top-[80%] right-[25%] w-[60px] h-[60px] md:w-[90px] md:h-[90px] rounded-full border border-violet-500/8"
+        style={{
+          boxShadow: "0 0 20px 5px rgba(139, 92, 246, 0.06)",
+        }}
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.6, 0.3],
+        }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+      />
 
       {/* Distant planets — belli belirsiz daireler, hafif glow */}
       <motion.div

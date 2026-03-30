@@ -91,7 +91,7 @@ export default function BasvuruLandingPage() {
             className="text-center mb-8 md:mb-12 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground mb-4">
@@ -208,7 +208,7 @@ export default function BasvuruLandingPage() {
             className="text-center mb-10 md:mb-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-foreground">
@@ -267,7 +267,7 @@ export default function BasvuruLandingPage() {
                 className="relative text-center group"
                 initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: i * 0.15 }}
               >
                 <motion.div
@@ -344,7 +344,7 @@ export default function BasvuruLandingPage() {
             className="max-w-lg md:max-w-2xl mx-auto text-center"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.7 }}
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground mb-5 md:mb-8">
@@ -371,7 +371,7 @@ export default function BasvuruLandingPage() {
               className="text-foreground-subtle text-sm md:text-base mt-6"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: 0.4 }}
             >
               24 saat içinde dönüş yapıyoruz.
@@ -419,7 +419,7 @@ function ServiceCard({
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.5, delay }}
         whileHover={{ y: -8, transition: { duration: 0.25 } }}
         className="group h-full"

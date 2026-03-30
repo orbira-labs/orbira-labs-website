@@ -362,7 +362,7 @@ export default function KasaBendePage() {
                   className="text-center"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.4, delay: i * 0.1 }}
                 >
                   <div className="text-xl sm:text-3xl font-bold text-emerald-400">
@@ -384,7 +384,7 @@ export default function KasaBendePage() {
               className="text-center mb-10 sm:mb-16"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6 }}
             >
               <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-4 sm:mb-6">
@@ -409,7 +409,7 @@ export default function KasaBendePage() {
                   className="group p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10 hover:border-emerald-500/30 transition-all duration-300"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: index * 0.05 }}
                   whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 >
@@ -436,7 +436,7 @@ export default function KasaBendePage() {
               className="text-center mb-10 sm:mb-16"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6 }}
             >
               <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-4 sm:mb-6">
@@ -463,7 +463,7 @@ export default function KasaBendePage() {
                   className="group relative p-5 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/10 hover:border-amber-500/30 transition-all duration-300 overflow-hidden"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: index * 0.08 }}
                   whileHover={{ y: -4, transition: { duration: 0.2 } }}
                 >
@@ -497,7 +497,7 @@ export default function KasaBendePage() {
               className="max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6 }}
             >
               <div className="rounded-xl sm:rounded-2xl border border-white/10 overflow-hidden">
@@ -568,7 +568,7 @@ export default function KasaBendePage() {
               className="text-center mb-8 sm:mb-10"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6 }}
             >
               <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-4 sm:mb-6">
@@ -590,7 +590,7 @@ export default function KasaBendePage() {
                 className="p-4 sm:p-5 rounded-xl bg-gradient-to-r from-emerald-500/10 to-transparent border border-emerald-500/20"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5 }}
               >
                 <div className="flex items-center gap-3 mb-2">
@@ -611,7 +611,7 @@ export default function KasaBendePage() {
                 className="p-4 sm:p-5 rounded-xl bg-gradient-to-r from-blue-500/10 to-transparent border border-blue-500/20"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
                 <div className="flex items-center gap-3 mb-2">
@@ -632,7 +632,7 @@ export default function KasaBendePage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <div className="p-4 sm:p-6 rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10">
@@ -664,7 +664,7 @@ export default function KasaBendePage() {
               className="text-center mb-10 sm:mb-16"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6 }}
             >
               <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-violet-500/10 text-violet-400 border border-violet-500/20 mb-4 sm:mb-6">
@@ -694,7 +694,7 @@ export default function KasaBendePage() {
                   className="group"
                   initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   <div className="relative aspect-[9/19] rounded-xl sm:rounded-2xl overflow-hidden bg-gradient-to-b from-zinc-700 to-zinc-900 p-0.5 sm:p-1 mb-3 sm:mb-4 group-hover:shadow-xl group-hover:shadow-emerald-500/10 transition-shadow duration-300">
@@ -726,7 +726,7 @@ export default function KasaBendePage() {
               className="text-center mb-10 sm:mb-16"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6 }}
             >
               <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-4 sm:mb-6">
@@ -747,7 +747,7 @@ export default function KasaBendePage() {
                   className="p-5 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/10"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   <StarRating rating={review.rating} />
@@ -780,7 +780,7 @@ export default function KasaBendePage() {
               className="text-center mb-10 sm:mb-16"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6 }}
             >
               <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 mb-4 sm:mb-6">
@@ -801,7 +801,7 @@ export default function KasaBendePage() {
                   className="relative p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   <div className="text-3xl sm:text-5xl font-bold text-emerald-500/20 mb-2 sm:mb-4">
@@ -829,7 +829,7 @@ export default function KasaBendePage() {
               className="relative p-6 sm:p-10 lg:p-12 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-emerald-500/10 via-teal-500/5 to-transparent border border-emerald-500/20 text-center overflow-hidden"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-teal-500/5 pointer-events-none" />

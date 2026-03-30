@@ -48,7 +48,7 @@ export function Approach() {
                   className="hidden lg:block absolute top-8 left-full w-full h-px bg-gradient-to-r from-border to-transparent z-0"
                   initial={{ scaleX: 0 }}
                   whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.6, delay: 0.3 + index * 0.15 }}
                   style={{ originX: 0 }}
                 />

@@ -59,7 +59,7 @@ export function Founder() {
                       className="group flex flex-col items-center text-center p-3 sm:p-4 rounded-lg sm:rounded-xl bg-white/5 border border-border transition-all duration-300 hover:border-brand-primary/50 hover:bg-white/10 hover:-translate-y-1"
                       initial={{ opacity: 0, y: isMobile ? 8 : 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
+                      viewport={{ once: true, margin: "-50px" }}
                       transition={{ duration: isMobile ? 0.2 : 0.4, delay: isMobile ? index * 0.03 : index * 0.08 }}
                     >
                       <div className="flex items-center gap-1.5 mb-0.5 sm:mb-1">
