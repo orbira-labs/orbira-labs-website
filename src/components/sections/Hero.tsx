@@ -106,26 +106,6 @@ export function Hero() {
             </Link>
           </motion.div>
 
-          {/* Scroll indicator */}
-          <motion.div
-            className="flex justify-center mt-10 sm:mt-12"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1 }}
-          >
-            <motion.div
-              className="w-6 h-10 rounded-full border border-border/50 flex items-start justify-center p-2 backdrop-blur-sm"
-              animate={{ y: [0, 5, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <motion.div
-                className="w-1 h-2 bg-brand-primary/60 rounded-full"
-                animate={{ y: [0, 8, 0], opacity: [1, 0.3, 1] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              />
-            </motion.div>
-          </motion.div>
         </motion.div>
       </Container>
     </section>

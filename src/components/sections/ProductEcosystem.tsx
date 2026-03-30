@@ -4,34 +4,34 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Container, SectionHeader, Card, Badge } from "@/components/ui";
 import { PRODUCTS } from "@/lib/constants";
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      type: "spring" as const,
-      stiffness: 100,
-      damping: 15,
-    },
-  },
-};
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export function ProductEcosystem() {
   const upcomingProducts = PRODUCTS.filter((p) => !p.href);
+  const isMobile = useIsMobile();
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: isMobile ? 0.05 : 0.1,
+        delayChildren: isMobile ? 0.1 : 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: isMobile ? 12 : 30, scale: isMobile ? 1 : 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: isMobile
+        ? { duration: 0.2 }
+        : { type: "spring" as const, stiffness: 100, damping: 15 },
+    },
+  };
 
   if (upcomingProducts.length === 0) return null;
 
@@ -56,7 +56,7 @@ export function ProductEcosystem() {
             <motion.div
               key={product.id}
               variants={itemVariants}
-              whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              whileHover={isMobile ? {} : { y: -5, transition: { duration: 0.2 } }}
               whileTap={{ scale: 0.98 }}
               className="touch-highlight"
             >
@@ -78,6 +78,7 @@ export function ProductEcosystem() {
                           alt={product.name}
                           width={44}
                           height={44}
+                          sizes="44px"
                           className="w-full h-full object-cover"
                         />
                       </motion.div>

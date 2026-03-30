@@ -3,23 +3,23 @@
 import { motion } from "framer-motion";
 import { Container, SectionHeader } from "@/components/ui";
 import { PROCESS_STEPS } from "@/lib/constants";
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.9 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      type: "spring" as const,
-      stiffness: 80,
-      damping: 15,
-      delay: i * 0.15,
-    },
-  }),
-};
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export function Approach() {
+  const isMobile = useIsMobile();
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: isMobile ? 12 : 40, scale: isMobile ? 1 : 0.9 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: isMobile
+        ? { duration: 0.2, delay: i * 0.05 }
+        : { type: "spring" as const, stiffness: 80, damping: 15, delay: i * 0.15 },
+    }),
+  };
+
   return (
     <section className="section-padding relative" id="approach">
       <Container className="relative z-10">
@@ -39,7 +39,7 @@ export function Approach() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
-              whileHover={{ y: -8, transition: { duration: 0.25 } }}
+              whileHover={isMobile ? {} : { y: -8, transition: { duration: 0.25 } }}
               whileTap={{ scale: 0.97 }}
             >
               {/* Connection line - desktop only */}

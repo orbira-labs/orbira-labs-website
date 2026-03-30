@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container, SectionHeader, Badge, Button } from "@/components/ui";
 import { PRODUCTS, type Product } from "@/lib/constants";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const getDotColor = (product: Product) => {
   if (product.gradient.includes("emerald")) return "bg-emerald-500";
@@ -38,17 +39,18 @@ const getButtonStyle = (product: Product) => {
 interface ProductCardProps {
   product: Product;
   index: number;
+  isMobile: boolean;
 }
 
-function ProductCard({ product, index }: ProductCardProps) {
+function ProductCard({ product, index, isMobile }: ProductCardProps) {
   return (
     <motion.div
       className={`relative bg-gradient-to-br from-white/[0.05] to-white/[0.02] rounded-2xl sm:rounded-3xl border border-white/10 overflow-hidden ${getBorderColor(product)} transition-all duration-300`}
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: isMobile ? 15 : 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      whileHover={{ y: -5, transition: { duration: 0.2 } }}
+      transition={{ duration: isMobile ? 0.25 : 0.6, delay: isMobile ? index * 0.05 : index * 0.1 }}
+      whileHover={isMobile ? {} : { y: -5, transition: { duration: 0.2 } }}
     >
       {/* Background glow */}
       <div className={`absolute inset-0 bg-gradient-to-br ${getGlowColor(product)} pointer-events-none`} />
@@ -63,6 +65,7 @@ function ProductCard({ product, index }: ProductCardProps) {
                 alt={product.name}
                 width={64}
                 height={64}
+                sizes="64px"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -118,6 +121,7 @@ function ProductCard({ product, index }: ProductCardProps) {
 
 export function FeaturedProduct() {
   const featuredProducts = PRODUCTS.filter((p) => p.href);
+  const isMobile = useIsMobile();
   
   if (featuredProducts.length === 0) return null;
 
@@ -133,7 +137,7 @@ export function FeaturedProduct() {
 
         <div className="grid md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {featuredProducts.map((product, index) => (
-            <ProductCard key={product.id} product={product} index={index} />
+            <ProductCard key={product.id} product={product} index={index} isMobile={isMobile} />
           ))}
         </div>
       </Container>

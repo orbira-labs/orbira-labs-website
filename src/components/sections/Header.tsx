@@ -6,25 +6,32 @@ import Link from "next/link";
 import { Container, Button } from "@/components/ui";
 import { NAV_LINKS, SITE_CONFIG } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const shouldBeScrolled = window.scrollY > 20;
+      if (shouldBeScrolled !== isScrolled) {
+        setIsScrolled(shouldBeScrolled);
+      }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isScrolled]);
 
   return (
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border"
+          ? isMobile
+            ? "bg-background/98 border-b border-white/5"
+            : "bg-background/80 backdrop-blur-xl border-b border-border"
           : "bg-transparent"
       )}
     >
@@ -102,7 +109,7 @@ export function Header() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border"
+            className="md:hidden bg-background/98 border-b border-white/5"
           >
             <Container>
               <div className="py-4 space-y-3">

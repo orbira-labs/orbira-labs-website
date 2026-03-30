@@ -4,17 +4,20 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Container, Button } from "@/components/ui";
 import { SITE_CONFIG } from "@/lib/constants";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export function Contact() {
+  const isMobile = useIsMobile();
+
   return (
     <section className="section-padding relative" id="contact">
       <Container className="relative z-10">
         <motion.div
           className="max-w-3xl mx-auto text-center px-2"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: isMobile ? 12 : 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: isMobile ? 0.25 : 0.6 }}
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-foreground mb-4 sm:mb-6">
             Bir fikir, iş birliği veya merak ettiğiniz bir şey varsa{" "}
@@ -29,7 +32,7 @@ export function Contact() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-8 sm:mb-10">
             <motion.div
               className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 border border-border text-left transition-all duration-300 hover:border-border-hover hover:-translate-y-1"
-              whileHover={{ scale: 1.02 }}
+              whileHover={isMobile ? {} : { scale: 1.02 }}
             >
               <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-brand-primary/20 flex items-center justify-center mb-3 sm:mb-4">
                 <svg className="w-4 h-4 sm:w-5 sm:h-5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -44,7 +47,7 @@ export function Contact() {
 
             <motion.div
               className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 border border-border text-left transition-all duration-300 hover:border-border-hover hover:-translate-y-1"
-              whileHover={{ scale: 1.02 }}
+              whileHover={isMobile ? {} : { scale: 1.02 }}
             >
               <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-brand-secondary/20 flex items-center justify-center mb-3 sm:mb-4">
                 <svg className="w-4 h-4 sm:w-5 sm:h-5 text-brand-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">

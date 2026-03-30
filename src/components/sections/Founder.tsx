@@ -4,8 +4,11 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Container, SectionHeader, Card } from "@/components/ui";
 import { FOUNDER } from "@/lib/constants";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export function Founder() {
+  const isMobile = useIsMobile();
+
   return (
     <section className="section-padding relative" id="about">
       <Container>
@@ -16,10 +19,10 @@ export function Founder() {
         />
 
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: isMobile ? 15 : 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: isMobile ? 0.3 : 0.6 }}
         >
           <Card variant="glass" className="overflow-hidden">
             <div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 lg:gap-10">
@@ -30,6 +33,7 @@ export function Founder() {
                     src={FOUNDER.image}
                     alt={FOUNDER.name}
                     fill
+                    sizes="(max-width: 640px) 80px, (max-width: 1024px) 96px, 112px"
                     className="object-cover"
                   />
                 </div>
@@ -53,10 +57,10 @@ export function Founder() {
                     <motion.div
                       key={exp.company}
                       className="group flex flex-col items-center text-center p-3 sm:p-4 rounded-lg sm:rounded-xl bg-white/5 border border-border transition-all duration-300 hover:border-brand-primary/50 hover:bg-white/10 hover:-translate-y-1"
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={{ opacity: 0, y: isMobile ? 8 : 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: index * 0.08 }}
+                      transition={{ duration: isMobile ? 0.2 : 0.4, delay: isMobile ? index * 0.03 : index * 0.08 }}
                     >
                       <div className="flex items-center gap-1.5 mb-0.5 sm:mb-1">
                         <span className="text-sm sm:text-base font-semibold text-foreground">

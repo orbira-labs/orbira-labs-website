@@ -1,8 +1,90 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export function PageBackground() {
+  const isMobile = useIsMobile();
+
+  if (isMobile) {
+    return (
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+        {/* Ana glow — üst merkez, güçlü */}
+        <div
+          className="absolute top-[5%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full"
+          style={{
+            background: "radial-gradient(ellipse at center, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.12) 35%, transparent 70%)",
+          }}
+        />
+
+        {/* Sol alt glow — mor tonu */}
+        <div
+          className="absolute top-[35%] -left-[10%] w-[450px] h-[500px] rounded-full"
+          style={{
+            background: "radial-gradient(ellipse at center, rgba(139, 92, 246, 0.18) 0%, rgba(99, 102, 241, 0.08) 40%, transparent 70%)",
+          }}
+        />
+
+        {/* Sağ orta glow — indigo tonu */}
+        <div
+          className="absolute top-[50%] -right-[15%] w-[400px] h-[450px] rounded-full"
+          style={{
+            background: "radial-gradient(ellipse at center, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.06) 45%, transparent 70%)",
+          }}
+        />
+
+        {/* Alt glow — derinlik için */}
+        <div
+          className="absolute top-[75%] left-[30%] w-[500px] h-[400px] rounded-full"
+          style={{
+            background: "radial-gradient(ellipse at center, rgba(139, 92, 246, 0.12) 0%, transparent 65%)",
+          }}
+        />
+
+        {/* Statik yıldızlar — kozmik atmosfer */}
+        {[
+          { top: "8%", left: "15%", size: 2.5 },
+          { top: "12%", left: "78%", size: 2 },
+          { top: "25%", left: "85%", size: 2.5 },
+          { top: "38%", left: "8%", size: 2 },
+          { top: "48%", left: "92%", size: 2.5 },
+          { top: "62%", left: "12%", size: 2 },
+          { top: "72%", left: "88%", size: 2.5 },
+          { top: "85%", left: "25%", size: 2 },
+          { top: "92%", left: "65%", size: 2.5 },
+        ].map((star, i) => (
+          <div
+            key={`star-mobile-${i}`}
+            className="absolute rounded-full"
+            style={{
+              top: star.top,
+              left: star.left,
+              width: star.size,
+              height: star.size,
+              background: star.size >= 2.5 
+                ? "radial-gradient(circle, rgba(139, 92, 246, 0.9) 0%, rgba(99, 102, 241, 0.4) 50%, transparent 80%)"
+                : "rgba(255, 255, 255, 0.7)",
+              boxShadow: star.size >= 2.5 
+                ? "0 0 8px 3px rgba(139, 92, 246, 0.35)"
+                : "0 0 4px 1px rgba(255, 255, 255, 0.25)",
+            }}
+          />
+        ))}
+
+        {/* Tek hafif pulse — canlılık için */}
+        <motion.div
+          className="absolute top-[30%] right-[15%] w-3 h-3 rounded-full"
+          style={{
+            background: "radial-gradient(circle, rgba(139, 92, 246, 0.85) 0%, transparent 70%)",
+            boxShadow: "0 0 10px 4px rgba(139, 92, 246, 0.25)",
+          }}
+          animate={{ opacity: [0.5, 0.9, 0.5] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
       {/* Main ambient glow orbs - stronger */}

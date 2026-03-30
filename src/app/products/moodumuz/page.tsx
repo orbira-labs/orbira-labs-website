@@ -171,7 +171,7 @@ export default function MoodumuzPage() {
               >
                 <div className="flex items-center gap-3 justify-center mb-3">
                   <div className="w-12 h-12 rounded-xl overflow-hidden shadow-lg shadow-[#7A8471]/20">
-                    <Image src="/images/moodumuz-icon.png" alt="Moodumuz" width={48} height={48} className="w-full h-full object-cover" />
+                    <Image src="/images/moodumuz-icon.png" alt="Moodumuz" width={48} height={48} sizes="48px" className="w-full h-full object-cover" />
                   </div>
                   <div className="text-left">
                     <h1 className="text-xl font-bold text-foreground">Moodumuz</h1>
@@ -202,7 +202,7 @@ export default function MoodumuzPage() {
                       <div className="relative w-full aspect-[9/19] rounded-2xl bg-gradient-to-b from-zinc-700 to-zinc-900 p-[2px] shadow-lg shadow-black/30 mb-2">
                         <div className="w-full h-full rounded-[14px] overflow-hidden relative bg-black">
                           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-3 bg-black rounded-b-lg z-10" />
-                          <Image src={ss.src} alt={ss.alt} fill className="object-cover object-top" />
+                          <Image src={ss.src} alt={ss.alt} fill sizes="130px" className="object-cover object-top" />
                         </div>
                       </div>
                       <p className="text-[10px] text-foreground-muted font-medium text-center">{ss.label}</p>
@@ -286,7 +286,7 @@ export default function MoodumuzPage() {
               >
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-18 h-18 rounded-2xl overflow-hidden shadow-lg shadow-[#7A8471]/20">
-                    <Image src="/images/moodumuz-icon.png" alt="Moodumuz" width={72} height={72} className="w-full h-full object-cover" />
+                    <Image src="/images/moodumuz-icon.png" alt="Moodumuz" width={72} height={72} sizes="72px" className="w-full h-full object-cover" />
                   </div>
                   <div>
                     <h1 className="text-5xl font-bold text-foreground">Moodumuz</h1>
@@ -658,7 +658,7 @@ export default function MoodumuzPage() {
                     <div className="relative w-full aspect-[9/19] rounded-[2rem] bg-gradient-to-b from-zinc-700 to-zinc-900 p-[3px] shadow-xl shadow-black/30 group-hover:shadow-2xl group-hover:shadow-[#7A8471]/20 transition-shadow duration-300 mb-4">
                       <div className="w-full h-full rounded-[1.85rem] overflow-hidden relative bg-black">
                         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-5 bg-black rounded-b-xl z-10" />
-                        <Image src={ss.src} alt={ss.alt} fill className="object-cover object-top" />
+                        <Image src={ss.src} alt={ss.alt} fill sizes="25vw" className="object-cover object-top" />
                       </div>
                     </div>
                     <p className="text-base text-foreground-muted font-medium text-center group-hover:text-foreground transition-colors duration-300">
@@ -760,6 +760,7 @@ export default function MoodumuzPage() {
                     alt="Moodumuz"
                     width={96}
                     height={96}
+                    sizes="(max-width: 640px) 64px, 96px"
                     className="w-full h-full object-cover"
                   />
                 </div>

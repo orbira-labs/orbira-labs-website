@@ -3,33 +3,34 @@
 import { motion } from "framer-motion";
 import { Container, SectionHeader } from "@/components/ui";
 import { PRINCIPLES } from "@/lib/constants";
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 40, rotateX: -10 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    rotateX: 0,
-    transition: {
-      type: "spring" as const,
-      stiffness: 100,
-      damping: 15,
-    },
-  },
-};
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export function BrandThesis() {
+  const isMobile = useIsMobile();
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: isMobile ? 0.06 : 0.12,
+        delayChildren: isMobile ? 0.05 : 0.1,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: isMobile ? 15 : 40, rotateX: isMobile ? 0 : -10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      transition: isMobile 
+        ? { duration: 0.25 }
+        : { type: "spring" as const, stiffness: 100, damping: 15 },
+    },
+  };
+
   return (
     <section className="section-padding relative" id="thesis">
       <Container className="relative z-10">
@@ -55,19 +56,25 @@ export function BrandThesis() {
               className="group touch-highlight"
             >
               <div className="relative h-full p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10 overflow-hidden transition-all duration-300 hover:border-white/20 hover:shadow-xl hover:shadow-black/20">
-                {/* Animated background glow */}
-                <motion.div 
-                  className={`absolute -top-20 -right-20 w-40 h-40 rounded-full bg-gradient-to-br ${principle.gradient} opacity-10 blur-3xl`}
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.1, 0.15, 0.1],
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
+                {/* Background glow — mobilde statik, desktop'ta animasyonlu */}
+                {isMobile ? (
+                  <div 
+                    className={`absolute -top-20 -right-20 w-40 h-40 rounded-full bg-gradient-to-br ${principle.gradient} opacity-10 blur-2xl`}
+                  />
+                ) : (
+                  <motion.div 
+                    className={`absolute -top-20 -right-20 w-40 h-40 rounded-full bg-gradient-to-br ${principle.gradient} opacity-10 blur-3xl`}
+                    animate={{
+                      scale: [1, 1.2, 1],
+                      opacity: [0.1, 0.15, 0.1],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+                )}
                 
                 <div className="relative flex flex-col h-full">
                   {/* Animated Icon */}
