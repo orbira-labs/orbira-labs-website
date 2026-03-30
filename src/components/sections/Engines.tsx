@@ -10,7 +10,7 @@ const ENGINES = [
     id: "hae",
     name: "Human Analysis Engine",
     shortName: "HAE",
-    description: "Multi-layer profile synthesis. Deep pattern recognition.",
+    description: "Multi-layer profil sentezi. Deep pattern recognition.",
     status: "active",
     version: "3.0",
     color: "from-[#7A8471] to-[#5C6455]",
@@ -18,8 +18,8 @@ const ENGINES = [
     bgColor: "from-[#7A8471]/5 to-[#5C6455]/5",
     iconBg: "bg-gradient-to-br from-[#7A8471] to-[#5C6455]",
     specs: [
-      { label: "Accuracy", value: "~94%" },
-      { label: "Coverage", value: "88%" },
+      { label: "Doğruluk", value: "~%94" },
+      { label: "Kapsam", value: "%88" },
     ],
     icon: (
       <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
@@ -41,8 +41,8 @@ const ENGINES = [
     bgColor: "from-violet-500/5 to-indigo-500/5",
     iconBg: "bg-gradient-to-br from-violet-500 to-indigo-600",
     specs: [
-      { label: "Routing", value: "Adaptive" },
-      { label: "Layers", value: "3-tier" },
+      { label: "Yönlendirme", value: "Adaptif" },
+      { label: "Katman", value: "3-tier" },
     ],
     icon: (
       <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
@@ -61,7 +61,7 @@ export function Engines() {
         <SectionHeader
           tag="Teknoloji"
           title="Engines"
-          description="Ürünlerimize güç veren yapay zeka motorları."
+          description="Ürünlerimize güç veren hybrid yapay zeka motorları."
         />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
