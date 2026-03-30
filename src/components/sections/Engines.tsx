@@ -10,9 +10,9 @@ const ENGINES = [
     id: "hae",
     name: "Human Analysis Engine",
     shortName: "HAE",
-    tagline: "İnsanı anlamak için tasarlandı",
+    tagline: "Profile Synthesis",
     description:
-      "Biyolojik sinyaller, davranış kalıpları ve psikolojik profilleri birleştiren çok katmanlı analiz mimarisi.",
+      "Multi-layer hybrid mimari.",
     status: "active",
     version: "3.0",
     color: "from-[#7A8471] to-[#5C6455]",
@@ -20,8 +20,8 @@ const ENGINES = [
     bgColor: "from-[#7A8471]/5 to-[#5C6455]/5",
     iconBg: "bg-gradient-to-br from-[#7A8471] to-[#5C6455]",
     specs: [
-      { label: "Katman", value: "8" },
-      { label: "Trait", value: "250+" },
+      { label: "Deep", value: "Pipeline" },
+      { label: "High", value: "Precision" },
     ],
     icon: (
       <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
@@ -35,9 +35,9 @@ const ENGINES = [
     id: "aqe",
     name: "Adaptive Question Engine",
     shortName: "AQE",
-    tagline: "Akıllı soru akışı",
+    tagline: "Query Orchestration",
     description:
-      "200+ soru havuzundan kullanıcıya en uygun 80-120 soruyu dinamik olarak seçen akıllı soru motoru.",
+      "Dynamic routing. Cross-engine senkron.",
     status: "active",
     version: "1.0",
     color: "from-violet-500 to-indigo-600",
@@ -45,8 +45,8 @@ const ENGINES = [
     bgColor: "from-violet-500/5 to-indigo-500/5",
     iconBg: "bg-gradient-to-br from-violet-500 to-indigo-600",
     specs: [
-      { label: "Havuz", value: "200+" },
-      { label: "Hedef", value: "80-120" },
+      { label: "Adaptive", value: "Flow" },
+      { label: "Smart", value: "Routing" },
     ],
     icon: (
       <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
@@ -63,9 +63,9 @@ export function Engines() {
     <section className="section-padding relative" id="engines">
       <Container className="relative z-10">
         <SectionHeader
-          tag="Teknoloji"
+          tag="Technology"
           title="Engines"
-          description="Ürünlerimize güç veren, insan odaklı yapay zeka motorlarımız."
+          description="Hybrid AI-algorithmic sistemler. Cross-engine learning. Daha az API çağrısı, daha çok zeka."
         />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">

@@ -113,11 +113,11 @@ export default function EnginesPage() {
               </h1>
               
               <p className="text-base sm:text-xl lg:text-2xl text-foreground-muted leading-relaxed mb-2">
-                İnsan odaklı yapay zeka motorlarımız
+                İnsan odaklı AI altyapısı
               </p>
               <p className="text-sm sm:text-base text-foreground-subtle max-w-xl mx-auto">
-                Her motor, belirli bir problemi çözmek için sıfırdan tasarlandı.
-                Modüler, ölçeklenebilir ve sürekli gelişen teknolojiler.
+                Hybrid AI-algorithmic sistemler. Cross-engine feedback döngüleri. 
+                Her motor öğrenir, her çıktı bir sonrakini besler. Daha az API çağrısı, daha çok zeka.
               </p>
             </motion.div>
           </Container>
@@ -249,10 +249,10 @@ export default function EnginesPage() {
                     </svg>
                   </div>
                   <p className="text-sm sm:text-lg font-medium text-foreground-muted mb-1 sm:mb-2">
-                    Yeni motorlar geliyor
+                    Yeni motorlar
                   </p>
                   <p className="text-xs sm:text-sm text-foreground-subtle">
-                    Üzerinde çalışıyoruz...
+                    Yakında...
                   </p>
                 </div>
               </motion.div>
@@ -276,34 +276,33 @@ export default function EnginesPage() {
               </div>
 
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4 sm:mb-6 leading-tight">
-                Teknoloji,{" "}
+                AI&apos;ı körlemesine{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-emerald-400">
-                  insana hizmet etmeli
+                  çağırmıyoruz.
                 </span>
               </h2>
 
               <p className="text-sm sm:text-lg text-foreground-muted leading-relaxed max-w-2xl mx-auto mb-8 sm:mb-12">
-                Her motor, gerçek bir ihtiyaçtan doğar. Karmaşıklığı içeride saklayıp,
-                dışarıya sadelik sunarız. Kullanıcı teknolojiyi hissetmemeli, 
-                sadece faydasını görmelidir.
+                Sormadan önce düşünen motorlar. Inference maliyetini artıran değil, azaltan algoritmalar.
+                Recursive learning — her çıktı, bir sonraki döngünün girdisi.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
                 {[
                   {
-                    icon: "🎯",
-                    title: "Odaklı",
-                    description: "Her motor tek bir şeyi çok iyi yapar",
+                    icon: "⚡",
+                    title: "Hybrid Architecture",
+                    description: "AI + deterministik algoritmalar. İkisinin de en iyisi.",
                   },
                   {
-                    icon: "🔧",
-                    title: "Modüler",
-                    description: "Parçalar bağımsız, birlikte güçlü",
+                    icon: "🔄",
+                    title: "Cross-Engine Learning",
+                    description: "Motorlar birbirini besler. Closed-loop optimizasyon.",
                   },
                   {
-                    icon: "🌱",
-                    title: "Evrimsel",
-                    description: "Kullanıldıkça öğrenir, gelişir",
+                    icon: "📉",
+                    title: "Cost-Aware Inference",
+                    description: "API çağrılarını minimize et. Signal extraction'ı maksimize et.",
                   },
                 ].map((item, index) => (
                   <motion.div
