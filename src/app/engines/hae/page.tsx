@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Container } from "@/components/ui";
 import { Header, Footer } from "@/components/sections";
-import { useIsMobile } from "@/hooks/useIsMobile";
 
 const HAE_DATA = {
   name: "Human Analysis Engine",
@@ -132,8 +131,6 @@ const fadeInUp = (delay = 0) => ({
 });
 
 export default function HAEPage() {
-  const isMobile = useIsMobile();
-
   return (
     <>
       <Header />
@@ -339,6 +336,53 @@ export default function HAEPage() {
                   <div className="text-xs text-foreground-muted">{domain.name}</div>
                 </div>
               ))}
+            </motion.div>
+          </Container>
+        </section>
+
+        {/* Technical Insight */}
+        <section className="section-padding relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/50 to-transparent pointer-events-none" />
+          <Container size="narrow">
+            <motion.div className="text-center mb-8" {...fadeInUp()}>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 mb-4">
+                <span className="text-xs font-mono uppercase tracking-wider text-foreground-subtle">
+                  Technical Insight
+                </span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
+                Çıktı Yapısı
+              </h2>
+            </motion.div>
+
+            <motion.div
+              className="p-6 rounded-2xl bg-[#0d1117] border border-white/[0.08] font-mono text-sm overflow-x-auto"
+              {...fadeInUp(0.1)}
+            >
+              <pre className="text-foreground-muted">
+{`HumanProfileV3 {
+  // Temel Özellikler
+  traits: Map<TraitId, Trait>       // 250+ aktif trait
+  patterns: List<MatchedPattern>   // Tespit edilen örüntüler
+  signals: Map<SignalId, double>   // Composite metrikler
+  
+  // Nedensel Analiz
+  causalChains: List<CausalChain>  // Davranış → Temel yapı
+  crossLinks: List<CrossLink>      // Branch arası bağlantılar
+  
+  // Risk & Tutarlılık
+  riskAssessment: RiskAssessment   // Kritik durum tespiti
+  consistency: ConsistencyReport   // Tutarsızlık skorları
+  
+  // AI Zenginleştirme
+  aiTraits: List<AiTrait>          // AI keşfettiği trait'ler
+  aiInsight: String                // Kişiselleştirilmiş özet
+  
+  // Açıklanabilirlik
+  toExplainableReport() → String   // İnsan okunabilir rapor
+  toPromptJson() → Map             // AI için yapılandırılmış
+}`}
+              </pre>
             </motion.div>
           </Container>
         </section>

@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Container } from "@/components/ui";
 import { Header, Footer } from "@/components/sections";
-import { useIsMobile } from "@/hooks/useIsMobile";
 
 const AQE_DATA = {
   name: "Adaptive Question Engine",
@@ -143,8 +142,6 @@ const fadeInUp = (delay = 0) => ({
 });
 
 export default function AQEPage() {
-  const isMobile = useIsMobile();
-
   return (
     <>
       <Header />
@@ -417,6 +414,54 @@ export default function AQEPage() {
                   <p className="text-xs text-foreground-muted">Analiz</p>
                 </div>
               </div>
+            </motion.div>
+          </Container>
+        </section>
+
+        {/* Technical Insight */}
+        <section className="section-padding relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/50 to-transparent pointer-events-none" />
+          <Container size="narrow">
+            <motion.div className="text-center mb-8" {...fadeInUp()}>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 mb-4">
+                <span className="text-xs font-mono uppercase tracking-wider text-foreground-subtle">
+                  Technical Insight
+                </span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
+                SmartQuestion Yapısı
+              </h2>
+            </motion.div>
+
+            <motion.div
+              className="p-6 rounded-2xl bg-[#0d1117] border border-white/[0.08] font-mono text-sm overflow-x-auto"
+              {...fadeInUp(0.1)}
+            >
+              <pre className="text-foreground-muted">
+{`SmartQuestion {
+  // Kimlik & İçerik
+  id: String                    // Benzersiz soru ID'si
+  text: String                  // Soru metni
+  category: QuestionCategory    // Kategori (body, mind, ...)
+  
+  // Sınıflandırma
+  tier: QuestionTier           // core | adaptive | deepDive
+  basePriority: double         // 0.0 - 1.0 öncelik puanı
+  informationWeight: double    // Bilgi değeri ağırlığı
+  
+  // HAE Bağlantısı
+  feedsDomains: List<Domain>   // Beslediği domain'ler
+  feedsTraits: List<TraitId>   // Beslediği trait'ler
+  
+  // Koşullu Gösterim
+  showCondition: TriggerCondition?   // Ne zaman göster
+  skipCondition: TriggerCondition?   // Ne zaman atla
+  
+  // Yanıt Tipleri
+  answerType: slider | single | multi | text
+  options: List<AnswerOption>?
+}`}
+              </pre>
             </motion.div>
           </Container>
         </section>
