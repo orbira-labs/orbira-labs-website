@@ -88,12 +88,6 @@ const STATS = [
   { value: "HAE", label: "Sync", desc: "Bidirectional data flow" },
 ];
 
-const HOW_IT_WORKS = [
-  { step: "01", title: "Cold Start Protocol", desc: "Baseline feature vector oluşturmak için minimum viable question set. Zero-knowledge state'den profile transition." },
-  { step: "02", title: "Probabilistic Routing", desc: "Her response, sonraki sorunun probability distribution'ını yeniden hesaplar. Bayesian inference ile path optimization." },
-  { step: "03", title: "Pattern Deep-Dive", desc: "Anomaly veya correlation tespit edildiğinde aktive olan exploration mode. Signal amplification için derinleşme." },
-  { step: "04", title: "Optimal Stopping", desc: "Information gain threshold'a ulaşıldığında convergence. Diminishing returns noktasında akıllı sonlandırma." },
-];
 
 const fadeInUp = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
@@ -342,35 +336,6 @@ export default function AQEPage() {
           </Container>
         </section>
 
-        {/* How it works */}
-        <section className="section-padding relative">
-          <Container size="narrow">
-            <motion.div className="text-center mb-10 sm:mb-14" {...fadeInUp()}>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Processing Pipeline</h2>
-              <p className="text-foreground-muted max-w-xl mx-auto">
-                Cold start'tan convergence'a kadar adaptive question flow.
-              </p>
-            </motion.div>
-
-            <div className="space-y-6">
-              {HOW_IT_WORKS.map((item, index) => (
-                <motion.div
-                  key={item.step}
-                  className="flex gap-4 sm:gap-6"
-                  {...fadeInUp(index * 0.1)}
-                >
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center flex-shrink-0">
-                    <span className="text-sm sm:text-base font-mono font-bold text-violet-400">{item.step}</span>
-                  </div>
-                  <div>
-                    <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1">{item.title}</h3>
-                    <p className="text-sm sm:text-base text-foreground-muted">{item.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </Container>
-        </section>
 
         {/* Capabilities */}
         <section className="section-padding relative">
