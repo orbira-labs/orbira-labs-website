@@ -41,12 +41,12 @@ export const PRODUCTS: Product[] = [
   {
     id: "kasabende",
     name: "KasaBende",
-    description: "Küçük ve orta ölçekli işletmeler için modern kasa ve operasyon yönetimi.",
+    description: "Kasanız artık güvende. Personel takibinden döviz işlemlerine, tüm ihtiyaçlarınız tek uygulamada.",
     status: "live",
     category: "business",
     icon: "₺",
     gradient: "from-emerald-500 to-teal-600",
-    features: ["Gelir Takibi", "Firma Rehberi", "Çoklu Kanal Kasa", "Operasyon Akışı"],
+    features: ["Kasa Takibi", "Alacak & Verecek", "Döviz İşlemleri", "Gün Sonu Sayımı"],
     href: "/products/kasabende",
     logo: "/images/kasabende-icon.png",
     screenshots: [
@@ -58,12 +58,12 @@ export const PRODUCTS: Product[] = [
   {
     id: "moodumuz",
     name: "Moodumuz",
-    description: "Döngünü anlayan, seni yargılamayan arkadaşın. Regl döngüsü takibi, ruh hali günlüğü ve kişiselleştirilmiş öneriler.",
+    description: "Döngünü anlayan, seni tanıyan arkadaşın. AI destekli kozmik rehberlik ve Human Analysis Engine™ ile kişiselleştirilmiş deneyim.",
     status: "testing",
     category: "health",
     icon: "🌿",
     gradient: "from-[#7A8471] to-[#5C6455]",
-    features: ["Döngü Takibi", "Ruh Hali Günlüğü", "Kişisel Öneriler", "Gizlilik Odaklı"],
+    features: ["Akıllı Döngü Takibi", "Ruh Hali Günlüğü", "AI Kozmik Rehber", "Trend Analizi"],
     href: "/products/moodumuz",
     logo: "/images/moodumuz-icon.png",
     screenshots: [
@@ -75,7 +75,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "cep-hocam",
     name: "Sınav Koçu",
-    description: "Yapay zeka destekli ödev ve soru çözüm asistanı. Fotoğraf çek, anında çözüm al.",
+    description: "AI destekli soru çözüm asistanı.",
     status: "in-progress",
     category: "education",
     icon: "📚",
@@ -84,7 +84,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "fal-burclar",
     name: "Fal & Burçlar",
-    description: "Günlük burç yorumları ve astroloji ile kişisel içgörüler.",
+    description: "Günlük burç yorumları ve astroloji.",
     status: "concept",
     category: "lifestyle",
     icon: "✨",
@@ -93,20 +93,20 @@ export const PRODUCTS: Product[] = [
   {
     id: "ebeveyn-halim",
     name: "EbeveynHalim",
-    description: "Ebeveynler için çocuk gelişimi takibi ve rehberlik uygulaması.",
+    description: "Çocuk gelişimi takibi ve rehberlik.",
     status: "concept",
     category: "health",
     icon: "👶",
     gradient: "from-pink-500 to-rose-600",
   },
   {
-    id: "kiraathanem",
-    name: "Kıraathanem",
-    description: "Arkadaşlarla online okey deneyimi ve sosyal oyun keyfi.",
+    id: "diyetkolik",
+    name: "Diyetkolik",
+    description: "Kilo takibi ve kalori sayacı.",
     status: "concept",
-    category: "entertainment",
-    icon: "🎴",
-    gradient: "from-orange-500 to-red-600",
+    category: "health",
+    icon: "🥗",
+    gradient: "from-lime-500 to-green-600",
   },
 ];
 

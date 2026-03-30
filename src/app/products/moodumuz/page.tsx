@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Container, Badge, Button, PageBackground } from "@/components/ui";
+import { Container, Badge, Button } from "@/components/ui";
 import { Header, Footer } from "@/components/sections";
 
 const FEATURES = [
@@ -137,7 +137,6 @@ export default function MoodumuzPage() {
       <main className="pt-20 overflow-hidden">
         {/* Hero Section - Mobile First */}
         <section className="relative min-h-[90vh] flex items-center py-12 sm:py-8">
-          <PageBackground />
           <div className="absolute inset-0 bg-gradient-to-br from-[#7A8471]/10 via-transparent to-[#5C6455]/5 pointer-events-none" />
 
           <Container className="relative z-10">

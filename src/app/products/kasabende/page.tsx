@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Container, Badge, Button, PageBackground } from "@/components/ui";
+import { Container, Badge, Button } from "@/components/ui";
 import { Header, Footer } from "@/components/sections";
 
 const APP_STORE_URL =
@@ -229,7 +229,6 @@ export default function KasaBendePage() {
       <main className="pt-16 sm:pt-20 overflow-hidden">
         {/* ────────────── HERO ────────────── */}
         <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center py-8 sm:py-0">
-          <PageBackground />
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-teal-500/5 pointer-events-none" />
 
           <Container className="relative z-10">

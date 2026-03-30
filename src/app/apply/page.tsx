@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
-import { Container, Button, PageBackground } from "@/components/ui";
+import { Container, Button } from "@/components/ui";
 
 const stagger = {
   animate: { transition: { staggerChildren: 0.12 } },
@@ -24,7 +24,7 @@ export default function BasvuruLandingPage() {
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.97]);
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-2xl border-b border-white/[0.06]">
         <Container>
@@ -47,9 +47,7 @@ export default function BasvuruLandingPage() {
       </header>
 
       {/* ═══ HERO ═══ */}
-      <section ref={heroRef} className="relative pt-28 pb-32 md:pt-44 md:pb-52 lg:pb-64">
-        <PageBackground />
-
+      <section ref={heroRef} className="relative pt-28 pb-16 md:pt-44 md:pb-28 lg:pb-32">
         <div className="absolute bottom-0 left-0 right-0 h-48 md:h-64 bg-gradient-to-t from-background to-transparent pointer-events-none z-[1]" />
 
         <motion.div
@@ -64,7 +62,7 @@ export default function BasvuruLandingPage() {
               animate="animate"
             >
               <motion.h1
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold tracking-tight leading-[1.1] mb-5 md:mb-8"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold tracking-tight leading-[1.1] mb-4 md:mb-5"
                 variants={fadeUp}
                 transition={{ duration: 0.7 }}
               >
@@ -73,40 +71,43 @@ export default function BasvuruLandingPage() {
               </motion.h1>
 
               <motion.p
-                className="text-base md:text-xl lg:text-2xl text-foreground-muted max-w-lg md:max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed"
+                className="text-lg md:text-2xl lg:text-3xl text-foreground font-medium"
                 variants={fadeUp}
                 transition={{ duration: 0.5 }}
               >
-                Restoranlar, oteller, kuaförler, klinikler ve daha fazlası.
-                Web sitenizden uygulamanıza, çekimlerinize kadar
-                her şeyi biz hallediyoruz.
+                Fikirden uygulamaya, tek adımda.
               </motion.p>
-
-              <motion.div variants={fadeUp} transition={{ duration: 0.5 }}>
-                <Link href="#hizmetler">
-                  <motion.div
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="inline-block"
-                  >
-                    <Button variant="secondary" size="lg">
-                      Neler Yapıyoruz?
-                    </Button>
-                  </motion.div>
-                </Link>
-              </motion.div>
             </motion.div>
           </Container>
         </motion.div>
       </section>
 
       {/* ═══ HİZMETLER ═══ */}
-      <section id="hizmetler" className="relative pt-4 pb-14 md:pt-8 md:pb-20 overflow-hidden scroll-mt-20">
+      <section id="hizmetler" className="relative pt-8 pb-14 md:pt-16 md:pb-20 overflow-hidden scroll-mt-20">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-primary/[0.04] to-transparent pointer-events-none" />
 
         <Container className="relative z-10">
+          <motion.div
+            className="text-center mb-8 md:mb-12 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground mb-4">
+              Neler Yapıyoruz?
+            </h2>
+            <p className="text-sm md:text-lg text-foreground-muted leading-relaxed">
+              Otel, restoran, klinik, hamam, kuaför, spa ve daha fazlası... 
+              İşletmenizin dijital varlığını sıfırdan profesyonelce inşa ediyoruz. 
+              Tasarımdan geliştirmeye, fotoğraf çekiminden video prodüksiyonuna kadar 
+              tüm süreci biz yönetiyoruz. Siz işinize odaklanın, dijital dünyadaki 
+              yerinizi biz oluşturalım.
+            </p>
+          </motion.div>
+
           {/* Mobil: dikey liste / Desktop: yan yana 3 kart */}
-          <div className="max-w-2xl mx-auto space-y-3 md:hidden">
+          <div className="max-w-md mx-auto space-y-3 md:hidden px-4">
             <ServiceCard
               emoji="🌐"
               title="Web Sitesi"
@@ -215,30 +216,73 @@ export default function BasvuruLandingPage() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-3 gap-4 md:gap-10 max-w-xs md:max-w-3xl mx-auto">
+          <div className="relative grid grid-cols-4 gap-2 sm:gap-3 md:gap-6 max-w-[340px] sm:max-w-lg md:max-w-4xl mx-auto">
+            {/* Bağlantı çizgisi — adımları birbirine bağlar */}
+            <div className="hidden md:block absolute top-8 left-[calc(12.5%+32px)] right-[calc(12.5%+32px)] h-px bg-gradient-to-r from-brand-primary/30 via-brand-secondary/20 to-brand-primary/30" />
+
             {[
-              { n: "1", title: "Formu doldurun" },
-              { n: "2", title: "Sizi arayalım" },
-              { n: "3", title: "Teklifinizi alın" },
+              {
+                n: "1",
+                title: "Formu doldurun",
+                desc: "2 dakikada tamamlayın",
+                icon: (
+                  <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15a2.251 2.251 0 011.15.564m-5.8 0c-.376.023-.75.05-1.124.08C7.095 3.007 6.25 3.97 6.25 5.108v15.142A2.25 2.25 0 008.5 22.5h7a2.25 2.25 0 002.25-2.25v-.878" />
+                  </svg>
+                ),
+              },
+              {
+                n: "2",
+                title: "Sizi arayalım",
+                desc: "24 saat içinde dönüş",
+                icon: (
+                  <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                  </svg>
+                ),
+              },
+              {
+                n: "3",
+                title: "Projenize çalışalım",
+                desc: "Tasarım & geliştirme",
+                icon: (
+                  <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+                  </svg>
+                ),
+              },
+              {
+                n: "4",
+                title: "Teklifinizi alın",
+                desc: "Size özel çözüm",
+                icon: (
+                  <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                  </svg>
+                ),
+              },
             ].map((step, i) => (
               <motion.div
                 key={step.n}
-                className="text-center"
+                className="relative text-center group"
                 initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.15 }}
               >
                 <motion.div
-                  className="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full bg-gradient-to-br from-brand-primary to-brand-secondary flex items-center justify-center text-white text-base md:text-lg font-bold mb-3 md:mb-4 shadow-lg shadow-brand-primary/20"
-                  whileHover={{ scale: 1.2, boxShadow: "0 0 30px rgba(99, 102, 241, 0.4)" }}
+                  className="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full bg-gradient-to-br from-brand-primary to-brand-secondary flex items-center justify-center text-white shadow-lg shadow-brand-primary/20 mb-3 md:mb-5"
+                  whileHover={{ scale: 1.15, boxShadow: "0 0 30px rgba(99, 102, 241, 0.4)" }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  {step.n}
+                  {step.icon}
                 </motion.div>
-                <h3 className="text-sm md:text-lg font-semibold text-foreground">
+                <h3 className="text-sm md:text-lg font-semibold text-foreground mb-1">
                   {step.title}
                 </h3>
+                <p className="text-[11px] md:text-sm text-foreground-subtle">
+                  {step.desc}
+                </p>
               </motion.div>
             ))}
           </div>

@@ -1,7 +1,22 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
+export const runtime = "nodejs";
+
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+function notifyEmail(): string {
+  return (
+    process.env.BASVURU_NOTIFY_EMAIL?.trim() || "seyyitaliperse@gmail.com"
+  );
+}
+
+function resendErrorMessage(error: unknown): string {
+  if (error && typeof error === "object" && "message" in error) {
+    return String((error as { message: string }).message);
+  }
+  return "E-posta gönderilemedi";
+}
 
 interface BasvuruPayload {
   fullName: string;
@@ -20,6 +35,16 @@ const projectTypeLabels: Record<string, string> = {
 
 export async function POST(request: Request) {
   try {
+    if (!process.env.RESEND_API_KEY?.trim()) {
+      return NextResponse.json(
+        {
+          error:
+            "RESEND_API_KEY tanımlı değil. Vercel ortam değişkenlerini kontrol edin.",
+        },
+        { status: 500 }
+      );
+    }
+
     const body: BasvuruPayload = await request.json();
 
     if (!body.fullName?.trim() || !body.phone?.trim() || !body.projectType) {
@@ -33,10 +58,28 @@ export async function POST(request: Request) {
       ? projectTypeLabels[body.projectType] ?? "-"
       : "-";
 
+    const to = notifyEmail();
+
     const { error } = await resend.emails.send({
       from: "Orbira Labs Başvuru <onboarding@resend.dev>",
-      to: "seyyitaliperse@gmail.com",
+      to,
+      replyTo: body.email?.trim() || undefined,
       subject: `Yeni Başvuru: ${body.fullName}`,
+      text: [
+        "Yeni Proje Başvurusu — Orbira Labs",
+        "",
+        "İletişim",
+        `Ad Soyad: ${body.fullName}`,
+        `Telefon: ${body.phone}`,
+        `E-posta: ${body.email?.trim() || "-"}`,
+        "",
+        "Proje",
+        `Tür: ${projectLabel}`,
+        `İşletme: ${body.business?.trim() || "-"}`,
+        "",
+        "Detaylar",
+        body.details?.trim() || "-",
+      ].join("\n"),
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 560px; margin: 0 auto; color: #1a1a1a;">
           <div style="background: linear-gradient(135deg, #6366f1, #8b5cf6); padding: 28px 32px; border-radius: 12px 12px 0 0;">
@@ -101,7 +144,7 @@ export async function POST(request: Request) {
     if (error) {
       console.error("Resend error:", error);
       return NextResponse.json(
-        { error: "E-posta gönderilemedi" },
+        { error: resendErrorMessage(error) },
         { status: 500 }
       );
     }
@@ -110,7 +153,10 @@ export async function POST(request: Request) {
   } catch (err) {
     console.error("API error:", err);
     return NextResponse.json(
-      { error: "Bir hata oluştu" },
+      {
+        error:
+          err instanceof Error ? err.message : "Beklenmeyen bir hata oluştu",
+      },
       { status: 500 }
     );
   }

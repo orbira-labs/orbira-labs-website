@@ -100,7 +100,7 @@ export function Hero() {
                 className="w-full"
               >
                 <Button variant="secondary" size="lg" className="w-full sm:w-auto">
-                  Orbira Labs&apos;i tanı
+                  Bizi tanıyın
                 </Button>
               </motion.div>
             </Link>

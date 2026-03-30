@@ -9,14 +9,12 @@ import {
   Contact,
   Footer,
 } from "@/components/sections";
-import { PageBackground } from "@/components/ui";
 
 export default function Home() {
   return (
     <>
-      <PageBackground />
       <Header />
-      <main className="relative z-[1] overflow-x-hidden">
+      <main className="overflow-x-hidden">
         <Hero />
         <BrandThesis />
         <FeaturedProduct />

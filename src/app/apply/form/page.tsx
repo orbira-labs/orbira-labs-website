@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Container, Button, PageBackground } from "@/components/ui";
+import { Container, Button } from "@/components/ui";
 
 type ProjectType = "website" | "mobile" | "both" | null;
 
@@ -34,6 +34,7 @@ export default function BasvuruFormPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState(false);
+  const [submitErrorMessage, setSubmitErrorMessage] = useState<string | null>(null);
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
 
   const validateForm = () => {
@@ -65,6 +66,7 @@ export default function BasvuruFormPage() {
 
     setIsSubmitting(true);
     setSubmitError(false);
+    setSubmitErrorMessage(null);
 
     try {
       const res = await fetch("/api/apply", {
@@ -80,11 +82,24 @@ export default function BasvuruFormPage() {
         }),
       });
 
-      if (!res.ok) throw new Error("Gönderilemedi");
+      const data: { error?: string } = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        setSubmitError(true);
+        setSubmitErrorMessage(
+          typeof data.error === "string" && data.error
+            ? data.error
+            : "Gönderilemedi, lütfen tekrar deneyin."
+        );
+        return;
+      }
 
       setIsSubmitted(true);
     } catch {
       setSubmitError(true);
+      setSubmitErrorMessage(
+        "Bağlantı hatası. İnternetinizi kontrol edip tekrar deneyin."
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -129,8 +144,7 @@ export default function BasvuruFormPage() {
 
   if (isSubmitted) {
     return (
-      <main className="min-h-screen bg-background flex items-center justify-center px-4">
-        <PageBackground />
+      <main className="min-h-screen flex items-center justify-center px-4">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -180,35 +194,7 @@ export default function BasvuruFormPage() {
   }
 
   return (
-    <main className="min-h-screen bg-background relative overflow-hidden">
-      {/* Animated glow background */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <motion.div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] md:w-[800px] md:h-[800px] rounded-full"
-          style={{
-            background: "radial-gradient(ellipse at center, rgba(99, 102, 241, 0.12) 0%, rgba(139, 92, 246, 0.06) 40%, transparent 70%)",
-          }}
-          animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 right-0 w-[300px] h-[300px] md:w-[500px] md:h-[500px] rounded-full"
-          style={{
-            background: "radial-gradient(ellipse at center, rgba(139, 92, 246, 0.08) 0%, transparent 60%)",
-          }}
-          animate={{ scale: [1.05, 1, 1.05], opacity: [0.4, 0.6, 0.4] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        />
-        <motion.div
-          className="absolute top-1/3 left-0 w-[200px] h-[200px] md:w-[350px] md:h-[350px] rounded-full"
-          style={{
-            background: "radial-gradient(ellipse at center, rgba(34, 211, 238, 0.06) 0%, transparent 60%)",
-          }}
-          animate={{ x: [0, 15, 0], y: [0, -10, 0], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        />
-      </div>
-
+    <main className="min-h-screen overflow-hidden">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-2xl border-b border-white/[0.06]">
         <Container>
@@ -415,8 +401,9 @@ export default function BasvuruFormPage() {
                 </motion.button>
 
                 {submitError && (
-                  <p className="text-center text-red-400 text-sm mt-4">
-                    Bir hata oluştu, lütfen tekrar deneyin.
+                  <p className="text-center text-red-400 text-sm mt-4 max-w-md mx-auto">
+                    {submitErrorMessage ??
+                      "Bir hata oluştu, lütfen tekrar deneyin."}
                   </p>
                 )}
 

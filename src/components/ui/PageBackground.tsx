@@ -75,64 +75,144 @@ export function PageBackground() {
         }}
       />
 
-      {/* Scattered floating rings - not centered, more organic */}
+      {/* Nebula — sol üst köşe (cyan + mor + indigo) */}
       <motion.div
-        className="absolute top-[18%] left-[20%] w-[180px] h-[180px] md:w-[280px] md:h-[280px] rounded-full border border-white/[0.04]"
-        animate={{ 
-          rotate: 360,
-          scale: [1, 1.05, 1],
+        className="absolute top-[3%] left-[2%] w-[260px] h-[200px] md:w-[360px] md:h-[260px] rounded-[50%]"
+        style={{
+          background:
+            "radial-gradient(ellipse 65% 70% at 50% 45%, rgba(34, 211, 238, 0.28) 0%, rgba(139, 92, 246, 0.18) 32%, rgba(99, 102, 241, 0.08) 56%, transparent 75%)",
+          filter: "blur(40px)",
+          transform: "rotate(-12deg)",
         }}
-        transition={{ 
-          rotate: { duration: 30, repeat: Infinity, ease: "linear" },
-          scale: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+        animate={{
+          opacity: [0.5, 0.75, 0.5],
+          x: [0, 6, 0],
+          scale: [1, 1.03, 1],
         }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
       />
-      
+      {/* Nebula — sağ alt köşe (pembe + lavanta + mavi) */}
       <motion.div
-        className="absolute top-[25%] right-[15%] w-[120px] h-[120px] md:w-[200px] md:h-[200px] rounded-full border border-white/[0.05]"
-        animate={{ 
-          rotate: -360,
-          y: [0, 15, 0],
+        className="absolute bottom-[3%] right-[2%] w-[250px] h-[190px] md:w-[340px] md:h-[250px] rounded-[50%]"
+        style={{
+          background:
+            "radial-gradient(ellipse 65% 58% at 48% 52%, rgba(244, 114, 182, 0.25) 0%, rgba(167, 139, 250, 0.18) 30%, rgba(56, 189, 248, 0.09) 54%, transparent 74%)",
+          filter: "blur(42px)",
+          transform: "rotate(6deg)",
         }}
-        transition={{ 
-          rotate: { duration: 25, repeat: Infinity, ease: "linear" },
-          y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+        animate={{
+          opacity: [0.45, 0.72, 0.45],
+          scale: [1.02, 1, 1.02],
+          x: [0, -5, 0],
         }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+      />
+
+      {/* Wormhole — tek halka, perspective ile elips, merkezde glow noktası */}
+      <div className="absolute top-[22%] left-[16%] md:left-[20%]" style={{ perspective: "400px" }}>
+        <motion.div
+          className="w-[160px] h-[160px] md:w-[260px] md:h-[260px] rounded-full border border-white/[0.07]"
+          style={{ transformStyle: "preserve-3d", rotateX: "58deg" }}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+        />
+        <motion.div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 md:w-3 md:h-3 rounded-full"
+          style={{
+            background: "radial-gradient(circle, rgba(139, 92, 246, 0.9) 0%, rgba(99, 102, 241, 0.4) 50%, transparent 80%)",
+            boxShadow: "0 0 18px 6px rgba(139, 92, 246, 0.25)",
+          }}
+          animate={{ scale: [1, 1.5, 1], opacity: [0.6, 1, 0.6] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+
+      {/* Distant planets — belli belirsiz daireler, hafif glow */}
+      <motion.div
+        className="absolute top-[55%] right-[8%] w-3 h-3 md:w-4 md:h-4 rounded-full"
+        style={{
+          background: "radial-gradient(circle at 35% 35%, rgba(167, 139, 250, 0.6) 0%, rgba(99, 102, 241, 0.25) 50%, transparent 80%)",
+          boxShadow: "0 0 12px 4px rgba(139, 92, 246, 0.15)",
+        }}
+        animate={{ opacity: [0.4, 0.75, 0.4], y: [0, -6, 0] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute top-[35%] right-[28%] w-[6px] h-[6px] md:w-2 md:h-2 rounded-full"
+        style={{
+          background: "radial-gradient(circle at 40% 30%, rgba(34, 211, 238, 0.5) 0%, rgba(99, 102, 241, 0.2) 60%, transparent 85%)",
+          boxShadow: "0 0 8px 2px rgba(34, 211, 238, 0.12)",
+        }}
+        animate={{ opacity: [0.3, 0.6, 0.3] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+      />
+      <motion.div
+        className="absolute bottom-[22%] left-[12%] w-2 h-2 md:w-3 md:h-3 rounded-full"
+        style={{
+          background: "radial-gradient(circle at 30% 40%, rgba(244, 114, 182, 0.45) 0%, rgba(139, 92, 246, 0.15) 60%, transparent 85%)",
+          boxShadow: "0 0 10px 3px rgba(244, 114, 182, 0.1)",
+        }}
+        animate={{ opacity: [0.35, 0.65, 0.35], y: [0, 5, 0] }}
+        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      />
+
+      {/* Geometric accents — hexagon, diamond, dot grid */}
+      <motion.svg
+        className="pointer-events-none absolute top-[18%] right-[20%] w-12 h-12 md:w-16 md:h-16 text-white/[0.06]"
+        viewBox="0 0 100 100"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={1}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+        aria-hidden
+      >
+        <polygon points="50,4 88,26 88,74 50,96 12,74 12,26" />
+      </motion.svg>
+
+      <motion.div
+        className="pointer-events-none absolute top-[52%] left-[44%] w-8 h-8 md:w-11 md:h-11 border border-white/[0.05] rounded-sm"
+        initial={{ rotate: 45 }}
+        animate={{
+          opacity: [0.3, 0.55, 0.3],
+          rotate: [45, 50, 45],
+        }}
+        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
       />
 
       <motion.div
-        className="absolute top-[40%] left-[8%] w-[100px] h-[100px] md:w-[150px] md:h-[150px] rounded-full border border-white/[0.06]"
-        animate={{ 
-          rotate: 360,
-          x: [0, 10, 0],
-        }}
-        transition={{ 
-          rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-          x: { duration: 7, repeat: Infinity, ease: "easeInOut" },
-        }}
-      />
+        className="pointer-events-none absolute bottom-[16%] right-[18%] flex gap-[8px] opacity-[0.05]"
+        animate={{ opacity: [0.03, 0.08, 0.03] }}
+        transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
+        aria-hidden
+      >
+        {[0, 1, 2].map((i) => (
+          <div key={i} className="flex flex-col gap-[8px]">
+            {[0, 1, 2].map((j) => (
+              <div key={j} className="h-1 w-1 rounded-full bg-white" />
+            ))}
+          </div>
+        ))}
+      </motion.div>
 
+      {/* Shooting star — arada bir geçen kuyruklu yıldız */}
       <motion.div
-        className="absolute top-[60%] right-[20%] w-[140px] h-[140px] md:w-[220px] md:h-[220px] rounded-full border border-white/[0.04]"
-        animate={{ 
-          rotate: -360,
-          scale: [1, 1.08, 1],
+        className="pointer-events-none absolute top-[12%] -left-[5%] w-[80px] md:w-[120px] h-[1px]"
+        style={{
+          background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 40%, rgba(139,92,246,0.6) 70%, transparent 100%)",
+          borderRadius: "1px",
+          transformOrigin: "left center",
+          rotate: "35deg",
         }}
-        transition={{ 
-          rotate: { duration: 35, repeat: Infinity, ease: "linear" },
-          scale: { duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 },
+        animate={{
+          x: ["0vw", "110vw"],
+          opacity: [0, 0.7, 0.7, 0],
         }}
-      />
-
-      <motion.div
-        className="absolute top-[75%] left-[15%] w-[90px] h-[90px] md:w-[130px] md:h-[130px] rounded-full border border-white/[0.05]"
-        animate={{ 
-          rotate: 360,
-          y: [0, -12, 0],
-        }}
-        transition={{ 
-          rotate: { duration: 22, repeat: Infinity, ease: "linear" },
-          y: { duration: 5, repeat: Infinity, ease: "easeInOut" },
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          repeatDelay: 14,
+          ease: "easeIn",
         }}
       />
 
