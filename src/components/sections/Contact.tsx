@@ -2,14 +2,12 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Container, Button, OrbitalBackground } from "@/components/ui";
+import { Container, Button } from "@/components/ui";
 import { SITE_CONFIG } from "@/lib/constants";
 
 export function Contact() {
   return (
-    <section className="section-padding relative overflow-hidden" id="contact">
-      <OrbitalBackground variant="hero" />
-      
+    <section className="section-padding relative" id="contact">
       <Container className="relative z-10">
         <motion.div
           className="max-w-3xl mx-auto text-center px-2"

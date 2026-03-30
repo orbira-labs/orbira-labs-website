@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Container, SectionHeader, OrbitalBackground } from "@/components/ui";
+import { Container, SectionHeader } from "@/components/ui";
 import { PRINCIPLES } from "@/lib/constants";
 
 const containerVariants = {
@@ -31,9 +31,7 @@ const cardVariants = {
 
 export function BrandThesis() {
   return (
-    <section className="section-padding relative overflow-hidden" id="thesis">
-      <OrbitalBackground variant="subtle" />
-      
+    <section className="section-padding relative" id="thesis">
       <Container className="relative z-10">
         <SectionHeader
           title="Her ürün bir akışı"

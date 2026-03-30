@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Container, SectionHeader, Card, Badge, OrbitalBackground } from "@/components/ui";
+import { Container, SectionHeader, Card, Badge } from "@/components/ui";
 import { PRODUCTS } from "@/lib/constants";
 
 const containerVariants = {
@@ -36,9 +36,7 @@ export function ProductEcosystem() {
   if (upcomingProducts.length === 0) return null;
 
   return (
-    <section className="section-padding relative overflow-hidden" id="products">
-      <OrbitalBackground variant="subtle" />
-      
+    <section className="section-padding relative" id="products">
       <Container className="relative z-10">
         <SectionHeader
           tag="Yakında"

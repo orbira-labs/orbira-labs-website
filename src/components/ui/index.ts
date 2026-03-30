@@ -3,4 +3,4 @@ export { Badge } from "./Badge";
 export { Card } from "./Card";
 export { Container } from "./Container";
 export { SectionHeader } from "./SectionHeader";
-export { OrbitalBackground } from "./OrbitalBackground";
+export { PageBackground } from "./PageBackground";

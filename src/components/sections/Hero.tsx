@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Container, Button, OrbitalBackground } from "@/components/ui";
+import { Container, Button } from "@/components/ui";
 import { SITE_CONFIG } from "@/lib/constants";
 
 const fadeInUp = {
@@ -20,9 +20,7 @@ const staggerContainer = {
 
 export function Hero() {
   return (
-    <section className="relative min-h-[100svh] flex items-center pt-16 pb-20 overflow-hidden">
-      <OrbitalBackground variant="hero" />
-      
+    <section className="relative min-h-[100svh] flex items-center pt-16 pb-20">
       <Container className="relative z-10">
         <motion.div 
           className="max-w-4xl mx-auto text-center px-2"

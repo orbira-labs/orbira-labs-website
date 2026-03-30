@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Container, SectionHeader, OrbitalBackground } from "@/components/ui";
+import { Container, SectionHeader } from "@/components/ui";
 import { PROCESS_STEPS } from "@/lib/constants";
 
 const cardVariants = {
@@ -21,9 +21,7 @@ const cardVariants = {
 
 export function Approach() {
   return (
-    <section className="section-padding relative overflow-hidden" id="approach">
-      <OrbitalBackground variant="section" />
-      
+    <section className="section-padding relative" id="approach">
       <Container className="relative z-10">
         <SectionHeader
           tag="Yaklaşım"

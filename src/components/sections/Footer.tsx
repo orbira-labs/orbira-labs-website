@@ -5,7 +5,7 @@ import { Container } from "@/components/ui";
 import { SITE_CONFIG, NAV_LINKS, PRODUCTS } from "@/lib/constants";
 
 const footerLinks = {
-  products: PRODUCTS.slice(0, 4).map((p) => ({
+  products: PRODUCTS.filter((p) => ["kasabende", "moodumuz"].includes(p.id)).map((p) => ({
     label: p.name,
     href: p.href || `#products`,
   })),
@@ -13,6 +13,7 @@ const footerLinks = {
     { label: "Hakkımızda", href: "#about" },
     { label: "Yaklaşım", href: "#approach" },
     { label: "İletişim", href: "#contact" },
+    { label: "Hizmet Başvurusu", href: "/apply" },
   ],
   legal: [
     { label: "Gizlilik Politikası", href: "/privacy" },

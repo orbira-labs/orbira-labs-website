@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Container, SectionHeader, Badge, Button, OrbitalBackground } from "@/components/ui";
+import { Container, SectionHeader, Badge, Button } from "@/components/ui";
 import { PRODUCTS, type Product } from "@/lib/constants";
 
 const getDotColor = (product: Product) => {
@@ -122,9 +122,7 @@ export function FeaturedProduct() {
   if (featuredProducts.length === 0) return null;
 
   return (
-    <section className="section-padding relative overflow-hidden" id="featured">
-      <OrbitalBackground variant="subtle" />
-      
+    <section className="section-padding relative" id="featured">
       <Container className="relative z-10">
         <SectionHeader
           tag="Aktif Ürünler"

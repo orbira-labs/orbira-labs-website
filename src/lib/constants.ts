@@ -74,7 +74,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "cep-hocam",
-    name: "Cep Hocam",
+    name: "Sınav Koçu",
     description: "Yapay zeka destekli ödev ve soru çözüm asistanı. Fotoğraf çek, anında çözüm al.",
     status: "in-progress",
     category: "education",

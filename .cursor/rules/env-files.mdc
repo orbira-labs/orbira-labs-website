@@ -1,0 +1,10 @@
+---
+description: Environment files are committed to git in this project
+alwaysApply: true
+---
+
+# Environment Files
+
+- Bu proje tek geliştiricili ve private repo. `.env.local` dahil tüm env dosyaları git'e commit edilir.
+- Cross-device çalışma için sync gerekli olduğundan `.env*` gitignore'da **değil**.
+- Env dosyalarını commit etmekten kaçınma, normal dosya gibi davran.
