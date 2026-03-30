@@ -9,7 +9,7 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 const CAPABILITIES = [
   {
     title: "Deep Pattern Recognition",
-    description: "Yüzeyde görünmeyen bağlantıları keşfeder. Her veri noktası, büyük resmin bir parçası.",
+    description: "Yüzeyde görünmeyen bağlantıları keşfeder. Tek bir veri noktası değil, yüzlerce sinyalin birleşimi. Her detay, büyük resmin bir parçası.",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <circle cx="12" cy="12" r="3" />
@@ -20,7 +20,7 @@ const CAPABILITIES = [
   },
   {
     title: "Contextual Intelligence",
-    description: "Anlık değil, bütünsel değerlendirme. Geçmiş, şimdi ve olası gelecek tek bir perspektifte.",
+    description: "Anlık değil, bütünsel değerlendirme. Bugünkü ruh halin dünle, geçen hafta ile, döngünle bağlantılı. Geçmiş, şimdi ve olası gelecek tek perspektifte.",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <path d="M12 2L2 7l10 5 10-5-10-5z" />
@@ -31,7 +31,7 @@ const CAPABILITIES = [
   },
   {
     title: "Adaptive Precision",
-    description: "Her etkileşimde daha keskin. Zaman geçtikçe seni daha iyi anlayan bir sistem.",
+    description: "Her etkileşimde daha keskin. İlk gün %85, bir ay sonra %92, üç ay sonra %95+. Seni tanıdıkça tahminleri netleşen, hatalarından öğrenen bir sistem.",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <circle cx="12" cy="12" r="10" />
@@ -41,8 +41,8 @@ const CAPABILITIES = [
     ),
   },
   {
-    title: "Privacy-First Architecture",
-    description: "Veriler sende kalır. Analiz sonuçları cihazında işlenir, sunuculara ham veri gitmez.",
+    title: "Privacy-First Design",
+    description: "Hassas veriler cihazında kalır. Sunuculara sadece anonim, işlenmiş özetler gider. Profilin sana ait, başka kimseye değil.",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
@@ -52,10 +52,30 @@ const CAPABILITIES = [
   },
 ];
 
+const ANALYSIS_DOMAINS = [
+  { name: "Fiziksel", desc: "Enerji, uyku, hareket kalıpları", color: "from-emerald-500/20 to-emerald-500/5", borderColor: "border-emerald-500/30" },
+  { name: "Psikolojik", desc: "Duygu durumu, stres, motivasyon", color: "from-violet-500/20 to-violet-500/5", borderColor: "border-violet-500/30" },
+  { name: "Davranışsal", desc: "Alışkanlıklar, tercihler, rutinler", color: "from-amber-500/20 to-amber-500/5", borderColor: "border-amber-500/30" },
+];
+
 const SIGNALS = [
-  { label: "Biyometrik Sinyaller", delay: 0 },
-  { label: "Davranış Haritası", delay: 0.1 },
-  { label: "Bağlam Matrisi", delay: 0.2 },
+  { label: "Biyometrik Sinyaller", sub: "Enerji, uyku kalitesi, fiziksel durum", delay: 0 },
+  { label: "Davranış Haritası", sub: "Kalıplar, tercihler, alışkanlıklar", delay: 0.1 },
+  { label: "Bağlam Matrisi", sub: "Zaman, döngü, çevresel faktörler", delay: 0.2 },
+];
+
+const PROCESSING_LAYERS = [
+  { name: "Veri Toplama", desc: "Ham sinyallerin standardizasyonu" },
+  { name: "Örüntü Tespiti", desc: "Gizli bağlantıların keşfi" },
+  { name: "Bağlam Analizi", desc: "Çevresel faktörlerin entegrasyonu" },
+  { name: "Profil Sentezi", desc: "Tüm katmanların birleşimi" },
+];
+
+const STATS = [
+  { value: "250+", label: "Analiz Parametresi", desc: "Her profil için değerlendirilen faktör" },
+  { value: "8", label: "İşleme Katmanı", desc: "Derinlemesine analiz mimarisi" },
+  { value: "<1s", label: "Yanıt Süresi", desc: "Gerçek zamanlı işleme kapasitesi" },
+  { value: "95%+", label: "Profil Doğruluğu", desc: "3 ay sonra ulaşılan hassasiyet" },
 ];
 
 const fadeInUp = (delay = 0) => ({
@@ -76,7 +96,6 @@ export default function HAEPage() {
         <section className="relative py-16 sm:py-24 lg:py-32">
           <div className="absolute inset-0 bg-gradient-to-br from-[#7A8471]/10 via-transparent to-[#5C6455]/10 pointer-events-none" />
           
-          {/* Animated background elements */}
           {!isMobile && (
             <>
               <motion.div
@@ -99,16 +118,12 @@ export default function HAEPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              {/* Breadcrumb */}
               <div className="flex items-center justify-center gap-2 text-sm text-foreground-muted mb-8">
-                <Link href="/engines" className="hover:text-foreground transition-colors">
-                  Engines
-                </Link>
+                <Link href="/engines" className="hover:text-foreground transition-colors">Engines</Link>
                 <span className="text-foreground-subtle">/</span>
                 <span className="text-[#9BA392]">HAE</span>
               </div>
 
-              {/* Icon */}
               <motion.div
                 className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-8 rounded-2xl bg-gradient-to-br from-[#7A8471] to-[#5C6455] flex items-center justify-center shadow-2xl shadow-[#7A8471]/30"
                 animate={isMobile ? {} : { 
@@ -127,19 +142,12 @@ export default function HAEPage() {
                 </svg>
               </motion.div>
 
-              {/* Title */}
               <div className="flex items-center justify-center gap-3 mb-4">
-                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground tracking-tight">
-                  HAE
-                </h1>
-                <span className="text-xs sm:text-sm font-mono text-foreground-subtle bg-white/5 px-2 py-1 rounded border border-white/10">
-                  v3.0
-                </span>
+                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground tracking-tight">HAE</h1>
+                <span className="text-xs sm:text-sm font-mono text-foreground-subtle bg-white/5 px-2 py-1 rounded border border-white/10">v3.0</span>
               </div>
 
-              <p className="text-lg sm:text-xl lg:text-2xl text-foreground-muted mb-2">
-                Human Analysis Engine
-              </p>
+              <p className="text-lg sm:text-xl lg:text-2xl text-foreground-muted mb-2">Human Analysis Engine</p>
 
               <p className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-foreground mb-6 leading-tight">
                 İnsanı{" "}
@@ -150,11 +158,11 @@ export default function HAEPage() {
               </p>
 
               <p className="text-base sm:text-lg text-foreground-muted max-w-2xl mx-auto leading-relaxed mb-10">
-                Karmaşık insan davranışlarını çözen, görünmeyeni görünür kılan, 
-                her bireyi eşsiz bir profil olarak değerlendiren yapay zeka mimarisi.
+                Geleneksel analizlerin ötesinde, çok katmanlı bir yapay zeka mimarisi. 
+                Yüzlerce parametreyi işler, görünmeyen bağlantıları keşfeder, 
+                her bireyi eşsiz bir profil olarak değerlendirir.
               </p>
 
-              {/* Status */}
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20">
                 <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="text-sm font-mono text-emerald-400">Production Ready</span>
@@ -163,13 +171,39 @@ export default function HAEPage() {
           </Container>
         </section>
 
+        {/* Stats */}
+        <section className="py-8 sm:py-12 relative">
+          <Container>
+            <motion.div 
+              className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              {STATS.map((stat, index) => (
+                <motion.div
+                  key={stat.label}
+                  className="text-center p-4 sm:p-6 rounded-xl bg-white/[0.02] border border-white/[0.06]"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <div className="text-3xl sm:text-4xl font-bold text-[#9BA392] mb-1">{stat.value}</div>
+                  <div className="text-sm font-medium text-foreground mb-1">{stat.label}</div>
+                  <div className="text-xs text-foreground-muted">{stat.desc}</div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </Container>
+        </section>
+
         {/* Architecture Visualization */}
         <section className="section-padding relative">
           <Container>
             <motion.div {...fadeInUp()}>
-              {/* Terminal Frame */}
               <div className="relative rounded-2xl sm:rounded-3xl border border-white/[0.06] bg-[#0a0a0c] overflow-hidden">
-                {/* Top bar */}
                 <div className="flex items-center gap-2 px-4 py-3 sm:px-6 sm:py-4 border-b border-white/[0.06] bg-white/[0.02]">
                   <div className="flex gap-1.5">
                     <div className="w-3 h-3 rounded-full bg-white/10" />
@@ -185,132 +219,125 @@ export default function HAEPage() {
                   </div>
                 </div>
 
-                <div className="p-6 sm:p-10 lg:p-16">
+                <div className="p-6 sm:p-10 lg:p-14">
                   {/* Input Signals */}
                   <div className="mb-8 sm:mb-12">
                     <div className="flex items-center gap-2 mb-4 sm:mb-6">
                       <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/10" />
-                      <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-foreground-subtle">Input Signals</span>
+                      <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-foreground-subtle">Veri Kaynakları</span>
                       <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10" />
                     </div>
 
-                    <div className="grid grid-cols-3 gap-3 sm:gap-4">
-                      {SIGNALS.map((signal, index) => (
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                      {SIGNALS.map((signal) => (
                         <motion.div
                           key={signal.label}
-                          className="relative p-4 sm:p-6 rounded-xl bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.08] text-center group"
+                          className="relative p-4 sm:p-5 rounded-xl bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.08] group"
                           initial={{ opacity: 0, y: 20 }}
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
                           transition={{ duration: 0.5, delay: signal.delay }}
                           whileHover={isMobile ? {} : { y: -3, borderColor: "rgba(122,132,113,0.3)" }}
                         >
-                          <div className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 rounded-lg bg-[#7A8471]/10 border border-[#7A8471]/20 flex items-center justify-center">
-                            <div className="w-2 h-2 rounded-full bg-[#9BA392] group-hover:animate-pulse" />
+                          <div className="flex items-start gap-3">
+                            <div className="w-10 h-10 rounded-lg bg-[#7A8471]/10 border border-[#7A8471]/20 flex items-center justify-center flex-shrink-0">
+                              <div className="w-2 h-2 rounded-full bg-[#9BA392] group-hover:animate-pulse" />
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium text-foreground mb-0.5">{signal.label}</p>
+                              <p className="text-xs text-foreground-muted">{signal.sub}</p>
+                            </div>
                           </div>
-                          <p className="text-xs sm:text-sm font-medium text-foreground">{signal.label}</p>
                         </motion.div>
                       ))}
                     </div>
                   </div>
 
-                  {/* Flow indicator */}
-                  <div className="flex justify-center mb-6 sm:mb-10">
-                    <motion.div
-                      className="flex flex-col items-center"
-                      animate={{ opacity: [0.5, 1, 0.5] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
-                      <div className="w-px h-8 sm:h-12 bg-gradient-to-b from-[#7A8471]/50 to-transparent" />
-                      <svg className="w-4 h-4 text-[#9BA392]" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 16l-6-6h12l-6 6z" />
-                      </svg>
+                  {/* Flow */}
+                  <div className="flex justify-center mb-6 sm:mb-8">
+                    <motion.div className="flex flex-col items-center" animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 2, repeat: Infinity }}>
+                      <div className="w-px h-8 sm:h-10 bg-gradient-to-b from-[#7A8471]/50 to-transparent" />
+                      <svg className="w-4 h-4 text-[#9BA392]" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16l-6-6h12l-6 6z" /></svg>
+                    </motion.div>
+                  </div>
+
+                  {/* Processing Layers */}
+                  <div className="mb-6 sm:mb-8">
+                    <div className="flex items-center gap-2 mb-4 sm:mb-6">
+                      <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/10" />
+                      <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-foreground-subtle">İşleme Katmanları</span>
+                      <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10" />
+                    </div>
+
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                      {PROCESSING_LAYERS.map((layer, index) => (
+                        <motion.div
+                          key={layer.name}
+                          className="p-3 sm:p-4 rounded-lg bg-white/[0.02] border border-white/[0.06] text-center"
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.4, delay: index * 0.1 }}
+                        >
+                          <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-[#7A8471]/10 border border-[#7A8471]/20 flex items-center justify-center">
+                            <span className="text-xs font-mono text-[#9BA392]">{index + 1}</span>
+                          </div>
+                          <p className="text-xs sm:text-sm font-medium text-foreground mb-0.5">{layer.name}</p>
+                          <p className="text-[10px] sm:text-xs text-foreground-muted">{layer.desc}</p>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Flow */}
+                  <div className="flex justify-center mb-6 sm:mb-8">
+                    <motion.div className="flex flex-col items-center" animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}>
+                      <div className="w-px h-8 sm:h-10 bg-gradient-to-b from-[#7A8471]/50 to-transparent" />
+                      <svg className="w-4 h-4 text-[#9BA392]" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16l-6-6h12l-6 6z" /></svg>
                     </motion.div>
                   </div>
 
                   {/* Core Engine */}
                   <motion.div
-                    className="relative max-w-2xl mx-auto mb-6 sm:mb-10"
+                    className="relative max-w-2xl mx-auto mb-6 sm:mb-8"
                     initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.3 }}
                   >
-                    <div className="relative p-6 sm:p-10 rounded-2xl border border-[#7A8471]/30 bg-gradient-to-b from-[#7A8471]/10 to-transparent overflow-hidden">
-                      {/* Animated border glow */}
+                    <div className="relative p-6 sm:p-8 rounded-2xl border border-[#7A8471]/30 bg-gradient-to-b from-[#7A8471]/10 to-transparent overflow-hidden">
                       {!isMobile && (
                         <motion.div
                           className="absolute inset-0 rounded-2xl"
-                          style={{ 
-                            background: "linear-gradient(90deg, transparent, rgba(122,132,113,0.3), transparent)",
-                            backgroundSize: "200% 100%",
-                          }}
+                          style={{ background: "linear-gradient(90deg, transparent, rgba(122,132,113,0.3), transparent)", backgroundSize: "200% 100%" }}
                           animate={{ backgroundPosition: ["200% 0", "-200% 0"] }}
                           transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                         />
                       )}
 
-                      {/* Grid pattern */}
-                      {!isMobile && (
-                        <div className="absolute inset-0 opacity-[0.03]" style={{
-                          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(155,163,146,1) 1px, transparent 0)`,
-                          backgroundSize: '24px 24px'
-                        }} />
-                      )}
-
                       <div className="relative z-10 text-center">
-                        <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 rounded-xl bg-gradient-to-br from-[#7A8471] to-[#5C6455] flex items-center justify-center shadow-lg shadow-[#7A8471]/30">
-                          <svg className="w-8 h-8 sm:w-10 sm:h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-                            <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                            <path d="M2 17l10 5 10-5" />
-                            <path d="M2 12l10 5 10-5" />
+                        <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-[#7A8471] to-[#5C6455] flex items-center justify-center shadow-lg shadow-[#7A8471]/30">
+                          <svg className="w-7 h-7 sm:w-8 sm:h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                            <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" />
                           </svg>
                         </div>
-
-                        <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
-                          Analysis Core
-                        </h3>
-                        <p className="text-sm sm:text-base text-foreground-muted mb-4">
-                          Çok katmanlı işleme • Gerçek zamanlı analiz • Sürekli öğrenme
-                        </p>
-
-                        <div className="flex items-center justify-center gap-4 sm:gap-6">
-                          <div className="text-center">
-                            <div className="text-2xl sm:text-3xl font-bold text-[#9BA392]">8</div>
-                            <div className="text-[10px] sm:text-xs text-foreground-subtle uppercase tracking-wide">Katman</div>
-                          </div>
-                          <div className="w-px h-8 bg-white/10" />
-                          <div className="text-center">
-                            <div className="text-2xl sm:text-3xl font-bold text-[#9BA392]">&lt;1s</div>
-                            <div className="text-[10px] sm:text-xs text-foreground-subtle uppercase tracking-wide">Latency</div>
-                          </div>
-                          <div className="w-px h-8 bg-white/10" />
-                          <div className="text-center">
-                            <div className="text-2xl sm:text-3xl font-bold text-[#9BA392]">∞</div>
-                            <div className="text-[10px] sm:text-xs text-foreground-subtle uppercase tracking-wide">Adaptif</div>
-                          </div>
-                        </div>
+                        <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">Analysis Core</h3>
+                        <p className="text-sm text-foreground-muted">Tüm katmanların birleştiği, profil sentezinin yapıldığı merkez</p>
                       </div>
                     </div>
                   </motion.div>
 
-                  {/* Flow indicator */}
-                  <div className="flex justify-center mb-6 sm:mb-10">
-                    <motion.div
-                      className="flex flex-col items-center"
-                      animate={{ opacity: [0.5, 1, 0.5] }}
-                      transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                    >
-                      <div className="w-px h-8 sm:h-12 bg-gradient-to-b from-[#7A8471]/50 to-transparent" />
-                      <svg className="w-4 h-4 text-[#9BA392]" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 16l-6-6h12l-6 6z" />
-                      </svg>
+                  {/* Flow */}
+                  <div className="flex justify-center mb-6 sm:mb-8">
+                    <motion.div className="flex flex-col items-center" animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}>
+                      <div className="w-px h-8 sm:h-10 bg-gradient-to-b from-[#7A8471]/50 to-transparent" />
+                      <svg className="w-4 h-4 text-[#9BA392]" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16l-6-6h12l-6 6z" /></svg>
                     </motion.div>
                   </div>
 
                   {/* Output */}
                   <motion.div
-                    className="max-w-xl mx-auto p-5 sm:p-8 rounded-xl bg-gradient-to-r from-[#7A8471]/10 via-[#7A8471]/5 to-[#7A8471]/10 border border-[#7A8471]/20 text-center"
+                    className="max-w-xl mx-auto p-5 sm:p-6 rounded-xl bg-gradient-to-r from-[#7A8471]/10 via-[#7A8471]/5 to-[#7A8471]/10 border border-[#7A8471]/20 text-center"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -320,16 +347,38 @@ export default function HAEPage() {
                       <div className="w-2 h-2 rounded-full bg-emerald-400" />
                       <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider">Output Ready</span>
                     </div>
-                    <p className="text-lg sm:text-xl font-semibold text-foreground">
-                      Sana özel, benzersiz profil
-                    </p>
-                    <p className="text-sm text-foreground-muted mt-1">
-                      Kimseninkine benzemeyen, sadece sana ait içgörüler
-                    </p>
+                    <p className="text-base sm:text-lg font-semibold text-foreground mb-1">Kişiselleştirilmiş Profil</p>
+                    <p className="text-sm text-foreground-muted">Kimseninkine benzemeyen, sadece sana ait içgörüler ve öneriler</p>
                   </motion.div>
                 </div>
               </div>
             </motion.div>
+          </Container>
+        </section>
+
+        {/* Analysis Domains */}
+        <section className="section-padding relative">
+          <Container>
+            <motion.div className="text-center mb-10 sm:mb-14" {...fadeInUp()}>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Analiz Alanları</h2>
+              <p className="text-foreground-muted max-w-xl mx-auto">
+                Üç temel alan, sonsuz kombinasyon. Her alan kendi içinde derinleşir, birlikte bütünleşir.
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+              {ANALYSIS_DOMAINS.map((domain, index) => (
+                <motion.div
+                  key={domain.name}
+                  className={`p-6 sm:p-8 rounded-xl sm:rounded-2xl bg-gradient-to-b ${domain.color} border ${domain.borderColor}`}
+                  {...fadeInUp(index * 0.1)}
+                  whileHover={isMobile ? {} : { y: -5 }}
+                >
+                  <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2">{domain.name}</h3>
+                  <p className="text-sm sm:text-base text-foreground-muted">{domain.desc}</p>
+                </motion.div>
+              ))}
+            </div>
           </Container>
         </section>
 
@@ -338,13 +387,9 @@ export default function HAEPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#7A8471]/[0.02] to-transparent pointer-events-none" />
           
           <Container>
-            <motion.div className="text-center mb-12 sm:mb-16" {...fadeInUp()}>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">
-                Ne yapabilir?
-              </h2>
-              <p className="text-foreground-muted max-w-xl mx-auto">
-                Yılların araştırması, tek bir sistemde.
-              </p>
+            <motion.div className="text-center mb-10 sm:mb-14" {...fadeInUp()}>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Temel Yetenekler</h2>
+              <p className="text-foreground-muted max-w-xl mx-auto">Yılların Ar-Ge&apos;si, tek bir sistemde.</p>
             </motion.div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
@@ -358,34 +403,56 @@ export default function HAEPage() {
                   <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-[#7A8471]/10 border border-[#7A8471]/20 flex items-center justify-center text-[#9BA392] mb-4 group-hover:bg-[#7A8471]/15 transition-colors">
                     {cap.icon}
                   </div>
-                  <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2">
-                    {cap.title}
-                  </h3>
-                  <p className="text-sm sm:text-base text-foreground-muted leading-relaxed">
-                    {cap.description}
-                  </p>
+                  <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2">{cap.title}</h3>
+                  <p className="text-sm sm:text-base text-foreground-muted leading-relaxed">{cap.description}</p>
                 </motion.div>
               ))}
             </div>
           </Container>
         </section>
 
-        {/* Quote / Philosophy */}
+        {/* How it works */}
         <section className="section-padding relative">
           <Container size="narrow">
-            <motion.div
-              className="text-center py-12 sm:py-20"
-              {...fadeInUp()}
-            >
+            <motion.div className="text-center mb-10" {...fadeInUp()}>
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">Nasıl Çalışır?</h2>
+            </motion.div>
+
+            <div className="space-y-6">
+              {[
+                { step: "01", title: "Veri Toplama", desc: "Günlük check-in'lerinden, döngü verilerinden ve davranış kalıplarından anlamlı sinyaller çıkarılır." },
+                { step: "02", title: "Örüntü Keşfi", desc: "Yapay zeka, yüzlerce parametre arasındaki gizli bağlantıları tespit eder. Sen fark etmeden önce." },
+                { step: "03", title: "Profil Oluşturma", desc: "Tüm veriler birleşerek sana özel, dinamik bir profil oluşturur. Her gün biraz daha doğru." },
+                { step: "04", title: "Kişisel İçgörüler", desc: "Profilin, sana özel öneriler, tahminler ve içgörüler üretir. Genel değil, sadece sana ait." },
+              ].map((item, index) => (
+                <motion.div
+                  key={item.step}
+                  className="flex gap-4 sm:gap-6"
+                  {...fadeInUp(index * 0.1)}
+                >
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-[#7A8471]/10 border border-[#7A8471]/20 flex items-center justify-center flex-shrink-0">
+                    <span className="text-sm sm:text-base font-mono font-bold text-[#9BA392]">{item.step}</span>
+                  </div>
+                  <div>
+                    <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1">{item.title}</h3>
+                    <p className="text-sm sm:text-base text-foreground-muted">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </Container>
+        </section>
+
+        {/* Quote */}
+        <section className="section-padding relative">
+          <Container size="narrow">
+            <motion.div className="text-center py-8 sm:py-12" {...fadeInUp()}>
               <div className="text-4xl sm:text-5xl mb-6 opacity-20">&ldquo;</div>
               <p className="text-xl sm:text-2xl lg:text-3xl font-medium text-foreground leading-relaxed mb-6">
-                Teknoloji insanı anlamalı,
-                <br />
+                Teknoloji insanı anlamalı,<br />
                 <span className="text-[#9BA392]">insan teknolojiyi değil.</span>
               </p>
-              <p className="text-sm text-foreground-subtle">
-                — HAE Felsefesi
-              </p>
+              <p className="text-sm text-foreground-subtle">— HAE Felsefesi</p>
             </motion.div>
           </Container>
         </section>
@@ -395,17 +462,10 @@ export default function HAEPage() {
           <Container size="narrow">
             <motion.div className="text-center" {...fadeInUp()}>
               <p className="text-sm text-foreground-subtle mb-4">Şu anda kullanılıyor</p>
-              <div className="flex justify-center">
-                <Link
-                  href="/products/moodumuz"
-                  className="group px-8 py-4 rounded-xl bg-white/5 border border-white/10 hover:border-[#7A8471]/30 transition-all duration-300"
-                >
-                  <span className="text-xl font-semibold text-foreground group-hover:text-[#9BA392] transition-colors">
-                    Moodumuz
-                  </span>
-                  <p className="text-sm text-foreground-muted mt-1">Döngü & Ruh Hali Takibi</p>
-                </Link>
-              </div>
+              <Link href="/products/moodumuz" className="group inline-block px-8 py-4 rounded-xl bg-white/5 border border-white/10 hover:border-[#7A8471]/30 transition-all duration-300">
+                <span className="text-xl font-semibold text-foreground group-hover:text-[#9BA392] transition-colors">Moodumuz</span>
+                <p className="text-sm text-foreground-muted mt-1">Döngü & Ruh Hali Takibi</p>
+              </Link>
             </motion.div>
           </Container>
         </section>
@@ -414,10 +474,7 @@ export default function HAEPage() {
         <section className="pb-12 sm:pb-20">
           <Container>
             <div className="flex justify-center">
-              <Link
-                href="/engines"
-                className="text-brand-primary hover:underline inline-flex items-center gap-2 text-sm sm:text-base py-2"
-              >
+              <Link href="/engines" className="text-brand-primary hover:underline inline-flex items-center gap-2 text-sm sm:text-base py-2">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
