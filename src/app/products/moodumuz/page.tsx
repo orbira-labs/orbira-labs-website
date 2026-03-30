@@ -104,26 +104,26 @@ const CYCLE_PHASES = [
 
 const ENGINE_FEATURES = [
   {
-    title: "Seni Tanıyor",
-    description: "Kullandıkça sana uyum sağlayan bir zeka. Her gün biraz daha sen.",
+    title: "Modüler Mimari",
+    description: "Her katman bağımsız çalışır, birlikte güçlenir. Farklı alanlara taşınabilir altyapı.",
     icon: (
       <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-        <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" />
+        <rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" />
       </svg>
     ),
   },
   {
-    title: "Anı Okuyor",
-    description: "Döngü fazın, mevsim, ruh halin — o anki bağlamını anlıyor.",
+    title: "Cross-domain Fusion",
+    description: "Farklı veri kaynaklarını tek bir anlam haritasında birleştirir. Kopukluk yok.",
     icon: (
       <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-        <circle cx="12" cy="12" r="3" /><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+        <circle cx="6" cy="12" r="3" /><circle cx="18" cy="12" r="3" /><path d="M9 12h6" /><path d="M12 3v4M12 17v4" /><circle cx="12" cy="5" r="2" /><circle cx="12" cy="19" r="2" />
       </svg>
     ),
   },
   {
-    title: "Öğrenmeyi Bırakmıyor",
-    description: "Her check-in yeni bir veri. Öneriler zamanla sadece sana özel.",
+    title: "Adaptive Learning",
+    description: "Her etkileşim modeli güçlendirir. Zaman geçtikçe doğruluk artar, tahmin keskinleşir.",
     icon: (
       <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
@@ -131,11 +131,11 @@ const ENGINE_FEATURES = [
     ),
   },
   {
-    title: "Genel Değil, Senin",
-    description: "Herkes için aynı tavsiyeler yok. Sadece senin verinden üretiliyor.",
+    title: "High-precision Output",
+    description: "~%95 profil doğruluğu. Genel çıkarımlar değil, birey bazlı analiz sonuçları.",
     icon: (
       <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z" /><circle cx="12" cy="12" r="3" />
+        <circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" />
       </svg>
     ),
   },
