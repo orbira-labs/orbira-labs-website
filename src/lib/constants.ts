@@ -199,7 +199,7 @@ Kullanıcı geri bildirimlerini topluyor, önceliklendiriyor ve ekibe anlamlı �
   {
     name: "Burak Gündüz",
     role: "Developer Partner",
-    image: "/images/burak-placeholder.jpg",
+    image: "/images/burak.png",
     shortBio: "Ekibin teknik omurgasını oluşturan isim.",
     fullBio: `Ekibin teknik omurgasını oluşturan isim. Frontend, backend ve sistem mimarisi konularında geniş bir deneyime sahip. Farklı sektörlerde, farklı ölçeklerde projeler geliştirdi.
 
