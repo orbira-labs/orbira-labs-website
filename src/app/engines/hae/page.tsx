@@ -94,12 +94,12 @@ export default function HAEPage() {
       <main className="pt-20 overflow-hidden">
         {/* Hero */}
         <section className="relative py-16 sm:py-24 lg:py-32">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#7A8471]/10 via-transparent to-[#5C6455]/10 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-cyan-700/10 pointer-events-none" />
           
           {!isMobile && (
             <>
               <motion.div
-                className="absolute -top-10 -left-20 w-96 h-96 bg-[#7A8471]/5 rounded-full blur-3xl"
+                className="absolute -top-10 -left-20 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl"
                 animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
                 transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
               />
@@ -122,14 +122,14 @@ export default function HAEPage() {
 
               <div className="inline-flex items-start justify-center gap-2 mb-4">
                 <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground tracking-tight">HAE</h1>
-                <span className="text-[9px] sm:text-[10px] font-medium text-cyan-400/80 bg-cyan-400/10 px-1.5 py-0.5 rounded border border-cyan-400/20 mt-0.5 sm:mt-1">v2.0</span>
+                <span className="text-[11px] sm:text-xs font-medium text-cyan-400/80 bg-cyan-400/10 px-2 py-0.5 rounded border border-cyan-400/20 mt-3 sm:mt-4">v2.0</span>
               </div>
 
               <p className="text-lg sm:text-xl lg:text-2xl text-foreground-muted mb-2">Human Analysis Engine</p>
 
               <p className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-foreground mb-6 leading-tight">
                 İnsanı{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7A8471] via-[#9BA392] to-[#7A8471]">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-cyan-300 to-cyan-400">
                   gerçekten anlayan
                 </span>{" "}
                 teknoloji.
@@ -167,7 +167,7 @@ export default function HAEPage() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <div className="text-3xl sm:text-4xl font-bold text-[#9BA392] mb-1">{stat.value}</div>
+                  <div className="text-3xl sm:text-4xl font-bold text-cyan-400 mb-1">{stat.value}</div>
                   <div className="text-sm font-medium text-foreground mb-1">{stat.label}</div>
                   <div className="text-xs text-foreground-muted">{stat.desc}</div>
                 </motion.div>
@@ -217,8 +217,8 @@ export default function HAEPage() {
                           whileHover={isMobile ? {} : { y: -3, borderColor: "rgba(122,132,113,0.3)" }}
                         >
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-lg bg-[#7A8471]/10 border border-[#7A8471]/20 flex items-center justify-center flex-shrink-0">
-                              <div className="w-2 h-2 rounded-full bg-[#9BA392] group-hover:animate-pulse" />
+                            <div className="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center flex-shrink-0">
+                              <div className="w-2 h-2 rounded-full bg-cyan-400 group-hover:animate-pulse" />
                             </div>
                             <p className="text-sm font-medium text-foreground">{signal.label}</p>
                           </div>
@@ -230,8 +230,8 @@ export default function HAEPage() {
                   {/* Flow */}
                   <div className="flex justify-center mb-6 sm:mb-8">
                     <motion.div className="flex flex-col items-center" animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 2, repeat: Infinity }}>
-                      <div className="w-px h-8 sm:h-10 bg-gradient-to-b from-[#7A8471]/50 to-transparent" />
-                      <svg className="w-4 h-4 text-[#9BA392]" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16l-6-6h12l-6 6z" /></svg>
+                      <div className="w-px h-8 sm:h-10 bg-gradient-to-b from-cyan-500/50 to-transparent" />
+                      <svg className="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16l-6-6h12l-6 6z" /></svg>
                     </motion.div>
                   </div>
 
@@ -253,8 +253,8 @@ export default function HAEPage() {
                           viewport={{ once: true }}
                           transition={{ duration: 0.4, delay: index * 0.1 }}
                         >
-                          <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-[#7A8471]/10 border border-[#7A8471]/20 flex items-center justify-center">
-                            <span className="text-xs font-mono text-[#9BA392]">{index + 1}</span>
+                          <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
+                            <span className="text-xs font-mono text-cyan-400">{index + 1}</span>
                           </div>
                           <p className="text-xs sm:text-sm font-medium text-foreground">{layer.name}</p>
                         </motion.div>
@@ -265,8 +265,8 @@ export default function HAEPage() {
                   {/* Flow */}
                   <div className="flex justify-center mb-6 sm:mb-8">
                     <motion.div className="flex flex-col items-center" animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}>
-                      <div className="w-px h-8 sm:h-10 bg-gradient-to-b from-[#7A8471]/50 to-transparent" />
-                      <svg className="w-4 h-4 text-[#9BA392]" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16l-6-6h12l-6 6z" /></svg>
+                      <div className="w-px h-8 sm:h-10 bg-gradient-to-b from-cyan-500/50 to-transparent" />
+                      <svg className="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16l-6-6h12l-6 6z" /></svg>
                     </motion.div>
                   </div>
 
@@ -278,7 +278,7 @@ export default function HAEPage() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.3 }}
                   >
-                    <div className="relative p-6 sm:p-8 rounded-2xl border border-[#7A8471]/30 bg-gradient-to-b from-[#7A8471]/10 to-transparent overflow-hidden">
+                    <div className="relative p-6 sm:p-8 rounded-2xl border border-cyan-500/30 bg-gradient-to-b from-cyan-500/10 to-transparent overflow-hidden">
                       {!isMobile && (
                         <motion.div
                           className="absolute inset-0 rounded-2xl"
@@ -289,7 +289,7 @@ export default function HAEPage() {
                       )}
 
                       <div className="relative z-10 text-center">
-                        <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-[#7A8471] to-[#5C6455] flex items-center justify-center shadow-lg shadow-[#7A8471]/30">
+                        <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-cyan-500 to-cyan-700 flex items-center justify-center shadow-lg shadow-cyan-500/30">
                           <svg className="w-7 h-7 sm:w-8 sm:h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
                             <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" />
                           </svg>
@@ -303,14 +303,14 @@ export default function HAEPage() {
                   {/* Flow */}
                   <div className="flex justify-center mb-6 sm:mb-8">
                     <motion.div className="flex flex-col items-center" animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}>
-                      <div className="w-px h-8 sm:h-10 bg-gradient-to-b from-[#7A8471]/50 to-transparent" />
-                      <svg className="w-4 h-4 text-[#9BA392]" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16l-6-6h12l-6 6z" /></svg>
+                      <div className="w-px h-8 sm:h-10 bg-gradient-to-b from-cyan-500/50 to-transparent" />
+                      <svg className="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16l-6-6h12l-6 6z" /></svg>
                     </motion.div>
                   </div>
 
                   {/* Output */}
                   <motion.div
-                    className="max-w-xl mx-auto p-5 sm:p-6 rounded-xl bg-gradient-to-r from-[#7A8471]/10 via-[#7A8471]/5 to-[#7A8471]/10 border border-[#7A8471]/20 text-center"
+                    className="max-w-xl mx-auto p-5 sm:p-6 rounded-xl bg-gradient-to-r from-cyan-500/10 via-cyan-500/5 to-cyan-500/10 border border-cyan-500/20 text-center"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -357,7 +357,7 @@ export default function HAEPage() {
 
         {/* Capabilities */}
         <section className="section-padding relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#7A8471]/[0.02] to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/[0.02] to-transparent pointer-events-none" />
           
           <Container>
             <motion.div className="text-center mb-10 sm:mb-14" {...fadeInUp()}>
@@ -369,11 +369,11 @@ export default function HAEPage() {
               {CAPABILITIES.map((cap, index) => (
                 <motion.div
                   key={cap.title}
-                  className={`group rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 transition-all duration-300 hover:border-[#7A8471]/30 sm:rounded-2xl sm:p-8 ${isMobile ? "min-w-[280px] snap-start" : ""}`}
+                  className={`group rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 transition-all duration-300 hover:border-cyan-500/30 sm:rounded-2xl sm:p-8 ${isMobile ? "min-w-[280px] snap-start" : ""}`}
                   {...fadeInUp(index * 0.1)}
                   whileHover={isMobile ? {} : { y: -3 }}
                 >
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-[#7A8471]/10 border border-[#7A8471]/20 flex items-center justify-center text-[#9BA392] mb-4 group-hover:bg-[#7A8471]/15 transition-colors">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-4 group-hover:bg-cyan-500/15 transition-colors">
                     {cap.icon}
                   </div>
                   <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2">{cap.title}</h3>
@@ -403,8 +403,8 @@ export default function HAEPage() {
                   className={`flex gap-4 sm:gap-6 ${isMobile ? "min-w-[280px] snap-start rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4" : ""}`}
                   {...fadeInUp(index * 0.1)}
                 >
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-[#7A8471]/10 border border-[#7A8471]/20 flex items-center justify-center flex-shrink-0">
-                    <span className="text-sm sm:text-base font-mono font-bold text-[#9BA392]">{item.step}</span>
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center flex-shrink-0">
+                    <span className="text-sm sm:text-base font-mono font-bold text-cyan-400">{item.step}</span>
                   </div>
                   <div>
                     <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1">{item.title}</h3>
@@ -423,7 +423,7 @@ export default function HAEPage() {
               <div className="text-4xl sm:text-5xl mb-6 opacity-20">&ldquo;</div>
               <p className="text-xl sm:text-2xl lg:text-3xl font-medium text-foreground leading-relaxed mb-6">
                 Teknoloji insanı anlamalı,<br />
-                <span className="text-[#9BA392]">insan teknolojiyi değil.</span>
+                <span className="text-cyan-400">insan teknolojiyi değil.</span>
               </p>
               <p className="text-sm text-foreground-subtle">— HAE Felsefesi</p>
             </motion.div>
@@ -435,8 +435,8 @@ export default function HAEPage() {
           <Container size="narrow">
             <motion.div className="text-center" {...fadeInUp()}>
               <p className="text-sm text-foreground-subtle mb-4">Şu anda kullanılıyor</p>
-              <Link href="/products/moodumuz" className="group inline-block px-8 py-4 rounded-xl bg-white/5 border border-white/10 hover:border-[#7A8471]/30 transition-all duration-300">
-                <span className="text-xl font-semibold text-foreground group-hover:text-[#9BA392] transition-colors">Moodumuz</span>
+              <Link href="/products/moodumuz" className="group inline-block px-8 py-4 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-500/30 transition-all duration-300">
+                <span className="text-xl font-semibold text-foreground group-hover:text-cyan-400 transition-colors">Moodumuz</span>
                 <p className="text-sm text-foreground-muted mt-1">Döngü & Ruh Hali Takibi</p>
               </Link>
             </motion.div>

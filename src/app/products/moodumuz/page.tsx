@@ -80,10 +80,10 @@ const ENGINE_LINKS = [
     name: "HAE",
     fullName: "Human Analysis Engine",
     href: "/engines/hae",
-    accent: "text-[#9BA392]",
-    border: "border-[#7A8471]/20 hover:border-[#9BA392]/40",
-    bg: "from-[#7A8471]/10 via-[#7A8471]/5 to-transparent",
-    badge: "bg-[#7A8471]/10 text-[#9BA392] border-[#7A8471]/20",
+    accent: "text-cyan-400",
+    border: "border-cyan-500/20 hover:border-cyan-400/40",
+    bg: "from-cyan-500/10 via-cyan-500/5 to-transparent",
+    badge: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
     description:
       "Döngü verilerini, davranış kalıplarını ve ruh hali sinyallerini bir araya getirir. Böylece Moodumuz sana sadece içerik değil, bağlamını anlayan öneriler sunar.",
   },
@@ -386,7 +386,7 @@ export default function MoodumuzPage() {
               </span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3 sm:mb-4">
                 Koçluğu mümkün kılan{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-[#9BA392] to-[#7A8471]">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-cyan-400 to-cyan-500">
                   iki motor
                 </span>
               </h2>
@@ -394,7 +394,7 @@ export default function MoodumuzPage() {
                 Moodumuz&apos;da kullandığımız teknoloji sadece içerik üretmek için
                 değil, seni daha doğru anlamak ve daha iyi yönlendirmek için
                 çalışır. Soru akışını <span className="text-violet-300">AQE</span>,
-                kişisel analiz katmanını ise <span className="text-[#9BA392]">HAE</span> yönetir.
+                kişisel analiz katmanını ise <span className="text-cyan-400">HAE</span> yönetir.
               </p>
             </motion.div>
 

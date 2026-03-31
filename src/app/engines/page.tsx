@@ -15,9 +15,9 @@ const ENGINES = [
     description: "Çoklu sinyal kaynaklarından kişiselleştirilmiş profil üretir.",
     status: "active",
     version: "2.0",
-    color: "from-[#7A8471] to-[#5C6455]",
-    borderColor: "border-[#7A8471]/30",
-    bgColor: "from-[#7A8471]/10 to-[#5C6455]/5",
+    color: "from-cyan-500 to-cyan-700",
+    borderColor: "border-cyan-500/30",
+    bgColor: "from-cyan-500/10 to-cyan-700/5",
     iconBg: "bg-transparent",
     specs: [
       { label: "Doğruluk", value: "~%94" },

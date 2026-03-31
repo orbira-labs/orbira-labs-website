@@ -13,9 +13,9 @@ const ENGINES = [
     description: "Multi-layer profil sentezi. Deep pattern recognition.",
     status: "active",
     version: "2.0",
-    color: "from-[#7A8471] to-[#5C6455]",
-    borderColor: "border-[#7A8471]/20 hover:border-[#7A8471]/40",
-    bgColor: "from-[#7A8471]/5 to-[#5C6455]/5",
+    color: "from-cyan-500 to-cyan-700",
+    borderColor: "border-cyan-500/20 hover:border-cyan-500/40",
+    bgColor: "from-cyan-500/5 to-cyan-700/5",
     iconBg: "bg-transparent",
     specs: [
       { label: "Doğruluk", value: "~%94" },
