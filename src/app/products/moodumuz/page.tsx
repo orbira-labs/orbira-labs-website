@@ -46,21 +46,21 @@ const FEATURES = [
   },
 ];
 
-const COACHING_PILLARS = [
+const WHAT_IT_DOES = [
   {
-    title: "Günlük yönlendirme",
-    description:
-      "Moodumuz her gün nasıl hissettiğini, hangi fazda olduğunu ve o gün sana neyin iyi gelebileceğini sade bir dille söyler.",
+    icon: "🌸",
+    title: "Döngü Takibi",
+    description: "Regl döngünü takip et, bir sonraki dönemin tarihlerini gör.",
   },
   {
-    title: "Faz bazlı destek",
-    description:
-      "Menstrüasyon, foliküler faz, ovülasyon ve luteal faz boyunca enerji, odak ve duygu değişimlerine göre öneriler verir.",
+    icon: "💭",
+    title: "Ruh Hali Günlüğü",
+    description: "Her gün nasıl hissettiğini kaydet, kalıplarını keşfet.",
   },
   {
-    title: "Gerçekten kişisel öneriler",
-    description:
-      "Genel tavsiyeler yerine kendi verin, check-in'lerin ve davranış kalıpların üzerinden ilerleyen bir koçluk deneyimi sunar.",
+    icon: "✨",
+    title: "Kişisel Koçluk",
+    description: "Verilerine dayalı öneriler ve yönlendirmeler al.",
   },
 ];
 
@@ -114,44 +114,6 @@ const SCREENSHOTS = [
   },
 ];
 
-const CYCLE_PHASES = [
-  {
-    name: "Menstrüasyon",
-    days: "1-5 gün",
-    icon: "🩸",
-    color: "from-rose-500/20 to-rose-600/10",
-    borderColor: "border-rose-500/30",
-    archetype: "Bilge Kadın",
-    description: "Dinlenme ve kendine zaman ayırma dönemi. İçe dönük enerji.",
-  },
-  {
-    name: "Foliküler Faz",
-    days: "6-14 gün",
-    icon: "🌱",
-    color: "from-emerald-500/20 to-emerald-600/10",
-    borderColor: "border-emerald-500/30",
-    archetype: "Keşifçi",
-    description: "Enerji yükselir, yaratıcılık artar. Yeni başlangıçlar için ideal.",
-  },
-  {
-    name: "Ovülasyon",
-    days: "15-17 gün",
-    icon: "☀️",
-    color: "from-amber-500/20 to-amber-600/10",
-    borderColor: "border-amber-500/30",
-    archetype: "Kraliçe",
-    description: "En yüksek enerji ve özgüven. Sosyalleşme ve liderlik zamanı.",
-  },
-  {
-    name: "Luteal Faz",
-    days: "18-28 gün",
-    icon: "🍂",
-    color: "from-orange-500/20 to-orange-600/10",
-    borderColor: "border-orange-500/30",
-    archetype: "Büyücü",
-    description: "İç değerlendirme ve yavaşlama. Detaylara odaklanma zamanı.",
-  },
-];
 
 const fadeInUp = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
@@ -342,40 +304,116 @@ export default function MoodumuzPage() {
           <Container>
             <motion.div className="text-center mb-8 sm:mb-14" {...fadeInUp()}>
               <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-[#7A8471]/10 text-[#9BA392] border border-[#7A8471]/20 mb-4 sm:mb-6">
-                Koçluk Deneyimi
+                Ne Yapar?
               </span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3 sm:mb-4">
-                Moodumuz&apos;un en güçlü yanı{" "}
+                Döngünü takip et,{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7A8471] to-[#9BA392]">
-                  kişisel koçluğu
+                  kendini tanı
                 </span>
               </h2>
               <p className="text-sm sm:text-lg text-foreground-muted max-w-2xl mx-auto leading-relaxed">
-                Moodumuz bir takip uygulamasından fazlası. Verini yorumlayıp sana
-                doğru anda doğru öneriyi veren, günlük hayatında yanında duran
-                dijital bir koç gibi çalışır.
+                Döngü takibi, ruh hali günlüğü ve kişisel koçluk — hepsi tek uygulamada.
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6">
-              {COACHING_PILLARS.map((pillar, index) => (
+            <div className="grid grid-cols-3 gap-3 sm:gap-6">
+              {WHAT_IT_DOES.map((item, index) => (
                 <motion.div
-                  key={pillar.title}
-                  className="rounded-xl sm:rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.05] to-white/[0.02] p-3.5 sm:p-6"
+                  key={item.title}
+                  className="rounded-xl sm:rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.05] to-white/[0.02] p-3.5 sm:p-6 text-center"
                   {...fadeInUp(index * 0.08)}
                   whileHover={isMobile ? {} : { y: -4, transition: { duration: 0.2 } }}
                 >
-                  <div className="mb-2 sm:mb-3 inline-flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg sm:rounded-xl bg-[#7A8471]/10 border border-[#7A8471]/20 text-[#9BA392]">
-                    <span className="text-xs sm:text-sm font-semibold">{index + 1}</span>
+                  <div className="mb-2 sm:mb-3 text-2xl sm:text-3xl">
+                    {item.icon}
                   </div>
-                  <h3 className="text-sm sm:text-lg font-semibold text-foreground mb-1 sm:mb-2">
-                    {pillar.title}
+                  <h3 className="text-xs sm:text-lg font-semibold text-foreground mb-1 sm:mb-2">
+                    {item.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed">
-                    {pillar.description}
+                  <p className="text-[10px] sm:text-sm text-foreground-muted leading-snug sm:leading-relaxed">
+                    {item.description}
                   </p>
                 </motion.div>
               ))}
+            </div>
+          </Container>
+        </section>
+
+        {/* Free vs Pro */}
+        <section className="section-padding relative">
+          <Container>
+            <motion.div className="text-center mb-8 sm:mb-14" {...fadeInUp()}>
+              <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-[#7A8471]/10 text-[#9BA392] border border-[#7A8471]/20 mb-4 sm:mb-6">
+                Planlar
+              </span>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3 sm:mb-4">
+                Ücretsiz başla,{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7A8471] to-[#9BA392]">
+                  Pro ile derinleş
+                </span>
+              </h2>
+              <p className="text-sm sm:text-lg text-foreground-muted max-w-2xl mx-auto leading-relaxed">
+                Temel özellikler herkese açık. Kişisel koçluk deneyimi için Pro&apos;ya geç.
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-2 gap-3 sm:gap-6 max-w-3xl mx-auto">
+              {/* Free */}
+              <motion.div
+                className="rounded-xl sm:rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.03] to-white/[0.01] p-4 sm:p-7"
+                {...fadeInUp(0)}
+              >
+                <div className="mb-4 sm:mb-6">
+                  <h3 className="text-base sm:text-2xl font-bold text-foreground mb-1">Free</h3>
+                  <p className="text-[10px] sm:text-sm text-foreground-muted">Sonsuza kadar ücretsiz</p>
+                </div>
+                <ul className="space-y-2.5 sm:space-y-3">
+                  {[
+                    "Ruh Hali ve Enerji Takibi",
+                    "Döngü Tahmini",
+                    "Burç Yorumları",
+                  ].map((f) => (
+                    <li key={f} className="flex items-start gap-2">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#9BA392] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-[11px] sm:text-sm text-foreground-muted leading-tight">{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              {/* Pro */}
+              <motion.div
+                className="rounded-xl sm:rounded-2xl border border-[#7A8471]/40 bg-gradient-to-br from-[#7A8471]/15 via-[#5C6455]/10 to-[#7A8471]/5 p-4 sm:p-7 relative overflow-hidden"
+                {...fadeInUp(0.08)}
+              >
+                <div className="absolute top-0 right-0 px-2.5 py-1 sm:px-3 sm:py-1.5 text-[9px] sm:text-xs font-semibold bg-[#7A8471] text-white rounded-bl-lg sm:rounded-bl-xl">
+                  PRO
+                </div>
+                <div className="mb-4 sm:mb-6">
+                  <h3 className="text-base sm:text-2xl font-bold text-foreground mb-1">Mood Pro</h3>
+                  <p className="text-[10px] sm:text-sm text-foreground-muted">Kişisel koçluk deneyimi</p>
+                </div>
+                <ul className="space-y-2.5 sm:space-y-3">
+                  {[
+                    "Free planın tüm özellikleri",
+                    "Sana Özel AI Analiz",
+                    "Anlık AI Rehberliği",
+                    "12 Aylık Kişisel Program",
+                    "Seri Takibi ve Rozetler",
+                    "Döngüne Uyumlu Görevler",
+                  ].map((f) => (
+                    <li key={f} className="flex items-start gap-2">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#9BA392] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-[11px] sm:text-sm text-foreground leading-tight">{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
             </div>
           </Container>
         </section>
@@ -491,110 +529,6 @@ export default function MoodumuzPage() {
                       </h3>
                       <p className="text-[10px] leading-snug sm:text-base text-foreground-muted sm:leading-relaxed">
                         {feature.description}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </Container>
-        </section>
-
-        {/* App Gallery Section — desktop only (mobile has carousel in hero) */}
-        <section className="section-padding relative overflow-hidden hidden lg:block">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#7A8471]/[0.03] to-transparent pointer-events-none" />
-          <Container>
-            <motion.div className="text-center mb-16" {...fadeInUp()}>
-              <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-[#7A8471]/10 text-[#9BA392] border border-[#7A8471]/20 mb-6">
-                Uygulama
-              </span>
-              <h2 className="text-4xl font-bold text-foreground mb-4">
-                İçeriden{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7A8471] to-[#9BA392]">
-                  bir bakış
-                </span>
-              </h2>
-              <p className="text-lg text-foreground-muted max-w-xl mx-auto">
-                Sade tasarım, kolay kullanım. Her detay senin için düşünüldü.
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-4 gap-6">
-              {SCREENSHOTS.map((ss, index) => (
-                <motion.div
-                  key={ss.label}
-                  {...fadeInUp(index * 0.1)}
-                >
-                  <motion.div
-                    className="group cursor-pointer"
-                    whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                  >
-                    <div className="relative w-full aspect-[9/19] rounded-[2rem] bg-gradient-to-b from-zinc-700 to-zinc-900 p-[3px] shadow-xl shadow-black/30 group-hover:shadow-2xl group-hover:shadow-[#7A8471]/20 transition-shadow duration-300 mb-4">
-                      <div className="w-full h-full rounded-[1.85rem] overflow-hidden relative bg-black">
-                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-5 bg-black rounded-b-xl z-10" />
-                        <Image src={ss.src} alt={ss.alt} fill sizes="25vw" className="object-cover object-top" />
-                      </div>
-                    </div>
-                    <p className="text-base text-foreground-muted font-medium text-center group-hover:text-foreground transition-colors duration-300">
-                      {ss.label}
-                    </p>
-                  </motion.div>
-                </motion.div>
-              ))}
-            </div>
-          </Container>
-        </section>
-
-        {/* Cycle Phases Section */}
-        <section className="section-padding relative bg-gradient-to-b from-transparent via-[#7A8471]/[0.02] to-transparent">
-          <Container>
-            <motion.div className="text-center mb-6 sm:mb-12" {...fadeInUp()}>
-              <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-rose-500/10 text-rose-400 border border-rose-500/20 mb-4 sm:mb-6">
-                Döngü Fazları
-              </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3 sm:mb-4">
-                Her fazı{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-orange-400">
-                  anla ve yaşa
-                </span>
-              </h2>
-              <p className="text-sm sm:text-lg text-foreground-muted max-w-2xl mx-auto">
-                Döngünün her fazında farklı ihtiyaçların var. Moodumuz sana her
-                fazda özel öneriler sunar.
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
-              {CYCLE_PHASES.map((phase, index) => (
-                <motion.div
-                  key={phase.name}
-                  className={`group relative p-3.5 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br ${phase.color} border ${phase.borderColor} transition-all duration-300 overflow-hidden`}
-                  {...fadeInUp(index * 0.1)}
-                  whileHover={isMobile ? {} : { y: -5, transition: { duration: 0.2 } }}
-                >
-                  <div className="relative z-10">
-                    <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
-                      <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-white/10 flex items-center justify-center text-xl sm:text-3xl flex-shrink-0">
-                        {phase.icon}
-                      </div>
-                      <div className="min-w-0">
-                        <h3 className="text-xs sm:text-base lg:text-lg font-semibold text-foreground leading-tight">
-                          {phase.name}
-                        </h3>
-                        <p className="text-[10px] sm:text-xs text-foreground-muted">
-                          {phase.days}
-                        </p>
-                      </div>
-                    </div>
-                    
-                    <p className="hidden sm:block text-foreground-muted text-sm mb-3 leading-relaxed line-clamp-2">
-                      {phase.description}
-                    </p>
-                    
-                    <div className="flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
-                      <p className="text-[10px] sm:text-xs text-foreground-subtle">
-                        <span className="text-foreground-muted font-medium">{phase.archetype}</span>
                       </p>
                     </div>
                   </div>
