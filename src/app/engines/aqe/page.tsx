@@ -395,18 +395,18 @@ export default function AQEPage() {
               )}
 
               <div className="relative z-10">
-                <div className="mb-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center">
-                    <span className="text-white font-bold">AQE</span>
+                <div className="mb-6 flex flex-row items-center justify-center gap-3 sm:gap-4">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center flex-shrink-0">
+                    <span className="text-white font-bold text-sm sm:text-base">AQE</span>
                   </div>
-                  <div className="flex flex-col items-center gap-1">
-                    <svg className="w-6 h-6 text-foreground-subtle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="flex flex-col items-center gap-0.5">
+                    <svg className="w-5 h-5 sm:w-6 sm:h-6 text-foreground-subtle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
-                    <span className="text-[10px] text-foreground-subtle">veri akışı</span>
+                    <span className="text-[9px] sm:text-[10px] text-foreground-subtle">veri akışı</span>
                   </div>
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#7A8471] to-[#5C6455] flex items-center justify-center">
-                    <span className="text-white font-bold">HAE</span>
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-[#7A8471] to-[#5C6455] flex items-center justify-center flex-shrink-0">
+                    <span className="text-white font-bold text-sm sm:text-base">HAE</span>
                   </div>
                 </div>
 

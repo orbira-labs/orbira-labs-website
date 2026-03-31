@@ -10,8 +10,8 @@ const footerLinks = {
     href: p.href || `#products`,
   })),
   engines: [
-    { label: "HAE — Human Analysis Engine", href: "/engines/hae" },
-    { label: "AQE — Adaptive Question Engine", href: "/engines/aqe" },
+    { label: "Human Analysis Engine", href: "/engines/hae" },
+    { label: "Adaptive Question Engine", href: "/engines/aqe" },
   ],
   company: [
     { label: "Hakkımızda", href: "/about" },
