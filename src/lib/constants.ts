@@ -7,11 +7,10 @@ export const SITE_CONFIG = {
 };
 
 export const NAV_LINKS = [
-  { href: "#products", label: "Ürünler" },
+  { href: "/", label: "Ana Sayfa" },
   { href: "/engines", label: "Hybrid Motorlar" },
-  { href: "#approach", label: "Yaklaşım" },
   { href: "/about", label: "Hakkımızda" },
-  { href: "#contact", label: "İletişim" },
+  { href: "/support", label: "İletişim" },
 ];
 
 export type ProductStatus = "live" | "in-progress" | "concept" | "testing";
@@ -181,20 +180,10 @@ export const TEAM_MEMBERS = [
     role: "Kurucu & Ürün Mühendisi",
     image: "/images/founder.png",
     shortBio: "Orbira Labs'ı kuran ve ürün vizyonunu şekillendiren isim.",
-    fullBio: `Orbira Labs'ı kuran ve ürün vizyonunu şekillendiren isim. Mobil ve web uygulamaları uçtan uca tasarlayıp geliştiriyor. KasaBende ve Moodumuz dahil birden fazla ürünü sıfırdan yayına taşıdı.
+    fullBio: `Orbira Labs'ın kurucusu olarak ürün stratejisi, teknoloji ve kullanıcı deneyimini birlikte ele alıyor. 7+ yıllık global deneyimi boyunca farklı ekipler, pazarlar ve iş modelleri içinde çalışarak fikir aşamasından ölçeklenebilir ürüne uzanan süreçlerde aktif rol aldı.
 
-Ürün geliştirme sürecinde tasarım, mühendislik ve kullanıcı deneyimini bir arada düşünüyor. AI destekli sistemler ve veri odaklı çözümler üzerine çalışıyor. Karmaşık problemleri sade ve işlevsel ürünlere dönüştürmek konusunda deneyimli.`,
+Sadece geliştirme tarafında güçlü bir mühendis değil; aynı zamanda ürünün neden var olduğunu, kullanıcıya nasıl değer ürettiğini ve iş hedefleriyle nasıl hizalanması gerektiğini de merkeze koyuyor. AI destekli sistemler, veri odaklı çözümler ve modern web teknolojileri üzerine çalışıyor; karmaşık problemleri sade, hızlı ve etkili dijital ürünlere dönüştürmeye odaklanıyor.`,
     experience: FOUNDER.experience,
-  },
-  {
-    name: "Burak Gündüz",
-    role: "Teknik Kurucu & Mühendislik Lideri",
-    image: "/images/burak-placeholder.jpg",
-    shortBio: "Ekibin teknik omurgasını oluşturan isim.",
-    fullBio: `Ekibin teknik omurgasını oluşturan isim. Frontend, backend ve sistem mimarisi konularında geniş bir deneyime sahip. Farklı sektörlerde, farklı ölçeklerde projeler geliştirdi.
-
-Sadece kod yazmıyor; ürün kararlarına teknik perspektiften katkı sağlıyor, mimari tercihler yapıyor ve sistemlerin uzun vadede sürdürülebilir kalmasını sağlıyor. Analitik düşünce yapısı ve detaylara hakimiyetiyle projelerin teknik kalitesini belirliyor.`,
-    experience: [],
   },
   {
     name: "Ayçin Akyel",
@@ -204,6 +193,16 @@ Sadece kod yazmıyor; ürün kararlarına teknik perspektiften katkı sağlıyor
     fullBio: `Ekibin akışını ve organizasyonunu yöneten isim. Projelerin zamanında, doğru kapsamda ve koordineli ilerlemesini sağlıyor.
 
 Kullanıcı geri bildirimlerini topluyor, önceliklendiriyor ve ekibe anlamlı şekilde aktarıyor. İletişim ve planlama konusundaki güçlü yönleri, ürün geliştirme sürecinin kesintisiz ilerlemesine katkı sağlıyor.`,
+    experience: [],
+  },
+  {
+    name: "Burak Gündüz",
+    role: "Developer Partner",
+    image: "/images/burak-placeholder.jpg",
+    shortBio: "Ekibin teknik omurgasını oluşturan isim.",
+    fullBio: `Ekibin teknik omurgasını oluşturan isim. Frontend, backend ve sistem mimarisi konularında geniş bir deneyime sahip. Farklı sektörlerde, farklı ölçeklerde projeler geliştirdi.
+
+Sadece kod yazmıyor; ürün kararlarına teknik perspektiften katkı sağlıyor, mimari tercihler yapıyor ve sistemlerin uzun vadede sürdürülebilir kalmasını sağlıyor. Analitik düşünce yapısı ve detaylara hakimiyetiyle projelerin teknik kalitesini belirliyor.`,
     experience: [],
   },
 ];

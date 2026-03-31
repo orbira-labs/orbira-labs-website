@@ -150,7 +150,7 @@ export default function AboutPage() {
               Ürünlerimizi keşfetmek veya bizimle çalışmak isterseniz, iletişime geçin.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-              <Link href="/#products">
+              <Link href="/products">
                 <Button variant="primary" size="lg">
                   Ürünleri Keşfet
                 </Button>

@@ -4,3 +4,5 @@ export { Card } from "./Card";
 export { Container } from "./Container";
 export { SectionHeader } from "./SectionHeader";
 export { PageBackground } from "./PageBackground";
+export { AtomAnimation } from "./AtomAnimation";
+export { QuestionPulseAnimation } from "./QuestionPulseAnimation";

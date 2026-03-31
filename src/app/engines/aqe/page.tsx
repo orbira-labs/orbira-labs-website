@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Container } from "@/components/ui";
+import { Container, QuestionPulseAnimation } from "@/components/ui";
 import { Header, Footer } from "@/components/sections";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
@@ -88,6 +88,12 @@ const STATS = [
   { value: "HAE", label: "Sync", desc: "Bidirectional data flow" },
 ];
 
+const HOW_IT_WORKS = [
+  { step: "01", title: "Cold Start Protocol", desc: "Baseline feature vector oluşturmak için minimum viable question set. Zero-knowledge state'den profile transition." },
+  { step: "02", title: "Probabilistic Routing", desc: "Her response, sonraki sorunun probability distribution'ını yeniden hesaplar. Bayesian inference ile path optimization." },
+  { step: "03", title: "Pattern Deep-Dive", desc: "Anomaly veya correlation tespit edildiğinde aktive olan exploration mode. Signal amplification için derinleşme." },
+  { step: "04", title: "Optimal Stopping", desc: "Information gain threshold'a ulaşıldığında convergence. Diminishing returns noktasında akıllı sonlandırma." },
+];
 
 const fadeInUp = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
@@ -129,31 +135,17 @@ export default function AQEPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <div className="flex items-center justify-center gap-2 text-sm text-foreground-muted mb-8">
+              <div className="mb-6 flex items-center justify-center gap-2 text-xs text-foreground-muted sm:mb-8 sm:text-sm">
                 <Link href="/engines" className="hover:text-foreground transition-colors">Engines</Link>
                 <span className="text-foreground-subtle">/</span>
                 <span className="text-violet-400">AQE</span>
               </div>
 
-              <motion.div
-                className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-8 rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center shadow-2xl shadow-violet-500/30"
-                animate={isMobile ? {} : { 
-                  boxShadow: [
-                    "0 25px 50px -12px rgba(139,92,246,0.3)",
-                    "0 25px 50px -12px rgba(139,92,246,0.5)",
-                    "0 25px 50px -12px rgba(139,92,246,0.3)",
-                  ]
-                }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <svg className="w-10 h-10 sm:w-12 sm:h-12 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-                  <path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </motion.div>
+              <QuestionPulseAnimation size="lg" className="mx-auto mb-4" animate={!isMobile} />
 
-              <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="mb-4 flex flex-wrap items-start justify-center gap-2">
                 <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground tracking-tight">AQE</h1>
-                <span className="text-xs sm:text-sm font-mono text-foreground-subtle bg-white/5 px-2 py-1 rounded border border-white/10">v1.0</span>
+                <span className="mt-1 rounded border border-violet-400/20 bg-violet-400/10 px-2 py-0.5 text-[10px] font-medium text-violet-400/80 sm:mt-2 sm:text-xs">v1.0</span>
               </div>
 
               <p className="text-lg sm:text-xl lg:text-2xl text-foreground-muted mb-2">Adaptive Question Engine</p>
@@ -166,12 +158,12 @@ export default function AQEPage() {
               </p>
 
               <p className="text-base sm:text-lg text-foreground-muted max-w-2xl mx-auto leading-relaxed mb-10">
-                Static survey'ler linear path izler. AQE, probabilistic routing ile 
+                Static survey&apos;ler linear path izler. AQE, probabilistic routing ile 
                 her kullanıcıya farklı bir yolculuk sunar. Entropy minimization, 
                 maximum information gain.
               </p>
 
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20">
+              <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-4 py-2">
                 <div className="w-2 h-2 rounded-full bg-violet-400 animate-pulse" />
                 <span className="text-sm font-mono text-violet-400">Production Ready</span>
               </div>
@@ -212,13 +204,13 @@ export default function AQEPage() {
           <Container>
             <motion.div {...fadeInUp()}>
               <div className="relative rounded-2xl sm:rounded-3xl border border-white/[0.06] bg-[#0a0a0c] overflow-hidden">
-                <div className="flex items-center gap-2 px-4 py-3 sm:px-6 sm:py-4 border-b border-white/[0.06] bg-white/[0.02]">
+                <div className="flex flex-wrap items-center gap-2 border-b border-white/[0.06] bg-white/[0.02] px-4 py-3 sm:px-6 sm:py-4">
                   <div className="flex gap-1.5">
                     <div className="w-3 h-3 rounded-full bg-white/10" />
                     <div className="w-3 h-3 rounded-full bg-white/10" />
                     <div className="w-3 h-3 rounded-full bg-white/10" />
                   </div>
-                  <div className="flex-1 flex justify-center">
+                  <div className="order-3 flex w-full justify-start sm:order-none sm:w-auto sm:flex-1 sm:justify-center">
                     <span className="text-xs font-mono text-foreground-subtle tracking-wider">aqe.flow.engine</span>
                   </div>
                   <div className="flex items-center gap-1.5">
@@ -268,11 +260,11 @@ export default function AQEPage() {
                       <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10" />
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0">
                       {QUESTION_TIERS.map((tier, index) => (
                         <motion.div
                           key={tier.name}
-                          className={`p-4 sm:p-5 rounded-xl bg-gradient-to-b ${tier.color} border ${tier.borderColor}`}
+                          className={`min-w-[220px] snap-start rounded-xl border bg-gradient-to-b p-4 sm:min-w-0 sm:p-5 ${tier.color} ${tier.borderColor}`}
                           initial={{ opacity: 0, y: 20 }}
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
@@ -316,7 +308,7 @@ export default function AQEPage() {
                         <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">Routing Core</h3>
                         <p className="text-sm text-foreground-muted mb-4">Bayesian inference, entropy calculation, optimal path selection.</p>
                         
-                        <div className="flex items-center justify-center gap-4 text-xs sm:text-sm">
+                        <div className="flex flex-wrap items-center justify-center gap-3 text-xs sm:text-sm">
                           <div className="flex items-center gap-1.5">
                             <div className="w-2 h-2 rounded-full bg-emerald-400" />
                             <span className="text-foreground-muted">Min entropy</span>
@@ -336,6 +328,35 @@ export default function AQEPage() {
           </Container>
         </section>
 
+        {/* How it works */}
+        <section className="section-padding relative">
+          <Container size="narrow">
+            <motion.div className="text-center mb-10 sm:mb-14" {...fadeInUp()}>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Processing Pipeline</h2>
+              <p className="text-foreground-muted max-w-xl mx-auto">
+                Cold start&apos;tan convergence&apos;a kadar adaptive question flow.
+              </p>
+            </motion.div>
+
+            <div className={isMobile ? "flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2" : "space-y-6"}>
+              {HOW_IT_WORKS.map((item, index) => (
+                <motion.div
+                  key={item.step}
+                  className={`flex gap-4 sm:gap-6 ${isMobile ? "min-w-[280px] snap-start rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4" : ""}`}
+                  {...fadeInUp(index * 0.1)}
+                >
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center flex-shrink-0">
+                    <span className="text-sm sm:text-base font-mono font-bold text-violet-400">{item.step}</span>
+                  </div>
+                  <div>
+                    <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1">{item.title}</h3>
+                    <p className="text-sm sm:text-base text-foreground-muted">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </Container>
+        </section>
 
         {/* Capabilities */}
         <section className="section-padding relative">
@@ -344,14 +365,14 @@ export default function AQEPage() {
           <Container>
             <motion.div className="text-center mb-10 sm:mb-14" {...fadeInUp()}>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Core Capabilities</h2>
-              <p className="text-foreground-muted max-w-xl mx-auto">Static survey'lerin ötesinde, intelligent question orchestration.</p>
+              <p className="text-foreground-muted max-w-xl mx-auto">Static survey&apos;lerin otesinde, intelligent question orchestration.</p>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+            <div className={isMobile ? "flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2" : "grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6"}>
               {CAPABILITIES.map((cap, index) => (
                 <motion.div
                   key={cap.title}
-                  className="group p-5 sm:p-8 rounded-xl sm:rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-violet-500/30 transition-all duration-300"
+                  className={`group rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 transition-all duration-300 hover:border-violet-500/30 sm:rounded-2xl sm:p-8 ${isMobile ? "min-w-[280px] snap-start" : ""}`}
                   {...fadeInUp(index * 0.1)}
                   whileHover={isMobile ? {} : { y: -3 }}
                 >
@@ -382,7 +403,7 @@ export default function AQEPage() {
               )}
 
               <div className="relative z-10">
-                <div className="flex items-center justify-center gap-4 mb-6">
+                <div className="mb-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
                   <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center">
                     <span className="text-white font-bold">AQE</span>
                   </div>
@@ -399,7 +420,7 @@ export default function AQEPage() {
 
                 <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-3">Bidirectional Sync</h3>
                 <p className="text-foreground-muted max-w-md mx-auto mb-4">
-                  AQE response data'sı HAE'ye akar, HAE insights'ı AQE routing'i optimize eder.
+                  AQE response data&apos;sı HAE&apos;ye akar, HAE insights&apos;ı AQE routing&apos;i optimize eder.
                   Continuous feedback loop ile mutual enhancement.
                 </p>
                 <p className="text-sm text-foreground-subtle font-mono">

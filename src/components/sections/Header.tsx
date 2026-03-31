@@ -62,7 +62,7 @@ export function Header() {
 
           {/* CTA */}
           <div className="hidden md:block">
-            <Link href="#products">
+            <Link href="/products">
               <Button variant="primary" size="sm">
                 Ürünleri Keşfet
               </Button>
@@ -124,7 +124,7 @@ export function Header() {
                   </Link>
                 ))}
                 <div className="pt-2">
-                  <Link href="#products" className="block">
+                  <Link href="/products" className="block">
                     <Button variant="primary" size="sm" className="w-full">
                       Ürünleri Keşfet
                     </Button>

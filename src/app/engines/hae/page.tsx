@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Container } from "@/components/ui";
+import { Container, AtomAnimation } from "@/components/ui";
 import { Header, Footer } from "@/components/sections";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
@@ -99,7 +99,7 @@ export default function HAEPage() {
           {!isMobile && (
             <>
               <motion.div
-                className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#7A8471]/5 rounded-full blur-3xl"
+                className="absolute -top-10 -left-20 w-96 h-96 bg-[#7A8471]/5 rounded-full blur-3xl"
                 animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
                 transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
               />
@@ -118,33 +118,11 @@ export default function HAEPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <div className="flex items-center justify-center gap-2 text-sm text-foreground-muted mb-8">
-                <Link href="/engines" className="hover:text-foreground transition-colors">Engines</Link>
-                <span className="text-foreground-subtle">/</span>
-                <span className="text-[#9BA392]">HAE</span>
-              </div>
+              <AtomAnimation size="lg" className="mx-auto mb-4" animate={!isMobile} />
 
-              <motion.div
-                className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-8 rounded-2xl bg-gradient-to-br from-[#7A8471] to-[#5C6455] flex items-center justify-center shadow-2xl shadow-[#7A8471]/30"
-                animate={isMobile ? {} : { 
-                  boxShadow: [
-                    "0 25px 50px -12px rgba(122,132,113,0.3)",
-                    "0 25px 50px -12px rgba(122,132,113,0.5)",
-                    "0 25px 50px -12px rgba(122,132,113,0.3)",
-                  ]
-                }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <svg className="w-10 h-10 sm:w-12 sm:h-12 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-                  <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                  <path d="M2 17l10 5 10-5" />
-                  <path d="M2 12l10 5 10-5" />
-                </svg>
-              </motion.div>
-
-              <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="inline-flex items-start justify-center gap-2 mb-4">
                 <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground tracking-tight">HAE</h1>
-                <span className="text-xs sm:text-sm font-mono text-foreground-subtle bg-white/5 px-2 py-1 rounded border border-white/10">v3.0</span>
+                <span className="text-[9px] sm:text-[10px] font-medium text-cyan-400/80 bg-cyan-400/10 px-1.5 py-0.5 rounded border border-cyan-400/20 mt-0.5 sm:mt-1">v2.0</span>
               </div>
 
               <p className="text-lg sm:text-xl lg:text-2xl text-foreground-muted mb-2">Human Analysis Engine</p>
@@ -203,13 +181,13 @@ export default function HAEPage() {
           <Container>
             <motion.div {...fadeInUp()}>
               <div className="relative rounded-2xl sm:rounded-3xl border border-white/[0.06] bg-[#0a0a0c] overflow-hidden">
-                <div className="flex items-center gap-2 px-4 py-3 sm:px-6 sm:py-4 border-b border-white/[0.06] bg-white/[0.02]">
+                <div className="flex flex-wrap items-center gap-2 border-b border-white/[0.06] bg-white/[0.02] px-4 py-3 sm:px-6 sm:py-4">
                   <div className="flex gap-1.5">
                     <div className="w-3 h-3 rounded-full bg-white/10" />
                     <div className="w-3 h-3 rounded-full bg-white/10" />
                     <div className="w-3 h-3 rounded-full bg-white/10" />
                   </div>
-                  <div className="flex-1 flex justify-center">
+                  <div className="order-3 flex w-full justify-start sm:order-none sm:w-auto sm:flex-1 sm:justify-center">
                     <span className="text-xs font-mono text-foreground-subtle tracking-wider">hae.engine.core</span>
                   </div>
                   <div className="flex items-center gap-1.5">
@@ -227,11 +205,11 @@ export default function HAEPage() {
                       <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10" />
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                    <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0 sm:gap-4">
                       {SIGNALS.map((signal) => (
                         <motion.div
                           key={signal.label}
-                          className="relative p-4 sm:p-5 rounded-xl bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.08] group"
+                          className="group relative min-w-[220px] snap-start rounded-xl border border-white/[0.08] bg-gradient-to-b from-white/[0.04] to-transparent p-4 sm:min-w-0 sm:p-5"
                           initial={{ opacity: 0, y: 20 }}
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
@@ -361,11 +339,11 @@ export default function HAEPage() {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+            <div className={isMobile ? "flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2" : "grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6"}>
               {ANALYSIS_DOMAINS.map((domain, index) => (
                 <motion.div
                   key={domain.name}
-                  className={`p-6 sm:p-8 rounded-xl sm:rounded-2xl bg-gradient-to-b ${domain.color} border ${domain.borderColor}`}
+                  className={`rounded-xl border bg-gradient-to-b p-6 sm:rounded-2xl sm:p-8 ${domain.color} ${domain.borderColor} ${isMobile ? "min-w-[260px] snap-start" : ""}`}
                   {...fadeInUp(index * 0.1)}
                   whileHover={isMobile ? {} : { y: -5 }}
                 >
@@ -387,11 +365,11 @@ export default function HAEPage() {
               <p className="text-foreground-muted max-w-xl mx-auto">Yılların Ar-Ge&apos;si, tek bir sistemde.</p>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+            <div className={isMobile ? "flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2" : "grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6"}>
               {CAPABILITIES.map((cap, index) => (
                 <motion.div
                   key={cap.title}
-                  className="group p-5 sm:p-8 rounded-xl sm:rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#7A8471]/30 transition-all duration-300"
+                  className={`group rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 transition-all duration-300 hover:border-[#7A8471]/30 sm:rounded-2xl sm:p-8 ${isMobile ? "min-w-[280px] snap-start" : ""}`}
                   {...fadeInUp(index * 0.1)}
                   whileHover={isMobile ? {} : { y: -3 }}
                 >
@@ -406,6 +384,37 @@ export default function HAEPage() {
           </Container>
         </section>
 
+        {/* How it works */}
+        <section className="section-padding relative">
+          <Container size="narrow">
+            <motion.div className="text-center mb-10" {...fadeInUp()}>
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">Nasıl Çalışır?</h2>
+            </motion.div>
+
+            <div className={isMobile ? "flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2" : "space-y-6"}>
+              {[
+                { step: "01", title: "Veri Toplama", desc: "Günlük check-in'lerinden, döngü verilerinden ve davranış kalıplarından anlamlı sinyaller çıkarılır." },
+                { step: "02", title: "Örüntü Keşfi", desc: "Yapay zeka, binlerce parametre arasındaki gizli bağlantıları tespit eder. Sen fark etmeden önce." },
+                { step: "03", title: "Profil Oluşturma", desc: "Tüm veriler birleşerek sana özel, dinamik bir profil oluşturur. Her gün biraz daha doğru." },
+                { step: "04", title: "Kişisel İçgörüler", desc: "Profilin, sana özel öneriler ve tahminler üretir. Genel değil, sadece sana ait." },
+              ].map((item, index) => (
+                <motion.div
+                  key={item.step}
+                  className={`flex gap-4 sm:gap-6 ${isMobile ? "min-w-[280px] snap-start rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4" : ""}`}
+                  {...fadeInUp(index * 0.1)}
+                >
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-[#7A8471]/10 border border-[#7A8471]/20 flex items-center justify-center flex-shrink-0">
+                    <span className="text-sm sm:text-base font-mono font-bold text-[#9BA392]">{item.step}</span>
+                  </div>
+                  <div>
+                    <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1">{item.title}</h3>
+                    <p className="text-sm sm:text-base text-foreground-muted">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </Container>
+        </section>
 
         {/* Quote */}
         <section className="section-padding relative">

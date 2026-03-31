@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Container } from "@/components/ui";
+import { Container, AtomAnimation, QuestionPulseAnimation } from "@/components/ui";
 import { Header, Footer } from "@/components/sections";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
@@ -14,22 +14,17 @@ const ENGINES = [
     tagline: "Profil sentezi",
     description: "Çoklu sinyal kaynaklarından kişiselleştirilmiş profil üretir.",
     status: "active",
-    version: "3.0",
+    version: "2.0",
     color: "from-[#7A8471] to-[#5C6455]",
     borderColor: "border-[#7A8471]/30",
     bgColor: "from-[#7A8471]/10 to-[#5C6455]/5",
-    iconBg: "bg-gradient-to-br from-[#7A8471] to-[#5C6455]",
+    iconBg: "bg-transparent",
     specs: [
       { label: "Doğruluk", value: "~%94" },
       { label: "Kapsam", value: "%88" },
     ],
-    icon: (
-      <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-        <path d="M12 2L2 7l10 5 10-5-10-5z" />
-        <path d="M2 17l10 5 10-5" />
-        <path d="M2 12l10 5 10-5" />
-      </svg>
-    ),
+    useAtom: true,
+    icon: null,
     usedIn: ["Moodumuz"],
   },
   {
@@ -43,16 +38,13 @@ const ENGINES = [
     color: "from-violet-500 to-indigo-600",
     borderColor: "border-violet-500/30",
     bgColor: "from-violet-500/10 to-indigo-500/5",
-    iconBg: "bg-gradient-to-br from-violet-500 to-indigo-600",
+    iconBg: "bg-transparent",
     specs: [
       { label: "Katman", value: "3-tier" },
       { label: "Adaptif", value: "Akış" },
     ],
-    icon: (
-      <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-        <path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
+    useLabyrinth: true,
+    icon: null,
     usedIn: ["Moodumuz"],
   },
 ];
@@ -141,19 +133,35 @@ export default function EnginesPage() {
 
                       <div className="relative z-10">
                         {/* Header */}
-                        <div className="flex items-start justify-between mb-4 sm:mb-6">
+                        <div className="mb-4 flex flex-col gap-4 sm:mb-6 sm:flex-row sm:items-start sm:justify-between">
                           <div className="flex items-center gap-3 sm:gap-4">
-                            <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl ${engine.iconBg} flex items-center justify-center shadow-lg`}>
-                              {engine.icon}
-                            </div>
+                            {'useAtom' in engine && engine.useAtom ? (
+                              <AtomAnimation size="sm" animate={!isMobile} />
+                            ) : 'useLabyrinth' in engine && engine.useLabyrinth ? (
+                              <QuestionPulseAnimation size="sm" animate={!isMobile} />
+                            ) : (
+                              <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl ${engine.iconBg} flex items-center justify-center shadow-lg`}>
+                                {engine.icon}
+                              </div>
+                            )}
                             <div>
-                              <div className="flex items-center gap-2 mb-1">
+                              <div className="mb-1 flex flex-wrap items-center gap-2">
                                 <h2 className="text-lg sm:text-2xl font-bold text-foreground">
                                   {engine.shortName}
                                 </h2>
-                                <span className="text-[10px] sm:text-xs font-mono text-foreground-subtle bg-white/5 px-1.5 py-0.5 rounded">
-                                  v{engine.version}
-                                </span>
+                                {'useAtom' in engine && engine.useAtom ? (
+                                  <span className="text-[8px] sm:text-[9px] font-medium text-cyan-400/80 bg-cyan-400/10 px-1.5 py-0.5 rounded border border-cyan-400/20">
+                                    v{engine.version}
+                                  </span>
+                                ) : 'useLabyrinth' in engine && engine.useLabyrinth ? (
+                                  <span className="text-[8px] sm:text-[9px] font-medium text-violet-400/80 bg-violet-400/10 px-1.5 py-0.5 rounded border border-violet-400/20">
+                                    v{engine.version}
+                                  </span>
+                                ) : (
+                                  <span className="ml-2 text-[10px] sm:text-xs font-mono text-foreground-subtle bg-white/5 px-1.5 py-0.5 rounded">
+                                    v{engine.version}
+                                  </span>
+                                )}
                               </div>
                               <p className="text-xs sm:text-sm text-foreground-muted">
                                 {engine.name}
@@ -162,7 +170,7 @@ export default function EnginesPage() {
                           </div>
                           
                           {/* Status indicator */}
-                          <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                          <div className="flex items-center gap-1.5 self-start px-2 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
                             <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                             <span className="text-[10px] sm:text-xs font-mono text-emerald-400">
                               {engine.status}
@@ -181,9 +189,9 @@ export default function EnginesPage() {
                         </p>
 
                         {/* Specs */}
-                        <div className="flex flex-wrap gap-3 sm:gap-4 mb-4 sm:mb-6">
+                        <div className="mb-4 grid grid-cols-2 gap-3 sm:mb-6 sm:gap-4">
                           {engine.specs.map((spec) => (
-                            <div key={spec.label} className="flex items-center gap-1.5">
+                            <div key={spec.label} className="flex items-center gap-1.5 rounded-xl bg-white/[0.03] px-3 py-2">
                               <span className="text-[10px] sm:text-xs font-mono text-foreground-subtle uppercase tracking-wide">
                                 {spec.label}
                               </span>
@@ -195,8 +203,8 @@ export default function EnginesPage() {
                         </div>
 
                         {/* Used in */}
-                        <div className="flex items-center justify-between pt-4 sm:pt-5 border-t border-white/5">
-                          <div className="flex items-center gap-2">
+                        <div className="flex flex-col gap-3 border-t border-white/5 pt-4 sm:flex-row sm:items-center sm:justify-between sm:pt-5">
+                          <div className="flex flex-wrap items-center gap-2">
                             <span className="text-[10px] sm:text-xs text-foreground-subtle">Kullanıldığı ürünler:</span>
                             <div className="flex gap-1.5">
                               {engine.usedIn.map((product) => (
@@ -211,7 +219,7 @@ export default function EnginesPage() {
                           </div>
                           
                           {/* Arrow */}
-                          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors duration-300">
+                          <div className="w-8 h-8 self-end rounded-full bg-white/5 flex items-center justify-center transition-colors duration-300 group-hover:bg-white/10 sm:h-10 sm:w-10 sm:self-auto">
                             <svg 
                               className="w-4 h-4 sm:w-5 sm:h-5 text-foreground-muted group-hover:text-foreground group-hover:translate-x-0.5 transition-all duration-300" 
                               fill="none" 
@@ -274,7 +282,7 @@ export default function EnginesPage() {
                 </span>
               </h2>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+              <div className={isMobile ? "flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2" : "grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6"}>
                 {[
                   {
                     icon: "🎯",
@@ -294,14 +302,14 @@ export default function EnginesPage() {
                 ].map((item, index) => (
                   <motion.div
                     key={item.title}
-                    className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/[0.02] border border-white/[0.06]"
+                    className={`rounded-xl bg-white/[0.02] border border-white/[0.06] p-4 sm:rounded-2xl sm:p-6 ${isMobile ? "min-w-[170px] snap-start" : ""}`}
                     {...fadeInUp(index * 0.1)}
                   >
-                    <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">{item.icon}</div>
-                    <h3 className="text-sm sm:text-base font-semibold text-foreground mb-1">
+                    <div className="mb-2 text-2xl sm:mb-3 sm:text-3xl">{item.icon}</div>
+                    <h3 className="mb-1 text-sm font-semibold text-foreground sm:text-base">
                       {item.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-foreground-muted">
+                    <p className="text-xs leading-relaxed text-foreground-muted sm:text-sm">
                       {item.description}
                     </p>
                   </motion.div>

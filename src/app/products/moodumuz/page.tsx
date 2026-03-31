@@ -9,6 +9,12 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 
 const FEATURES = [
   {
+    icon: "🫶",
+    title: "Döngü Koçluğu",
+    description:
+      "Sadece veri göstermez; o günkü fazına, ruh haline ve ihtiyaçlarına göre sana neyin iyi gelebileceğini söyleyen kişisel koçluk deneyimi sunar.",
+  },
+  {
     icon: "🌸",
     title: "Akıllı Döngü Takibi",
     description:
@@ -30,13 +36,56 @@ const FEATURES = [
     icon: "✨",
     title: "Sana Özel Öneriler",
     description:
-      "Verilerine dayalı haftalık öneriler, semptom rahatlatma ve döngü fazına uygun aktiviteler.",
+      "Verilerine dayalı haftalık öneriler, semptom rahatlatma önerileri ve döngü fazına uygun günlük yönlendirmeler.",
   },
   {
     icon: "📊",
     title: "Trend Analizi",
     description:
       "Ruh hali ve enerji trendlerini izle. Döngü-duygu bağlantılarını keşfet, kalıplarını anla.",
+  },
+];
+
+const COACHING_PILLARS = [
+  {
+    title: "Günlük yönlendirme",
+    description:
+      "Moodumuz her gün nasıl hissettiğini, hangi fazda olduğunu ve o gün sana neyin iyi gelebileceğini sade bir dille söyler.",
+  },
+  {
+    title: "Faz bazlı destek",
+    description:
+      "Menstrüasyon, foliküler faz, ovülasyon ve luteal faz boyunca enerji, odak ve duygu değişimlerine göre öneriler verir.",
+  },
+  {
+    title: "Gerçekten kişisel öneriler",
+    description:
+      "Genel tavsiyeler yerine kendi verin, check-in'lerin ve davranış kalıpların üzerinden ilerleyen bir koçluk deneyimi sunar.",
+  },
+];
+
+const ENGINE_LINKS = [
+  {
+    name: "AQE",
+    fullName: "Adaptive Question Engine",
+    href: "/engines/aqe",
+    accent: "text-violet-400",
+    border: "border-violet-500/20 hover:border-violet-400/40",
+    bg: "from-violet-500/10 via-violet-500/5 to-transparent",
+    badge: "bg-violet-500/10 text-violet-300 border-violet-500/20",
+    description:
+      "Mood check-in akışını herkese aynı şekilde göstermez. AQE, verdiğin yanıtlara göre soruları ve yönlendirmeleri adapte ederek koçluk deneyimini kişiselleştirir.",
+  },
+  {
+    name: "HAE",
+    fullName: "Human Analysis Engine",
+    href: "/engines/hae",
+    accent: "text-[#9BA392]",
+    border: "border-[#7A8471]/20 hover:border-[#9BA392]/40",
+    bg: "from-[#7A8471]/10 via-[#7A8471]/5 to-transparent",
+    badge: "bg-[#7A8471]/10 text-[#9BA392] border-[#7A8471]/20",
+    description:
+      "Döngü verilerini, davranış kalıplarını ve ruh hali sinyallerini bir araya getirir. Böylece Moodumuz sana sadece içerik değil, bağlamını anlayan öneriler sunar.",
   },
 ];
 
@@ -186,7 +235,7 @@ export default function MoodumuzPage() {
                   Arkadaşın
                 </p>
                 <p className="text-xs text-foreground-muted mt-2 leading-relaxed max-w-xs mx-auto">
-                  Seni yargılamayan, döngünü takip eden, burcuna göre kozmik rehberlik sunan dijital arkadaşın.
+                  Seni yargılamayan; döngünü, ruh halini ve ihtiyaçlarını anlayıp her gün koçluk eden dijital arkadaşın.
                 </p>
               </motion.div>
 
@@ -303,9 +352,9 @@ export default function MoodumuzPage() {
                 </p>
 
                 <p className="text-xl text-foreground-muted mb-10 leading-relaxed max-w-xl">
-                  Seni yargılamayan, döngünü takip eden, burcuna göre kozmik
-                  rehberlik sunan ve her gün sana özel içerik üreten dijital
-                  arkadaşın.
+                  Seni yargılamayan; döngünü takip eden, ruh halini anlayan,
+                  kozmik rehberlik sunan ve her gün sana özel koçluk önerileri
+                  üreten dijital arkadaşın.
                 </p>
 
                 <div className="flex gap-4">
@@ -322,6 +371,48 @@ export default function MoodumuzPage() {
                 </div>
 
               </motion.div>
+            </div>
+          </Container>
+        </section>
+
+        <section className="section-padding relative">
+          <Container>
+            <motion.div className="text-center mb-8 sm:mb-14" {...fadeInUp()}>
+              <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-[#7A8471]/10 text-[#9BA392] border border-[#7A8471]/20 mb-4 sm:mb-6">
+                Koçluk Deneyimi
+              </span>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3 sm:mb-4">
+                Moodumuz&apos;un en güçlü yanı{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7A8471] to-[#9BA392]">
+                  kişisel koçluğu
+                </span>
+              </h2>
+              <p className="text-sm sm:text-lg text-foreground-muted max-w-2xl mx-auto leading-relaxed">
+                Moodumuz bir takip uygulamasından fazlası. Verini yorumlayıp sana
+                doğru anda doğru öneriyi veren, günlük hayatında yanında duran
+                dijital bir koç gibi çalışır.
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+              {COACHING_PILLARS.map((pillar, index) => (
+                <motion.div
+                  key={pillar.title}
+                  className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.05] to-white/[0.02] p-5 sm:p-6"
+                  {...fadeInUp(index * 0.08)}
+                  whileHover={isMobile ? {} : { y: -4, transition: { duration: 0.2 } }}
+                >
+                  <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#7A8471]/10 border border-[#7A8471]/20 text-[#9BA392]">
+                    <span className="text-sm font-semibold">{index + 1}</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-foreground mb-2">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-sm text-foreground-muted leading-relaxed">
+                    {pillar.description}
+                  </p>
+                </motion.div>
+              ))}
             </div>
           </Container>
         </section>
@@ -580,6 +671,71 @@ export default function MoodumuzPage() {
           </Container>
         </section>
 
+        <section className="section-padding relative overflow-hidden">
+          <Container>
+            <motion.div className="text-center mb-8 sm:mb-14" {...fadeInUp()}>
+              <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-white/5 text-foreground-muted border border-white/10 mb-4 sm:mb-6">
+                Teknoloji Altyapısı
+              </span>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3 sm:mb-4">
+                Koçluğu mümkün kılan{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-[#9BA392] to-[#7A8471]">
+                  iki motor
+                </span>
+              </h2>
+              <p className="text-sm sm:text-lg text-foreground-muted max-w-3xl mx-auto leading-relaxed">
+                Moodumuz&apos;da kullandığımız teknoloji sadece içerik üretmek için
+                değil, seni daha doğru anlamak ve daha iyi yönlendirmek için
+                çalışır. Soru akışını <span className="text-violet-300">AQE</span>,
+                kişisel analiz katmanını ise <span className="text-[#9BA392]">HAE</span> yönetir.
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+              {ENGINE_LINKS.map((engine, index) => (
+                <motion.div
+                  key={engine.name}
+                  {...fadeInUp(index * 0.08)}
+                  whileHover={isMobile ? {} : { y: -4, transition: { duration: 0.2 } }}
+                >
+                  <Link
+                    href={engine.href}
+                    className={`group block rounded-2xl border bg-gradient-to-br ${engine.bg} ${engine.border} p-6 sm:p-7 transition-all duration-300`}
+                  >
+                    <div className="flex items-start justify-between gap-4 mb-4">
+                      <div>
+                        <div className={`inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] ${engine.badge}`}>
+                          Orbira Engine
+                        </div>
+                        <h3 className={`mt-4 text-2xl sm:text-3xl font-bold ${engine.accent}`}>
+                          {engine.name}
+                        </h3>
+                        <p className="mt-1 text-sm text-foreground-muted">
+                          {engine.fullName}
+                        </p>
+                      </div>
+                      <div className="rounded-xl border border-white/10 bg-black/20 p-2.5 text-foreground-muted group-hover:text-foreground transition-colors">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </div>
+                    </div>
+
+                    <p className="text-sm sm:text-base text-foreground-muted leading-relaxed">
+                      {engine.description}
+                    </p>
+
+                    <div className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-foreground">
+                      Motor sayfasını aç
+                      <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </Container>
+        </section>
+
         {/* Features Section */}
         <section className="section-padding relative" id="features">
           <Container>
@@ -594,8 +750,8 @@ export default function MoodumuzPage() {
                 </span>
               </h2>
               <p className="text-sm sm:text-lg text-foreground-muted max-w-2xl mx-auto">
-                Döngü takibinden AI destekli kozmik rehberliğe, kendini daha iyi
-                anlamak için ihtiyacın olan her şey.
+                Koçluk, döngü takibi ve AI destekli rehberliği bir araya getiren,
+                kendini daha iyi anlaman için tasarlanmış özellikler.
               </p>
             </motion.div>
 

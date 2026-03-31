@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Container, SectionHeader } from "@/components/ui";
+import { Container, SectionHeader, AtomAnimation, QuestionPulseAnimation } from "@/components/ui";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 const ENGINES = [
@@ -12,22 +12,17 @@ const ENGINES = [
     shortName: "HAE",
     description: "Multi-layer profil sentezi. Deep pattern recognition.",
     status: "active",
-    version: "3.0",
+    version: "2.0",
     color: "from-[#7A8471] to-[#5C6455]",
     borderColor: "border-[#7A8471]/20 hover:border-[#7A8471]/40",
     bgColor: "from-[#7A8471]/5 to-[#5C6455]/5",
-    iconBg: "bg-gradient-to-br from-[#7A8471] to-[#5C6455]",
+    iconBg: "bg-transparent",
     specs: [
       { label: "Doğruluk", value: "~%94" },
       { label: "Kapsam", value: "%88" },
     ],
-    icon: (
-      <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-        <path d="M12 2L2 7l10 5 10-5-10-5z" />
-        <path d="M2 17l10 5 10-5" />
-        <path d="M2 12l10 5 10-5" />
-      </svg>
-    ),
+    useAtom: true,
+    icon: null,
   },
   {
     id: "aqe",
@@ -39,16 +34,13 @@ const ENGINES = [
     color: "from-violet-500 to-indigo-600",
     borderColor: "border-violet-500/20 hover:border-violet-500/40",
     bgColor: "from-violet-500/5 to-indigo-500/5",
-    iconBg: "bg-gradient-to-br from-violet-500 to-indigo-600",
+    iconBg: "bg-transparent",
     specs: [
       { label: "Yönlendirme", value: "Adaptif" },
       { label: "Katman", value: "3-tier" },
     ],
-    icon: (
-      <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-        <path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
+    useLabyrinth: true,
+    icon: null,
   },
 ];
 
@@ -85,17 +77,33 @@ export function Engines() {
                     {/* Header */}
                     <div className="flex items-center justify-between mb-3 sm:mb-4">
                       <div className="flex items-center gap-2.5 sm:gap-3">
-                        <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl ${engine.iconBg} flex items-center justify-center shadow-lg`}>
-                          {engine.icon}
-                        </div>
+                        {'useAtom' in engine && engine.useAtom ? (
+                          <AtomAnimation size="xs" animate={!isMobile} />
+                        ) : 'useLabyrinth' in engine && engine.useLabyrinth ? (
+                          <QuestionPulseAnimation size="xs" animate={!isMobile} />
+                        ) : (
+                          <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl ${engine.iconBg} flex items-center justify-center shadow-lg`}>
+                            {engine.icon}
+                          </div>
+                        )}
                         <div>
-                          <div className="flex items-center gap-1.5 mb-0.5">
+                          <div className="inline-flex items-start gap-1.5 mb-0.5">
                             <h3 className="text-base sm:text-lg font-bold text-foreground">
                               {engine.shortName}
                             </h3>
-                            <span className="text-[9px] sm:text-[10px] font-mono text-foreground-subtle bg-white/5 px-1 py-0.5 rounded">
-                              v{engine.version}
-                            </span>
+                            {'useAtom' in engine && engine.useAtom ? (
+                              <span className="text-[6px] sm:text-[7px] font-medium text-cyan-400/80 bg-cyan-400/10 px-1 py-0.5 rounded border border-cyan-400/20 mt-0.5">
+                                v{engine.version}
+                              </span>
+                            ) : 'useLabyrinth' in engine && engine.useLabyrinth ? (
+                              <span className="text-[6px] sm:text-[7px] font-medium text-violet-400/80 bg-violet-400/10 px-1 py-0.5 rounded border border-violet-400/20 mt-0.5">
+                                v{engine.version}
+                              </span>
+                            ) : (
+                              <span className="text-[9px] sm:text-[10px] font-mono text-foreground-subtle bg-white/5 px-1 py-0.5 rounded mt-0.5">
+                                v{engine.version}
+                              </span>
+                            )}
                           </div>
                           <p className="text-[10px] sm:text-xs text-foreground-muted">
                             {engine.name}
