@@ -31,9 +31,9 @@ const FEATURES: FeatureCard[] = [
   {
     eyebrow: "12 Aylık Yolculuk",
     title: "Kişisel Gelişim Koçu",
-    hook: "Sana özel yazılan bir gelişim haritası.",
+    hook: "Sana özel yazılan bir gelişim haritasından fazlası.",
     description:
-      "Moodumuz, HAE ve AQE'nin birlikte çalıştığı kişisel koçluk katmanıyla seni tek bir gün için değil, aylar boyunca okur. Döngün, ruh halin ve cevapların birleşir; ortaya her ay seninle evrilen bir yön haritası çıkar.",
+      "Moodumuz'un koçluk deneyimi, arka planda çalışan AQE ve HAE ile her gün daha da kişiselleşir. AQE, verdiğin yanıtlara göre akışı dinamik biçimde şekillendirir; herkese aynı soruları sormaz, seni daha derin anlamak için en doğru yerden ilerler. HAE ise döngü verilerin, davranış örüntülerin ve günlük sinyallerin arasındaki bağlantıları analiz ederek sana özel yaşayan bir profil oluşturur. Böylece karşına çıkan görevler, öneriler ve geri bildirimler genel tavsiyeler gibi değil; seni tanıdıkça keskinleşen gerçek bir kişisel yönlendirme sistemi gibi çalışır.",
     icon: "coach",
     iconTone: "text-[#9BA392]",
     borderTone: "border-[#7A8471]/25 hover:border-[#7A8471]/45",
@@ -42,9 +42,9 @@ const FEATURES: FeatureCard[] = [
   {
     eyebrow: "Ritmini Gör",
     title: "Döngü Takibi",
-    hook: "Sadece tarih değil, hangi dönemde neye ihtiyacın olduğunu da gösterir.",
+    hook: "Sadece günü değil, o günün sende neyi değiştirdiğini de gösterir.",
     description:
-      "Yaklaşan günleri işaretlemekle kalmaz; enerjinin yükseldiği, içe döndüğün ya da daha hassas hissettiğin dönemleri görünür kılar. Bedenini takip etmek yerine onunla aynı ritimde yaşamaya başlarsın.",
+      "Moodumuz, yaklaşan tarihleri göstermenin ötesine geçer; hangi dönemlerde yükseldiğini, hangi anlarda daha hassaslaştığını, ne zaman içe döndüğünü ve ne zaman daha güçlü aktığını görünür kılar. Zamanla bedeninin ritmiyle duyguların, enerjin ve kararların arasındaki bağı fark etmeye başlarsın. Takip ettiğin şey yalnızca döngün değil; seni yöneten görünmez düzen.",
     icon: "cycle",
     iconTone: "text-cyan-400",
     borderTone: "border-cyan-500/20 hover:border-cyan-400/40",
@@ -53,9 +53,9 @@ const FEATURES: FeatureCard[] = [
   {
     eyebrow: "Kozmik Katman",
     title: "Bilimsel Astroloji",
-    hook: "Gökyüzünü günlük hayatının ritmiyle buluşturan daha derin bir okuma.",
+    hook: "Genel yorumlar değil, sana dokunan daha derin bir okuma.",
     description:
-      "Yüzeysel burç cümleleri yerine zamanın duygusunu, senin ritmini ve o günkü iç dünyanı birlikte okumaya çalışan özel bir katman. Merak uyandıran, kişisel ve şaşırtıcı derecede tanıdık.",
+      "Burada amaç klasik burç cümleleri sunmak değil; zamanın enerjisini, senin ritmini ve o günün iç dünyasını aynı yerde buluşturan daha kişisel bir alan açmak. Bazen açıklayamadığın hislerin, bazen içinden gelen yön değişimlerinin altında ne olduğunu farklı bir yerden görmeye başlarsın. Tanıdık gelir, şaşırtır ve merakını sürekli canlı tutar.",
     icon: "astro",
     iconTone: "text-violet-300",
     borderTone: "border-violet-500/20 hover:border-violet-400/40",
@@ -64,9 +64,9 @@ const FEATURES: FeatureCard[] = [
   {
     eyebrow: "Yakında",
     title: "Karakter Analizi",
-    hook: "Karakter haritan ortaya çıktıkça neden böyle hissettiğini de göreceksin.",
+    hook: "Neden böyle hissettiğini değil, aslında nasıl biri olduğunu da gösterecek.",
     description:
-      "Moodumuz yalnızca modunu değil, kararlarını, eğilimlerini ve gelişim yönlerini de okumaya başlayacak. Zaman içinde büyüyen bir karakter haritası ile kendinin daha derin versiyonunu keşfedeceksin.",
+      "Moodumuz zamanla yalnızca modunu değil; karar alış biçimini, eğilimlerini, tetikleyicilerini, güçlü taraflarını ve seni sabote eden kalıpları da okumaya başlayacak. Ortaya tek bir sonuç değil, giderek derinleşen yaşayan bir karakter haritası çıkacak. Kendine baktığını sanarken, daha önce fark etmediğin bir versiyonunla karşılaşacaksın.",
     comingSoon: true,
     icon: "character",
     iconTone: "text-[#9BA392]",
@@ -76,9 +76,9 @@ const FEATURES: FeatureCard[] = [
   {
     eyebrow: "Yakında",
     title: "Eğlenceli Testler",
-    hook: "Her hafta hem seni anlatan hem paylaşmak isteyeceğin testler.",
+    hook: "Seni anlatan, şaşırtan ve paylaşmak isteyeceğin testler.",
     description:
-      "Gününe, moduna ve arkadaş grubuna göre konuşulacak mini testler. Sonuçlarını tek başına saklamayacak; story'de, mesajda ya da sohbette paylaşmak isteyeceksin.",
+      "Bunlar sıradan internet testleri gibi hissettirmeyecek. Gününe, moduna, enerjine ve karakter akışına göre şekillenen mini deneyimler olacak. Bazen eğlenceli, bazen fazla isabetli, bazen de rahatsız edecek kadar tanıdık. Sonuçlar sadece bakıp geçilecek şeyler değil; paylaşılacak, konuşulacak ve merak uyandıracak kadar güçlü olacak.",
     comingSoon: true,
     icon: "quiz",
     iconTone: "text-violet-300",
@@ -88,9 +88,9 @@ const FEATURES: FeatureCard[] = [
   {
     eyebrow: "Yakında",
     title: "Haftanın Stickeri",
-    hook: "Haftanın enerjisini taşıyan küçük ama çok paylaşılır drop'lar.",
+    hook: "O haftanın enerjisini taşıyan küçük ama etkisi büyük bir drop.",
     description:
-      "Instagram dump'larına, hikayelerine ve arkadaş sohbetlerine bırakabileceğin özel sticker ve görseller. Moodumuz'un dünyası uygulamanın dışına taşacak.",
+      "Her hafta ruh haline, döneme ve o anki enerjine dokunan özel sticker'lar ve görseller açılacak. Sadece tatlı bir detay gibi görünmeyecek; o haftanın hissini dışarı taşıyan küçük bir kimlik parçasına dönüşecek. Story'de, mesajda, sohbette ya da dump'ında kullanmak isteyeceğin kadar senin gibi; başkalarının da \"bu tam olarak ne?\" diye merak edeceği kadar farklı.",
     comingSoon: true,
     icon: "sticker",
     iconTone: "text-cyan-400",
@@ -423,7 +423,7 @@ export default function MoodumuzPage() {
               </p>
             </motion.div>
 
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-6xl mx-auto px-4 sm:px-0">
               <div className="mb-6 sm:mb-8 flex items-center justify-between gap-3">
                 <div>
                   <p className="text-[11px] sm:text-xs uppercase tracking-[0.24em] text-foreground-muted/60 mb-1">
@@ -439,36 +439,29 @@ export default function MoodumuzPage() {
                 {FEATURES.filter((feature) => !feature.comingSoon).map((feature, index) => (
                   <motion.div
                     key={feature.title}
-                    className={`group relative overflow-hidden rounded-2xl sm:rounded-3xl border ${feature.borderTone} bg-gradient-to-br ${feature.backgroundTone} p-5 sm:p-7 lg:min-h-[340px] transition-all duration-300`}
+                    className={`group relative overflow-hidden rounded-2xl sm:rounded-3xl border ${feature.borderTone} bg-gradient-to-br ${feature.backgroundTone} p-4 sm:p-6 transition-all duration-300`}
                     {...fadeInUp(index * 0.08)}
                     whileHover={isMobile ? {} : { y: -6, transition: { duration: 0.22 } }}
                   >
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.12),transparent_45%)] opacity-60 pointer-events-none" />
                   <div className="relative z-10 flex h-full flex-col">
-                    <div className="mb-3 flex items-center justify-between gap-4">
-                      <span className="text-[10px] sm:text-xs uppercase tracking-[0.24em] text-foreground-muted/65">
-                        {feature.eyebrow}
-                      </span>
-                    </div>
-
-                    <div className="mb-4">
-                      <div className="flex items-start gap-3 mb-2">
-                        <div className={`flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl border border-white/10 bg-black/20 ${feature.iconTone} flex-shrink-0`}>
-                          <FeatureIcon icon={feature.icon} className="h-5 w-5 sm:h-6 sm:w-6" />
-                        </div>
-                        <h3 className="text-xl sm:text-2xl font-bold text-foreground leading-tight">
-                          {feature.title}
-                        </h3>
+                    <div className="flex items-center gap-2.5 mb-2.5">
+                      <div className={`flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg border border-white/10 bg-black/20 ${feature.iconTone} flex-shrink-0`}>
+                        <FeatureIcon icon={feature.icon} className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
                       </div>
-                      <p className="text-sm sm:text-lg font-medium text-foreground/85 leading-relaxed">
-                        {feature.hook}
-                      </p>
+                      <h3 className="text-lg sm:text-xl font-bold text-foreground leading-tight">
+                        {feature.title}
+                      </h3>
                     </div>
 
-                      <p className="text-sm sm:text-base text-foreground-muted leading-relaxed max-w-md mt-auto">
-                        {feature.description}
-                      </p>
-                    </div>
+                    <p className="text-sm sm:text-base font-medium text-foreground/85 leading-snug mb-2">
+                      {feature.hook}
+                    </p>
+
+                    <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </div>
                   </motion.div>
                 ))}
               </div>
@@ -494,27 +487,27 @@ export default function MoodumuzPage() {
                   >
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.09),transparent_40%)] opacity-70 pointer-events-none" />
                   <div className="relative z-10">
-                    <div className="mb-3 flex items-start justify-between gap-3">
-                      <span className="inline-flex rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.22em] text-foreground-muted/80">
+                    <div className="flex items-center justify-between gap-2 mb-2.5">
+                      <div className="flex items-center gap-2">
+                        <div className={`flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-lg border border-white/10 bg-black/20 ${feature.iconTone} flex-shrink-0`}>
+                          <FeatureIcon icon={feature.icon} className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
+                        </div>
+                        <h4 className="text-base sm:text-lg font-semibold text-foreground leading-tight">
+                          {feature.title}
+                        </h4>
+                      </div>
+                      <span className="inline-flex rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[9px] font-medium uppercase tracking-[0.18em] text-foreground-muted/70 whitespace-nowrap">
                         Yakında
                       </span>
                     </div>
 
-                    <div className="flex items-start gap-3 mb-2">
-                      <div className={`flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-black/20 ${feature.iconTone} flex-shrink-0`}>
-                        <FeatureIcon icon={feature.icon} className="h-5 w-5" />
-                      </div>
-                      <h4 className="text-base sm:text-lg font-semibold text-foreground leading-tight">
-                        {feature.title}
-                      </h4>
-                    </div>
-                      <p className="text-sm text-foreground/85 leading-relaxed mb-3">
-                        {feature.hook}
-                      </p>
-                      <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed">
-                        {feature.description}
-                      </p>
-                    </div>
+                    <p className="text-sm text-foreground/85 leading-snug mb-1.5">
+                      {feature.hook}
+                    </p>
+                    <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </div>
                   </motion.div>
                 ))}
               </div>
