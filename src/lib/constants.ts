@@ -162,10 +162,10 @@ export const PROCESS_STEPS = [
 ];
 
 export const FOUNDER = {
-  name: "Seyyit Ali Perse",
+  name: "Eren Kayacan",
   role: "Kurucu & Geliştirici",
   bio: "Global ölçekte farklı sektörlerde mobil ve web uygulama geliştirme deneyimine sahip yazılım mühendisi.",
-  image: "/images/founder.png",
+  image: "/images/eren-placeholder.svg",
   experience: [
     { company: "Nesine", domain: "İddaa Platformu", country: "Türkiye", flag: "🇹🇷" },
     { company: "SwissSign", domain: "Dijital Sertifika & PKI", country: "İsviçre", flag: "🇨🇭" },
@@ -177,10 +177,10 @@ export const FOUNDER = {
 
 export const TEAM_MEMBERS = [
   {
-    name: "Seyyit Ali Perse",
-    mobileName: "Ali Perse",
+    name: "Eren Kayacan",
+    mobileName: "Eren Kayacan",
     role: "Kurucu & Ürün Mühendisi",
-    image: "/images/founder.png",
+    image: "/images/eren-placeholder.svg",
     imageClassName: "object-cover object-[center_30%]",
     shortBio: "Orbira Labs'ı kuran ve ürün vizyonunu şekillendiren isim.",
     fullBio: `Orbira Labs'ın kurucusu olarak ürün stratejisi, teknoloji ve kullanıcı deneyimini birlikte ele alıyor. 7+ yıllık global deneyimi boyunca farklı ekipler, pazarlar ve iş modelleri içinde çalışarak fikir aşamasından ölçeklenebilir ürüne uzanan süreçlerde aktif rol aldı.
