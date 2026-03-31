@@ -110,7 +110,7 @@ export default function EnginesPage() {
         {/* Engines Grid */}
         <section className="section-padding relative">
           <Container>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8">
               {ENGINES.map((engine, index) => (
                 <motion.div
                   key={engine.id}
@@ -232,9 +232,9 @@ export default function EnginesPage() {
                 </motion.div>
               ))}
 
-              {/* Coming Soon Card */}
+              {/* Coming Soon Card — hidden on mobile */}
               <motion.div
-                className="relative h-full min-h-[280px] sm:min-h-[320px] p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-white/[0.02] border border-white/[0.06] border-dashed overflow-hidden flex items-center justify-center"
+                className="hidden sm:flex relative h-full min-h-[280px] sm:min-h-[320px] p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-white/[0.02] border border-white/[0.06] border-dashed overflow-hidden items-center justify-center"
                 {...fadeInUp(0.2)}
               >
                 <div className="text-center">
@@ -278,7 +278,7 @@ export default function EnginesPage() {
                 </span>
               </h2>
 
-              <div className={isMobile ? "flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2" : "grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6"}>
+              <div className="grid grid-cols-3 gap-2 sm:gap-6">
                 {[
                   {
                     icon: "🎯",
@@ -298,14 +298,14 @@ export default function EnginesPage() {
                 ].map((item, index) => (
                   <motion.div
                     key={item.title}
-                    className={`rounded-xl bg-white/[0.02] border border-white/[0.06] p-4 sm:rounded-2xl sm:p-6 ${isMobile ? "min-w-[170px] snap-start" : ""}`}
+                    className="rounded-xl bg-white/[0.02] border border-white/[0.06] p-3 sm:rounded-2xl sm:p-6"
                     {...fadeInUp(index * 0.1)}
                   >
-                    <div className="mb-2 text-2xl sm:mb-3 sm:text-3xl">{item.icon}</div>
-                    <h3 className="mb-1 text-sm font-semibold text-foreground sm:text-base">
+                    <div className="mb-1.5 text-xl sm:mb-3 sm:text-3xl">{item.icon}</div>
+                    <h3 className="mb-0.5 text-xs font-semibold text-foreground sm:mb-1 sm:text-base">
                       {item.title}
                     </h3>
-                    <p className="text-xs leading-relaxed text-foreground-muted sm:text-sm">
+                    <p className="text-[10px] leading-relaxed text-foreground-muted sm:text-sm">
                       {item.description}
                     </p>
                   </motion.div>

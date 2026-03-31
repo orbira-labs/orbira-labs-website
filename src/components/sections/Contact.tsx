@@ -29,7 +29,7 @@ export function Contact() {
           </p>
 
           {/* Contact pathways */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-8 sm:mb-10">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-8 sm:mb-10">
             <motion.div
               className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 border border-border text-left transition-all duration-300 hover:border-border-hover hover:-translate-y-1"
               whileHover={isMobile ? {} : { scale: 1.02 }}

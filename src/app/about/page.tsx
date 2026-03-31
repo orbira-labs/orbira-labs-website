@@ -110,7 +110,7 @@ export default function AboutPage() {
                         alt={member.name}
                         fill
                         sizes="80px"
-                        className="object-cover"
+                        className={member.imageClassName || "object-cover"}
                       />
                     </div>
                     <div>

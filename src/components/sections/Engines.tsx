@@ -56,18 +56,18 @@ export function Engines() {
           description="Ürünlerimize güç veren hybrid yapay zeka motorları."
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
           {ENGINES.map((engine, index) => (
             <motion.div
               key={engine.id}
               initial={{ opacity: 0, y: isMobile ? 12 : 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: isMobile ? 0.2 : 0.4, delay: index * 0.1 }}
+              transition={{ duration: isMobile ? 0.3 : 0.4, delay: index * 0.1 }}
             >
               <Link href={`/engines/${engine.id}`}>
                 <motion.div
-                  className={`group relative h-full p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br ${engine.bgColor} border ${engine.borderColor} overflow-hidden transition-all duration-300`}
+                  className={`group relative h-full p-3 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br ${engine.bgColor} border ${engine.borderColor} overflow-hidden transition-all duration-300`}
                   whileHover={isMobile ? {} : { y: -5, transition: { duration: 0.2 } }}
                 >
                   {/* Subtle glow on hover */}
@@ -75,12 +75,12 @@ export function Engines() {
 
                   <div className="relative z-10">
                     {/* Header */}
-                    <div className="flex items-center justify-between mb-3 sm:mb-4">
-                      <div className="flex items-center gap-2.5 sm:gap-3">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 sm:mb-4 gap-2">
+                      <div className="flex items-center gap-2 sm:gap-3">
                         {'useAtom' in engine && engine.useAtom ? (
-                          <AtomAnimation size="xs" animate={!isMobile} />
+                          <AtomAnimation size="xs" animate={true} slow={isMobile} />
                         ) : 'useLabyrinth' in engine && engine.useLabyrinth ? (
-                          <QuestionPulseAnimation size="xs" animate={!isMobile} />
+                          <QuestionPulseAnimation size="xs" animate={true} slow={isMobile} />
                         ) : (
                           <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl ${engine.iconBg} flex items-center justify-center shadow-lg`}>
                             {engine.icon}
@@ -101,14 +101,14 @@ export function Engines() {
                               </span>
                             </div>
                           )}
-                          <p className="text-[10px] sm:text-xs text-foreground-muted">
+                          <p className="text-[10px] sm:text-xs text-foreground-muted hidden sm:block">
                             {engine.name}
                           </p>
                         </div>
                       </div>
 
                       {/* Status */}
-                      <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                      <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 w-fit">
                         <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                         <span className="text-[8px] sm:text-[10px] font-mono text-emerald-400">
                           {engine.status}
@@ -117,19 +117,19 @@ export function Engines() {
                     </div>
 
                     {/* Description */}
-                    <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed mb-3 sm:mb-4 line-clamp-2">
+                    <p className="text-[10px] sm:text-sm text-foreground-muted leading-relaxed mb-3 sm:mb-4 line-clamp-2">
                       {engine.description}
                     </p>
 
                     {/* Footer */}
-                    <div className="flex items-center justify-between pt-3 border-t border-white/5">
-                      <div className="flex gap-3 sm:gap-4">
+                    <div className="flex items-center justify-between pt-2 sm:pt-3 border-t border-white/5">
+                      <div className="flex flex-col sm:flex-row gap-1 sm:gap-4">
                         {engine.specs.map((spec) => (
                           <div key={spec.label} className="flex items-center gap-1">
-                            <span className="text-[9px] sm:text-[10px] font-mono text-foreground-subtle uppercase">
+                            <span className="text-[8px] sm:text-[10px] font-mono text-foreground-subtle uppercase">
                               {spec.label}
                             </span>
-                            <span className="text-[9px] sm:text-[10px] font-mono text-foreground font-medium">
+                            <span className="text-[8px] sm:text-[10px] font-mono text-foreground font-medium">
                               {spec.value}
                             </span>
                           </div>
@@ -137,9 +137,9 @@ export function Engines() {
                       </div>
 
                       {/* Arrow */}
-                      <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors duration-300">
+                      <div className="w-5 h-5 sm:w-8 sm:h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors duration-300 flex-shrink-0">
                         <svg
-                          className="w-3 h-3 sm:w-4 sm:h-4 text-foreground-muted group-hover:text-foreground group-hover:translate-x-0.5 transition-all duration-300"
+                          className="w-2.5 h-2.5 sm:w-4 sm:h-4 text-foreground-muted group-hover:text-foreground group-hover:translate-x-0.5 transition-all duration-300"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -154,13 +154,13 @@ export function Engines() {
             </motion.div>
           ))}
 
-          {/* Coming Soon Card */}
+          {/* Coming Soon Card — hidden on mobile */}
           <motion.div
-            className="relative h-full min-h-[160px] sm:min-h-[200px] p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/[0.02] border border-white/[0.06] border-dashed flex items-center justify-center"
-            initial={{ opacity: 0, y: isMobile ? 12 : 30 }}
+            className="hidden lg:flex relative h-full min-h-[160px] sm:min-h-[200px] p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/[0.02] border border-white/[0.06] border-dashed items-center justify-center"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: isMobile ? 0.2 : 0.4, delay: 0.2 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
           >
             <div className="text-center">
               <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center mx-auto mb-2 sm:mb-3">

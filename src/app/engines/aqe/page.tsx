@@ -253,20 +253,20 @@ export default function AQEPage() {
                       <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10" />
                     </div>
 
-                    <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0">
+                    <div className="grid grid-cols-3 gap-2 sm:gap-4">
                       {QUESTION_TIERS.map((tier, index) => (
                         <motion.div
                           key={tier.name}
-                          className={`min-w-[220px] snap-start rounded-xl border bg-gradient-to-b p-4 sm:min-w-0 sm:p-5 ${tier.color} ${tier.borderColor}`}
+                          className={`rounded-xl border bg-gradient-to-b p-2.5 sm:p-5 ${tier.color} ${tier.borderColor}`}
                           initial={{ opacity: 0, y: 20 }}
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
                           transition={{ duration: 0.5, delay: index * 0.1 }}
                         >
-                          <div className="flex items-center gap-2">
-                            <div className={`w-2 h-2 rounded-full ${tier.dotColor}`} />
-                            <span className="text-sm font-semibold text-foreground">{tier.name}</span>
-                            <span className="text-xs font-mono text-foreground-muted ml-auto">{tier.count}</span>
+                          <div className="flex items-center gap-1.5 sm:gap-2">
+                            <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${tier.dotColor} flex-shrink-0`} />
+                            <span className="text-[10px] sm:text-sm font-semibold text-foreground truncate">{tier.name}</span>
+                            <span className="text-[9px] sm:text-xs font-mono text-foreground-muted ml-auto flex-shrink-0">{tier.count}</span>
                           </div>
                         </motion.div>
                       ))}
@@ -330,19 +330,19 @@ export default function AQEPage() {
               </p>
             </motion.div>
 
-            <div className={isMobile ? "flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2" : "space-y-6"}>
+            <div className="grid grid-cols-4 gap-2 sm:grid-cols-1 sm:gap-0 sm:space-y-6">
               {HOW_IT_WORKS.map((item, index) => (
                 <motion.div
                   key={item.step}
-                  className={`flex gap-4 sm:gap-6 ${isMobile ? "min-w-[280px] snap-start rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4" : ""}`}
+                  className="flex flex-col items-center text-center sm:flex-row sm:text-left sm:items-start gap-1.5 sm:gap-6 rounded-xl border border-white/[0.06] bg-white/[0.02] p-2.5 sm:border-0 sm:bg-transparent sm:p-0 sm:rounded-none"
                   {...fadeInUp(index * 0.1)}
                 >
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center flex-shrink-0">
-                    <span className="text-sm sm:text-base font-mono font-bold text-violet-400">{item.step}</span>
+                  <div className="w-8 h-8 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center flex-shrink-0">
+                    <span className="text-[10px] sm:text-base font-mono font-bold text-violet-400">{item.step}</span>
                   </div>
                   <div>
-                    <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1">{item.title}</h3>
-                    <p className="text-sm sm:text-base text-foreground-muted">{item.desc}</p>
+                    <h3 className="text-[11px] sm:text-lg font-semibold text-foreground sm:mb-1">{item.title}</h3>
+                    <p className="hidden sm:block text-base text-foreground-muted leading-normal">{item.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -360,19 +360,19 @@ export default function AQEPage() {
               <p className="text-foreground-muted max-w-xl mx-auto">Klasik anketlerin ötesinde, akıllı soru yönetimi.</p>
             </motion.div>
 
-            <div className={isMobile ? "flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2" : "grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6"}>
+            <div className="grid grid-cols-2 gap-3 sm:gap-6">
               {CAPABILITIES.map((cap, index) => (
                 <motion.div
                   key={cap.title}
-                  className={`group rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 transition-all duration-300 hover:border-violet-500/30 sm:rounded-2xl sm:p-8 ${isMobile ? "min-w-[280px] snap-start" : ""}`}
+                  className="group rounded-xl border border-white/[0.06] bg-white/[0.02] p-3 transition-all duration-300 hover:border-violet-500/30 sm:rounded-2xl sm:p-8"
                   {...fadeInUp(index * 0.1)}
                   whileHover={isMobile ? {} : { y: -3 }}
                 >
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-400 mb-4 group-hover:bg-violet-500/15 transition-colors">
+                  <div className="w-9 h-9 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-400 mb-2 sm:mb-4 group-hover:bg-violet-500/15 transition-colors [&>svg]:w-4 [&>svg]:h-4 sm:[&>svg]:w-6 sm:[&>svg]:h-6">
                     {cap.icon}
                   </div>
-                  <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2">{cap.title}</h3>
-                  <p className="text-sm sm:text-base text-foreground-muted leading-relaxed">{cap.description}</p>
+                  <h3 className="text-sm sm:text-xl font-semibold text-foreground mb-1 sm:mb-2">{cap.title}</h3>
+                  <p className="text-[10px] sm:text-base text-foreground-muted leading-relaxed">{cap.description}</p>
                 </motion.div>
               ))}
             </div>

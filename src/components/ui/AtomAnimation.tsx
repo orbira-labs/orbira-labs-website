@@ -9,6 +9,7 @@ interface AtomAnimationProps {
   size?: AtomSize;
   className?: string;
   animate?: boolean;
+  slow?: boolean;
 }
 
 const sizeConfig: Record<AtomSize, { container: string; nucleus: string; glow: string }> = {
@@ -34,9 +35,10 @@ const sizeConfig: Record<AtomSize, { container: string; nucleus: string; glow: s
   },
 };
 
-export function AtomAnimation({ size = "lg", className = "", animate = true }: AtomAnimationProps) {
+export function AtomAnimation({ size = "lg", className = "", animate = true, slow = false }: AtomAnimationProps) {
   const id = useId();
   const config = sizeConfig[size];
+  const s = slow ? 2 : 1;
 
   return (
     <div 
@@ -59,12 +61,12 @@ export function AtomAnimation({ size = "lg", className = "", animate = true }: A
             </defs>
             <ellipse cx="0" cy="0" rx="85" ry="85" fill="none" stroke="rgba(34,211,238,0.5)" strokeWidth="1.2" />
             <circle r="6" fill="#22d3ee" filter={`url(#${id}-glow1)`}>
-              <animateMotion dur="4s" repeatCount="indefinite">
+              <animateMotion dur={`${4 * s}s`} repeatCount="indefinite">
                 <mpath href={`#${id}-orbitPath1`} />
               </animateMotion>
             </circle>
             <circle r="4" fill="#67e8f9" opacity="0.8" filter={`url(#${id}-glow1)`}>
-              <animateMotion dur="4s" repeatCount="indefinite" begin="-2s">
+              <animateMotion dur={`${4 * s}s`} repeatCount="indefinite" begin={`-${2 * s}s`}>
                 <mpath href={`#${id}-orbitPath1`} />
               </animateMotion>
             </circle>
@@ -85,12 +87,12 @@ export function AtomAnimation({ size = "lg", className = "", animate = true }: A
             </defs>
             <ellipse cx="0" cy="0" rx="85" ry="85" fill="none" stroke="rgba(56,189,248,0.45)" strokeWidth="1.2" />
             <circle r="5.5" fill="#38bdf8" filter={`url(#${id}-glow2)`}>
-              <animateMotion dur="5s" repeatCount="indefinite">
+              <animateMotion dur={`${5 * s}s`} repeatCount="indefinite">
                 <mpath href={`#${id}-orbitPath2`} />
               </animateMotion>
             </circle>
             <circle r="3.5" fill="#7dd3fc" opacity="0.75" filter={`url(#${id}-glow2)`}>
-              <animateMotion dur="5s" repeatCount="indefinite" begin="-2.5s">
+              <animateMotion dur={`${5 * s}s`} repeatCount="indefinite" begin={`-${2.5 * s}s`}>
                 <mpath href={`#${id}-orbitPath2`} />
               </animateMotion>
             </circle>
@@ -111,12 +113,12 @@ export function AtomAnimation({ size = "lg", className = "", animate = true }: A
             </defs>
             <ellipse cx="0" cy="0" rx="85" ry="85" fill="none" stroke="rgba(94,234,212,0.4)" strokeWidth="1.2" />
             <circle r="5" fill="#2dd4bf" filter={`url(#${id}-glow3)`}>
-              <animateMotion dur="6s" repeatCount="indefinite">
+              <animateMotion dur={`${6 * s}s`} repeatCount="indefinite">
                 <mpath href={`#${id}-orbitPath3`} />
               </animateMotion>
             </circle>
             <circle r="3.5" fill="#5eead4" opacity="0.7" filter={`url(#${id}-glow3)`}>
-              <animateMotion dur="6s" repeatCount="indefinite" begin="-3s">
+              <animateMotion dur={`${6 * s}s`} repeatCount="indefinite" begin={`-${3 * s}s`}>
                 <mpath href={`#${id}-orbitPath3`} />
               </animateMotion>
             </circle>
@@ -142,7 +144,7 @@ export function AtomAnimation({ size = "lg", className = "", animate = true }: A
             "0 0 25px 8px rgba(34,211,238,0.5), 0 0 50px 15px rgba(34,211,238,0.25), inset 0 0 10px rgba(255,255,255,0.3)",
           ],
         } : {}}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 2 * s, repeat: Infinity, ease: "easeInOut" }}
       />
     </div>
   );

@@ -42,11 +42,12 @@ export function Founder() {
                   alt={member.name}
                   fill
                   sizes="(max-width: 640px) 80px, (max-width: 1024px) 112px, 128px"
-                  className="object-cover"
+                  className={member.imageClassName || "object-cover"}
                 />
               </div>
               <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-foreground mb-0.5 sm:mb-1">
-                {member.name}
+                <span className="sm:hidden">{member.mobileName || member.name}</span>
+                <span className="hidden sm:inline">{member.name}</span>
               </h3>
               <p className="text-brand-primary font-medium text-[10px] sm:text-xs lg:text-sm">
                 {member.role}

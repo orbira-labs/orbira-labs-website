@@ -9,6 +9,7 @@ interface QuestionPulseAnimationProps {
   size?: PulseSize;
   className?: string;
   animate?: boolean;
+  slow?: boolean;
 }
 
 const sizeConfig: Record<PulseSize, { container: string; center: string; centerText: string }> = {
@@ -44,9 +45,10 @@ const floatingQuestions = [
   { x: 65, y: -5, delay: 2.8, duration: 3.9 },
 ];
 
-export function QuestionPulseAnimation({ size = "lg", className = "", animate = true }: QuestionPulseAnimationProps) {
+export function QuestionPulseAnimation({ size = "lg", className = "", animate = true, slow = false }: QuestionPulseAnimationProps) {
   const id = useId();
   const config = sizeConfig[size];
+  const s = slow ? 2 : 1;
 
   return (
     <div className={`relative ${config.container} flex items-center justify-center ${className}`}>
@@ -66,7 +68,6 @@ export function QuestionPulseAnimation({ size = "lg", className = "", animate = 
               </filter>
             </defs>
 
-            {/* Labyrinth paths - concentric with openings */}
             {/* Outer ring */}
             <motion.path
               d="M -70 0 A 70 70 0 0 1 0 -70"
@@ -76,7 +77,7 @@ export function QuestionPulseAnimation({ size = "lg", className = "", animate = 
               strokeLinecap="round"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: [0, 1, 1, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              transition={{ duration: 6 * s, repeat: Infinity, ease: "easeInOut" }}
             />
             <motion.path
               d="M 35 -60 A 70 70 0 0 1 70 0"
@@ -86,7 +87,7 @@ export function QuestionPulseAnimation({ size = "lg", className = "", animate = 
               strokeLinecap="round"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: [0, 1, 1, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              transition={{ duration: 6 * s, repeat: Infinity, ease: "easeInOut", delay: 0.5 * s }}
             />
             <motion.path
               d="M 70 0 A 70 70 0 0 1 0 70"
@@ -96,7 +97,7 @@ export function QuestionPulseAnimation({ size = "lg", className = "", animate = 
               strokeLinecap="round"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: [0, 1, 1, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              transition={{ duration: 6 * s, repeat: Infinity, ease: "easeInOut", delay: 1 * s }}
             />
             <motion.path
               d="M -35 60 A 70 70 0 0 1 -70 0"
@@ -106,7 +107,7 @@ export function QuestionPulseAnimation({ size = "lg", className = "", animate = 
               strokeLinecap="round"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: [0, 1, 1, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+              transition={{ duration: 6 * s, repeat: Infinity, ease: "easeInOut", delay: 1.5 * s }}
             />
 
             {/* Middle ring */}
@@ -118,7 +119,7 @@ export function QuestionPulseAnimation({ size = "lg", className = "", animate = 
               strokeLinecap="round"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: [0, 1, 1, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+              transition={{ duration: 5 * s, repeat: Infinity, ease: "easeInOut", delay: 0.3 * s }}
             />
             <motion.path
               d="M 50 0 A 50 50 0 0 1 -25 43"
@@ -128,7 +129,7 @@ export function QuestionPulseAnimation({ size = "lg", className = "", animate = 
               strokeLinecap="round"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: [0, 1, 1, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+              transition={{ duration: 5 * s, repeat: Infinity, ease: "easeInOut", delay: 0.8 * s }}
             />
             <motion.path
               d="M -50 10 A 50 50 0 0 1 -20 -46"
@@ -138,7 +139,7 @@ export function QuestionPulseAnimation({ size = "lg", className = "", animate = 
               strokeLinecap="round"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: [0, 1, 1, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1.3 }}
+              transition={{ duration: 5 * s, repeat: Infinity, ease: "easeInOut", delay: 1.3 * s }}
             />
 
             {/* Inner ring */}
@@ -150,7 +151,7 @@ export function QuestionPulseAnimation({ size = "lg", className = "", animate = 
               strokeLinecap="round"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: [0, 1, 1, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+              transition={{ duration: 4 * s, repeat: Infinity, ease: "easeInOut", delay: 0.2 * s }}
             />
             <motion.path
               d="M 26 15 A 30 30 0 0 1 -15 26"
@@ -160,7 +161,7 @@ export function QuestionPulseAnimation({ size = "lg", className = "", animate = 
               strokeLinecap="round"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: [0, 1, 1, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
+              transition={{ duration: 4 * s, repeat: Infinity, ease: "easeInOut", delay: 0.7 * s }}
             />
 
             {/* Connecting paths between rings */}
@@ -171,7 +172,7 @@ export function QuestionPulseAnimation({ size = "lg", className = "", animate = 
               strokeLinecap="round"
               initial={{ opacity: 0 }}
               animate={{ opacity: [0, 0.6, 0.6, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              transition={{ duration: 4 * s, repeat: Infinity, ease: "easeInOut", delay: 0.5 * s }}
             />
             <motion.line
               x1="50" y1="0" x2="70" y2="0"
@@ -180,7 +181,7 @@ export function QuestionPulseAnimation({ size = "lg", className = "", animate = 
               strokeLinecap="round"
               initial={{ opacity: 0 }}
               animate={{ opacity: [0, 0.6, 0.6, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              transition={{ duration: 4 * s, repeat: Infinity, ease: "easeInOut", delay: 1 * s }}
             />
             <motion.line
               x1="-30" y1="0" x2="-50" y2="0"
@@ -189,7 +190,7 @@ export function QuestionPulseAnimation({ size = "lg", className = "", animate = 
               strokeLinecap="round"
               initial={{ opacity: 0 }}
               animate={{ opacity: [0, 0.6, 0.6, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+              transition={{ duration: 4 * s, repeat: Infinity, ease: "easeInOut", delay: 1.5 * s }}
             />
             <motion.line
               x1="0" y1="30" x2="0" y2="50"
@@ -198,7 +199,7 @@ export function QuestionPulseAnimation({ size = "lg", className = "", animate = 
               strokeLinecap="round"
               initial={{ opacity: 0 }}
               animate={{ opacity: [0, 0.6, 0.6, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+              transition={{ duration: 4 * s, repeat: Infinity, ease: "easeInOut", delay: 2 * s }}
             />
 
             {/* Floating question marks */}
@@ -220,17 +221,17 @@ export function QuestionPulseAnimation({ size = "lg", className = "", animate = 
                   x: [q.x, q.x + (i % 2 === 0 ? 5 : -5), q.x],
                 }}
                 transition={{
-                  duration: q.duration,
+                  duration: q.duration * s,
                   repeat: Infinity,
                   ease: "easeInOut",
-                  delay: q.delay,
+                  delay: q.delay * s,
                 }}
               >
                 ?
               </motion.text>
             ))}
 
-            {/* Path finder dot - navigating through the maze */}
+            {/* Path finder dot */}
             <motion.circle
               r="4"
               fill="#a78bfa"
@@ -240,7 +241,7 @@ export function QuestionPulseAnimation({ size = "lg", className = "", animate = 
                 cy: [-15, -30, -30, 0, 30, 50, 30, 30, 0, -30, -15],
               }}
               transition={{
-                duration: 8,
+                duration: 8 * s,
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
@@ -266,7 +267,7 @@ export function QuestionPulseAnimation({ size = "lg", className = "", animate = 
             "0 0 20px 6px rgba(167,139,250,0.5), 0 0 40px 12px rgba(167,139,250,0.25), inset 0 0 8px rgba(255,255,255,0.3)",
           ],
         } : {}}
-        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 2.5 * s, repeat: Infinity, ease: "easeInOut" }}
       >
         <span className={`${config.centerText} font-bold text-white drop-shadow-lg`}>?</span>
       </motion.div>

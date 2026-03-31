@@ -336,16 +336,16 @@ export default function HAEPage() {
               </p>
             </motion.div>
 
-            <div className={isMobile ? "flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2" : "grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6"}>
+            <div className="grid grid-cols-3 gap-2 sm:gap-6">
               {ANALYSIS_DOMAINS.map((domain, index) => (
                 <motion.div
                   key={domain.name}
-                  className={`rounded-xl border bg-gradient-to-b p-6 sm:rounded-2xl sm:p-8 ${domain.color} ${domain.borderColor} ${isMobile ? "min-w-[260px] snap-start" : ""}`}
+                  className={`rounded-xl border bg-gradient-to-b p-3 sm:rounded-2xl sm:p-8 ${domain.color} ${domain.borderColor}`}
                   {...fadeInUp(index * 0.1)}
                   whileHover={isMobile ? {} : { y: -5 }}
                 >
-                  <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2">{domain.name}</h3>
-                  <p className="text-sm sm:text-base text-foreground-muted">{domain.desc}</p>
+                  <h3 className="text-sm sm:text-2xl font-bold text-foreground mb-1 sm:mb-2">{domain.name}</h3>
+                  <p className="text-[10px] sm:text-base text-foreground-muted leading-snug">{domain.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -362,19 +362,19 @@ export default function HAEPage() {
               <p className="text-foreground-muted max-w-xl mx-auto">Yılların Ar-Ge&apos;si, tek bir sistemde.</p>
             </motion.div>
 
-            <div className={isMobile ? "flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2" : "grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6"}>
+            <div className="grid grid-cols-2 gap-3 sm:gap-6">
               {CAPABILITIES.map((cap, index) => (
                 <motion.div
                   key={cap.title}
-                  className={`group rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 transition-all duration-300 hover:border-cyan-500/30 sm:rounded-2xl sm:p-8 ${isMobile ? "min-w-[280px] snap-start" : ""}`}
+                  className="group rounded-xl border border-white/[0.06] bg-white/[0.02] p-3 transition-all duration-300 hover:border-cyan-500/30 sm:rounded-2xl sm:p-8"
                   {...fadeInUp(index * 0.1)}
                   whileHover={isMobile ? {} : { y: -3 }}
                 >
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-4 group-hover:bg-cyan-500/15 transition-colors">
+                  <div className="w-9 h-9 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-2 sm:mb-4 group-hover:bg-cyan-500/15 transition-colors [&>svg]:w-4 [&>svg]:h-4 sm:[&>svg]:w-6 sm:[&>svg]:h-6">
                     {cap.icon}
                   </div>
-                  <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2">{cap.title}</h3>
-                  <p className="text-sm sm:text-base text-foreground-muted leading-relaxed">{cap.description}</p>
+                  <h3 className="text-sm sm:text-xl font-semibold text-foreground mb-1 sm:mb-2">{cap.title}</h3>
+                  <p className="text-[10px] sm:text-base text-foreground-muted leading-relaxed">{cap.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -388,24 +388,24 @@ export default function HAEPage() {
               <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">Nasıl Çalışır?</h2>
             </motion.div>
 
-            <div className={isMobile ? "flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2" : "space-y-6"}>
+            <div className="grid grid-cols-4 gap-2 sm:grid-cols-1 sm:gap-0 sm:space-y-6">
               {[
                 { step: "01", title: "Veri Toplama", desc: "Günlük check-in'lerinden, döngü verilerinden ve davranış kalıplarından anlamlı sinyaller çıkarılır." },
                 { step: "02", title: "Örüntü Keşfi", desc: "Yapay zeka, binlerce parametre arasındaki gizli bağlantıları tespit eder. Sen fark etmeden önce." },
-                { step: "03", title: "Profil Oluşturma", desc: "Tüm veriler birleşerek sana özel, dinamik bir profil oluşturur. Her gün biraz daha doğru." },
-                { step: "04", title: "Kişisel İçgörüler", desc: "Profilin, sana özel öneriler ve tahminler üretir. Genel değil, sadece sana ait." },
+                { step: "03", title: "Profil Sentezi", desc: "Tüm veriler birleşerek sana özel, dinamik bir profil oluşturur. Her gün biraz daha doğru." },
+                { step: "04", title: "İçgörüler", desc: "Profilin, sana özel öneriler ve tahminler üretir. Genel değil, sadece sana ait." },
               ].map((item, index) => (
                 <motion.div
                   key={item.step}
-                  className={`flex gap-4 sm:gap-6 ${isMobile ? "min-w-[280px] snap-start rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4" : ""}`}
+                  className="flex flex-col items-center text-center sm:flex-row sm:text-left sm:items-start gap-1.5 sm:gap-6 rounded-xl border border-white/[0.06] bg-white/[0.02] p-2.5 sm:border-0 sm:bg-transparent sm:p-0 sm:rounded-none"
                   {...fadeInUp(index * 0.1)}
                 >
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                    <span className="text-sm sm:text-base font-mono font-bold text-cyan-400">{item.step}</span>
+                  <div className="w-8 h-8 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center flex-shrink-0">
+                    <span className="text-[10px] sm:text-base font-mono font-bold text-cyan-400">{item.step}</span>
                   </div>
                   <div>
-                    <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1">{item.title}</h3>
-                    <p className="text-sm sm:text-base text-foreground-muted">{item.desc}</p>
+                    <h3 className="text-[11px] sm:text-lg font-semibold text-foreground sm:mb-1">{item.title}</h3>
+                    <p className="hidden sm:block text-base text-foreground-muted leading-normal">{item.desc}</p>
                   </div>
                 </motion.div>
               ))}

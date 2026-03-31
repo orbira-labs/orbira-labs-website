@@ -178,8 +178,10 @@ export const FOUNDER = {
 export const TEAM_MEMBERS = [
   {
     name: "Seyyit Ali Perse",
+    mobileName: "Ali Perse",
     role: "Kurucu & Ürün Mühendisi",
     image: "/images/founder.png",
+    imageClassName: "object-cover scale-[0.85] object-top",
     shortBio: "Orbira Labs'ı kuran ve ürün vizyonunu şekillendiren isim.",
     fullBio: `Orbira Labs'ın kurucusu olarak ürün stratejisi, teknoloji ve kullanıcı deneyimini birlikte ele alıyor. 7+ yıllık global deneyimi boyunca farklı ekipler, pazarlar ve iş modelleri içinde çalışarak fikir aşamasından ölçeklenebilir ürüne uzanan süreçlerde aktif rol aldı.
 
@@ -190,6 +192,7 @@ Sadece geliştirme tarafında güçlü bir mühendis değil; aynı zamanda ürü
     name: "Ayçin Akyel",
     role: "Operasyon & Proje Yöneticisi",
     image: "/images/aycin.jpg",
+    imageClassName: "object-cover",
     shortBio: "Ekibin akışını ve organizasyonunu yöneten isim.",
     fullBio: `Ekibin akışını ve organizasyonunu yöneten isim. Projelerin zamanında, doğru kapsamda ve koordineli ilerlemesini sağlıyor.
 
@@ -200,6 +203,7 @@ Kullanıcı geri bildirimlerini topluyor, önceliklendiriyor ve ekibe anlamlı �
     name: "Burak Gündüz",
     role: "Developer Partner",
     image: "/images/burak.png",
+    imageClassName: "object-cover scale-[1.4] object-[center_20%]",
     shortBio: "Ekibin teknik omurgasını oluşturan isim.",
     fullBio: `Ekibin teknik omurgasını oluşturan isim. Frontend, backend ve sistem mimarisi konularında geniş bir deneyime sahip. Farklı sektörlerde, farklı ölçeklerde projeler geliştirdi.
 

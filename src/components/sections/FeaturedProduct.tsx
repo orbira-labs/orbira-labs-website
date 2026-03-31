@@ -55,11 +55,11 @@ function ProductCard({ product, index, isMobile }: ProductCardProps) {
       {/* Background glow */}
       <div className={`absolute inset-0 bg-gradient-to-br ${getGlowColor(product)} pointer-events-none`} />
       
-      <div className="relative p-4 sm:p-6 lg:p-8">
+      <div className="relative p-3 sm:p-6 lg:p-8">
         {/* Header with logo and badge */}
-        <div className="flex items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
+        <div className="flex flex-col items-center text-center sm:flex-row sm:text-left sm:items-start gap-2 sm:gap-4 mb-3 sm:mb-6">
           {product.logo ? (
-            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl overflow-hidden flex-shrink-0 shadow-lg">
+            <div className="w-11 h-11 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl overflow-hidden flex-shrink-0 shadow-lg">
               <Image
                 src={product.logo}
                 alt={product.name}
@@ -70,26 +70,26 @@ function ProductCard({ product, index, isMobile }: ProductCardProps) {
               />
             </div>
           ) : (
-            <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br ${product.gradient} flex items-center justify-center text-2xl sm:text-3xl flex-shrink-0 shadow-lg`}>
+            <div className={`w-11 h-11 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br ${product.gradient} flex items-center justify-center text-xl sm:text-3xl flex-shrink-0 shadow-lg`}>
               {product.icon}
             </div>
           )}
           <div className="flex-1 min-w-0">
-            <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-foreground mb-1 truncate">
+            <h3 className="text-sm sm:text-xl lg:text-2xl font-semibold text-foreground mb-0.5 sm:mb-1 truncate">
               {product.name}
             </h3>
             <Badge status={product.status} />
           </div>
         </div>
 
-        {/* Description */}
-        <p className="text-sm sm:text-base text-foreground-muted mb-4 sm:mb-6 leading-relaxed line-clamp-3">
+        {/* Description — hidden on mobile */}
+        <p className="hidden sm:block text-sm sm:text-base text-foreground-muted mb-4 sm:mb-6 leading-relaxed line-clamp-3">
           {product.description}
         </p>
 
-        {/* Features */}
+        {/* Features — hidden on mobile */}
         {product.features && product.features.length > 0 && (
-          <div className="grid grid-cols-2 gap-2 mb-4 sm:mb-6">
+          <div className="hidden sm:grid grid-cols-2 gap-2 mb-4 sm:mb-6">
             {product.features.map((feature) => (
               <div
                 key={feature}
@@ -108,7 +108,7 @@ function ProductCard({ product, index, isMobile }: ProductCardProps) {
             <Button 
               variant="primary" 
               size="md" 
-              className={`w-full ${getButtonStyle(product)}`}
+              className={`w-full text-xs sm:text-sm ${getButtonStyle(product)}`}
             >
               Ürünü İncele
             </Button>
@@ -135,7 +135,7 @@ export function FeaturedProduct() {
           description="Aktif olarak kullanıma sunduğumuz ve geliştirmeye devam ettiğimiz ürünler."
         />
 
-        <div className="grid md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+        <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:gap-8">
           {featuredProducts.map((product, index) => (
             <ProductCard key={product.id} product={product} index={index} isMobile={isMobile} />
           ))}
