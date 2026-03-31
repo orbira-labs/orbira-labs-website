@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Container, AtomAnimation } from "@/components/ui";
+import { Container, AtomAnimation, HAELogo } from "@/components/ui";
 import { Header, Footer } from "@/components/sections";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
@@ -120,10 +120,7 @@ export default function HAEPage() {
             >
               <AtomAnimation size="lg" className="mx-auto mb-4" animate={!isMobile} />
 
-              <div className="inline-flex items-start justify-center gap-2 mb-4">
-                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground tracking-tight">HAE</h1>
-                <span className="text-[11px] sm:text-xs font-medium text-cyan-400/80 bg-cyan-400/10 px-2 py-0.5 rounded border border-cyan-400/20 mt-3 sm:mt-4">v2.0</span>
-              </div>
+              <HAELogo size="lg" className="mb-4" />
 
               <p className="text-lg sm:text-xl lg:text-2xl text-foreground-muted mb-2">Human Analysis Engine</p>
 

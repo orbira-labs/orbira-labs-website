@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Container, Button } from "@/components/ui";
+import { Container, Button, AtomAnimation, QuestionPulseAnimation } from "@/components/ui";
 import { Header, Footer } from "@/components/sections";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
@@ -411,12 +411,23 @@ export default function MoodumuzPage() {
                   >
                     <div className="flex items-start justify-between gap-4 mb-4">
                       <div>
-                        <div className={`inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] ${engine.badge}`}>
-                          Orbira Engine
+                        <div className="mb-4">
+                          {engine.name === "AQE" ? (
+                            <QuestionPulseAnimation size="xs" animate={!isMobile} />
+                          ) : (
+                            <AtomAnimation size="xs" animate={!isMobile} />
+                          )}
                         </div>
-                        <h3 className={`mt-4 text-2xl sm:text-3xl font-bold ${engine.accent}`}>
-                          {engine.name}
-                        </h3>
+                        <div className="flex items-center gap-2 mb-1">
+                          <h3 className={`text-2xl sm:text-3xl font-bold ${engine.accent}`}>
+                            {engine.name}
+                          </h3>
+                          {engine.name === "AQE" ? (
+                            <span className="text-[9px] sm:text-[10px] font-medium text-violet-400/80 bg-violet-400/10 px-1.5 py-0.5 rounded border border-violet-400/20">v1.0</span>
+                          ) : (
+                            <span className="text-[9px] sm:text-[10px] font-medium text-cyan-400/80 bg-cyan-400/10 px-1.5 py-0.5 rounded border border-cyan-400/20">v2.0</span>
+                          )}
+                        </div>
                         <p className="mt-1 text-sm text-foreground-muted">
                           {engine.fullName}
                         </p>
