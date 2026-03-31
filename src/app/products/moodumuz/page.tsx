@@ -7,62 +7,165 @@ import { Container, Button, AtomAnimation, QuestionPulseAnimation, HAELogo, AQEL
 import { Header, Footer } from "@/components/sections";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
-const FEATURES = [
+type FeatureIconKey =
+  | "coach"
+  | "cycle"
+  | "astro"
+  | "character"
+  | "quiz"
+  | "sticker";
+
+type FeatureCard = {
+  eyebrow: string;
+  title: string;
+  hook: string;
+  description: string;
+  comingSoon?: boolean;
+  icon: FeatureIconKey;
+  iconTone: string;
+  borderTone: string;
+  backgroundTone: string;
+};
+
+const FEATURES: FeatureCard[] = [
   {
-    icon: "🫶",
-    title: "Döngü Koçluğu",
+    eyebrow: "12 Aylık Yolculuk",
+    title: "Kişisel Gelişim Koçu",
+    hook: "Sana özel yazılan bir gelişim haritası.",
     description:
-      "Sadece veri göstermez; o günkü fazına, ruh haline ve ihtiyaçlarına göre sana neyin iyi gelebileceğini söyleyen kişisel koçluk deneyimi sunar.",
+      "Moodumuz, HAE ve AQE'nin birlikte çalıştığı kişisel koçluk katmanıyla seni tek bir gün için değil, aylar boyunca okur. Döngün, ruh halin ve cevapların birleşir; ortaya her ay seninle evrilen bir yön haritası çıkar.",
+    icon: "coach",
+    iconTone: "text-[#9BA392]",
+    borderTone: "border-[#7A8471]/25 hover:border-[#7A8471]/45",
+    backgroundTone: "from-[#7A8471]/14 via-[#5C6455]/8 to-transparent",
   },
   {
-    icon: "🌸",
-    title: "Akıllı Döngü Takibi",
+    eyebrow: "Ritmini Gör",
+    title: "Döngü Takibi",
+    hook: "Sadece tarih değil, hangi dönemde neye ihtiyacın olduğunu da gösterir.",
     description:
-      "Regl döngünü takip et, sonraki dönemin tahmini tarihlerini gör. Döngün öğrendikçe tahminler kişiselleşir.",
+      "Yaklaşan günleri işaretlemekle kalmaz; enerjinin yükseldiği, içe döndüğün ya da daha hassas hissettiğin dönemleri görünür kılar. Bedenini takip etmek yerine onunla aynı ritimde yaşamaya başlarsın.",
+    icon: "cycle",
+    iconTone: "text-cyan-400",
+    borderTone: "border-cyan-500/20 hover:border-cyan-400/40",
+    backgroundTone: "from-cyan-500/12 via-cyan-500/6 to-transparent",
   },
   {
-    icon: "💭",
-    title: "Ruh Hali Günlüğü",
+    eyebrow: "Kozmik Katman",
+    title: "Bilimsel Astroloji",
+    hook: "Gökyüzünü günlük hayatının ritmiyle buluşturan daha derin bir okuma.",
     description:
-      "Günlük ruh halini ve enerji seviyeni kaydet. Haftalık trendlerini takip et, kalıplarını keşfet.",
+      "Yüzeysel burç cümleleri yerine zamanın duygusunu, senin ritmini ve o günkü iç dünyanı birlikte okumaya çalışan özel bir katman. Merak uyandıran, kişisel ve şaşırtıcı derecede tanıdık.",
+    icon: "astro",
+    iconTone: "text-violet-300",
+    borderTone: "border-violet-500/20 hover:border-violet-400/40",
+    backgroundTone: "from-violet-500/12 via-violet-500/6 to-transparent",
   },
   {
-    icon: "🤖",
-    title: "AI Kozmik Rehber",
+    eyebrow: "Yakında",
+    title: "Karakter Analizi",
+    hook: "Karakter haritan ortaya çıktıkça neden böyle hissettiğini de göreceksin.",
     description:
-      "Burcuna ve döngü fazına özel, AI tarafından her gün üretilen kişiselleştirilmiş kozmik rehberlik.",
+      "Moodumuz yalnızca modunu değil, kararlarını, eğilimlerini ve gelişim yönlerini de okumaya başlayacak. Zaman içinde büyüyen bir karakter haritası ile kendinin daha derin versiyonunu keşfedeceksin.",
+    comingSoon: true,
+    icon: "character",
+    iconTone: "text-[#9BA392]",
+    borderTone: "border-white/10 hover:border-white/20",
+    backgroundTone: "from-white/[0.06] via-white/[0.025] to-transparent",
   },
   {
-    icon: "✨",
-    title: "Sana Özel Öneriler",
+    eyebrow: "Yakında",
+    title: "Eğlenceli Testler",
+    hook: "Her hafta hem seni anlatan hem paylaşmak isteyeceğin testler.",
     description:
-      "Verilerine dayalı haftalık öneriler, semptom rahatlatma önerileri ve döngü fazına uygun günlük yönlendirmeler.",
+      "Gününe, moduna ve arkadaş grubuna göre konuşulacak mini testler. Sonuçlarını tek başına saklamayacak; story'de, mesajda ya da sohbette paylaşmak isteyeceksin.",
+    comingSoon: true,
+    icon: "quiz",
+    iconTone: "text-violet-300",
+    borderTone: "border-white/10 hover:border-violet-400/25",
+    backgroundTone: "from-violet-500/[0.06] via-white/[0.02] to-transparent",
   },
   {
-    icon: "📊",
-    title: "Trend Analizi",
+    eyebrow: "Yakında",
+    title: "Haftanın Stickeri",
+    hook: "Haftanın enerjisini taşıyan küçük ama çok paylaşılır drop'lar.",
     description:
-      "Ruh hali ve enerji trendlerini izle. Döngü-duygu bağlantılarını keşfet, kalıplarını anla.",
+      "Instagram dump'larına, hikayelerine ve arkadaş sohbetlerine bırakabileceğin özel sticker ve görseller. Moodumuz'un dünyası uygulamanın dışına taşacak.",
+    comingSoon: true,
+    icon: "sticker",
+    iconTone: "text-cyan-400",
+    borderTone: "border-white/10 hover:border-cyan-400/25",
+    backgroundTone: "from-cyan-500/[0.06] via-white/[0.02] to-transparent",
   },
 ];
 
-const WHAT_IT_DOES = [
-  {
-    icon: "🌸",
-    title: "Döngü Takibi",
-    description: "Regl döngünü takip et, bir sonraki dönemin tarihlerini gör.",
-  },
-  {
-    icon: "💭",
-    title: "Ruh Hali Günlüğü",
-    description: "Her gün nasıl hissettiğini kaydet, kalıplarını keşfet.",
-  },
-  {
-    icon: "✨",
-    title: "Kişisel Koçluk",
-    description: "Verilerine dayalı öneriler ve yönlendirmeler al.",
-  },
-];
+function FeatureIcon({ icon, className = "" }: { icon: FeatureIconKey; className?: string }) {
+  switch (icon) {
+    case "coach":
+      return (
+        <svg viewBox="0 0 48 48" className={className} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M11 35c7-1 12-6 15-14 2-5 5-8 11-8" />
+          <path d="M18 36c6 0 10-3 13-7" />
+          <path d="M32 13l3 6 6 3-6 3-3 6-3-6-6-3 6-3 3-6z" />
+          <circle cx="13" cy="35" r="2.5" />
+        </svg>
+      );
+    case "cycle":
+      return (
+        <svg viewBox="0 0 48 48" className={className} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M24 8a16 16 0 0 1 11.3 4.7" />
+          <path d="M40 24a16 16 0 0 1-4.7 11.3" />
+          <path d="M24 40a16 16 0 0 1-11.3-4.7" />
+          <path d="M8 24a16 16 0 0 1 4.7-11.3" />
+          <circle cx="24" cy="24" r="5" />
+          <path d="M24 13v4" />
+          <path d="M35 24h-4" />
+          <path d="M24 35v-4" />
+          <path d="M13 24h4" />
+        </svg>
+      );
+    case "astro":
+      return (
+        <svg viewBox="0 0 48 48" className={className} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M10 31l9-12 8 6 10-11" />
+          <circle cx="10" cy="31" r="2.5" />
+          <circle cx="19" cy="19" r="2.5" />
+          <circle cx="27" cy="25" r="2.5" />
+          <circle cx="37" cy="14" r="2.5" />
+          <path d="M34 32l1.5 3 3 1.5-3 1.5L34 41l-1.5-3-3-1.5 3-1.5L34 32z" />
+        </svg>
+      );
+    case "character":
+      return (
+        <svg viewBox="0 0 48 48" className={className} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M24 8l12 7v14l-12 7-12-7V15l12-7z" />
+          <path d="M24 15l6 3.5v7L24 29l-6-3.5v-7L24 15z" />
+          <path d="M24 8v7" />
+          <path d="M36 15l-6 3.5" />
+          <path d="M18 18.5L12 15" />
+        </svg>
+      );
+    case "quiz":
+      return (
+        <svg viewBox="0 0 48 48" className={className} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M10 14h18a4 4 0 0 1 4 4v9a4 4 0 0 1-4 4H19l-7 5v-5h-2a4 4 0 0 1-4-4v-9a4 4 0 0 1 4-4z" />
+          <path d="M31 17h7a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4h-3l-5 4" />
+          <path d="M16 20c.5-2 2-3 4-3 2.2 0 4 1.4 4 3.5 0 3-4 3.3-4 6" />
+          <circle cx="20" cy="29" r="1" fill="currentColor" stroke="none" />
+        </svg>
+      );
+    case "sticker":
+      return (
+        <svg viewBox="0 0 48 48" className={className} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="11" y="11" width="20" height="20" rx="5" />
+          <path d="M31 17v10a5 5 0 0 0 5-5v-5h-5z" />
+          <path d="M35 9l1.5 3 3 1.5-3 1.5-1.5 3-1.5-3-3-1.5 3-1.5 1.5-3z" />
+          <path d="M18 20h7" />
+          <path d="M18 25h5" />
+        </svg>
+      );
+  }
+}
 
 const ENGINE_LINKS = [
   {
@@ -288,9 +391,9 @@ export default function MoodumuzPage() {
                       Teknolojiyi Keşfet
                     </Button>
                   </Link>
-                  <Link href="#features">
+                  <Link href="#feature-world">
                     <Button variant="secondary" size="lg" className="text-base">
-                      Özellikleri Gör
+                      Deneyimi Keşfet
                     </Button>
                   </Link>
                 </div>
@@ -300,42 +403,121 @@ export default function MoodumuzPage() {
           </Container>
         </section>
 
-        <section className="section-padding relative">
+        {/* Feature Showcase */}
+        <section id="feature-world" className="section-padding relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#7A8471]/[0.025] to-transparent pointer-events-none" />
           <Container>
-            <motion.div className="text-center mb-8 sm:mb-14" {...fadeInUp()}>
+            <motion.div className="text-center mb-8 sm:mb-14 lg:mb-16" {...fadeInUp()}>
               <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-[#7A8471]/10 text-[#9BA392] border border-[#7A8471]/20 mb-4 sm:mb-6">
-                Ne Yapar?
+                Neler Sunuyoruz
               </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3 sm:mb-4">
-                Döngünü takip et,{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7A8471] to-[#9BA392]">
-                  kendini tanı
-                </span>
+              <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-foreground mb-3 sm:mb-4 leading-tight">
+                Kendini anlamanın daha{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7A8471] via-[#9BA392] to-violet-400">
+                  derin ve daha kişisel
+                </span>{' '}
+                yolu
               </h2>
-              <p className="text-sm sm:text-lg text-foreground-muted max-w-2xl mx-auto leading-relaxed">
-                Döngü takibi, ruh hali günlüğü ve kişisel koçluk — hepsi tek uygulamada.
+              <p className="text-sm sm:text-lg text-foreground-muted max-w-3xl mx-auto leading-relaxed">
+                Moodumuz; beden ritmini, kişisel koçluğu ve kültürel katmanları tek bir deneyimde buluşturur. Bazı parçalar bugün seninle, bazıları ise çok yakında hayatına karışacak.
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-3 gap-3 sm:gap-6">
-              {WHAT_IT_DOES.map((item, index) => (
-                <motion.div
-                  key={item.title}
-                  className="rounded-xl sm:rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.05] to-white/[0.02] p-3.5 sm:p-6 text-center"
-                  {...fadeInUp(index * 0.08)}
-                  whileHover={isMobile ? {} : { y: -4, transition: { duration: 0.2 } }}
-                >
-                  <div className="mb-2 sm:mb-3 text-2xl sm:text-3xl">
-                    {item.icon}
-                  </div>
-                  <h3 className="text-xs sm:text-lg font-semibold text-foreground mb-1 sm:mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-[10px] sm:text-sm text-foreground-muted leading-snug sm:leading-relaxed">
-                    {item.description}
+            <div className="max-w-6xl mx-auto">
+              <div className="mb-6 sm:mb-8 flex items-center justify-between gap-3">
+                <div>
+                  <p className="text-[11px] sm:text-xs uppercase tracking-[0.24em] text-foreground-muted/60 mb-1">
+                    Bugün Seninle
                   </p>
-                </motion.div>
-              ))}
+                  <h3 className="text-lg sm:text-2xl font-semibold text-foreground">
+                    Ana deneyimi taşıyan üç katman
+                  </h3>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+                {FEATURES.filter((feature) => !feature.comingSoon).map((feature, index) => (
+                  <motion.div
+                    key={feature.title}
+                    className={`group relative overflow-hidden rounded-2xl sm:rounded-3xl border ${feature.borderTone} bg-gradient-to-br ${feature.backgroundTone} p-5 sm:p-7 lg:min-h-[340px] transition-all duration-300`}
+                    {...fadeInUp(index * 0.08)}
+                    whileHover={isMobile ? {} : { y: -6, transition: { duration: 0.22 } }}
+                  >
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.12),transparent_45%)] opacity-60 pointer-events-none" />
+                  <div className="relative z-10 flex h-full flex-col">
+                    <div className="mb-3 flex items-center justify-between gap-4">
+                      <span className="text-[10px] sm:text-xs uppercase tracking-[0.24em] text-foreground-muted/65">
+                        {feature.eyebrow}
+                      </span>
+                    </div>
+
+                    <div className="mb-4">
+                      <div className="flex items-start gap-3 mb-2">
+                        <div className={`flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl border border-white/10 bg-black/20 ${feature.iconTone} flex-shrink-0`}>
+                          <FeatureIcon icon={feature.icon} className="h-5 w-5 sm:h-6 sm:w-6" />
+                        </div>
+                        <h3 className="text-xl sm:text-2xl font-bold text-foreground leading-tight">
+                          {feature.title}
+                        </h3>
+                      </div>
+                      <p className="text-sm sm:text-lg font-medium text-foreground/85 leading-relaxed">
+                        {feature.hook}
+                      </p>
+                    </div>
+
+                      <p className="text-sm sm:text-base text-foreground-muted leading-relaxed max-w-md mt-auto">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="mt-10 sm:mt-14 mb-5 sm:mb-7 flex items-center justify-between gap-3">
+                <div>
+                  <p className="text-[11px] sm:text-xs uppercase tracking-[0.24em] text-foreground-muted/60 mb-1">
+                    Yolda Olanlar
+                  </p>
+                  <h3 className="text-lg sm:text-2xl font-semibold text-foreground">
+                    Moodumuz dünyasını büyütecek yeni katmanlar
+                  </h3>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-5">
+                {FEATURES.filter((feature) => feature.comingSoon).map((feature, index) => (
+                  <motion.div
+                    key={feature.title}
+                    className={`group relative overflow-hidden rounded-2xl border ${feature.borderTone} bg-gradient-to-br ${feature.backgroundTone} p-4 sm:p-5 backdrop-blur-xl transition-all duration-300`}
+                    {...fadeInUp(index * 0.08)}
+                    whileHover={isMobile ? {} : { y: -4, transition: { duration: 0.2 } }}
+                  >
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.09),transparent_40%)] opacity-70 pointer-events-none" />
+                  <div className="relative z-10">
+                    <div className="mb-3 flex items-start justify-between gap-3">
+                      <span className="inline-flex rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.22em] text-foreground-muted/80">
+                        Yakında
+                      </span>
+                    </div>
+
+                    <div className="flex items-start gap-3 mb-2">
+                      <div className={`flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-black/20 ${feature.iconTone} flex-shrink-0`}>
+                        <FeatureIcon icon={feature.icon} className="h-5 w-5" />
+                      </div>
+                      <h4 className="text-base sm:text-lg font-semibold text-foreground leading-tight">
+                        {feature.title}
+                      </h4>
+                    </div>
+                      <p className="text-sm text-foreground/85 leading-relaxed mb-3">
+                        {feature.hook}
+                      </p>
+                      <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </Container>
         </section>
@@ -492,51 +674,6 @@ export default function MoodumuzPage() {
           </Container>
         </section>
 
-        {/* Features Section */}
-        <section className="section-padding relative" id="features">
-          <Container>
-            <motion.div className="text-center mb-8 sm:mb-16" {...fadeInUp()}>
-              <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-[#7A8471]/10 text-[#9BA392] border border-[#7A8471]/20 mb-4 sm:mb-6">
-                Özellikler
-              </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3 sm:mb-4">
-                Sana özel{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7A8471] to-[#5C6455]">
-                  deneyim
-                </span>
-              </h2>
-              <p className="text-sm sm:text-lg text-foreground-muted max-w-2xl mx-auto">
-                Koçluk, döngü takibi ve AI destekli rehberliği bir araya getiren,
-                kendini daha iyi anlaman için tasarlanmış özellikler.
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
-              {FEATURES.map((feature, index) => (
-                <motion.div
-                  key={feature.title}
-                  className="group p-3 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10 hover:border-[#7A8471]/30 transition-all duration-300"
-                  {...fadeInUp(index * 0.05)}
-                  whileHover={isMobile ? {} : { y: -5, transition: { duration: 0.2 } }}
-                >
-                  <div className="flex flex-col sm:flex-row items-start gap-2 sm:gap-4">
-                    <div className="w-9 h-9 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-gradient-to-br from-[#7A8471]/20 to-[#5C6455]/10 flex items-center justify-center text-lg sm:text-2xl flex-shrink-0">
-                      {feature.icon}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-xs sm:text-xl font-semibold text-foreground mb-0.5 sm:mb-2">
-                        {feature.title}
-                      </h3>
-                      <p className="text-[10px] leading-snug sm:text-base text-foreground-muted sm:leading-relaxed">
-                        {feature.description}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </Container>
-        </section>
 
         {/* CTA Section */}
         <section className="section-padding relative overflow-hidden">
