@@ -9,6 +9,7 @@ export const SITE_CONFIG = {
 export const NAV_LINKS = [
   { href: "/", label: "Ana Sayfa" },
   { href: "/engines", label: "Hybrid Motorlar" },
+  { href: "/products", label: "Ürünler" },
   { href: "/about", label: "Hakkımızda" },
   { href: "/support", label: "İletişim" },
 ];
@@ -58,12 +59,12 @@ export const PRODUCTS: Product[] = [
   {
     id: "moodumuz",
     name: "Moodumuz",
-    description: "Döngünü anlayan, seni tanıyan arkadaşın. AI destekli kozmik rehberlik ve Human Analysis Engine™ ile kişiselleştirilmiş deneyim.",
+    description: "Döngünü, ruh halini ve ihtiyaçlarını anlayan dijital koçun. AQE ve HAE destekli kişisel yönlendirmelerle her gün sana daha uygun öneriler sunar.",
     status: "testing",
     category: "health",
     icon: "🌿",
     gradient: "from-[#7A8471] to-[#5C6455]",
-    features: ["Akıllı Döngü Takibi", "Ruh Hali Günlüğü", "AI Kozmik Rehber", "Trend Analizi"],
+    features: ["Döngü Koçluğu", "Akıllı Döngü Takibi", "AQE Destekli Check-in", "HAE Destekli Analiz"],
     href: "/products/moodumuz",
     logo: "/images/moodumuz-icon.png",
     screenshots: [
