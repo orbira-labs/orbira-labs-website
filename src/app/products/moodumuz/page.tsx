@@ -73,6 +73,7 @@ const ENGINE_LINKS = [
     border: "border-violet-500/20 hover:border-violet-400/40",
     bg: "from-violet-500/10 via-violet-500/5 to-transparent",
     badge: "bg-violet-500/10 text-violet-300 border-violet-500/20",
+    slogan: "Soruları sana göre şekillendirir.",
     description:
       "Mood check-in akışını herkese aynı şekilde göstermez. AQE, verdiğin yanıtlara göre soruları ve yönlendirmeleri adapte ederek koçluk deneyimini kişiselleştirir.",
   },
@@ -84,6 +85,7 @@ const ENGINE_LINKS = [
     border: "border-cyan-500/20 hover:border-cyan-400/40",
     bg: "from-cyan-500/10 via-cyan-500/5 to-transparent",
     badge: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
+    slogan: "Bağlamını anlayıp seni yönlendirir.",
     description:
       "Döngü verilerini, davranış kalıplarını ve ruh hali sinyallerini bir araya getirir. Böylece Moodumuz sana sadece içerik değil, bağlamını anlayan öneriler sunar.",
   },
@@ -355,21 +357,21 @@ export default function MoodumuzPage() {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6">
               {COACHING_PILLARS.map((pillar, index) => (
                 <motion.div
                   key={pillar.title}
-                  className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.05] to-white/[0.02] p-5 sm:p-6"
+                  className="rounded-xl sm:rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.05] to-white/[0.02] p-3.5 sm:p-6"
                   {...fadeInUp(index * 0.08)}
                   whileHover={isMobile ? {} : { y: -4, transition: { duration: 0.2 } }}
                 >
-                  <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#7A8471]/10 border border-[#7A8471]/20 text-[#9BA392]">
-                    <span className="text-sm font-semibold">{index + 1}</span>
+                  <div className="mb-2 sm:mb-3 inline-flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg sm:rounded-xl bg-[#7A8471]/10 border border-[#7A8471]/20 text-[#9BA392]">
+                    <span className="text-xs sm:text-sm font-semibold">{index + 1}</span>
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">
+                  <h3 className="text-sm sm:text-lg font-semibold text-foreground mb-1 sm:mb-2">
                     {pillar.title}
                   </h3>
-                  <p className="text-sm text-foreground-muted leading-relaxed">
+                  <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed">
                     {pillar.description}
                   </p>
                 </motion.div>
@@ -398,7 +400,7 @@ export default function MoodumuzPage() {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-6">
               {ENGINE_LINKS.map((engine, index) => (
                 <motion.div
                   key={engine.name}
@@ -407,11 +409,11 @@ export default function MoodumuzPage() {
                 >
                   <Link
                     href={engine.href}
-                    className={`group block rounded-2xl border bg-gradient-to-br ${engine.bg} ${engine.border} p-6 sm:p-7 transition-all duration-300`}
+                    className={`group block rounded-xl sm:rounded-2xl border bg-gradient-to-br ${engine.bg} ${engine.border} p-3.5 sm:p-7 transition-all duration-300 h-full`}
                   >
-                    <div className="flex items-start justify-between gap-4 mb-4">
+                    <div className="flex items-start justify-between gap-2 sm:gap-4 mb-3 sm:mb-4">
                       <div>
-                        <div className="mb-4">
+                        <div className="mb-3 sm:mb-4">
                           {engine.name === "AQE" ? (
                             <QuestionPulseAnimation size="xs" animate={!isMobile} />
                           ) : (
@@ -419,26 +421,29 @@ export default function MoodumuzPage() {
                           )}
                         </div>
                         {engine.name === "HAE" ? (
-                          <HAELogo size="md" as="h3" className="mb-1" />
+                          <HAELogo size={isMobile ? "sm" : "md"} as="h3" className="mb-1" />
                         ) : (
-                          <AQELogo size="md" as="h3" className="mb-1" />
+                          <AQELogo size={isMobile ? "sm" : "md"} as="h3" className="mb-1" />
                         )}
-                        <p className="mt-1 text-sm text-foreground-muted">
+                        <p className="mt-1 text-xs sm:text-sm text-foreground-muted hidden sm:block">
                           {engine.fullName}
                         </p>
                       </div>
-                      <div className="rounded-xl border border-white/10 bg-black/20 p-2.5 text-foreground-muted group-hover:text-foreground transition-colors">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="rounded-lg sm:rounded-xl border border-white/10 bg-black/20 p-1.5 sm:p-2.5 text-foreground-muted group-hover:text-foreground transition-colors">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                       </div>
                     </div>
 
-                    <p className="text-sm sm:text-base text-foreground-muted leading-relaxed">
+                    <p className="text-xs text-foreground-muted leading-relaxed sm:hidden">
+                      {engine.slogan}
+                    </p>
+                    <p className="hidden sm:block text-sm sm:text-base text-foreground-muted leading-relaxed">
                       {engine.description}
                     </p>
 
-                    <div className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-foreground">
+                    <div className="mt-3 sm:mt-5 inline-flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-medium text-foreground">
                       Motor sayfasını aç
                       <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                     </div>
@@ -468,23 +473,23 @@ export default function MoodumuzPage() {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
               {FEATURES.map((feature, index) => (
                 <motion.div
                   key={feature.title}
-                  className="group p-5 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10 hover:border-[#7A8471]/30 transition-all duration-300"
+                  className="group p-3 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10 hover:border-[#7A8471]/30 transition-all duration-300"
                   {...fadeInUp(index * 0.05)}
                   whileHover={isMobile ? {} : { y: -5, transition: { duration: 0.2 } }}
                 >
-                  <div className="flex items-start gap-3 sm:gap-4">
-                    <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-gradient-to-br from-[#7A8471]/20 to-[#5C6455]/10 flex items-center justify-center text-xl sm:text-2xl flex-shrink-0">
+                  <div className="flex flex-col sm:flex-row items-start gap-2 sm:gap-4">
+                    <div className="w-9 h-9 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-gradient-to-br from-[#7A8471]/20 to-[#5C6455]/10 flex items-center justify-center text-lg sm:text-2xl flex-shrink-0">
                       {feature.icon}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-base sm:text-xl font-semibold text-foreground mb-1 sm:mb-2">
+                      <h3 className="text-xs sm:text-xl font-semibold text-foreground mb-0.5 sm:mb-2">
                         {feature.title}
                       </h3>
-                      <p className="text-xs sm:text-base text-foreground-muted leading-relaxed">
+                      <p className="text-[10px] leading-snug sm:text-base text-foreground-muted sm:leading-relaxed">
                         {feature.description}
                       </p>
                     </div>
