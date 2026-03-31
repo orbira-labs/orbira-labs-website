@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Container, Button, AtomAnimation, QuestionPulseAnimation } from "@/components/ui";
+import { Container, Button, AtomAnimation, QuestionPulseAnimation, HAELogo, AQELogo } from "@/components/ui";
 import { Header, Footer } from "@/components/sections";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
@@ -418,16 +418,11 @@ export default function MoodumuzPage() {
                             <AtomAnimation size="xs" animate={!isMobile} />
                           )}
                         </div>
-                        <div className="flex items-center gap-2 mb-1">
-                          <h3 className={`text-2xl sm:text-3xl font-bold ${engine.accent}`}>
-                            {engine.name}
-                          </h3>
-                          {engine.name === "AQE" ? (
-                            <span className="text-[9px] sm:text-[10px] font-medium text-violet-400/80 bg-violet-400/10 px-1.5 py-0.5 rounded border border-violet-400/20">v1.0</span>
-                          ) : (
-                            <span className="text-[9px] sm:text-[10px] font-medium text-cyan-400/80 bg-cyan-400/10 px-1.5 py-0.5 rounded border border-cyan-400/20">v2.0</span>
-                          )}
-                        </div>
+                        {engine.name === "HAE" ? (
+                          <HAELogo size="md" as="h3" className="mb-1" />
+                        ) : (
+                          <AQELogo size="md" as="h3" className="mb-1" />
+                        )}
                         <p className="mt-1 text-sm text-foreground-muted">
                           {engine.fullName}
                         </p>

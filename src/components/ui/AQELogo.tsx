@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { ElementType } from "react";
 
-interface HAELogoProps {
+interface AQELogoProps {
   size?: "xs" | "sm" | "md" | "lg";
   as?: ElementType;
   className?: string;
@@ -30,19 +30,19 @@ const sizeStyles = {
   },
 };
 
-export function HAELogo({ size = "lg", as: Tag = "span", className }: HAELogoProps) {
+export function AQELogo({ size = "lg", as: Tag = "span", className }: AQELogoProps) {
   const s = sizeStyles[size];
 
   return (
     <div className={cn("inline-flex items-start", s.wrapper, className)}>
-      <Tag className={cn("font-bold text-foreground tracking-tight", s.title)}>HAE</Tag>
+      <Tag className={cn("font-bold text-foreground tracking-tight", s.title)}>AQE</Tag>
       <span
         className={cn(
-          "font-medium text-cyan-400/80 bg-cyan-400/10 rounded border border-cyan-400/20",
+          "font-medium text-violet-400/80 bg-violet-400/10 rounded border border-violet-400/20",
           s.badge
         )}
       >
-        v2.0
+        v1.0
       </span>
     </div>
   );

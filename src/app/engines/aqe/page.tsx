@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Container, QuestionPulseAnimation } from "@/components/ui";
+import { Container, QuestionPulseAnimation, AQELogo } from "@/components/ui";
 import { Header, Footer } from "@/components/sections";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
@@ -143,10 +143,7 @@ export default function AQEPage() {
 
               <QuestionPulseAnimation size="lg" className="mx-auto mb-4" animate={!isMobile} />
 
-              <div className="mb-4 flex flex-wrap items-start justify-center gap-2">
-                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground tracking-tight">AQE</h1>
-                <span className="mt-1 rounded border border-violet-400/20 bg-violet-400/10 px-2 py-0.5 text-[10px] font-medium text-violet-400/80 sm:mt-2 sm:text-xs">v1.0</span>
-              </div>
+              <AQELogo size="lg" className="mb-4" />
 
               <p className="text-lg sm:text-xl lg:text-2xl text-foreground-muted mb-2">Adaptive Question Engine</p>
 

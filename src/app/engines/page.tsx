@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Container, AtomAnimation, QuestionPulseAnimation } from "@/components/ui";
+import { Container, AtomAnimation, QuestionPulseAnimation, HAELogo, AQELogo } from "@/components/ui";
 import { Header, Footer } from "@/components/sections";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
@@ -145,24 +145,20 @@ export default function EnginesPage() {
                               </div>
                             )}
                             <div>
-                              <div className="mb-1 flex flex-wrap items-center gap-2">
-                                <h2 className="text-lg sm:text-2xl font-bold text-foreground">
-                                  {engine.shortName}
-                                </h2>
-                                {'useAtom' in engine && engine.useAtom ? (
-                                  <span className="text-[8px] sm:text-[9px] font-medium text-cyan-400/80 bg-cyan-400/10 px-1.5 py-0.5 rounded border border-cyan-400/20">
-                                    v{engine.version}
-                                  </span>
-                                ) : 'useLabyrinth' in engine && engine.useLabyrinth ? (
-                                  <span className="text-[8px] sm:text-[9px] font-medium text-violet-400/80 bg-violet-400/10 px-1.5 py-0.5 rounded border border-violet-400/20">
-                                    v{engine.version}
-                                  </span>
-                                ) : (
+                              {'useAtom' in engine && engine.useAtom ? (
+                                <HAELogo size="sm" as="h2" className="mb-1" />
+                              ) : 'useLabyrinth' in engine && engine.useLabyrinth ? (
+                                <AQELogo size="sm" as="h2" className="mb-1" />
+                              ) : (
+                                <div className="mb-1 flex flex-wrap items-center gap-2">
+                                  <h2 className="text-lg sm:text-2xl font-bold text-foreground">
+                                    {engine.shortName}
+                                  </h2>
                                   <span className="ml-2 text-[10px] sm:text-xs font-mono text-foreground-subtle bg-white/5 px-1.5 py-0.5 rounded">
                                     v{engine.version}
                                   </span>
-                                )}
-                              </div>
+                                </div>
+                              )}
                               <p className="text-xs sm:text-sm text-foreground-muted">
                                 {engine.name}
                               </p>
