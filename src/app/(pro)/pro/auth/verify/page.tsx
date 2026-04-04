@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { ShieldCheck } from "lucide-react";
+import Link from "next/link";
 import { createClient } from "@/lib/pro/supabase/client";
 import { Button } from "@/components/pro/ui/Button";
 import { AuthLayout } from "@/components/pro/auth/AuthLayout";
@@ -16,6 +17,12 @@ function VerifyForm() {
   const [loading, setLoading] = useState(false);
   const [resendTimer, setResendTimer] = useState(60);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  useEffect(() => {
+    if (!email) {
+      router.replace("/pro/auth/register");
+    }
+  }, [email, router]);
 
   useEffect(() => {
     if (resendTimer > 0) {
@@ -70,7 +77,13 @@ function VerifyForm() {
       });
 
       if (error) {
-        toast.error("Kod hatalı veya süresi dolmuş");
+        if (error.message.includes("expired")) {
+          toast.error("Kodun süresi dolmuş. Yeni kod gönderin.");
+        } else if (error.message.includes("invalid")) {
+          toast.error("Hatalı kod. Tekrar deneyin.");
+        } else {
+          toast.error("Kod hatalı veya süresi dolmuş");
+        }
         return;
       }
 
@@ -90,12 +103,21 @@ function VerifyForm() {
       email,
     });
     if (error) {
-      toast.error("Kod gönderilemedi");
+      if (error.message.includes("already confirmed")) {
+        toast.success("Email zaten doğrulanmış. Giriş yapabilirsiniz.");
+        router.push("/pro/auth/login");
+        return;
+      }
+      toast.error("Kod gönderilemedi. Lütfen tekrar deneyin.");
     } else {
       toast.success("Yeni kod gönderildi");
       setResendTimer(60);
+      setCode(["", "", "", "", "", ""]);
+      inputRefs.current[0]?.focus();
     }
   }
+
+  if (!email) return null;
 
   return (
     <AuthLayout>
@@ -158,6 +180,16 @@ function VerifyForm() {
             Doğrula
           </Button>
         </div>
+
+        <p className="text-center text-sm text-pro-text-tertiary">
+          Yanlış email mi girdiniz?{" "}
+          <Link
+            href="/pro/auth/register"
+            className="text-pro-primary font-medium hover:underline"
+          >
+            Tekrar kayıt olun
+          </Link>
+        </p>
       </div>
     </AuthLayout>
   );

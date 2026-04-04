@@ -29,7 +29,7 @@ export default function RegisterPage() {
     setLoading(true);
     try {
       const supabase = createClient();
-      const { error } = await supabase.auth.signUp({
+      const { data: signUpData, error } = await supabase.auth.signUp({
         email: data.email,
         password: data.password,
         options: {
@@ -39,10 +39,15 @@ export default function RegisterPage() {
 
       if (error) {
         if (error.message.includes("already registered")) {
-          toast.error("Bu email zaten kayıtlı");
+          toast.error("Bu email zaten kayıtlı. Giriş yapmayı deneyin.");
         } else {
           toast.error(error.message);
         }
+        return;
+      }
+
+      if (signUpData.user && !signUpData.user.identities?.length) {
+        toast.error("Bu email zaten kayıtlı. Giriş yapmayı deneyin.");
         return;
       }
 

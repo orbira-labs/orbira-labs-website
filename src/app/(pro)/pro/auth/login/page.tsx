@@ -35,7 +35,16 @@ export default function LoginPage() {
       });
 
       if (error) {
-        toast.error("Email veya şifre hatalı");
+        if (error.message.includes("Email not confirmed")) {
+          toast.error("Email adresiniz henüz doğrulanmamış");
+          router.push(`/pro/auth/verify?email=${encodeURIComponent(data.email)}`);
+          return;
+        }
+        if (error.message.includes("Invalid login credentials")) {
+          toast.error("Email veya şifre hatalı");
+          return;
+        }
+        toast.error(error.message);
         return;
       }
 
@@ -79,14 +88,6 @@ export default function LoginPage() {
                 error={errors.password?.message}
                 {...register("password")}
               />
-              <div className="flex justify-end mt-1.5">
-                <Link
-                  href="/pro/auth/login"
-                  className="text-xs text-pro-text-tertiary hover:text-pro-primary transition-colors"
-                >
-                  Şifremi unuttum
-                </Link>
-              </div>
             </div>
 
             <Button type="submit" fullWidth loading={loading} size="lg">
