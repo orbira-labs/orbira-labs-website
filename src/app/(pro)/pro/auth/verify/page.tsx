@@ -3,8 +3,10 @@
 import { useState, useRef, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
+import { ShieldCheck } from "lucide-react";
 import { createClient } from "@/lib/pro/supabase/client";
 import { Button } from "@/components/pro/ui/Button";
+import { AuthLayout } from "@/components/pro/auth/AuthLayout";
 
 function VerifyForm() {
   const router = useRouter();
@@ -96,23 +98,23 @@ function VerifyForm() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md space-y-8">
-        <div className="text-center">
-          <div className="mx-auto h-12 w-12 rounded-2xl bg-pro-primary-light flex items-center justify-center mb-4">
-            <span className="text-pro-primary text-xl">✉</span>
+    <AuthLayout>
+      <div className="space-y-6">
+        <div className="text-center lg:text-left">
+          <div className="mx-auto lg:mx-0 h-12 w-12 rounded-2xl bg-pro-primary-light flex items-center justify-center mb-4">
+            <ShieldCheck className="h-6 w-6 text-pro-primary" />
           </div>
-          <h1 className="text-2xl font-semibold text-pro-text">
-            Email Doğrulama
+          <h1 className="text-2xl sm:text-[28px] font-semibold text-pro-text">
+            Email doğrulama
           </h1>
-          <p className="mt-2 text-sm text-pro-text-secondary">
+          <p className="mt-1.5 text-sm text-pro-text-secondary">
             <span className="font-medium text-pro-text">{email}</span> adresine
-            6 haneli doğrulama kodu gönderdik.
+            gönderilen 6 haneli kodu girin.
           </p>
         </div>
 
-        <div className="bg-pro-surface rounded-2xl border border-pro-border p-6 sm:p-8 shadow-[var(--pro-shadow-md)]">
-          <div className="flex justify-center gap-2 sm:gap-3" onPaste={handlePaste}>
+        <div className="bg-pro-surface rounded-2xl border border-pro-border p-5 sm:p-7 shadow-[var(--pro-shadow-md)]">
+          <div className="flex justify-center gap-2.5 sm:gap-3" onPaste={handlePaste}>
             {code.map((digit, i) => (
               <input
                 key={i}
@@ -123,15 +125,16 @@ function VerifyForm() {
                 value={digit}
                 onChange={(e) => handleChange(i, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(i, e)}
-                className="w-11 h-13 sm:w-12 sm:h-14 text-center text-xl font-semibold rounded-lg border border-pro-border bg-pro-surface text-pro-text focus:outline-none focus:ring-2 focus:ring-pro-primary/30 focus:border-pro-primary transition-colors"
+                className="w-11 h-14 sm:w-13 sm:h-16 text-center text-2xl font-bold rounded-xl border-2 border-pro-border bg-[var(--pro-surface-alt)] text-pro-text focus:outline-none focus:ring-2 focus:ring-pro-primary/30 focus:border-pro-primary transition-all"
               />
             ))}
           </div>
 
-          <div className="mt-4 text-center">
+          <div className="mt-5 text-center">
             {resendTimer > 0 ? (
               <p className="text-sm text-pro-text-tertiary">
-                Kod gelmedi mi? Tekrar gönder ({resendTimer}s)
+                Kod gelmedi mi?{" "}
+                <span className="text-pro-text-secondary font-medium">{resendTimer}s</span>
               </p>
             ) : (
               <button
@@ -151,11 +154,12 @@ function VerifyForm() {
             disabled={code.some((d) => !d)}
             onClick={handleVerify}
           >
+            <ShieldCheck className="h-4 w-4" />
             Doğrula
           </Button>
         </div>
       </div>
-    </div>
+    </AuthLayout>
   );
 }
 

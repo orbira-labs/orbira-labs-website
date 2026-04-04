@@ -6,10 +6,12 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import { UserPlus } from "lucide-react";
 import { createClient } from "@/lib/pro/supabase/client";
 import { registerSchema, type RegisterInput } from "@/lib/pro/validations";
 import { Button } from "@/components/pro/ui/Button";
 import { Input } from "@/components/pro/ui/Input";
+import { AuthLayout } from "@/components/pro/auth/AuthLayout";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -53,26 +55,24 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md space-y-8">
-        <div className="text-center">
-          <div className="mx-auto h-12 w-12 rounded-2xl bg-pro-primary flex items-center justify-center mb-4">
-            <span className="text-white text-xl font-bold">O</span>
-          </div>
-          <h1 className="text-2xl font-semibold text-pro-text">
-            Hesap Oluştur
+    <AuthLayout>
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-2xl sm:text-[28px] font-semibold text-pro-text">
+            Hesap oluşturun
           </h1>
-          <p className="mt-2 text-sm text-pro-text-secondary">
+          <p className="mt-1.5 text-sm text-pro-text-secondary">
             Danışanlarınızı yönetin, testler gönderin
           </p>
         </div>
 
-        <div className="bg-pro-surface rounded-2xl border border-pro-border p-6 sm:p-8 shadow-[var(--pro-shadow-md)]">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        <div className="bg-pro-surface rounded-2xl border border-pro-border p-5 sm:p-7 shadow-[var(--pro-shadow-md)]">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <Input
               label="Email"
               type="email"
               placeholder="ornek@email.com"
+              autoComplete="email"
               error={errors.email?.message}
               {...reg("email")}
             />
@@ -80,6 +80,7 @@ export default function RegisterPage() {
               label="Şifre"
               type="password"
               placeholder="En az 8 karakter"
+              autoComplete="new-password"
               error={errors.password?.message}
               {...reg("password")}
             />
@@ -87,34 +88,36 @@ export default function RegisterPage() {
               label="Şifre Tekrar"
               type="password"
               placeholder="Şifrenizi tekrar girin"
+              autoComplete="new-password"
               error={errors.confirmPassword?.message}
               {...reg("confirmPassword")}
             />
 
             <Button type="submit" fullWidth loading={loading} size="lg">
+              <UserPlus className="h-4 w-4" />
               Kayıt Ol
             </Button>
           </form>
-
-          <p className="mt-6 text-center text-sm text-pro-text-secondary">
-            Zaten hesabınız var mı?{" "}
-            <Link
-              href="/pro/auth/login"
-              className="text-pro-primary font-medium hover:underline"
-            >
-              Giriş yapın
-            </Link>
-          </p>
-
-          <p className="mt-4 text-center text-xs text-pro-text-tertiary">
-            Kayıt olarak{" "}
-            <Link href="/privacy" className="underline">
-              KVKK Aydınlatma Metni
-            </Link>
-            &apos;ni kabul etmiş olursunuz.
-          </p>
         </div>
+
+        <p className="text-center text-sm text-pro-text-secondary">
+          Zaten hesabınız var mı?{" "}
+          <Link
+            href="/pro/auth/login"
+            className="text-pro-primary font-medium hover:underline"
+          >
+            Giriş yapın
+          </Link>
+        </p>
+
+        <p className="text-center text-xs text-pro-text-tertiary leading-relaxed">
+          Kayıt olarak{" "}
+          <Link href="/privacy" className="underline hover:text-pro-text-secondary transition-colors">
+            KVKK Aydınlatma Metni
+          </Link>
+          &apos;ni kabul etmiş olursunuz.
+        </p>
       </div>
-    </div>
+    </AuthLayout>
   );
 }
