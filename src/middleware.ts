@@ -36,6 +36,7 @@ export async function middleware(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
 
   const supabase = createServerClient(supabaseUrl, supabaseKey, {
+    db: { schema: "pro" },
     cookies: {
       getAll() {
         return request.cookies.getAll();
