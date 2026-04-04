@@ -39,7 +39,7 @@ export function Avatar({
   return (
     <div
       className={clsx(
-        "rounded-full bg-pro-primary-light text-pro-primary font-medium flex items-center justify-center",
+        "rounded-full bg-gradient-to-br from-pro-primary-light to-pro-primary/10 text-pro-primary font-semibold flex items-center justify-center ring-2 ring-pro-primary/10",
         sizeStyles[size],
         className
       )}

@@ -10,11 +10,11 @@ interface BadgeProps {
 }
 
 const variantStyles: Record<BadgeVariant, string> = {
-  success: "bg-pro-success-light text-pro-success",
-  warning: "bg-pro-warning-light text-pro-warning",
-  danger: "bg-pro-danger-light text-pro-danger",
-  info: "bg-pro-primary-light text-pro-primary",
-  muted: "bg-pro-surface-alt text-pro-text-secondary",
+  success: "bg-pro-success-light text-pro-success border border-pro-success/15",
+  warning: "bg-pro-warning-light text-pro-warning border border-pro-warning/15",
+  danger: "bg-pro-danger-light text-pro-danger border border-pro-danger/15",
+  info: "bg-pro-primary-light text-pro-primary border border-pro-primary/15",
+  muted: "bg-pro-surface-alt text-pro-text-secondary border border-pro-border",
 };
 
 const dotColors: Record<BadgeVariant, string> = {

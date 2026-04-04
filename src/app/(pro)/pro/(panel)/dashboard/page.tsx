@@ -42,9 +42,12 @@ export default function DashboardPage() {
       <TopBar title="Dashboard" />
       <main className="flex-1 p-4 sm:p-6 lg:p-8">
         <div className="mx-auto max-w-5xl space-y-6">
-          <h2 className="text-xl sm:text-2xl font-semibold text-pro-text">
-            {getGreeting()}, {professional?.first_name || "Hoş geldiniz"} 👋
-          </h2>
+          <div className="flex items-center gap-3">
+            <div className="h-1.5 w-1.5 rounded-full bg-pro-primary animate-pulse" />
+            <h2 className="text-xl sm:text-2xl font-semibold text-pro-text">
+              {getGreeting()}, <span className="text-pro-primary">{professional?.first_name || "Hoş geldiniz"}</span> 👋
+            </h2>
+          </div>
 
           {loading ? (
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
@@ -76,9 +79,12 @@ export default function DashboardPage() {
           )}
 
           <div className="grid lg:grid-cols-2 gap-4 sm:gap-6">
-            <Card padding="lg">
+            <Card padding="lg" accent="primary">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-pro-text">Yaklaşan Randevular</h3>
+                <h3 className="font-semibold text-pro-text flex items-center gap-2">
+                  <span className="h-4 w-0.5 rounded-full bg-pro-primary" />
+                  Yaklaşan Randevular
+                </h3>
                 <Link href="/pro/appointments" className="text-sm text-pro-primary hover:underline">Tümü</Link>
               </div>
               {loading ? (
@@ -114,9 +120,12 @@ export default function DashboardPage() {
               )}
             </Card>
 
-            <Card padding="lg">
+            <Card padding="lg" accent="accent">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-pro-text">Son Test Aktivitesi</h3>
+                <h3 className="font-semibold text-pro-text flex items-center gap-2">
+                  <span className="h-4 w-0.5 rounded-full bg-pro-accent" />
+                  Son Test Aktivitesi
+                </h3>
                 <Link href="/pro/tests" className="text-sm text-pro-primary hover:underline">Tümü</Link>
               </div>
               {loading ? (
