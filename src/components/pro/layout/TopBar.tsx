@@ -2,14 +2,15 @@
 
 import { Bell } from "lucide-react";
 import { Avatar } from "../ui/Avatar";
-import type { Professional } from "@/lib/pro/types";
+import { useProContext } from "@/lib/pro/context";
 
 interface TopBarProps {
   title: string;
-  professional: Professional | null;
 }
 
-export function TopBar({ title, professional }: TopBarProps) {
+export function TopBar({ title }: TopBarProps) {
+  const { professional } = useProContext();
+
   return (
     <header className="h-16 border-b border-pro-border bg-pro-surface flex items-center justify-between px-4 sm:px-6 lg:px-8 sticky top-0 z-30">
       <h1 className="text-lg font-semibold text-pro-text">{title}</h1>

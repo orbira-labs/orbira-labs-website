@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Avatar } from "../ui/Avatar";
-import type { Professional } from "@/lib/pro/types";
+import { useProContext } from "@/lib/pro/context";
 
 const NAV_ITEMS = [
   { href: "/pro/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -25,41 +25,41 @@ const NAV_ITEMS = [
   { href: "/pro/billing", label: "Bakiye", icon: CreditCard },
 ];
 
-interface SidebarProps {
-  professional: Professional | null;
-  onSignOut: () => void;
-}
-
-export function Sidebar({ professional, onSignOut }: SidebarProps) {
+export function Sidebar() {
   const pathname = usePathname();
+  const { professional, signOut } = useProContext();
   const [collapsed, setCollapsed] = useState(false);
 
   return (
     <aside
       className={clsx(
-        "hidden lg:flex flex-col bg-pro-surface border-r border-pro-border",
+        "hidden lg:flex flex-col border-r border-pro-border",
         "h-screen sticky top-0 transition-all duration-200",
-        collapsed ? "w-[68px]" : "w-[256px]"
+        collapsed ? "w-[68px]" : "w-[260px]"
       )}
     >
       <div
         className={clsx(
-          "flex items-center h-16 border-b border-pro-border px-4",
+          "flex items-center h-[68px] px-4 bg-gradient-to-r from-pro-surface to-[var(--pro-surface-alt)]",
+          "border-b border-pro-border",
           collapsed ? "justify-center" : "justify-between"
         )}
       >
         {!collapsed && (
-          <Link href="/pro/dashboard" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-pro-primary flex items-center justify-center">
+          <Link href="/pro/dashboard" className="flex items-center gap-2.5">
+            <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-pro-primary to-pro-primary-hover flex items-center justify-center shadow-sm">
               <span className="text-white text-sm font-bold">O</span>
             </div>
-            <span className="font-semibold text-pro-text">Orbira <span className="font-light text-pro-text-secondary">Karakter Analiz</span></span>
+            <div className="leading-tight">
+              <span className="text-sm font-semibold text-pro-text">Orbira</span>
+              <span className="text-sm font-light text-pro-text-secondary ml-1">Karakter</span>
+            </div>
           </Link>
         )}
         <button
           onClick={() => setCollapsed(!collapsed)}
           className={clsx(
-            "p-1.5 rounded-lg text-pro-text-tertiary hover:text-pro-text hover:bg-pro-surface-alt transition-colors",
+            "p-1.5 rounded-lg text-pro-text-tertiary hover:text-pro-text hover:bg-pro-surface transition-colors",
             collapsed && "rotate-180"
           )}
         >
@@ -67,7 +67,7 @@ export function Sidebar({ professional, onSignOut }: SidebarProps) {
         </button>
       </div>
 
-      <nav className="flex-1 py-3 px-2 space-y-1">
+      <nav className="flex-1 py-4 px-2.5 space-y-1 bg-pro-surface">
         {NAV_ITEMS.map((item) => {
           const isActive = pathname.startsWith(item.href);
           return (
@@ -75,27 +75,31 @@ export function Sidebar({ professional, onSignOut }: SidebarProps) {
               key={item.href}
               href={item.href}
               className={clsx(
-                "flex items-center gap-3 rounded-lg transition-colors duration-150",
+                "group flex items-center gap-3 rounded-xl transition-all duration-200",
                 collapsed ? "justify-center px-2 py-2.5" : "px-3 py-2.5",
                 isActive
-                  ? "bg-pro-primary-light text-pro-primary font-medium"
+                  ? "bg-gradient-to-r from-pro-primary-light to-transparent text-pro-primary font-medium shadow-sm"
                   : "text-pro-text-secondary hover:bg-pro-surface-alt hover:text-pro-text"
               )}
               title={collapsed ? item.label : undefined}
             >
-              <item.icon className="h-5 w-5 shrink-0" />
+              {isActive && !collapsed && (
+                <div className="absolute left-0 w-[3px] h-5 rounded-r-full bg-pro-primary" />
+              )}
+              <item.icon className={clsx("h-5 w-5 shrink-0 transition-transform duration-200", !isActive && "group-hover:scale-110")} />
               {!collapsed && <span className="text-sm">{item.label}</span>}
             </Link>
           );
         })}
       </nav>
 
-      <div className="border-t border-pro-border p-2 space-y-1">
+      <div className="border-t border-pro-border p-2.5 bg-pro-surface">
         <Link
           href="/pro/settings"
           className={clsx(
-            "flex items-center gap-3 rounded-lg px-3 py-2.5 text-pro-text-secondary hover:bg-pro-surface-alt hover:text-pro-text transition-colors",
-            collapsed && "justify-center px-2"
+            "flex items-center gap-3 rounded-xl px-3 py-2.5 text-pro-text-secondary hover:bg-pro-surface-alt hover:text-pro-text transition-all duration-200",
+            collapsed && "justify-center px-2",
+            pathname.startsWith("/pro/settings") && "bg-pro-surface-alt text-pro-text"
           )}
         >
           <Settings className="h-5 w-5 shrink-0" />
@@ -103,7 +107,7 @@ export function Sidebar({ professional, onSignOut }: SidebarProps) {
         </Link>
       </div>
 
-      <div className="border-t border-pro-border p-3">
+      <div className="border-t border-pro-border p-3.5 bg-gradient-to-t from-[var(--pro-surface-alt)] to-pro-surface">
         <div
           className={clsx(
             "flex items-center",
@@ -122,11 +126,11 @@ export function Sidebar({ professional, onSignOut }: SidebarProps) {
                 {professional.first_name} {professional.last_name}
               </p>
               <button
-                onClick={onSignOut}
-                className="text-xs text-pro-text-tertiary hover:text-pro-danger transition-colors flex items-center gap-1"
+                onClick={signOut}
+                className="text-xs text-pro-text-tertiary hover:text-pro-danger transition-colors flex items-center gap-1 mt-0.5"
               >
                 <LogOut className="h-3 w-3" />
-                Çıkış
+                Çıkış yap
               </button>
             </div>
           )}

@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ProShell } from "@/components/pro/layout/ProShell";
+import { useProContext } from "@/lib/pro/context";
+import { useClients } from "@/lib/pro/hooks/useClients";
 import { TopBar } from "@/components/pro/layout/TopBar";
 import { Card } from "@/components/pro/ui/Card";
 import { Badge } from "@/components/pro/ui/Badge";
@@ -14,21 +15,17 @@ import { Input } from "@/components/pro/ui/Input";
 import { Modal } from "@/components/pro/ui/Modal";
 import { Avatar } from "@/components/pro/ui/Avatar";
 import { EmptyState } from "@/components/pro/ui/EmptyState";
+import { Skeleton, ListItemSkeleton } from "@/components/pro/ui/Skeleton";
 import { Users, Plus, Search } from "lucide-react";
 import { createClient as createSupabase } from "@/lib/pro/supabase/client";
 import { clientSchema, type ClientInput } from "@/lib/pro/validations";
 import { CLIENT_STATUSES } from "@/lib/pro/constants";
-import type { Professional, Client } from "@/lib/pro/types";
 import Link from "next/link";
 
-interface ClientsContentProps {
-  professional: Professional | null;
-  clients: Client[];
-}
-
-export function ClientsContent({ professional, clients: initialClients }: ClientsContentProps) {
+export default function ClientsPage() {
   const router = useRouter();
-  const [clients, setClients] = useState(initialClients);
+  const { professional } = useProContext();
+  const { clients, setClients, loading } = useClients();
   const [showModal, setShowModal] = useState(false);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
@@ -82,7 +79,6 @@ export function ClientsContent({ professional, clients: initialClients }: Client
       setShowModal(false);
       reset();
       toast.success("Danışan eklendi");
-      router.refresh();
     } catch {
       toast.error("Bir hata oluştu");
     } finally {
@@ -91,96 +87,104 @@ export function ClientsContent({ professional, clients: initialClients }: Client
   }
 
   return (
-    <ProShell professional={professional}>
-      <TopBar title="Danışanlar" professional={professional} />
+    <>
+      <TopBar title="Danışanlar" />
       <main className="flex-1 p-4 sm:p-6 lg:p-8">
         <div className="mx-auto max-w-5xl space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-          <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-pro-text-tertiary" />
-            <input
-              type="text"
-              placeholder="Danışan ara..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-9 pr-4 py-2.5 rounded-lg border border-pro-border bg-pro-surface text-sm text-pro-text placeholder:text-pro-text-tertiary focus:outline-none focus:ring-2 focus:ring-pro-primary/30 focus:border-pro-primary"
-            />
-          </div>
-
-          <div className="flex items-center gap-2">
-            <div className="flex gap-1 bg-pro-surface-alt rounded-lg p-1">
-              <button
-                onClick={() => setStatusFilter("all")}
-                className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${statusFilter === "all" ? "bg-pro-surface text-pro-text shadow-[var(--pro-shadow-sm)]" : "text-pro-text-secondary"}`}
-              >
-                Tümü
-              </button>
-              {CLIENT_STATUSES.map((s) => (
-                <button
-                  key={s.id}
-                  onClick={() => setStatusFilter(s.id)}
-                  className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${statusFilter === s.id ? "bg-pro-surface text-pro-text shadow-[var(--pro-shadow-sm)]" : "text-pro-text-secondary"}`}
-                >
-                  {s.label}
-                </button>
-              ))}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div className="relative flex-1 max-w-md">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-pro-text-tertiary" />
+              <input
+                type="text"
+                placeholder="Danışan ara..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full pl-9 pr-4 py-2.5 rounded-lg border border-pro-border bg-pro-surface text-sm text-pro-text placeholder:text-pro-text-tertiary focus:outline-none focus:ring-2 focus:ring-pro-primary/30 focus:border-pro-primary"
+              />
             </div>
 
-            <Button onClick={() => setShowModal(true)}>
-              <Plus className="h-4 w-4" />
-              <span className="hidden sm:inline">Danışan Ekle</span>
-            </Button>
-          </div>
-        </div>
+            <div className="flex items-center gap-2">
+              <div className="flex gap-1 bg-pro-surface-alt rounded-lg p-1">
+                <button
+                  onClick={() => setStatusFilter("all")}
+                  className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${statusFilter === "all" ? "bg-pro-surface text-pro-text shadow-[var(--pro-shadow-sm)]" : "text-pro-text-secondary"}`}
+                >
+                  Tümü
+                </button>
+                {CLIENT_STATUSES.map((s) => (
+                  <button
+                    key={s.id}
+                    onClick={() => setStatusFilter(s.id)}
+                    className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${statusFilter === s.id ? "bg-pro-surface text-pro-text shadow-[var(--pro-shadow-sm)]" : "text-pro-text-secondary"}`}
+                  >
+                    {s.label}
+                  </button>
+                ))}
+              </div>
 
-        {filtered.length === 0 ? (
-          <EmptyState
-            icon={Users}
-            title={clients.length === 0 ? "Henüz danışan yok" : "Sonuç bulunamadı"}
-            description={
-              clients.length === 0
-                ? "İlk danışanınızı ekleyerek başlayın"
-                : "Farklı bir arama veya filtre deneyin"
-            }
-            actionLabel={clients.length === 0 ? "Danışan Ekle" : undefined}
-            onAction={clients.length === 0 ? () => setShowModal(true) : undefined}
-          />
-        ) : (
-          <div className="grid gap-3">
-            {filtered.map((client) => {
-              const statusInfo = CLIENT_STATUSES.find((s) => s.id === client.status);
-              return (
-                <Link key={client.id} href={`/pro/clients/${client.id}`}>
-                  <Card hover padding="sm">
-                    <div className="flex items-center gap-3">
-                      <Avatar
-                        firstName={client.first_name}
-                        lastName={client.last_name}
-                        size="md"
-                      />
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-pro-text">
-                          {client.first_name} {client.last_name}
-                        </p>
-                        <p className="text-xs text-pro-text-tertiary truncate">
-                          {client.email || client.phone || "İletişim bilgisi yok"}
-                        </p>
+              <Button onClick={() => setShowModal(true)}>
+                <Plus className="h-4 w-4" />
+                <span className="hidden sm:inline">Danışan Ekle</span>
+              </Button>
+            </div>
+          </div>
+
+          {loading ? (
+            <div className="grid gap-3">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Card key={i} padding="sm">
+                  <ListItemSkeleton />
+                </Card>
+              ))}
+            </div>
+          ) : filtered.length === 0 ? (
+            <EmptyState
+              icon={Users}
+              title={clients.length === 0 ? "Henüz danışan yok" : "Sonuç bulunamadı"}
+              description={
+                clients.length === 0
+                  ? "İlk danışanınızı ekleyerek başlayın"
+                  : "Farklı bir arama veya filtre deneyin"
+              }
+              actionLabel={clients.length === 0 ? "Danışan Ekle" : undefined}
+              onAction={clients.length === 0 ? () => setShowModal(true) : undefined}
+            />
+          ) : (
+            <div className="grid gap-3">
+              {filtered.map((client) => {
+                const statusInfo = CLIENT_STATUSES.find((s) => s.id === client.status);
+                return (
+                  <Link key={client.id} href={`/pro/clients/${client.id}`}>
+                    <Card hover padding="sm">
+                      <div className="flex items-center gap-3">
+                        <Avatar
+                          firstName={client.first_name}
+                          lastName={client.last_name}
+                          size="md"
+                        />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium text-pro-text">
+                            {client.first_name} {client.last_name}
+                          </p>
+                          <p className="text-xs text-pro-text-tertiary truncate">
+                            {client.email || client.phone || "İletişim bilgisi yok"}
+                          </p>
+                        </div>
+                        <Badge
+                          variant={statusInfo?.color as "success" | "warning" | "muted" || "muted"}
+                          dot
+                        >
+                          {statusInfo?.label || client.status}
+                        </Badge>
                       </div>
-                      <Badge
-                        variant={statusInfo?.color as "success" | "warning" | "muted" || "muted"}
-                        dot
-                      >
-                        {statusInfo?.label || client.status}
-                      </Badge>
-                    </div>
-                  </Card>
-                </Link>
-              );
-            })}
-          </div>
-        )}
-
+                    </Card>
+                  </Link>
+                );
+              })}
+            </div>
+          )}
         </div>
+
         <Modal
           open={showModal}
           onClose={() => { setShowModal(false); reset(); }}
@@ -239,6 +243,6 @@ export function ClientsContent({ professional, clients: initialClients }: Client
           </form>
         </Modal>
       </main>
-    </ProShell>
+    </>
   );
 }

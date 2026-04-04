@@ -16,21 +16,21 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantStyles: Record<Variant, string> = {
   primary:
-    "bg-pro-primary text-white hover:bg-pro-primary-hover shadow-[var(--pro-shadow-sm)] hover:shadow-[var(--pro-shadow-md)]",
+    "bg-gradient-to-r from-pro-primary to-pro-primary-hover text-white shadow-sm hover:shadow-md hover:brightness-105",
   secondary:
-    "bg-pro-surface text-pro-text border border-pro-border hover:bg-pro-surface-alt hover:border-pro-border-strong",
+    "bg-pro-surface text-pro-text border border-pro-border hover:bg-pro-surface-alt hover:border-pro-border-strong hover:shadow-sm",
   accent:
-    "bg-pro-accent text-white hover:bg-pro-accent-hover shadow-[var(--pro-shadow-sm)]",
+    "bg-gradient-to-r from-pro-accent to-pro-accent-hover text-white shadow-sm hover:shadow-md hover:brightness-105",
   ghost:
     "text-pro-text-secondary hover:bg-pro-surface-alt hover:text-pro-text",
   danger:
-    "bg-pro-danger text-white hover:opacity-90",
+    "bg-gradient-to-r from-pro-danger to-[#C0392B] text-white hover:shadow-md",
 };
 
 const sizeStyles: Record<Size, string> = {
-  sm: "px-3 py-1.5 text-sm rounded-md gap-1.5",
-  md: "px-4 py-2.5 text-sm rounded-lg gap-2",
-  lg: "px-6 py-3 text-base rounded-lg gap-2",
+  sm: "px-3.5 py-1.5 text-sm rounded-lg gap-1.5",
+  md: "px-4.5 py-2.5 text-sm rounded-xl gap-2",
+  lg: "px-6 py-3 text-[15px] rounded-xl gap-2",
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -52,10 +52,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         disabled={disabled || loading}
         className={clsx(
-          "inline-flex items-center justify-center font-medium transition-all duration-150",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pro-primary focus-visible:ring-offset-2",
-          "disabled:opacity-50 disabled:cursor-not-allowed",
-          "active:scale-[0.98]",
+          "inline-flex items-center justify-center font-medium",
+          "transition-all duration-200 ease-out",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pro-primary/40 focus-visible:ring-offset-2",
+          "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none",
+          "hover:scale-[1.02] active:scale-[0.97]",
           variantStyles[variant],
           sizeStyles[size],
           fullWidth && "w-full",
