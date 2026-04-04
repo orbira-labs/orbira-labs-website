@@ -23,7 +23,7 @@ export function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-pro-surface border-t border-pro-border">
+    <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-pro-surface/95 backdrop-blur-md border-t border-pro-border">
       <div className="flex items-center justify-around h-16 pb-[env(safe-area-inset-bottom)]">
         {NAV_ITEMS.map((item) => {
           const isActive = pathname.startsWith(item.href);
@@ -32,13 +32,18 @@ export function BottomNav() {
               key={item.href}
               href={item.href}
               className={clsx(
-                "flex flex-col items-center justify-center gap-0.5 min-w-[56px] py-1.5 transition-colors",
+                "flex flex-col items-center justify-center gap-0.5 min-w-[56px] py-1.5 rounded-xl transition-all duration-200",
                 isActive
                   ? "text-pro-primary"
-                  : "text-pro-text-tertiary active:text-pro-text"
+                  : "text-pro-text-tertiary active:text-pro-text active:scale-95"
               )}
             >
-              <item.icon className="h-5 w-5" />
+              <div className={clsx(
+                "p-1 rounded-lg transition-colors duration-200",
+                isActive && "bg-pro-primary-light"
+              )}>
+                <item.icon className="h-5 w-5" />
+              </div>
               <span className="text-[10px] font-medium">{item.label}</span>
             </Link>
           );
