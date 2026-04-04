@@ -28,7 +28,8 @@ export function BillingContent({
   return (
     <ProShell professional={professional}>
       <TopBar title="Bakiye" professional={professional} />
-      <main className="flex-1 p-4 sm:p-6 lg:p-8 space-y-6 max-w-4xl">
+      <main className="flex-1 p-4 sm:p-6 lg:p-8">
+        <div className="mx-auto max-w-5xl space-y-6">
         <Card padding="lg">
           <div className="flex items-center gap-4">
             <div className="h-14 w-14 rounded-2xl bg-pro-primary-light flex items-center justify-center">
@@ -154,6 +155,7 @@ export function BillingContent({
               </div>
             </Card>
           )}
+        </div>
         </div>
       </main>
     </ProShell>

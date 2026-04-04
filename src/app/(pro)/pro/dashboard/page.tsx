@@ -10,31 +10,29 @@ export default async function DashboardPage() {
 
   if (!user) redirect("/pro/auth/login");
 
-  const { data: professional } = await supabase
-    .from("professionals")
-    .select("*")
-    .eq("id", user.id)
-    .single();
-
-  const { data: stats } = await supabase.rpc("get_dashboard_stats", {
-    p_professional_id: user.id,
-  });
-
-  const { data: upcomingAppointments } = await supabase
-    .from("appointments")
-    .select("*, client:clients(first_name, last_name)")
-    .eq("professional_id", user.id)
-    .eq("status", "scheduled")
-    .gte("starts_at", new Date().toISOString())
-    .order("starts_at", { ascending: true })
-    .limit(5);
-
-  const { data: recentTests } = await supabase
-    .from("test_invitations")
-    .select("*, client:clients(first_name, last_name)")
-    .eq("professional_id", user.id)
-    .order("created_at", { ascending: false })
-    .limit(5);
+  const [
+    { data: professional },
+    { data: stats },
+    { data: upcomingAppointments },
+    { data: recentTests },
+  ] = await Promise.all([
+    supabase.from("professionals").select("*").eq("id", user.id).single(),
+    supabase.rpc("get_dashboard_stats", { p_professional_id: user.id }),
+    supabase
+      .from("appointments")
+      .select("*, client:clients(first_name, last_name)")
+      .eq("professional_id", user.id)
+      .eq("status", "scheduled")
+      .gte("starts_at", new Date().toISOString())
+      .order("starts_at", { ascending: true })
+      .limit(5),
+    supabase
+      .from("test_invitations")
+      .select("*, client:clients(first_name, last_name)")
+      .eq("professional_id", user.id)
+      .order("created_at", { ascending: false })
+      .limit(5),
+  ]);
 
   return (
     <DashboardContent

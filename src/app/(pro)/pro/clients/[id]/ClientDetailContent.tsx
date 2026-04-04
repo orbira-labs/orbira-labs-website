@@ -105,7 +105,8 @@ export function ClientDetailContent({
         title={`${client.first_name} ${client.last_name}`}
         professional={professional}
       />
-      <main className="flex-1 p-4 sm:p-6 lg:p-8 space-y-6 max-w-4xl">
+      <main className="flex-1 p-4 sm:p-6 lg:p-8">
+        <div className="mx-auto max-w-5xl space-y-6">
         <Link
           href="/pro/clients"
           className="inline-flex items-center gap-1.5 text-sm text-pro-text-secondary hover:text-pro-text transition-colors"
@@ -305,6 +306,7 @@ export function ClientDetailContent({
             )}
           </div>
         )}
+        </div>
       </main>
     </ProShell>
   );

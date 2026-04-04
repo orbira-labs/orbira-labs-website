@@ -10,28 +10,26 @@ export default async function TestsPage() {
 
   if (!user) redirect("/pro/auth/login");
 
-  const { data: professional } = await supabase
-    .from("professionals")
-    .select("*")
-    .eq("id", user.id)
-    .single();
-
-  const { data: tests } = await supabase
-    .from("test_invitations")
-    .select("*, client:clients(first_name, last_name)")
-    .eq("professional_id", user.id)
-    .order("created_at", { ascending: false });
-
-  const balance = await supabase.rpc("get_credit_balance", {
-    p_professional_id: user.id,
-  });
-
-  const { data: clients } = await supabase
-    .from("clients")
-    .select("id, first_name, last_name, email, phone")
-    .eq("professional_id", user.id)
-    .eq("status", "active")
-    .order("first_name");
+  const [
+    { data: professional },
+    { data: tests },
+    { data: balance },
+    { data: clients },
+  ] = await Promise.all([
+    supabase.from("professionals").select("*").eq("id", user.id).single(),
+    supabase
+      .from("test_invitations")
+      .select("*, client:clients(first_name, last_name)")
+      .eq("professional_id", user.id)
+      .order("created_at", { ascending: false }),
+    supabase.rpc("get_credit_balance", { p_professional_id: user.id }),
+    supabase
+      .from("clients")
+      .select("id, first_name, last_name, email, phone")
+      .eq("professional_id", user.id)
+      .eq("status", "active")
+      .order("first_name"),
+  ]);
 
   const completedCount = (tests || []).filter(
     (t) => t.status === "completed"
@@ -42,7 +40,7 @@ export default async function TestsPage() {
       professional={professional}
       tests={tests || []}
       clients={clients || []}
-      creditBalance={balance.data || 0}
+      creditBalance={balance || 0}
       completedCount={completedCount}
     />
   );

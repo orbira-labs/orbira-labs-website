@@ -131,7 +131,8 @@ export function TestsContent({
   return (
     <ProShell professional={professional}>
       <TopBar title="Testler" professional={professional} />
-      <main className="flex-1 p-4 sm:p-6 lg:p-8 space-y-6 max-w-6xl">
+      <main className="flex-1 p-4 sm:p-6 lg:p-8">
+        <div className="mx-auto max-w-5xl space-y-6">
         <div className="grid grid-cols-3 gap-3 sm:gap-4">
           <Card padding="md">
             <div className="flex items-start justify-between">
@@ -328,6 +329,7 @@ export function TestsContent({
             </div>
           )}
         </Modal>
+        </div>
       </main>
     </ProShell>
   );

@@ -15,38 +15,38 @@ export default async function ClientDetailPage({
 
   if (!user) redirect("/pro/auth/login");
 
-  const { data: professional } = await supabase
-    .from("professionals")
-    .select("*")
-    .eq("id", user.id)
-    .single();
-
-  const { data: client } = await supabase
-    .from("clients")
-    .select("*")
-    .eq("id", id)
-    .eq("professional_id", user.id)
-    .single();
+  const [
+    { data: professional },
+    { data: client },
+    { data: notes },
+    { data: tests },
+    { data: appointments },
+  ] = await Promise.all([
+    supabase.from("professionals").select("*").eq("id", user.id).single(),
+    supabase
+      .from("clients")
+      .select("*")
+      .eq("id", id)
+      .eq("professional_id", user.id)
+      .single(),
+    supabase
+      .from("client_notes")
+      .select("*")
+      .eq("client_id", id)
+      .order("created_at", { ascending: false }),
+    supabase
+      .from("test_invitations")
+      .select("*")
+      .eq("client_id", id)
+      .order("created_at", { ascending: false }),
+    supabase
+      .from("appointments")
+      .select("*")
+      .eq("client_id", id)
+      .order("starts_at", { ascending: false }),
+  ]);
 
   if (!client) notFound();
-
-  const { data: notes } = await supabase
-    .from("client_notes")
-    .select("*")
-    .eq("client_id", id)
-    .order("created_at", { ascending: false });
-
-  const { data: tests } = await supabase
-    .from("test_invitations")
-    .select("*")
-    .eq("client_id", id)
-    .order("created_at", { ascending: false });
-
-  const { data: appointments } = await supabase
-    .from("appointments")
-    .select("*")
-    .eq("client_id", id)
-    .order("starts_at", { ascending: false });
 
   return (
     <ClientDetailContent

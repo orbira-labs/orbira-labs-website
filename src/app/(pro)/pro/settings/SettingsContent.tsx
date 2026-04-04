@@ -65,7 +65,8 @@ export function SettingsContent({ professional }: Props) {
   return (
     <ProShell professional={professional}>
       <TopBar title="Ayarlar" professional={professional} />
-      <main className="flex-1 p-4 sm:p-6 lg:p-8 space-y-6 max-w-2xl">
+      <main className="flex-1 p-4 sm:p-6 lg:p-8">
+        <div className="mx-auto max-w-2xl space-y-6">
         <Card padding="lg">
           <h2 className="text-base font-semibold text-pro-text mb-4">
             Profil Bilgileri
@@ -153,6 +154,7 @@ export function SettingsContent({ professional }: Props) {
             </p>
           </div>
         </Card>
+        </div>
       </main>
     </ProShell>
   );

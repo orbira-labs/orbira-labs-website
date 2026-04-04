@@ -10,17 +10,14 @@ export default async function ClientsPage() {
 
   if (!user) redirect("/pro/auth/login");
 
-  const { data: professional } = await supabase
-    .from("professionals")
-    .select("*")
-    .eq("id", user.id)
-    .single();
-
-  const { data: clients } = await supabase
-    .from("clients")
-    .select("*")
-    .eq("professional_id", user.id)
-    .order("created_at", { ascending: false });
+  const [{ data: professional }, { data: clients }] = await Promise.all([
+    supabase.from("professionals").select("*").eq("id", user.id).single(),
+    supabase
+      .from("clients")
+      .select("*")
+      .eq("professional_id", user.id)
+      .order("created_at", { ascending: false }),
+  ]);
 
   return (
     <ClientsContent professional={professional} clients={clients || []} />

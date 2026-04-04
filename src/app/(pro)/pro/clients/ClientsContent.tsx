@@ -93,7 +93,8 @@ export function ClientsContent({ professional, clients: initialClients }: Client
   return (
     <ProShell professional={professional}>
       <TopBar title="Danışanlar" professional={professional} />
-      <main className="flex-1 p-4 sm:p-6 lg:p-8 space-y-4 max-w-6xl">
+      <main className="flex-1 p-4 sm:p-6 lg:p-8">
+        <div className="mx-auto max-w-5xl space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-pro-text-tertiary" />
@@ -179,6 +180,7 @@ export function ClientsContent({ professional, clients: initialClients }: Client
           </div>
         )}
 
+        </div>
         <Modal
           open={showModal}
           onClose={() => { setShowModal(false); reset(); }}

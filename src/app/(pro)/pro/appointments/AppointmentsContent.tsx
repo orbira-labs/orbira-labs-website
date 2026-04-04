@@ -91,7 +91,8 @@ export function AppointmentsContent({ professional, appointments, clients }: Pro
   return (
     <ProShell professional={professional}>
       <TopBar title="Randevular" professional={professional} />
-      <main className="flex-1 p-4 sm:p-6 lg:p-8 space-y-4 max-w-4xl">
+      <main className="flex-1 p-4 sm:p-6 lg:p-8">
+        <div className="mx-auto max-w-5xl space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex gap-1 bg-pro-surface-alt rounded-lg p-1">
             {(["upcoming", "past", "all"] as Filter[]).map((f) => (
@@ -161,6 +162,7 @@ export function AppointmentsContent({ professional, appointments, clients }: Pro
           </div>
         )}
 
+        </div>
         <Modal
           open={showModal}
           onClose={() => { setShowModal(false); reset(); }}
