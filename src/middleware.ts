@@ -18,72 +18,90 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const isPublicProPath = PUBLIC_PRO_PATHS.some((p) => pathname.startsWith(p));
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  let supabaseResponse = NextResponse.next({ request });
-
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll();
-        },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) => {
-            request.cookies.set(name, value);
-          });
-          supabaseResponse = NextResponse.next({ request });
-          cookiesToSet.forEach(({ name, value, options }) => {
-            supabaseResponse.cookies.set(name, value, options);
-          });
-        },
-      },
+  if (!supabaseUrl || !supabaseKey) {
+    const isPublicProPath = PUBLIC_PRO_PATHS.some((p) => pathname.startsWith(p));
+    if (isPublicProPath) {
+      return NextResponse.next();
     }
-  );
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user && !isPublicProPath) {
     const url = request.nextUrl.clone();
     url.pathname = "/pro/auth/login";
     return NextResponse.redirect(url);
   }
 
-  if (user && isPublicProPath) {
-    const { data: profile } = await supabase
-      .from("professionals")
-      .select("onboarding_completed")
-      .eq("id", user.id)
-      .single();
+  const isPublicProPath = PUBLIC_PRO_PATHS.some((p) => pathname.startsWith(p));
 
-    const url = request.nextUrl.clone();
-    if (!profile || !profile.onboarding_completed) {
-      url.pathname = "/pro/onboarding";
-    } else {
-      url.pathname = "/pro/dashboard";
-    }
-    return NextResponse.redirect(url);
-  }
+  let supabaseResponse = NextResponse.next({ request });
 
-  if (user && !isPublicProPath && pathname !== "/pro/onboarding") {
-    const { data: profile } = await supabase
-      .from("professionals")
-      .select("onboarding_completed")
-      .eq("id", user.id)
-      .single();
+  const supabase = createServerClient(supabaseUrl, supabaseKey, {
+    cookies: {
+      getAll() {
+        return request.cookies.getAll();
+      },
+      setAll(cookiesToSet) {
+        cookiesToSet.forEach(({ name, value }) => {
+          request.cookies.set(name, value);
+        });
+        supabaseResponse = NextResponse.next({ request });
+        cookiesToSet.forEach(({ name, value, options }) => {
+          supabaseResponse.cookies.set(name, value, options);
+        });
+      },
+    },
+  });
 
-    if (!profile || !profile.onboarding_completed) {
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user && !isPublicProPath) {
       const url = request.nextUrl.clone();
-      url.pathname = "/pro/onboarding";
+      url.pathname = "/pro/auth/login";
       return NextResponse.redirect(url);
     }
-  }
 
-  return supabaseResponse;
+    if (user && isPublicProPath) {
+      const { data: profile } = await supabase
+        .from("professionals")
+        .select("onboarding_completed")
+        .eq("id", user.id)
+        .single();
+
+      const url = request.nextUrl.clone();
+      if (!profile || !profile.onboarding_completed) {
+        url.pathname = "/pro/onboarding";
+      } else {
+        url.pathname = "/pro/dashboard";
+      }
+      return NextResponse.redirect(url);
+    }
+
+    if (user && !isPublicProPath && pathname !== "/pro/onboarding") {
+      const { data: profile } = await supabase
+        .from("professionals")
+        .select("onboarding_completed")
+        .eq("id", user.id)
+        .single();
+
+      if (!profile || !profile.onboarding_completed) {
+        const url = request.nextUrl.clone();
+        url.pathname = "/pro/onboarding";
+        return NextResponse.redirect(url);
+      }
+    }
+
+    return supabaseResponse;
+  } catch {
+    if (isPublicProPath) {
+      return NextResponse.next();
+    }
+    const url = request.nextUrl.clone();
+    url.pathname = "/pro/auth/login";
+    return NextResponse.redirect(url);
+  }
 }
 
 export const config = {
