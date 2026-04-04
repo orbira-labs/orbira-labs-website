@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 const NAV_ITEMS = [
-  { href: "/pro/dashboard", label: "Ana", icon: LayoutDashboard },
+  { href: "/pro/dashboard", label: "Ofisim", icon: LayoutDashboard },
   { href: "/pro/clients", label: "Danışan", icon: Users },
   { href: "/pro/appointments", label: "Randevu", icon: Calendar },
   { href: "/pro/tests", label: "Test", icon: FlaskConical },

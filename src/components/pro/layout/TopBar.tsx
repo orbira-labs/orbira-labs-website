@@ -12,11 +12,11 @@ export function TopBar({ title }: TopBarProps) {
   const { professional } = useProContext();
 
   return (
-    <header className="h-16 border-b border-pro-border bg-gradient-to-r from-pro-surface via-pro-surface to-[var(--pro-surface-alt)] flex items-center justify-between px-4 sm:px-6 lg:px-8 sticky top-0 z-30 backdrop-blur-sm">
-      <h1 className="text-lg font-semibold text-pro-text">{title}</h1>
+    <header className="h-16 border-b border-[#C8D8CE] bg-gradient-to-r from-[#E8F0EB] via-[#EEF3F0] to-[#F2F5F3] flex items-center justify-between px-4 sm:px-6 lg:px-8 sticky top-0 z-30">
+      <h1 className="text-lg font-semibold text-[#3D5A4C]">{title}</h1>
 
       <div className="flex items-center gap-3">
-        <button className="relative p-2 rounded-xl text-pro-text-secondary hover:bg-pro-primary-light hover:text-pro-primary transition-all duration-200">
+        <button className="relative p-2 rounded-xl text-[#6B8F7B] hover:bg-white/60 hover:text-[#3D5A4C] transition-all duration-200">
           <Bell className="h-5 w-5" />
         </button>
 

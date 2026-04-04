@@ -18,7 +18,7 @@ import { Avatar } from "../ui/Avatar";
 import { useProContext } from "@/lib/pro/context";
 
 const NAV_ITEMS = [
-  { href: "/pro/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/pro/dashboard", label: "Ofisim", icon: LayoutDashboard },
   { href: "/pro/clients", label: "Danışanlar", icon: Users },
   { href: "/pro/appointments", label: "Randevular", icon: Calendar },
   { href: "/pro/tests", label: "Testler", icon: FlaskConical },
@@ -33,33 +33,34 @@ export function Sidebar() {
   return (
     <aside
       className={clsx(
-        "hidden lg:flex flex-col border-r border-pro-border",
+        "hidden lg:flex flex-col",
         "h-screen sticky top-0 transition-all duration-200",
+        "bg-gradient-to-b from-[#4A6A59] via-[#5B7B6A] to-[#4A6A59]",
         collapsed ? "w-[68px]" : "w-[260px]"
       )}
     >
       <div
         className={clsx(
-          "flex items-center h-[68px] px-4 bg-pro-surface",
-          "border-b border-pro-border",
+          "flex items-center h-[68px] px-4",
+          "border-b border-white/10",
           collapsed ? "justify-center" : "justify-between"
         )}
       >
         {!collapsed && (
           <Link href="/pro/dashboard" className="flex items-center gap-2.5">
-            <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-pro-primary to-pro-primary-hover flex items-center justify-center shadow-sm">
+            <div className="h-9 w-9 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
               <span className="text-white text-sm font-bold">O</span>
             </div>
             <div className="leading-tight">
-              <span className="text-sm font-semibold text-pro-text">Orbira</span>
-              <span className="text-sm font-light text-pro-text-secondary ml-1">Karakter</span>
+              <span className="text-sm font-semibold text-white">Orbira</span>
+              <span className="text-sm font-light text-white/60 ml-1">Karakter</span>
             </div>
           </Link>
         )}
         <button
           onClick={() => setCollapsed(!collapsed)}
           className={clsx(
-            "p-1.5 rounded-lg text-pro-text-tertiary hover:text-pro-text hover:bg-pro-surface transition-colors",
+            "p-1.5 rounded-lg text-white/40 hover:text-white hover:bg-white/10 transition-colors",
             collapsed && "rotate-180"
           )}
         >
@@ -67,7 +68,7 @@ export function Sidebar() {
         </button>
       </div>
 
-      <nav className="flex-1 py-4 px-2.5 space-y-1 bg-pro-surface">
+      <nav className="flex-1 py-4 px-2.5 space-y-1">
         {NAV_ITEMS.map((item) => {
           const isActive = pathname.startsWith(item.href);
           return (
@@ -75,16 +76,16 @@ export function Sidebar() {
               key={item.href}
               href={item.href}
               className={clsx(
-                "group flex items-center gap-3 rounded-xl transition-all duration-200",
+                "group relative flex items-center gap-3 rounded-xl transition-all duration-200",
                 collapsed ? "justify-center px-2 py-2.5" : "px-3 py-2.5",
                 isActive
-                  ? "bg-pro-primary-light text-pro-primary font-medium"
-                  : "text-pro-text-secondary hover:bg-pro-surface-alt hover:text-pro-text"
+                  ? "bg-white/20 text-white font-medium backdrop-blur-sm"
+                  : "text-white/60 hover:bg-white/10 hover:text-white"
               )}
               title={collapsed ? item.label : undefined}
             >
               {isActive && !collapsed && (
-                <div className="absolute left-0 w-[3px] h-5 rounded-r-full bg-pro-primary" />
+                <div className="absolute left-0 w-[3px] h-5 rounded-r-full bg-white" />
               )}
               <item.icon className={clsx("h-5 w-5 shrink-0 transition-transform duration-200", !isActive && "group-hover:scale-110")} />
               {!collapsed && <span className="text-sm">{item.label}</span>}
@@ -93,13 +94,13 @@ export function Sidebar() {
         })}
       </nav>
 
-      <div className="border-t border-pro-border p-2.5 bg-pro-surface">
+      <div className="border-t border-white/10 p-2.5">
         <Link
           href="/pro/settings"
           className={clsx(
-            "flex items-center gap-3 rounded-xl px-3 py-2.5 text-pro-text-secondary hover:bg-pro-surface-alt hover:text-pro-text transition-all duration-200",
+            "flex items-center gap-3 rounded-xl px-3 py-2.5 text-white/50 hover:bg-white/10 hover:text-white transition-all duration-200",
             collapsed && "justify-center px-2",
-            pathname.startsWith("/pro/settings") && "bg-pro-surface-alt text-pro-text"
+            pathname.startsWith("/pro/settings") && "bg-white/15 text-white"
           )}
         >
           <Settings className="h-5 w-5 shrink-0" />
@@ -107,27 +108,24 @@ export function Sidebar() {
         </Link>
       </div>
 
-      <div className="border-t border-pro-border p-3.5 bg-pro-surface">
+      <div className="border-t border-white/10 p-3.5">
         <div
           className={clsx(
             "flex items-center",
             collapsed ? "justify-center" : "gap-3"
           )}
         >
-          <Avatar
-            firstName={professional?.first_name || "U"}
-            lastName={professional?.last_name || ""}
-            src={professional?.avatar_url}
-            size="sm"
-          />
+          <div className="h-8 w-8 rounded-full bg-white/20 text-white text-xs font-semibold flex items-center justify-center">
+            {professional ? `${professional.first_name.charAt(0)}${professional.last_name.charAt(0)}` : "U"}
+          </div>
           {!collapsed && professional && (
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-pro-text truncate">
+              <p className="text-sm font-medium text-white truncate">
                 {professional.first_name} {professional.last_name}
               </p>
               <button
                 onClick={signOut}
-                className="text-xs text-pro-text-tertiary hover:text-pro-danger transition-colors flex items-center gap-1 mt-0.5"
+                className="text-xs text-white/40 hover:text-white/80 transition-colors flex items-center gap-1 mt-0.5"
               >
                 <LogOut className="h-3 w-3" />
                 Çıkış yap
