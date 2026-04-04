@@ -1,6 +1,7 @@
 export const PRO_CONFIG = {
-  name: "Orbira Pro",
-  description: "Wellness profesyonelleri için danışan yönetim paneli",
+  name: "Orbira Karakter Analiz",
+  shortName: "Orbira",
+  description: "Danışanlarınızın iç dünyasını anlamanın en bilimsel yolu",
   testExpiryDays: 7,
 };
 

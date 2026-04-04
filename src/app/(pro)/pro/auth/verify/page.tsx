@@ -87,7 +87,7 @@ function VerifyForm() {
         return;
       }
 
-      toast.success("Email doğrulandı!");
+      toast.success("Harika! Email doğrulandı.");
       router.push("/pro/onboarding");
     } catch {
       toast.error("Bir hata oluştu");
@@ -110,7 +110,7 @@ function VerifyForm() {
       }
       toast.error("Kod gönderilemedi. Lütfen tekrar deneyin.");
     } else {
-      toast.success("Yeni kod gönderildi");
+      toast.success("Yeni doğrulama kodu gönderildi");
       setResendTimer(60);
       setCode(["", "", "", "", "", ""]);
       inputRefs.current[0]?.focus();
@@ -127,11 +127,11 @@ function VerifyForm() {
             <ShieldCheck className="h-6 w-6 text-pro-primary" />
           </div>
           <h1 className="text-2xl sm:text-[28px] font-semibold text-pro-text">
-            Email doğrulama
+            Neredeyse tamam
           </h1>
-          <p className="mt-1.5 text-sm text-pro-text-secondary">
+          <p className="mt-1.5 text-[15px] text-pro-text-secondary leading-relaxed">
             <span className="font-medium text-pro-text">{email}</span> adresine
-            gönderilen 6 haneli kodu girin.
+            gönderdiğimiz 6 haneli kodu girin.
           </p>
         </div>
 
@@ -177,7 +177,7 @@ function VerifyForm() {
             onClick={handleVerify}
           >
             <ShieldCheck className="h-4 w-4" />
-            Doğrula
+            Doğrula ve Devam Et
           </Button>
         </div>
 

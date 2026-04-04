@@ -3,10 +3,10 @@ import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: {
-    default: "Orbira Pro",
-    template: "%s | Orbira Pro",
+    default: "Orbira Karakter Analiz",
+    template: "%s | Orbira Karakter Analiz",
   },
-  description: "Wellness profesyonelleri için danışan yönetim paneli",
+  description: "Danışanlarınızın iç dünyasını anlamanın en bilimsel yolu",
   robots: { index: false, follow: false },
 };
 

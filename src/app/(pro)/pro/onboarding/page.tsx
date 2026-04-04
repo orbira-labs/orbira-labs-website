@@ -103,10 +103,10 @@ export default function OnboardingPage() {
       <div className="w-full max-w-lg space-y-8">
         <div className="text-center">
           <h1 className="text-2xl font-semibold text-pro-text">
-            Profilinizi Tamamlayın
+            Sizi tanıyalım
           </h1>
-          <p className="mt-2 text-sm text-pro-text-secondary">
-            Birkaç bilgi ile başlayalım
+          <p className="mt-2 text-[15px] text-pro-text-secondary leading-relaxed">
+            Birkaç bilgi ile kişisel deneyiminizi oluşturalım.
           </p>
         </div>
 

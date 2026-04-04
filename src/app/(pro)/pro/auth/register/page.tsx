@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { UserPlus } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { createClient } from "@/lib/pro/supabase/client";
 import { registerSchema, type RegisterInput } from "@/lib/pro/validations";
 import { Button } from "@/components/pro/ui/Button";
@@ -39,7 +39,7 @@ export default function RegisterPage() {
 
       if (error) {
         if (error.message.includes("already registered")) {
-          toast.error("Bu email zaten kayıtlı. Giriş yapmayı deneyin.");
+          toast.error("Bu email adresi zaten kayıtlı. Giriş yapmayı deneyin.");
         } else {
           toast.error(error.message);
         }
@@ -47,7 +47,7 @@ export default function RegisterPage() {
       }
 
       if (signUpData.user && !signUpData.user.identities?.length) {
-        toast.error("Bu email zaten kayıtlı. Giriş yapmayı deneyin.");
+        toast.error("Bu email adresi zaten kayıtlı. Giriş yapmayı deneyin.");
         return;
       }
 
@@ -64,10 +64,11 @@ export default function RegisterPage() {
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl sm:text-[28px] font-semibold text-pro-text">
-            Hesap oluşturun
+            Yolculuğunuz burada başlıyor
           </h1>
-          <p className="mt-1.5 text-sm text-pro-text-secondary">
-            Danışanlarınızı yönetin, testler gönderin
+          <p className="mt-1.5 text-[15px] text-pro-text-secondary leading-relaxed">
+            Danışanlarınızın karakterini analiz edin,<br className="hidden sm:block" />
+            daha derin bir anlayışla yönlendirin.
           </p>
         </div>
 
@@ -99,29 +100,30 @@ export default function RegisterPage() {
             />
 
             <Button type="submit" fullWidth loading={loading} size="lg">
-              <UserPlus className="h-4 w-4" />
-              Kayıt Ol
+              <Sparkles className="h-4 w-4" />
+              Ücretsiz Başla
             </Button>
           </form>
         </div>
 
-        <p className="text-center text-sm text-pro-text-secondary">
-          Zaten hesabınız var mı?{" "}
-          <Link
-            href="/pro/auth/login"
-            className="text-pro-primary font-medium hover:underline"
-          >
-            Giriş yapın
-          </Link>
-        </p>
-
-        <p className="text-center text-xs text-pro-text-tertiary leading-relaxed">
-          Kayıt olarak{" "}
-          <Link href="/privacy" className="underline hover:text-pro-text-secondary transition-colors">
-            KVKK Aydınlatma Metni
-          </Link>
-          &apos;ni kabul etmiş olursunuz.
-        </p>
+        <div className="space-y-2 text-center">
+          <p className="text-sm text-pro-text-secondary">
+            Zaten üye misiniz?{" "}
+            <Link
+              href="/pro/auth/login"
+              className="text-pro-primary font-medium hover:underline"
+            >
+              Giriş yapın
+            </Link>
+          </p>
+          <p className="text-xs text-pro-text-tertiary leading-relaxed">
+            Kayıt olarak{" "}
+            <Link href="/privacy" className="underline hover:text-pro-text-secondary transition-colors">
+              KVKK Aydınlatma Metni
+            </Link>
+            &apos;ni kabul etmiş olursunuz.
+          </p>
+        </div>
       </div>
     </AuthLayout>
   );

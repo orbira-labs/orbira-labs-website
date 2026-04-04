@@ -64,8 +64,8 @@ export default function LoginPage() {
           <h1 className="text-2xl sm:text-[28px] font-semibold text-pro-text">
             Tekrar hoş geldiniz
           </h1>
-          <p className="mt-1.5 text-sm text-pro-text-secondary">
-            Hesabınıza giriş yapın
+          <p className="mt-1.5 text-[15px] text-pro-text-secondary leading-relaxed">
+            Danışanlarınız sizi bekliyor.
           </p>
         </div>
 
@@ -79,16 +79,14 @@ export default function LoginPage() {
               error={errors.email?.message}
               {...register("email")}
             />
-            <div>
-              <Input
-                label="Şifre"
-                type="password"
-                placeholder="••••••••"
-                autoComplete="current-password"
-                error={errors.password?.message}
-                {...register("password")}
-              />
-            </div>
+            <Input
+              label="Şifre"
+              type="password"
+              placeholder="••••••••"
+              autoComplete="current-password"
+              error={errors.password?.message}
+              {...register("password")}
+            />
 
             <Button type="submit" fullWidth loading={loading} size="lg">
               <LogIn className="h-4 w-4" />
@@ -97,15 +95,17 @@ export default function LoginPage() {
           </form>
         </div>
 
-        <p className="text-center text-sm text-pro-text-secondary">
-          Hesabınız yok mu?{" "}
-          <Link
-            href="/pro/auth/register"
-            className="text-pro-primary font-medium hover:underline"
-          >
-            Ücretsiz kayıt olun
-          </Link>
-        </p>
+        <div className="space-y-2 text-center">
+          <p className="text-sm text-pro-text-secondary">
+            Henüz üye değil misiniz?{" "}
+            <Link
+              href="/pro/auth/register"
+              className="text-pro-primary font-medium hover:underline"
+            >
+              Hemen başlayın
+            </Link>
+          </p>
+        </div>
       </div>
     </AuthLayout>
   );

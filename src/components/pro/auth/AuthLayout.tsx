@@ -1,12 +1,12 @@
 "use client";
 
-import { Leaf, Heart, Sparkles, Shield } from "lucide-react";
+import { Brain, Users, BarChart3, Lock } from "lucide-react";
 
 const FEATURES = [
-  { icon: Leaf, text: "Danışanlarınızı tek panelden yönetin" },
-  { icon: Heart, text: "Wellness testleri gönderin ve takip edin" },
-  { icon: Sparkles, text: "AQE + HAE destekli derinlemesine analiz" },
-  { icon: Shield, text: "Verileriniz güvende, KVKK uyumlu" },
+  { icon: Brain, text: "Yapay zeka destekli karakter ve davranış analizi" },
+  { icon: Users, text: "Danışanlarınızı tek panelden takip edin" },
+  { icon: BarChart3, text: "350+ psikolojik özellik, 10 boyutlu wellness skoru" },
+  { icon: Lock, text: "Uçtan uca güvenli, KVKK uyumlu altyapı" },
 ];
 
 export function AuthLayout({ children }: { children: React.ReactNode }) {
@@ -33,41 +33,46 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
               <div className="h-10 w-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
                 <span className="text-white text-lg font-bold">O</span>
               </div>
-              <span className="text-white/90 text-lg font-semibold">Orbira Pro</span>
+              <div>
+                <span className="text-white/90 text-lg font-semibold">Orbira</span>
+                <span className="text-white/60 text-lg font-light ml-1.5">Karakter Analiz</span>
+              </div>
             </div>
-            <p className="text-white/50 text-sm mt-1">Wellness profesyonelleri için</p>
           </div>
 
           <div className="space-y-5">
-            <h2 className="text-white text-2xl xl:text-3xl font-semibold leading-snug">
-              Danışanlarınız için<br />
-              <span className="text-white/70">daha iyi bir deneyim.</span>
+            <h2 className="text-white text-[26px] xl:text-[30px] font-semibold leading-snug">
+              Danışanlarınızın<br />
+              iç dünyasını keşfedin.
             </h2>
-            <div className="space-y-4 mt-8">
+            <p className="text-white/55 text-sm leading-relaxed max-w-[340px]">
+              Bilimsel karakter analizi ile her danışanınızı daha iyi anlayın, daha doğru yönlendirin.
+            </p>
+            <div className="space-y-4 pt-4">
               {FEATURES.map((f, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <div className="h-9 w-9 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
-                    <f.icon className="h-4 w-4 text-white/80" />
+                <div key={i} className="flex items-start gap-3">
+                  <div className="h-9 w-9 rounded-lg bg-white/10 flex items-center justify-center shrink-0 mt-0.5">
+                    <f.icon className="h-[18px] w-[18px] text-white/80" />
                   </div>
-                  <span className="text-white/75 text-sm">{f.text}</span>
+                  <span className="text-white/70 text-[13px] leading-snug pt-1.5">{f.text}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <p className="text-white/30 text-xs">
+          <p className="text-white/25 text-xs">
             &copy; {new Date().getFullYear()} Orbira Labs
           </p>
         </div>
       </div>
 
-      <div className="flex-1 flex items-center justify-center px-5 py-10 sm:px-8">
+      <div className="flex-1 flex flex-col items-center justify-center px-5 py-10 sm:px-8 bg-[var(--background)]">
         <div className="w-full max-w-[420px]">
           <div className="lg:hidden text-center mb-8">
-            <div className="mx-auto h-14 w-14 rounded-2xl bg-pro-primary flex items-center justify-center mb-3">
+            <div className="mx-auto h-14 w-14 rounded-2xl bg-gradient-to-br from-[#5B7B6A] to-[#4A6A59] flex items-center justify-center mb-3 shadow-[var(--pro-shadow-md)]">
               <span className="text-white text-2xl font-bold">O</span>
             </div>
-            <p className="text-xs text-pro-text-tertiary tracking-widest uppercase">Orbira Pro</p>
+            <p className="text-sm font-semibold text-pro-text">Orbira <span className="font-light text-pro-text-secondary">Karakter Analiz</span></p>
           </div>
 
           {children}

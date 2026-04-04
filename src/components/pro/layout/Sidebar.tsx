@@ -53,7 +53,7 @@ export function Sidebar({ professional, onSignOut }: SidebarProps) {
             <div className="h-8 w-8 rounded-lg bg-pro-primary flex items-center justify-center">
               <span className="text-white text-sm font-bold">O</span>
             </div>
-            <span className="font-semibold text-pro-text">Orbira Pro</span>
+            <span className="font-semibold text-pro-text">Orbira <span className="font-light text-pro-text-secondary">Karakter Analiz</span></span>
           </Link>
         )}
         <button
