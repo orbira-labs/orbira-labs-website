@@ -1,6 +1,8 @@
+"use client";
+
 export function PageDecoration() {
   return (
-    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden>
+    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden hidden lg:block" aria-hidden>
       {/* Top-right neuron network */}
       <svg
         className="absolute -top-20 -right-20 w-[700px] h-[700px] opacity-[0.06]"
@@ -19,7 +21,6 @@ export function PageDecoration() {
         <circle cx="500" cy="300" r="5" fill="var(--pro-primary)" />
         <circle cx="100" cy="300" r="3.5" fill="var(--pro-primary)" />
         <circle cx="480" cy="420" r="4" fill="var(--pro-primary)" />
-        <circle cx="120" cy="180" r="3" fill="var(--pro-primary)" />
 
         <line x1="300" y1="150" x2="420" y2="230" stroke="var(--pro-primary)" strokeWidth="1.2" />
         <line x1="300" y1="150" x2="180" y2="250" stroke="var(--pro-primary)" strokeWidth="1.2" />
@@ -29,46 +30,87 @@ export function PageDecoration() {
         <line x1="180" y1="250" x2="150" y2="400" stroke="var(--pro-primary)" strokeWidth="0.8" />
         <line x1="300" y1="150" x2="450" y2="100" stroke="var(--pro-primary)" strokeWidth="0.8" />
         <line x1="420" y1="230" x2="500" y2="300" stroke="var(--pro-primary)" strokeWidth="0.8" />
-        <line x1="300" y1="150" x2="350" y2="200" stroke="var(--pro-primary)" strokeWidth="0.7" />
         <line x1="350" y1="200" x2="420" y2="230" stroke="var(--pro-primary)" strokeWidth="0.7" />
         <line x1="200" y1="150" x2="180" y2="250" stroke="var(--pro-primary)" strokeWidth="0.7" />
         <line x1="100" y1="300" x2="180" y2="250" stroke="var(--pro-primary)" strokeWidth="0.6" />
-        <line x1="150" y1="400" x2="250" y2="350" stroke="var(--pro-primary)" strokeWidth="0.6" />
         <line x1="370" y1="380" x2="480" y2="420" stroke="var(--pro-primary)" strokeWidth="0.6" />
         <line x1="500" y1="300" x2="480" y2="420" stroke="var(--pro-primary)" strokeWidth="0.6" />
-        <line x1="120" y1="180" x2="200" y2="150" stroke="var(--pro-primary)" strokeWidth="0.5" />
-        <line x1="300" y1="150" x2="200" y2="150" stroke="var(--pro-primary)" strokeWidth="0.5" />
       </svg>
 
-      {/* Bottom-left DNA helix */}
+      {/* Bottom-left DNA helix — large and visible */}
       <svg
-        className="absolute -bottom-10 -left-10 w-[450px] h-[550px] opacity-[0.05]"
-        viewBox="0 0 400 500"
+        className="absolute bottom-0 left-[5%] w-[200px] h-[85vh] opacity-[0.1]"
+        viewBox="0 0 200 800"
         fill="none"
+        preserveAspectRatio="xMidYMid slice"
       >
-        <path d="M200 30 C240 80, 240 130, 200 180 C160 230, 160 280, 200 330 C240 380, 240 430, 200 480" stroke="var(--pro-primary)" strokeWidth="2" fill="none" />
-        <path d="M200 30 C160 80, 160 130, 200 180 C240 230, 240 280, 200 330 C160 380, 160 430, 200 480" stroke="var(--pro-primary)" strokeWidth="2" fill="none" />
+        <path
+          d="M100 0 C140 60, 140 120, 100 180 C60 240, 60 300, 100 360 C140 420, 140 480, 100 540 C60 600, 60 660, 100 720 C140 780, 140 800, 100 800"
+          stroke="var(--pro-primary)"
+          strokeWidth="2.5"
+          fill="none"
+        />
+        <path
+          d="M100 0 C60 60, 60 120, 100 180 C140 240, 140 300, 100 360 C60 420, 60 480, 100 540 C140 600, 140 660, 100 720 C60 780, 60 800, 100 800"
+          stroke="var(--pro-primary)"
+          strokeWidth="2.5"
+          fill="none"
+        />
 
-        {[55, 105, 155, 205, 255, 305, 355, 405, 455].map((y, i) => (
-          <line key={i} x1={165 + (i % 2 === 0 ? -10 : 5)} y1={y} x2={235 + (i % 2 === 0 ? 10 : -5)} y2={y} stroke="var(--pro-primary)" strokeWidth="0.8" />
+        {[45, 90, 135, 180, 225, 270, 315, 360, 405, 450, 495, 540, 585, 630, 675, 720].map((y, i) => (
+          <line
+            key={i}
+            x1={70 + (i % 2 === 0 ? -10 : 5)}
+            y1={y}
+            x2={130 + (i % 2 === 0 ? 10 : -5)}
+            y2={y}
+            stroke="var(--pro-primary)"
+            strokeWidth="1"
+          />
         ))}
 
-        {[55, 105, 155, 205, 255, 305, 355, 405, 455].map((y, i) => (
-          <circle key={`d${i}`} cx={i % 2 === 0 ? 155 : 245} cy={y} r="3" fill="var(--pro-primary)" />
+        {[45, 90, 135, 180, 225, 270, 315, 360, 405, 450, 495, 540, 585, 630, 675, 720].map((y, i) => (
+          <circle
+            key={`n${i}`}
+            cx={i % 2 === 0 ? 60 : 140}
+            cy={y}
+            r="4"
+            fill="var(--pro-primary)"
+          />
         ))}
+
+        {/* Animated particles flowing along DNA */}
+        <circle r="3" fill="var(--pro-primary)" opacity="0.6">
+          <animateMotion
+            dur="8s"
+            repeatCount="indefinite"
+            path="M100 0 C140 60, 140 120, 100 180 C60 240, 60 300, 100 360 C140 420, 140 480, 100 540 C60 600, 60 660, 100 720"
+          />
+        </circle>
+        <circle r="2.5" fill="var(--pro-accent)" opacity="0.5">
+          <animateMotion
+            dur="10s"
+            repeatCount="indefinite"
+            begin="3s"
+            path="M100 0 C60 60, 60 120, 100 180 C140 240, 140 300, 100 360 C60 420, 60 480, 100 540 C140 600, 140 660, 100 720"
+          />
+        </circle>
+        <circle r="2" fill="var(--pro-primary)" opacity="0.4">
+          <animateMotion
+            dur="12s"
+            repeatCount="indefinite"
+            begin="6s"
+            path="M100 0 C140 60, 140 120, 100 180 C60 240, 60 300, 100 360 C140 420, 140 480, 100 540 C60 600, 60 660, 100 720"
+          />
+        </circle>
       </svg>
 
-      {/* Sage green gradient glow - top left */}
+      {/* Gradient glows */}
       <div className="absolute top-[5%] left-[5%] w-[500px] h-[500px] rounded-full bg-[var(--pro-primary)] opacity-[0.04] blur-[120px]" />
-
-      {/* Terracotta gradient glow - bottom right */}
       <div className="absolute bottom-[10%] right-[5%] w-[400px] h-[400px] rounded-full bg-[var(--pro-accent)] opacity-[0.035] blur-[100px]" />
 
-      {/* Small accent glow - center */}
-      <div className="absolute top-[45%] right-[30%] w-[200px] h-[200px] rounded-full bg-[var(--pro-primary)] opacity-[0.025] blur-[80px]" />
-
-      {/* Subtle top gradient band */}
-      <div className="absolute top-0 left-0 right-0 h-[300px] bg-gradient-to-b from-[var(--pro-primary-light)] to-transparent opacity-30" />
+      {/* Top gradient band */}
+      <div className="absolute top-0 left-0 right-0 h-[250px] bg-gradient-to-b from-[var(--pro-primary-light)] to-transparent opacity-25" />
     </div>
   );
 }

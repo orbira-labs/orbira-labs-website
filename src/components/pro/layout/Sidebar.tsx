@@ -40,7 +40,7 @@ export function Sidebar() {
     >
       <div
         className={clsx(
-          "flex items-center h-[68px] px-4 bg-gradient-to-r from-pro-surface to-[var(--pro-surface-alt)]",
+          "flex items-center h-[68px] px-4 bg-pro-surface",
           "border-b border-pro-border",
           collapsed ? "justify-center" : "justify-between"
         )}
@@ -78,7 +78,7 @@ export function Sidebar() {
                 "group flex items-center gap-3 rounded-xl transition-all duration-200",
                 collapsed ? "justify-center px-2 py-2.5" : "px-3 py-2.5",
                 isActive
-                  ? "bg-gradient-to-r from-pro-primary-light to-transparent text-pro-primary font-medium shadow-sm"
+                  ? "bg-pro-primary-light text-pro-primary font-medium"
                   : "text-pro-text-secondary hover:bg-pro-surface-alt hover:text-pro-text"
               )}
               title={collapsed ? item.label : undefined}
@@ -107,7 +107,7 @@ export function Sidebar() {
         </Link>
       </div>
 
-      <div className="border-t border-pro-border p-3.5 bg-gradient-to-t from-[var(--pro-surface-alt)] to-pro-surface">
+      <div className="border-t border-pro-border p-3.5 bg-pro-surface">
         <div
           className={clsx(
             "flex items-center",
