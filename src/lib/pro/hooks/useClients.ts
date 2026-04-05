@@ -31,6 +31,7 @@ function setCache(data: Client[]) {
 export function useClients() {
   const { professional } = useProContext();
   const initialCache = useRef(getCache());
+  const supabase = useRef(createClient());
   
   const [clients, setClients] = useState<Client[]>(initialCache.current?.data ?? []);
   const [loading, setLoading] = useState(!initialCache.current);
@@ -38,8 +39,7 @@ export function useClients() {
   const refresh = useCallback(async () => {
     if (!professional?.id) return;
     
-    const supabase = createClient();
-    const { data } = await supabase
+    const { data } = await supabase.current
       .from("clients")
       .select("*")
       .eq("professional_id", professional.id)

@@ -7,6 +7,7 @@ import { Badge } from "@/components/pro/ui/Badge";
 import { EmptyState } from "@/components/pro/ui/EmptyState";
 import { Avatar } from "@/components/pro/ui/Avatar";
 import { Skeleton } from "@/components/pro/ui/Skeleton";
+import { SendTestModal } from "@/components/pro/tests/SendTestModal";
 import { Users, Calendar, FlaskConical, CheckCircle2, Eye, Send, Share2, Copy, Mail, MessageCircle, Check } from "lucide-react";
 import { useProContext } from "@/lib/pro/context";
 import { useDashboard } from "@/lib/pro/hooks/useDashboard";
@@ -155,12 +156,18 @@ function SharePopover({ testToken, clientName, professionalName, onClose }: {
 
 export default function DashboardPage() {
   const { professional } = useProContext();
-  const { stats, upcomingAppointments, recentTests, loading } = useDashboard();
+  const { stats, upcomingAppointments, recentTests, loading, refresh } = useDashboard();
   const [shareOpenId, setShareOpenId] = useState<string | null>(null);
+  const [showSendModal, setShowSendModal] = useState(false);
 
   return (
     <>
       <TopBar title="Ofisim" />
+      <SendTestModal
+        open={showSendModal}
+        onClose={() => setShowSendModal(false)}
+        onSent={refresh}
+      />
       <main className="flex-1 p-4 sm:p-6 lg:p-8">
         <div className="mx-auto max-w-5xl space-y-6">
           {/* Greeting + quick action */}
@@ -174,13 +181,13 @@ export default function DashboardPage() {
               </div>
               <p className="text-sm text-pro-text-tertiary mt-1 ml-[18px]">{formatTodayDate()}</p>
             </div>
-            <Link
-              href="/pro/tests"
+            <button
+              onClick={() => setShowSendModal(true)}
               className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-xl bg-pro-primary text-white text-sm font-medium hover:bg-pro-primary-hover transition-colors shadow-sm"
             >
               <Send className="h-4 w-4" />
               Test Gönder
-            </Link>
+            </button>
           </div>
 
           {/* Stat cards */}
@@ -278,7 +285,7 @@ export default function DashboardPage() {
                   ))}
                 </div>
               ) : recentTests.length === 0 ? (
-                <EmptyState icon={FlaskConical} title="Henüz test yok" description="İlk karakter analizinizi bir danışanınıza gönderin" actionLabel="Test Gönder" onAction={() => {}} />
+                <EmptyState icon={FlaskConical} title="Henüz test yok" description="İlk karakter analizinizi bir danışanınıza gönderin" actionLabel="Test Gönder" onAction={() => setShowSendModal(true)} />
               ) : (
                 <div className="space-y-2.5">
                   {recentTests.map((test) => {

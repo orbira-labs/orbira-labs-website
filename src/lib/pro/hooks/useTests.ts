@@ -35,6 +35,7 @@ function setCache(data: TestWithClient[]) {
 export function useTests() {
   const { professional } = useProContext();
   const initialCache = useRef(getCache());
+  const supabase = useRef(createClient());
   
   const [tests, setTests] = useState<TestWithClient[]>(initialCache.current?.data ?? []);
   const [loading, setLoading] = useState(!initialCache.current);
@@ -42,8 +43,7 @@ export function useTests() {
   const refresh = useCallback(async () => {
     if (!professional?.id) return;
     
-    const supabase = createClient();
-    const { data } = await supabase
+    const { data } = await supabase.current
       .from("test_invitations")
       .select("*, client:clients(first_name, last_name)")
       .eq("professional_id", professional.id)

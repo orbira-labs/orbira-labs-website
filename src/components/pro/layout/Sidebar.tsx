@@ -13,7 +13,7 @@ import {
   LogOut,
   ChevronLeft,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Avatar } from "../ui/Avatar";
 import { useProContext } from "@/lib/pro/context";
 
@@ -29,6 +29,11 @@ export function Sidebar() {
   const pathname = usePathname();
   const { professional, signOut } = useProContext();
   const [collapsed, setCollapsed] = useState(false);
+  const [pendingHref, setPendingHref] = useState<string | null>(null);
+
+  useEffect(() => {
+    setPendingHref(null);
+  }, [pathname]);
 
   return (
     <aside
@@ -89,11 +94,12 @@ export function Sidebar() {
 
       <nav className="flex-1 py-4 px-2.5 space-y-1 relative">
         {NAV_ITEMS.map((item) => {
-          const isActive = pathname.startsWith(item.href);
+          const isActive = (pendingHref ?? pathname).startsWith(item.href);
           return (
             <Link
               key={item.href}
               href={item.href}
+              onClick={() => setPendingHref(item.href)}
               className={clsx(
                 "group relative flex items-center gap-3 rounded-xl transition-all duration-200",
                 collapsed ? "justify-center px-2 py-2.5" : "px-3 py-2.5",
@@ -116,10 +122,11 @@ export function Sidebar() {
       <div className="border-t border-white/10 p-2.5">
         <Link
           href="/pro/settings"
+          onClick={() => setPendingHref("/pro/settings")}
           className={clsx(
             "flex items-center gap-3 rounded-xl px-3 py-2.5 text-white/50 hover:bg-white/10 hover:text-white transition-all duration-200",
             collapsed && "justify-center px-2",
-            pathname.startsWith("/pro/settings") && "bg-white/15 text-white"
+            (pendingHref ?? pathname).startsWith("/pro/settings") && "bg-white/15 text-white"
           )}
         >
           <Settings className="h-5 w-5 shrink-0" />

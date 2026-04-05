@@ -60,6 +60,8 @@ export function useDashboard() {
     initialCache.current = getCache();
   }
 
+  const supabase = useRef(createClient());
+
   const [stats, setStats] = useState<DashboardStats>(
     initialCache.current?.stats ?? {
       total_clients: 0,
@@ -79,11 +81,9 @@ export function useDashboard() {
   const fetchData = useCallback(async () => {
     if (!professional?.id) return;
 
-    const supabase = createClient();
-
     const [statsRes, aptsRes, testsRes] = await Promise.all([
-      supabase.rpc("get_dashboard_stats", { p_professional_id: professional.id }),
-      supabase
+      supabase.current.rpc("get_dashboard_stats", { p_professional_id: professional.id }),
+      supabase.current
         .from("appointments")
         .select("id, starts_at, subject, client:clients(first_name, last_name)")
         .eq("professional_id", professional.id)
@@ -91,7 +91,7 @@ export function useDashboard() {
         .gte("starts_at", new Date().toISOString())
         .order("starts_at", { ascending: true })
         .limit(5),
-      supabase
+      supabase.current
         .from("test_invitations")
         .select("id, token, status, created_at, client:clients(first_name, last_name)")
         .eq("professional_id", professional.id)
@@ -138,13 +138,11 @@ export function useDashboard() {
   useEffect(() => {
     if (!professional?.id) return;
 
-    const supabase = createClient();
-
     if (channelRef.current) {
-      supabase.removeChannel(channelRef.current);
+      supabase.current.removeChannel(channelRef.current);
     }
 
-    channelRef.current = supabase
+    channelRef.current = supabase.current
       .channel(`dashboard-${professional.id}`)
       .on(
         "postgres_changes",
@@ -170,7 +168,7 @@ export function useDashboard() {
 
     return () => {
       if (channelRef.current) {
-        supabase.removeChannel(channelRef.current);
+        supabase.current.removeChannel(channelRef.current);
         channelRef.current = null;
       }
     };

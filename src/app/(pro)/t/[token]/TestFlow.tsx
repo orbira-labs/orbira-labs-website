@@ -20,7 +20,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { clsx } from "clsx";
 import { User, Heart, Shield, Coffee, Apple, Sparkles, Activity, Ruler } from "lucide-react";
 
-type Phase = "loading" | "profile" | "core" | "measurements" | "deep_dive" | "analyzing" | "done" | "error";
+type Phase = "loading" | "welcome" | "profile" | "core" | "measurements" | "deep_dive" | "analyzing" | "done" | "error";
 
 interface TestFlowProps {
   token: string;
@@ -82,7 +82,7 @@ export function TestFlow({ token, clientName }: TestFlowProps) {
       const data = await createSession();
       setSessionId(data.session_id);
       setSessionData(data);
-      setPhase("profile");
+      setPhase("welcome");
     } catch (e) {
       console.error("Session init error:", e);
       setError("Bağlantı hatası oluştu. Lütfen sayfayı yenileyin.");
@@ -261,6 +261,42 @@ export function TestFlow({ token, clientName }: TestFlowProps) {
     );
   }
 
+  if (phase === "welcome") {
+    const firstName = clientName?.split(" ")[0];
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-[#F5F9F7] via-white to-[#E8F0EC] flex items-center justify-center p-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="bg-white rounded-3xl shadow-2xl p-10 max-w-md w-full text-center"
+        >
+          <div className="w-20 h-20 bg-gradient-to-br from-[#5B7B6A] to-[#4A6A59] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-[#5B7B6A]/30">
+            <Sparkles className="w-10 h-10 text-white" />
+          </div>
+          <h1 className="text-2xl font-bold text-gray-900 mb-1">
+            {firstName ? `Merhaba, ${firstName}! 👋` : "Hoş Geldiniz! 👋"}
+          </h1>
+          <p className="text-[#5B7B6A] font-semibold text-base mb-5">Karakter Analizi</p>
+          <div className="space-y-3 text-sm text-gray-500 leading-relaxed mb-8 text-left bg-gray-50 rounded-2xl p-5">
+            <p>✦ Yaklaşık <strong className="text-gray-700">15–20 dakika</strong> sürecek.</p>
+            <p>✦ Sorulara <strong className="text-gray-700">içgüdüsel olarak</strong>, çok düşünmeden cevap verin — bu daha doğru sonuç verir.</p>
+            <p>✦ Cevaplarınız yalnızca <strong className="text-gray-700">uzmanınızla paylaşılacak</strong>.</p>
+          </div>
+          <button
+            onClick={() => setPhase("profile")}
+            className="w-full py-4 bg-gradient-to-r from-[#5B7B6A] to-[#4A6A59] text-white rounded-2xl font-semibold text-base shadow-xl shadow-[#5B7B6A]/20 hover:shadow-2xl hover:shadow-[#5B7B6A]/30 transition-all active:scale-[0.98]"
+          >
+            Teste Başla →
+          </button>
+          <div className="mt-8 pt-6 border-t border-gray-100">
+            <p className="text-xs text-gray-300 font-medium tracking-wider uppercase">Powered by Orbira Labs</p>
+          </div>
+        </motion.div>
+      </div>
+    );
+  }
+
   if (phase === "error") {
     return (
       <div className="min-h-screen bg-gradient-to-br from-[#F5F9F7] via-white to-[#E8F0EC] flex items-center justify-center p-4">
@@ -290,23 +326,78 @@ export function TestFlow({ token, clientName }: TestFlowProps) {
   if (phase === "analyzing") return <AnalysisLoading />;
 
   if (phase === "done") {
+    const firstName = clientName?.split(" ")[0];
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#F5F9F7] via-white to-[#E8F0EC] flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-[#F5F9F7] via-white to-[#E8F0EC] flex items-center justify-center p-4 overflow-hidden">
+        {/* Floating sparkles */}
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute text-2xl pointer-events-none select-none"
+            initial={{ opacity: 0, y: 0, x: 0, scale: 0 }}
+            animate={{
+              opacity: [0, 1, 1, 0],
+              y: [0, -120 - i * 15],
+              scale: [0, 1, 1, 0.5],
+            }}
+            transition={{
+              duration: 2.5,
+              delay: i * 0.15,
+              ease: "easeOut",
+            }}
+            style={{
+              left: `${15 + (i * 10) % 70}%`,
+              top: "60%",
+            }}
+          >
+            {["🎉", "✨", "⭐", "🌟", "🎊", "💫", "🏆", "✦"][i]}
+          </motion.div>
+        ))}
+
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="bg-white rounded-3xl shadow-2xl p-10 max-w-md text-center"
+          initial={{ opacity: 0, scale: 0.85, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="bg-white rounded-3xl shadow-2xl p-10 max-w-md w-full text-center relative z-10"
         >
-          <div className="w-20 h-20 bg-gradient-to-br from-[#5B7B6A] to-[#4A6A59] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-[#5B7B6A]/30">
-            <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          <motion.div
+            initial={{ scale: 0, rotate: -20 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 200, damping: 15 }}
+            className="w-24 h-24 bg-gradient-to-br from-[#5B7B6A] to-[#4A6A59] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-[#5B7B6A]/30"
+          >
+            <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
             </svg>
-          </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-3">Tebrikler!</h1>
-          <p className="text-gray-600 mb-1">Testiniz başarıyla tamamlandı.</p>
-          <p className="text-gray-400 text-sm">Sonuçlarınız uzmanınızla paylaşılacaktır.</p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+          >
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              {firstName ? `Harika iş, ${firstName}! 🎉` : "Tebrikler! 🎉"}
+            </h1>
+            <p className="text-gray-600 mb-1 text-base">Testini başarıyla tamamladın.</p>
+            <p className="text-gray-400 text-sm mt-3 leading-relaxed">
+              Karakter analizi hazırlanıyor. Sonuçların yakında uzmanınla paylaşılacak.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7 }}
+            className="mt-6 p-4 bg-[#5B7B6A]/5 rounded-2xl border border-[#5B7B6A]/10"
+          >
+            <p className="text-sm text-[#5B7B6A] font-medium">
+              Bu sayfayı artık kapatabilirsin ✓
+            </p>
+          </motion.div>
+
           <div className="mt-8 pt-6 border-t border-gray-100">
-            <p className="text-xs text-gray-300 font-medium tracking-wider uppercase">Powered by Orbira</p>
+            <p className="text-xs text-gray-300 font-medium tracking-wider uppercase">Powered by Orbira Labs</p>
           </div>
         </motion.div>
       </div>
@@ -457,6 +548,11 @@ export function TestFlow({ token, clientName }: TestFlowProps) {
                   <div className="text-sm text-gray-400 font-medium">
                     {currentCoreIndex + 1} / {sessionData.core_questions.length}
                   </div>
+                  {sessionData.core_questions.length - currentCoreIndex - 1 > 0 && (
+                    <div className="text-xs text-gray-300 mt-0.5">
+                      {sessionData.core_questions.length - currentCoreIndex - 1} soru kaldı
+                    </div>
+                  )}
                 </div>
 
                 <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg shadow-black/[0.04] border border-white/60 p-8">
@@ -573,16 +669,23 @@ export function TestFlow({ token, clientName }: TestFlowProps) {
                 className="space-y-8"
               >
                 <div className="text-center">
-                  <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-gradient-to-r from-[#5B7B6A]/10 to-[#7A9A8A]/10 text-[#5B7B6A] rounded-full text-xs font-bold uppercase tracking-wider mb-3">
-                    <Sparkles className="w-3.5 h-3.5" />
-                    Neredeyse bitti!
-                  </div>
+                  {currentDeepDiveIndex >= deepDiveQuestions.length - Math.max(1, Math.ceil(deepDiveQuestions.length * 0.25)) && (
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-gradient-to-r from-[#5B7B6A]/10 to-[#7A9A8A]/10 text-[#5B7B6A] rounded-full text-xs font-bold uppercase tracking-wider mb-3">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      Neredeyse bitti!
+                    </div>
+                  )}
                   <div className={clsx("inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-2", deepDiveTheme.badge, deepDiveTheme.badgeText)}>
                     {getPoolLabel(currentDeepDiveQuestion.pool)}
                   </div>
                   <div className="text-sm text-gray-400 font-medium">
                     {currentDeepDiveIndex + 1} / {deepDiveQuestions.length}
                   </div>
+                  {deepDiveQuestions.length - currentDeepDiveIndex - 1 > 0 && (
+                    <div className="text-xs text-gray-300 mt-0.5">
+                      {deepDiveQuestions.length - currentDeepDiveIndex - 1} soru kaldı
+                    </div>
+                  )}
                 </div>
 
                 <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg shadow-black/[0.04] border border-white/60 p-8">
