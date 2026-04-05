@@ -22,7 +22,7 @@ const NAV_ITEMS = [
   { href: "/pro/clients", label: "Danışanlar", icon: Users },
   { href: "/pro/appointments", label: "Randevular", icon: Calendar },
   { href: "/pro/tests", label: "Testler", icon: FlaskConical },
-  { href: "/pro/billing", label: "Bakiye", icon: CreditCard },
+  { href: "/pro/billing", label: "Satın Al", icon: CreditCard },
 ];
 
 export function Sidebar() {

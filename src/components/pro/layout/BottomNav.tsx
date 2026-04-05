@@ -16,7 +16,7 @@ const NAV_ITEMS = [
   { href: "/pro/clients", label: "Danışan", icon: Users },
   { href: "/pro/appointments", label: "Randevu", icon: Calendar },
   { href: "/pro/tests", label: "Test", icon: FlaskConical },
-  { href: "/pro/billing", label: "Bakiye", icon: CreditCard },
+  { href: "/pro/billing", label: "Satın Al", icon: CreditCard },
 ];
 
 export function BottomNav() {
