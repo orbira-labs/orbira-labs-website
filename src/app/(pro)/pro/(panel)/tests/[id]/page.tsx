@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { ArrowLeft, Calendar, User, Download } from "lucide-react";
 import { createClient } from "@/lib/pro/supabase/client";
 import { TopBar } from "@/components/pro/layout/TopBar";
@@ -18,6 +19,7 @@ import { CharacterAnalysis } from "@/components/pro/results/CharacterAnalysis";
 import { BlindSpotCard } from "@/components/pro/results/BlindSpotCard";
 import { CoachingTimeline } from "@/components/pro/results/CoachingTimeline";
 import { formatDate, formatDateTime } from "@/lib/pro/utils";
+import { staggerContainer, cardReveal } from "@/lib/pro/animations";
 import type { TestInvitation, Client, TestResults } from "@/lib/pro/types";
 
 type Tab = "overview" | "character" | "blindspots" | "roadmap";
@@ -88,14 +90,14 @@ export default function TestResultPage() {
   if (!test) {
     return (
       <>
-        <TopBar title="Test Bulunamadı" />
+        <TopBar title="Analiz Bulunamadı" />
         <main className="flex-1 p-4 sm:p-6 lg:p-8">
           <div className="mx-auto max-w-5xl">
             <EmptyState
               icon={Calendar}
-              title="Test bulunamadı"
-              description="Bu test mevcut değil veya erişim yetkiniz yok"
-              actionLabel="Testlere Dön"
+              title="Analiz bulunamadı"
+              description="Bu analiz mevcut değil veya erişim yetkiniz yok"
+              actionLabel="Analizlere Dön"
               onAction={() => router.push("/pro/tests")}
             />
           </div>
@@ -107,7 +109,7 @@ export default function TestResultPage() {
   if (test.status !== "completed" || !test.results_snapshot) {
     return (
       <>
-        <TopBar title="Test Sonucu" />
+        <TopBar title="Analiz Sonucu" />
         <main className="flex-1 p-4 sm:p-6 lg:p-8">
           <div className="mx-auto max-w-5xl">
             <Link
@@ -115,7 +117,7 @@ export default function TestResultPage() {
               className="inline-flex items-center gap-1.5 text-sm text-pro-text-secondary hover:text-pro-text transition-colors mb-6"
             >
               <ArrowLeft className="h-4 w-4" />
-              Testlere Dön
+              Analizlere Dön
             </Link>
 
             <Card padding="lg">
@@ -144,8 +146,8 @@ export default function TestResultPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Test Henüz Tamamlanmadı</h3>
-                <p className="text-gray-600">Danışan testi tamamladığında sonuçlar burada görüntülenecektir.</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Analiz Henüz Tamamlanmadı</h3>
+                <p className="text-gray-600">Danışan analizi tamamladığında sonuçlar burada görüntülenecektir.</p>
               </div>
             </Card>
           </div>
@@ -159,7 +161,7 @@ export default function TestResultPage() {
 
   return (
     <>
-      <TopBar title="Test Sonucu" />
+      <TopBar title="Analiz Sonucu" />
       <main className="flex-1 p-4 sm:p-6 lg:p-8">
         <div className="mx-auto max-w-5xl space-y-6">
           <Link
@@ -167,7 +169,7 @@ export default function TestResultPage() {
             className="inline-flex items-center gap-1.5 text-sm text-pro-text-secondary hover:text-pro-text transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
-            Testlere Dön
+            Analizlere Dön
           </Link>
 
           <Card padding="lg">
@@ -220,42 +222,71 @@ export default function TestResultPage() {
           </div>
 
           {activeTab === "overview" && (
-            <div className="space-y-6">
+            <motion.div
+              variants={staggerContainer}
+              initial="initial"
+              animate="animate"
+              className="space-y-6"
+            >
               <div className="grid md:grid-cols-2 gap-6">
-                <Card padding="lg">
-                  <WellnessGauge score={analysis.wellness_score} size="lg" />
-                </Card>
-                <Card padding="lg">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">10 Boyut Karakter Analizi</h3>
-                  <DimensionRadar scores={analysis.dimension_scores} />
-                </Card>
+                <motion.div variants={cardReveal}>
+                  <Card padding="lg">
+                    <WellnessGauge score={analysis.wellness_score} size="lg" />
+                  </Card>
+                </motion.div>
+                <motion.div variants={cardReveal}>
+                  <Card padding="lg">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">10 Boyut Karakter Analizi</h3>
+                    <DimensionRadar scores={analysis.dimension_scores} />
+                  </Card>
+                </motion.div>
               </div>
 
-              <Card padding="lg">
-                <StrengthWeaknessGrid
-                  strengths={report.top5_and_weak5.top5}
-                  weaknesses={report.top5_and_weak5.weak5}
-                />
-              </Card>
-            </div>
+              <motion.div variants={cardReveal}>
+                <Card padding="lg">
+                  <StrengthWeaknessGrid
+                    strengths={report.top5_and_weak5.top5}
+                    weaknesses={report.top5_and_weak5.weak5}
+                  />
+                </Card>
+              </motion.div>
+            </motion.div>
           )}
 
           {activeTab === "character" && (
-            <Card padding="lg">
-              <CharacterAnalysis text={report.character_analysis} />
-            </Card>
+            <motion.div
+              variants={cardReveal}
+              initial="initial"
+              animate="animate"
+            >
+              <Card padding="lg">
+                <CharacterAnalysis text={report.character_analysis} />
+              </Card>
+            </motion.div>
           )}
 
           {activeTab === "blindspots" && (
-            <Card padding="lg">
-              <BlindSpotCard blindSpots={report.blind_spots} />
-            </Card>
+            <motion.div
+              variants={cardReveal}
+              initial="initial"
+              animate="animate"
+            >
+              <Card padding="lg">
+                <BlindSpotCard blindSpots={report.blind_spots} />
+              </Card>
+            </motion.div>
           )}
 
           {activeTab === "roadmap" && (
-            <Card padding="lg">
-              <CoachingTimeline roadmap={report.coaching_roadmap} />
-            </Card>
+            <motion.div
+              variants={cardReveal}
+              initial="initial"
+              animate="animate"
+            >
+              <Card padding="lg">
+                <CoachingTimeline roadmap={report.coaching_roadmap} />
+              </Card>
+            </motion.div>
           )}
 
           <div className="text-center text-xs text-gray-400 py-4">

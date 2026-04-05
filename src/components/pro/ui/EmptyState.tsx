@@ -1,5 +1,9 @@
+"use client";
+
+import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 import { Button } from "./Button";
+import { scaleIn } from "@/lib/pro/animations";
 
 interface EmptyStateProps {
   icon: LucideIcon;
@@ -7,6 +11,8 @@ interface EmptyStateProps {
   description: string;
   actionLabel?: string;
   onAction?: () => void;
+  secondaryActionLabel?: string;
+  onSecondaryAction?: () => void;
 }
 
 export function EmptyState({
@@ -15,24 +21,65 @@ export function EmptyState({
   description,
   actionLabel,
   onAction,
+  secondaryActionLabel,
+  onSecondaryAction,
 }: EmptyStateProps) {
   return (
-    <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
-      <div className="relative mb-5">
+    <motion.div
+      variants={scaleIn}
+      initial="initial"
+      animate="animate"
+      className="flex flex-col items-center justify-center py-12 px-4 text-center"
+    >
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
+        className="relative mb-5"
+      >
         <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-pro-primary-light to-[var(--pro-surface-alt)] flex items-center justify-center">
           <Icon className="h-7 w-7 text-pro-primary" />
         </div>
-        <div className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-pro-accent-light border-2 border-pro-surface" />
-      </div>
-      <h3 className="text-base font-semibold text-pro-text mb-1.5">{title}</h3>
-      <p className="text-sm text-pro-text-secondary max-w-xs leading-relaxed mb-5">
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.3, type: "spring", stiffness: 300 }}
+          className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-pro-accent-light border-2 border-pro-surface"
+        />
+      </motion.div>
+      <motion.h3
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.15 }}
+        className="text-base font-semibold text-pro-text mb-1.5"
+      >
+        {title}
+      </motion.h3>
+      <motion.p
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="text-sm text-pro-text-secondary max-w-xs leading-relaxed mb-5"
+      >
         {description}
-      </p>
-      {actionLabel && onAction && (
-        <Button variant="primary" size="md" onClick={onAction}>
-          {actionLabel}
-        </Button>
-      )}
-    </div>
+      </motion.p>
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.25 }}
+        className="flex flex-col sm:flex-row gap-2"
+      >
+        {actionLabel && onAction && (
+          <Button variant="primary" size="md" onClick={onAction}>
+            {actionLabel}
+          </Button>
+        )}
+        {secondaryActionLabel && onSecondaryAction && (
+          <Button variant="secondary" size="md" onClick={onSecondaryAction}>
+            {secondaryActionLabel}
+          </Button>
+        )}
+      </motion.div>
+    </motion.div>
   );
 }

@@ -21,7 +21,7 @@ const NAV_ITEMS = [
   { href: "/pro/dashboard", label: "Ofisim", icon: LayoutDashboard },
   { href: "/pro/clients", label: "Danışanlar", icon: Users },
   { href: "/pro/appointments", label: "Randevular", icon: Calendar },
-  { href: "/pro/tests", label: "Testler", icon: FlaskConical },
+  { href: "/pro/tests", label: "Analizler", icon: FlaskConical },
   { href: "/pro/billing", label: "Satın Al", icon: CreditCard },
 ];
 

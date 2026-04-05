@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
 import { TopBar } from "@/components/pro/layout/TopBar";
 import { Card } from "@/components/pro/ui/Card";
 import { Badge } from "@/components/pro/ui/Badge";
@@ -8,10 +9,12 @@ import { EmptyState } from "@/components/pro/ui/EmptyState";
 import { Avatar } from "@/components/pro/ui/Avatar";
 import { Skeleton } from "@/components/pro/ui/Skeleton";
 import { SendTestModal } from "@/components/pro/tests/SendTestModal";
+import { ActionCenter, InsightCard, QuickStats } from "@/components/pro/dashboard";
 import { Users, Calendar, FlaskConical, CheckCircle2, Eye, Send, Share2, Copy, Mail, MessageCircle, Check } from "lucide-react";
 import { useProContext } from "@/lib/pro/context";
 import { useDashboard } from "@/lib/pro/hooks/useDashboard";
 import { formatTime, formatRelative, formatDayLabel, generateWhatsAppLink, buildTestMessage } from "@/lib/pro/utils";
+import { staggerContainer, cardReveal } from "@/lib/pro/animations";
 import { toast } from "sonner";
 import Link from "next/link";
 
@@ -40,7 +43,7 @@ const STAT_CARDS = [
   },
   {
     key: "remaining_tests" as const,
-    label: "Kullanılabilir Test",
+    label: "Kullanılabilir Analiz",
     icon: FlaskConical,
     href: "/pro/tests",
     gradient: "from-[#EBF0F8] to-[#D8E3F1]",
@@ -51,7 +54,7 @@ const STAT_CARDS = [
   },
   {
     key: "completed_tests" as const,
-    label: "Tamamlanan Test",
+    label: "Tamamlanan Analiz",
     icon: CheckCircle2,
     href: "/pro/tests",
     gradient: "from-[#E9F7EF] to-[#D0EDDB]",
@@ -160,6 +163,14 @@ export default function DashboardPage() {
   const [shareOpenId, setShareOpenId] = useState<string | null>(null);
   const [showSendModal, setShowSendModal] = useState(false);
 
+  const pendingReports = recentTests.filter(t => t.status === "completed").length;
+  const waitingAnalyses = recentTests.filter(t => t.status === "sent" || t.status === "started").length;
+
+  const statCards = STAT_CARDS.map(card => ({
+    ...card,
+    value: stats[card.key],
+  }));
+
   return (
     <>
       <TopBar title="Ofisim" />
@@ -169,13 +180,18 @@ export default function DashboardPage() {
         onSent={refresh}
       />
       <main className="flex-1 p-4 sm:p-6 lg:p-8">
-        <div className="mx-auto max-w-5xl space-y-6">
+        <motion.div 
+          className="mx-auto max-w-5xl space-y-6"
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+        >
           {/* Greeting + quick action */}
-          <div className="flex items-center justify-between">
+          <motion.div variants={cardReveal} className="flex items-center justify-between">
             <div>
               <div className="flex items-center gap-3">
                 <div className="h-1.5 w-1.5 rounded-full bg-pro-primary animate-pulse" />
-                <h2 className="text-xl sm:text-2xl font-semibold text-pro-text">
+                <h2 className="text-xl sm:text-2xl font-bold text-pro-text tracking-tight">
                   {getGreeting()}, <span className="text-pro-primary">{professional?.first_name || "Hoş geldiniz"}</span>
                 </h2>
               </div>
@@ -183,47 +199,36 @@ export default function DashboardPage() {
             </div>
             <button
               onClick={() => setShowSendModal(true)}
-              className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-xl bg-pro-primary text-white text-sm font-medium hover:bg-pro-primary-hover transition-colors shadow-sm"
+              className="hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-xl bg-pro-primary text-white text-sm font-medium hover:bg-pro-primary-hover transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5"
             >
               <Send className="h-4 w-4" />
-              Test Gönder
+              Analiz Gönder
             </button>
+          </motion.div>
+
+          {/* Action Center + Insight - New Premium Section */}
+          <div className="grid lg:grid-cols-2 gap-4 sm:gap-5">
+            <ActionCenter
+              pendingReports={pendingReports}
+              upcomingAppointments={stats.todays_appointments}
+              waitingAnalyses={waitingAnalyses}
+              completedToday={0}
+            />
+            <InsightCard
+              insights={[]}
+              completionRateChange={0}
+              activeClients={stats.total_clients}
+              weeklyAnalyses={stats.completed_tests}
+            />
           </div>
 
-          {/* Stat cards */}
-          {loading ? (
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className="bg-pro-surface rounded-xl border border-pro-border p-4 sm:p-5">
-                  <Skeleton className="h-4 w-20 mb-3" />
-                  <Skeleton className="h-8 w-14" />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-              {STAT_CARDS.map((card) => (
-                <Link key={card.key} href={card.href}>
-                  <div className={`relative overflow-hidden rounded-xl bg-gradient-to-br ${card.gradient} border border-white/60 p-4 sm:p-5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group`}>
-                    <div className={`absolute left-0 top-3 bottom-3 w-1 rounded-r-full ${card.accentBar}`} />
-                    <div className="flex items-start justify-between pl-2">
-                      <div>
-                        <p className="text-xs sm:text-sm text-pro-text-secondary font-medium">{card.label}</p>
-                        <p className={`text-2xl sm:text-3xl font-bold mt-1 ${card.valueColor}`}>{stats[card.key]}</p>
-                      </div>
-                      <div className={`h-10 w-10 rounded-xl ${card.iconBg} flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform`}>
-                        <card.icon className={`h-5 w-5 ${card.iconColor}`} />
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          )}
+          {/* Stat cards - Enhanced with QuickStats */}
+          <QuickStats stats={statCards} loading={loading} />
 
           {/* Bottom panels */}
           <div className="grid lg:grid-cols-2 gap-4 sm:gap-6">
-            <Card padding="lg" accent="primary">
+            <motion.div variants={cardReveal}>
+            <Card padding="lg" accent="primary" variant="elevated">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-semibold text-pro-text flex items-center gap-2">
                   <span className="h-4 w-0.5 rounded-full bg-pro-primary" />
@@ -244,7 +249,7 @@ export default function DashboardPage() {
                   ))}
                 </div>
               ) : upcomingAppointments.length === 0 ? (
-                <EmptyState icon={Calendar} title="Henüz randevu yok" description="Danışanlarınızla randevu oluşturarak takibinizi kolaylaştırın" />
+                <EmptyState icon={Calendar} title="Henüz randevu yok" description="İlk randevunuzu oluşturun ve danışanlarınızı takip edin" actionLabel="Randevu Oluştur" onAction={() => {}} />
               ) : (
                 <div className="space-y-2.5">
                   {upcomingAppointments.map((apt) => (
@@ -263,12 +268,14 @@ export default function DashboardPage() {
                 </div>
               )}
             </Card>
+            </motion.div>
 
-            <Card padding="lg" accent="accent">
+            <motion.div variants={cardReveal}>
+            <Card padding="lg" accent="accent" variant="elevated">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-semibold text-pro-text flex items-center gap-2">
                   <span className="h-4 w-0.5 rounded-full bg-pro-accent" />
-                  Son Testler
+                  Son Analizler
                 </h3>
                 <Link href="/pro/tests" className="text-sm text-pro-primary hover:underline">Tümü</Link>
               </div>
@@ -285,7 +292,7 @@ export default function DashboardPage() {
                   ))}
                 </div>
               ) : recentTests.length === 0 ? (
-                <EmptyState icon={FlaskConical} title="Henüz test yok" description="İlk karakter analizinizi bir danışanınıza gönderin" actionLabel="Test Gönder" onAction={() => setShowSendModal(true)} />
+                <EmptyState icon={FlaskConical} title="Henüz analiz yok" description="İlk karakter analizinizi gönderin ve danışanlarınızı daha derinden tanıyın" actionLabel="Analiz Gönder" onAction={() => setShowSendModal(true)} />
               ) : (
                 <div className="space-y-2.5">
                   {recentTests.map((test) => {
@@ -317,7 +324,7 @@ export default function DashboardPage() {
                               <button
                                 onClick={() => setShareOpenId(shareOpenId === test.id ? null : test.id)}
                                 className="p-1.5 rounded-lg text-pro-text-tertiary hover:text-pro-primary hover:bg-pro-primary-light transition-colors"
-                                title="Testi Paylaş"
+                                title="Analizi Paylaş"
                               >
                                 <Share2 className="h-4 w-4" />
                               </button>
@@ -338,8 +345,9 @@ export default function DashboardPage() {
                 </div>
               )}
             </Card>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </main>
     </>
   );

@@ -38,7 +38,7 @@ type Tab = "overview" | "tests" | "appointments" | "notes";
 
 const TABS: { id: Tab; label: string; icon: typeof FileText }[] = [
   { id: "overview", label: "Genel", icon: FileText },
-  { id: "tests", label: "Testler", icon: FlaskConical },
+  { id: "tests", label: "Analizler", icon: FlaskConical },
   { id: "appointments", label: "Randevular", icon: Calendar },
   { id: "notes", label: "Notlar", icon: FileText },
 ];
@@ -242,7 +242,7 @@ export default function ClientDetailPage() {
               </div>
               <div className="flex gap-2">
                 <Button variant="secondary" size="sm">
-                  <Send className="h-3.5 w-3.5" /> Test Gönder
+                  <Send className="h-3.5 w-3.5" /> Analiz Gönder
                 </Button>
               </div>
             </div>
@@ -269,7 +269,7 @@ export default function ClientDetailPage() {
           {activeTab === "overview" && (
             <div className="grid sm:grid-cols-3 gap-4">
               <Card padding="sm">
-                <p className="text-xs text-pro-text-secondary">Testler</p>
+                <p className="text-xs text-pro-text-secondary">Analizler</p>
                 <p className="text-2xl font-bold text-pro-text mt-1">{tests.length}</p>
               </Card>
               <Card padding="sm">
@@ -288,9 +288,9 @@ export default function ClientDetailPage() {
               {tests.length === 0 ? (
                 <EmptyState
                   icon={FlaskConical}
-                  title="Test gönderilmemiş"
-                  description="Bu danışana henüz test gönderilmemiş"
-                  actionLabel="Test Gönder"
+                  title="Analiz gönderilmemiş"
+                  description="Bu danışana henüz analiz gönderilmemiş"
+                  actionLabel="Analiz Gönder"
                   onAction={() => {}}
                 />
               ) : (

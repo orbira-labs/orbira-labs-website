@@ -1,5 +1,7 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
+
 interface WellnessGaugeProps {
   score: number;
   size?: "sm" | "md" | "lg";
@@ -27,13 +29,52 @@ function getScoreLabel(score: number): string {
   return "Kritik";
 }
 
+function easeOutCubic(t: number): number {
+  return 1 - Math.pow(1 - t, 3);
+}
+
 export function WellnessGauge({ score, size = "md" }: WellnessGaugeProps) {
+  const [displayScore, setDisplayScore] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const animationRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (hasAnimated) return;
+
+    const duration = 1500;
+    const startTime = performance.now();
+
+    function animate(currentTime: number) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = easeOutCubic(progress);
+      const currentScore = easedProgress * score;
+
+      setDisplayScore(currentScore);
+
+      if (progress < 1) {
+        animationRef.current = requestAnimationFrame(animate);
+      } else {
+        setDisplayScore(score);
+        setHasAnimated(true);
+      }
+    }
+
+    animationRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [score, hasAnimated]);
+
   const { outer, strokeWidth, fontSize, labelSize } = SIZES[size];
   const radius = (outer - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
-  const progress = (score / 10) * circumference;
-  const color = getScoreColor(score);
-  const label = getScoreLabel(score);
+  const progress = (displayScore / 10) * circumference;
+  const color = getScoreColor(displayScore);
+  const label = getScoreLabel(displayScore);
 
   return (
     <div className="flex flex-col items-center">
@@ -57,12 +98,11 @@ export function WellnessGauge({ score, size = "md" }: WellnessGaugeProps) {
             strokeLinecap="round"
             strokeDasharray={circumference}
             strokeDashoffset={circumference - progress}
-            className="transition-all duration-1000 ease-out"
           />
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className={`${fontSize} font-bold`} style={{ color }}>
-            {score.toFixed(1)}
+            {displayScore.toFixed(1)}
           </span>
           <span className={`${labelSize} text-gray-500 font-medium`}>{label}</span>
         </div>

@@ -33,6 +33,12 @@ const CAPABILITIES = [
   },
 ];
 
+const VALUE_PROPOSITIONS = [
+  "Her analiz ~15 dakika seans hazırlığı tasarrufu",
+  "Ortalama 45+ sayfalık detaylı rapor",
+  "10 boyutlu karakter haritası",
+];
+
 const OUTPUTS = [
   {
     icon: Fingerprint,
@@ -160,17 +166,29 @@ export default function BillingPage() {
 
             <div className="mx-6 sm:mx-10 border-t border-gray-100" />
 
+            {/* Value propositions */}
+            <div className="px-6 sm:px-10 py-4 bg-pro-surface-alt/50 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+              {VALUE_PROPOSITIONS.map((prop, i) => (
+                <div key={i} className="flex items-center gap-2 text-xs text-pro-text-secondary">
+                  <div className="h-1.5 w-1.5 rounded-full bg-pro-primary" />
+                  {prop}
+                </div>
+              ))}
+            </div>
+
+            <div className="mx-6 sm:mx-10 border-t border-gray-100" />
+
             {/* Pricing cards */}
             <div className="p-6 sm:p-10 grid sm:grid-cols-2 gap-4">
-              {/* Tek Test */}
+              {/* Başlangıç Paketi */}
               <div className="rounded-2xl border border-pro-border overflow-hidden flex flex-col">
                 <div className="bg-gradient-to-br from-[#EDF5F0] to-[#E0EDE4] px-5 py-4">
-                  <p className="text-xs font-semibold text-pro-primary uppercase tracking-wide">Tek Test</p>
+                  <p className="text-xs font-semibold text-pro-primary uppercase tracking-wide">Başlangıç</p>
                   <div className="mt-2">
                     <span className="text-3xl font-bold text-pro-text">₺32</span>
                     <span className="text-lg font-semibold text-pro-text-secondary">,99</span>
                   </div>
-                  <p className="text-xs text-pro-text-tertiary mt-0.5">tek seferlik</p>
+                  <p className="text-xs text-pro-text-tertiary mt-0.5">1 analiz kredisi</p>
                 </div>
                 <div className="px-5 py-4 flex-1 flex flex-col bg-white">
                   <ul className="space-y-2 flex-1">
@@ -187,16 +205,19 @@ export default function BillingPage() {
                       WhatsApp / Email gönderim
                     </li>
                   </ul>
+                  <p className="text-[10px] text-pro-text-tertiary mt-3 italic">
+                    İlk deneyim için ideal
+                  </p>
                   <button
                     onClick={() => toast.info("Ödeme sistemi yakında aktif olacak")}
-                    className="mt-4 w-full py-2.5 rounded-xl border-2 border-pro-primary text-pro-primary text-sm font-semibold hover:bg-pro-primary hover:text-white transition-all active:scale-[0.98]"
+                    className="mt-3 w-full py-2.5 rounded-xl border-2 border-pro-primary text-pro-primary text-sm font-semibold hover:bg-pro-primary hover:text-white transition-all active:scale-[0.98]"
                   >
                     Satın Al
                   </button>
                 </div>
               </div>
 
-              {/* 10'lu Paket — gold */}
+              {/* Profesyonel Paket — gold */}
               <div className="rounded-2xl overflow-hidden flex flex-col relative group">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#C9A84C] via-[#E8C963] to-[#A67C34]" />
                 <div
@@ -210,16 +231,16 @@ export default function BillingPage() {
 
                 {/* Diagonal ribbon */}
                 <div className="absolute -right-[30px] top-[18px] z-10 rotate-45 bg-white shadow-md px-8 py-1">
-                  <span className="text-[11px] font-bold text-[#8B6914] tracking-wide">%9 tasarruf</span>
+                  <span className="text-[11px] font-bold text-[#8B6914] tracking-wide">En Popüler</span>
                 </div>
 
                 <div className="relative px-5 py-4">
-                  <p className="text-xs font-semibold text-white/90 uppercase tracking-wide">10 Test Paketi</p>
+                  <p className="text-xs font-semibold text-white/90 uppercase tracking-wide">Profesyonel Paket</p>
                   <div className="mt-2">
                     <span className="text-3xl font-bold text-white">₺299</span>
                     <span className="text-lg font-semibold text-white/70">,90</span>
                   </div>
-                  <p className="text-xs text-white/55 mt-0.5">test başına ₺29,99</p>
+                  <p className="text-xs text-white/55 mt-0.5">10 analiz kredisi · analiz başına ₺29,99</p>
                 </div>
 
                 <div className="relative px-5 py-4 flex-1 flex flex-col">
@@ -236,13 +257,51 @@ export default function BillingPage() {
                       <Check className="h-3.5 w-3.5 text-white shrink-0" />
                       WhatsApp / Email gönderim
                     </li>
+                    <li className="flex items-center gap-2 text-xs text-white/80">
+                      <Zap className="h-3.5 w-3.5 text-white shrink-0" />
+                      %9 tasarruf
+                    </li>
                   </ul>
+                  <p className="text-[10px] text-white/50 mt-3 italic">
+                    Yoğun kullanım için önerilir
+                  </p>
                   <button
                     onClick={() => toast.info("Ödeme sistemi yakında aktif olacak")}
-                    className="mt-4 w-full py-2.5 rounded-xl bg-white text-[#8B6914] text-sm font-semibold shadow-md shadow-black/10 hover:shadow-lg hover:bg-white/95 transition-all active:scale-[0.98] flex items-center justify-center gap-1.5"
+                    className="mt-3 w-full py-2.5 rounded-xl bg-white text-[#8B6914] text-sm font-semibold shadow-md shadow-black/10 hover:shadow-lg hover:bg-white/95 transition-all active:scale-[0.98] flex items-center justify-center gap-1.5"
                   >
                     Satın Al
                   </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Social proof */}
+            <div className="px-6 sm:px-10 pb-6 sm:pb-8">
+              <div className="p-4 bg-pro-surface-alt rounded-xl">
+                <div className="flex items-center justify-center gap-6 flex-wrap text-xs text-pro-text-secondary">
+                  <div className="flex items-center gap-2">
+                    <div className="flex -space-x-1.5">
+                      {[0, 1, 2, 3].map((i) => (
+                        <div 
+                          key={i} 
+                          className="h-6 w-6 rounded-full bg-pro-primary-light border-2 border-white flex items-center justify-center text-[10px] font-medium text-pro-primary"
+                        >
+                          {["A", "B", "C", "D"][i]}
+                        </div>
+                      ))}
+                    </div>
+                    <span>200+ uzman kullanıyor</span>
+                  </div>
+                  <div className="h-4 w-px bg-pro-border hidden sm:block" />
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-pro-success font-medium">%94</span>
+                    <span>memnuniyet oranı</span>
+                  </div>
+                  <div className="h-4 w-px bg-pro-border hidden sm:block" />
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-medium">~18 dk</span>
+                    <span>ortalama tamamlama</span>
+                  </div>
                 </div>
               </div>
             </div>

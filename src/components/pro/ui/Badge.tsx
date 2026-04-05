@@ -1,9 +1,11 @@
 import { clsx } from "clsx";
 
 type BadgeVariant = "success" | "warning" | "danger" | "info" | "muted";
+type BadgeSize = "sm" | "md";
 
 interface BadgeProps {
   variant?: BadgeVariant;
+  size?: BadgeSize;
   children: React.ReactNode;
   dot?: boolean;
   className?: string;
@@ -17,6 +19,11 @@ const variantStyles: Record<BadgeVariant, string> = {
   muted: "bg-pro-surface-alt text-pro-text-secondary border border-pro-border",
 };
 
+const sizeStyles: Record<BadgeSize, string> = {
+  sm: "px-2 py-0.5 text-[10px]",
+  md: "px-2.5 py-0.5 text-xs",
+};
+
 const dotColors: Record<BadgeVariant, string> = {
   success: "bg-pro-success",
   warning: "bg-pro-warning",
@@ -27,6 +34,7 @@ const dotColors: Record<BadgeVariant, string> = {
 
 export function Badge({
   variant = "muted",
+  size = "md",
   dot = false,
   className,
   children,
@@ -34,8 +42,9 @@ export function Badge({
   return (
     <span
       className={clsx(
-        "inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium",
+        "inline-flex items-center gap-1.5 rounded-full font-medium",
         variantStyles[variant],
+        sizeStyles[size],
         className
       )}
     >

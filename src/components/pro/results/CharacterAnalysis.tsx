@@ -1,5 +1,8 @@
 "use client";
 
+import { motion } from "framer-motion";
+import { staggerContainer, paragraphReveal } from "@/lib/pro/animations";
+
 interface CharacterAnalysisProps {
   text: string;
 }
@@ -18,16 +21,22 @@ export function CharacterAnalysis({ text }: CharacterAnalysisProps) {
         <h3 className="text-xl font-semibold text-gray-900 m-0">Karakter Analizi</h3>
       </div>
 
-      <div className="bg-gradient-to-br from-gray-50 to-slate-50 rounded-2xl p-6 sm:p-8 border border-gray-100">
+      <motion.div
+        variants={staggerContainer}
+        initial="initial"
+        animate="animate"
+        className="bg-gradient-to-br from-gray-50 to-slate-50 rounded-2xl p-6 sm:p-8 border border-gray-100"
+      >
         {paragraphs.map((paragraph, idx) => (
-          <p
+          <motion.p
             key={idx}
+            variants={paragraphReveal}
             className="text-gray-700 leading-relaxed text-[15px] mb-4 last:mb-0"
           >
             {paragraph}
-          </p>
+          </motion.p>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }

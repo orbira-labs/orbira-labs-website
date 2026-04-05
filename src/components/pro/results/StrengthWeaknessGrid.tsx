@@ -1,5 +1,7 @@
 "use client";
 
+import { motion } from "framer-motion";
+import { staggerContainer, staggerItem } from "@/lib/pro/animations";
 import type { StrengthWeakness } from "@/lib/pro/types";
 
 interface StrengthWeaknessGridProps {
@@ -10,7 +12,12 @@ interface StrengthWeaknessGridProps {
 export function StrengthWeaknessGrid({ strengths, weaknesses }: StrengthWeaknessGridProps) {
   return (
     <div className="grid md:grid-cols-2 gap-6">
-      <div className="space-y-3">
+      <motion.div
+        variants={staggerContainer}
+        initial="initial"
+        animate="animate"
+        className="space-y-3"
+      >
         <div className="flex items-center gap-2 mb-4">
           <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
             <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -20,17 +27,23 @@ export function StrengthWeaknessGrid({ strengths, weaknesses }: StrengthWeakness
           <h3 className="text-lg font-semibold text-gray-900">Güçlü Yönler</h3>
         </div>
         {strengths.map((item, idx) => (
-          <div
+          <motion.div
             key={idx}
+            variants={staggerItem}
             className="p-4 rounded-xl bg-gradient-to-br from-green-50 to-emerald-50 border border-green-100"
           >
             <h4 className="font-semibold text-green-800 mb-1">{item.name}</h4>
             <p className="text-sm text-green-700/80 leading-relaxed">{item.insight}</p>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
-      <div className="space-y-3">
+      <motion.div
+        variants={staggerContainer}
+        initial="initial"
+        animate="animate"
+        className="space-y-3"
+      >
         <div className="flex items-center gap-2 mb-4">
           <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center">
             <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -40,15 +53,16 @@ export function StrengthWeaknessGrid({ strengths, weaknesses }: StrengthWeakness
           <h3 className="text-lg font-semibold text-gray-900">Gelişim Alanları</h3>
         </div>
         {weaknesses.map((item, idx) => (
-          <div
+          <motion.div
             key={idx}
+            variants={staggerItem}
             className="p-4 rounded-xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-100"
           >
             <h4 className="font-semibold text-amber-800 mb-1">{item.name}</h4>
             <p className="text-sm text-amber-700/80 leading-relaxed">{item.insight}</p>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }

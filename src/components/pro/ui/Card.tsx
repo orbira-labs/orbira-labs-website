@@ -3,14 +3,16 @@ import type { HTMLAttributes } from "react";
 
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
   hover?: boolean;
-  padding?: "sm" | "md" | "lg";
+  padding?: "sm" | "md" | "lg" | "none";
   accent?: "primary" | "accent" | "none";
+  variant?: "default" | "elevated" | "flat";
 }
 
 export function Card({
   hover = false,
   padding = "md",
   accent = "none",
+  variant = "default",
   className,
   children,
   ...props
@@ -18,9 +20,20 @@ export function Card({
   return (
     <div
       className={clsx(
-        "bg-pro-surface rounded-2xl border border-pro-border relative overflow-hidden",
-        "shadow-[var(--pro-shadow-sm)]",
-        hover && "transition-all duration-200 ease-out hover:shadow-[var(--pro-shadow-md)] hover:-translate-y-0.5 hover:border-pro-border-strong cursor-pointer",
+        "bg-pro-surface rounded-2xl relative overflow-hidden",
+        // Variant styles
+        variant === "default" && "border border-pro-border shadow-[var(--pro-shadow-sm)]",
+        variant === "elevated" && "border border-pro-border/50 shadow-[var(--pro-shadow-elevated)]",
+        variant === "flat" && "border border-pro-border",
+        // Hover effects - premium feel
+        hover && [
+          "transition-all duration-300 ease-out cursor-pointer",
+          "hover:shadow-[var(--pro-shadow-hover)] hover:-translate-y-1",
+          "hover:border-pro-border-strong",
+          "active:translate-y-0 active:shadow-[var(--pro-shadow-md)]"
+        ],
+        // Padding
+        padding === "none" && "p-0",
         padding === "sm" && "p-3.5 sm:p-4",
         padding === "md" && "p-4 sm:p-5",
         padding === "lg" && "p-5 sm:p-6",

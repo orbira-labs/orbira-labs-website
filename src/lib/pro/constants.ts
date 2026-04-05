@@ -37,3 +37,5 @@ export const TEST_STATUSES = [
   { id: "completed", label: "Tamamlandı", color: "success" },
   { id: "expired", label: "Süresi Doldu", color: "danger" },
 ] as const;
+
+export const ANALYSIS_STATUSES = TEST_STATUSES;

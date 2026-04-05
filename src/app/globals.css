@@ -52,8 +52,9 @@
   --pro-accent-hover: #B38459;
   --pro-accent-light: #FDF5EE;
   --pro-text: #2D3436;
-  --pro-text-secondary: #6B7C85;
-  --pro-text-tertiary: #9CAAAF;
+  /* Daha koyu, daha okunur secondary/tertiary renkler */
+  --pro-text-secondary: #4A5568;
+  --pro-text-tertiary: #718096;
   --pro-text-on-primary: #FFFFFF;
   --pro-border: #E5E0DB;
   --pro-border-strong: #D1CBC3;
@@ -67,9 +68,17 @@
   --pro-info: #5B7B6A;
   --pro-info-light: #E8F0EB;
 
+  /* Shadow katmanları - premium his için */
   --pro-shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
-  --pro-shadow-md: 0 2px 8px rgba(0,0,0,0.06);
-  --pro-shadow-lg: 0 8px 24px rgba(0,0,0,0.08);
+  --pro-shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --pro-shadow-lg: 0 8px 24px rgba(0,0,0,0.10);
+  --pro-shadow-elevated: 0 12px 40px -8px rgba(0,0,0,0.12);
+  --pro-shadow-hover: 0 8px 30px -4px rgba(0,0,0,0.14);
+
+  /* Tipografi ağırlıkları */
+  --pro-heading-weight: 700;
+  --pro-subheading-weight: 600;
+  --pro-body-weight: 500;
 }
 
 @theme inline {
@@ -100,8 +109,8 @@
   --color-pro-accent-hover: var(--pro-accent-hover, #B38459);
   --color-pro-accent-light: var(--pro-accent-light, #FDF5EE);
   --color-pro-text: var(--pro-text, #2D3436);
-  --color-pro-text-secondary: var(--pro-text-secondary, #6B7C85);
-  --color-pro-text-tertiary: var(--pro-text-tertiary, #9CAAAF);
+  --color-pro-text-secondary: var(--pro-text-secondary, #4A5568);
+  --color-pro-text-tertiary: var(--pro-text-tertiary, #718096);
   --color-pro-border: var(--pro-border, #E5E0DB);
   --color-pro-border-strong: var(--pro-border-strong, #D1CBC3);
   --color-pro-success: var(--pro-success, #27AE60);

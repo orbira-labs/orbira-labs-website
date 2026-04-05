@@ -5,21 +5,21 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "framer-motion";
 import { useProContext } from "@/lib/pro/context";
 import { useClients } from "@/lib/pro/hooks/useClients";
 import { TopBar } from "@/components/pro/layout/TopBar";
 import { Card } from "@/components/pro/ui/Card";
-import { Badge } from "@/components/pro/ui/Badge";
 import { Button } from "@/components/pro/ui/Button";
 import { Input } from "@/components/pro/ui/Input";
 import { Modal } from "@/components/pro/ui/Modal";
-import { Avatar } from "@/components/pro/ui/Avatar";
 import { EmptyState } from "@/components/pro/ui/EmptyState";
-import { Skeleton, ListItemSkeleton } from "@/components/pro/ui/Skeleton";
-import { Users, Plus, Search } from "lucide-react";
+import { ListItemSkeleton } from "@/components/pro/ui/Skeleton";
+import { ClientCard, ClientFilters, type FilterType } from "@/components/pro/clients";
+import { Users, Plus, Search, LayoutGrid, LayoutList } from "lucide-react";
 import { createClient as createSupabase } from "@/lib/pro/supabase/client";
 import { clientSchema, type ClientInput } from "@/lib/pro/validations";
-import { CLIENT_STATUSES } from "@/lib/pro/constants";
+import { staggerContainer, cardReveal } from "@/lib/pro/animations";
 import Link from "next/link";
 
 export default function ClientsPage() {
@@ -29,7 +29,18 @@ export default function ClientsPage() {
   const [showModal, setShowModal] = useState(false);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [extendedFilters, setExtendedFilters] = useState<FilterType[]>([]);
+  const [showExtendedFilters, setShowExtendedFilters] = useState(false);
+  const [viewMode, setViewMode] = useState<"card" | "row">("row");
   const [saving, setSaving] = useState(false);
+
+  const toggleExtendedFilter = (filter: FilterType) => {
+    setExtendedFilters(prev => 
+      prev.includes(filter) 
+        ? prev.filter(f => f !== filter)
+        : [...prev, filter]
+    );
+  };
 
   const {
     register,
@@ -91,47 +102,57 @@ export default function ClientsPage() {
       <TopBar title="Danışanlar" />
       <main className="flex-1 p-4 sm:p-6 lg:p-8">
         <div className="mx-auto max-w-5xl space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-pro-text-tertiary" />
-              <input
-                type="text"
-                placeholder="Danışan ara..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-9 pr-4 py-2.5 rounded-lg border border-pro-border bg-pro-surface text-sm text-pro-text placeholder:text-pro-text-tertiary focus:outline-none focus:ring-2 focus:ring-pro-primary/30 focus:border-pro-primary"
-              />
-            </div>
-
-            <div className="flex items-center gap-2">
-              <div className="flex gap-1 bg-pro-surface-alt rounded-lg p-1">
-                <button
-                  onClick={() => setStatusFilter("all")}
-                  className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${statusFilter === "all" ? "bg-pro-surface text-pro-text shadow-[var(--pro-shadow-sm)]" : "text-pro-text-secondary"}`}
-                >
-                  Tümü
-                </button>
-                {CLIENT_STATUSES.map((s) => (
-                  <button
-                    key={s.id}
-                    onClick={() => setStatusFilter(s.id)}
-                    className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${statusFilter === s.id ? "bg-pro-surface text-pro-text shadow-[var(--pro-shadow-sm)]" : "text-pro-text-secondary"}`}
-                  >
-                    {s.label}
-                  </button>
-                ))}
+          <div className="space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <div className="relative flex-1 max-w-md">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-pro-text-tertiary" />
+                <input
+                  type="text"
+                  placeholder="Danışan ara..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-pro-border bg-pro-surface text-sm text-pro-text placeholder:text-pro-text-tertiary focus:outline-none focus:ring-2 focus:ring-pro-primary/30 focus:border-pro-primary transition-shadow"
+                />
               </div>
 
-              <Button onClick={() => setShowModal(true)}>
-                <Plus className="h-4 w-4" />
-                <span className="hidden sm:inline">Danışan Ekle</span>
-              </Button>
+              <div className="flex items-center gap-2">
+                <div className="hidden sm:flex gap-1 bg-pro-surface-alt rounded-lg p-1">
+                  <button
+                    onClick={() => setViewMode("row")}
+                    className={`p-1.5 rounded-md transition-colors ${viewMode === "row" ? "bg-pro-surface text-pro-text shadow-[var(--pro-shadow-sm)]" : "text-pro-text-tertiary hover:text-pro-text"}`}
+                    title="Liste görünümü"
+                  >
+                    <LayoutList className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={() => setViewMode("card")}
+                    className={`p-1.5 rounded-md transition-colors ${viewMode === "card" ? "bg-pro-surface text-pro-text shadow-[var(--pro-shadow-sm)]" : "text-pro-text-tertiary hover:text-pro-text"}`}
+                    title="Kart görünümü"
+                  >
+                    <LayoutGrid className="h-4 w-4" />
+                  </button>
+                </div>
+
+                <Button onClick={() => setShowModal(true)}>
+                  <Plus className="h-4 w-4" />
+                  <span className="hidden sm:inline">Danışan Ekle</span>
+                </Button>
+              </div>
             </div>
+
+            <ClientFilters
+              statusFilter={statusFilter}
+              onStatusChange={setStatusFilter}
+              extendedFilters={extendedFilters}
+              onExtendedFilterToggle={toggleExtendedFilter}
+              showExtended={showExtendedFilters}
+              onToggleExtended={() => setShowExtendedFilters(!showExtendedFilters)}
+            />
           </div>
 
           {loading ? (
-            <div className="grid gap-3">
-              {Array.from({ length: 5 }).map((_, i) => (
+            <div className={viewMode === "card" ? "grid sm:grid-cols-2 lg:grid-cols-3 gap-4" : "grid gap-3"}>
+              {Array.from({ length: 6 }).map((_, i) => (
                 <Card key={i} padding="sm">
                   <ListItemSkeleton />
                 </Card>
@@ -150,38 +171,22 @@ export default function ClientsPage() {
               onAction={clients.length === 0 ? () => setShowModal(true) : undefined}
             />
           ) : (
-            <div className="grid gap-3">
-              {filtered.map((client) => {
-                const statusInfo = CLIENT_STATUSES.find((s) => s.id === client.status);
-                return (
-                  <Link key={client.id} href={`/pro/clients/${client.id}`}>
-                    <Card hover padding="sm">
-                      <div className="flex items-center gap-3">
-                        <Avatar
-                          firstName={client.first_name}
-                          lastName={client.last_name}
-                          size="md"
-                        />
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-pro-text">
-                            {client.first_name} {client.last_name}
-                          </p>
-                          <p className="text-xs text-pro-text-tertiary truncate">
-                            {client.email || client.phone || "İletişim bilgisi yok"}
-                          </p>
-                        </div>
-                        <Badge
-                          variant={statusInfo?.color as "success" | "warning" | "muted" || "muted"}
-                          dot
-                        >
-                          {statusInfo?.label || client.status}
-                        </Badge>
-                      </div>
-                    </Card>
-                  </Link>
-                );
-              })}
-            </div>
+            <motion.div 
+              className={viewMode === "card" ? "grid sm:grid-cols-2 lg:grid-cols-3 gap-4" : "grid gap-3"}
+              variants={staggerContainer}
+              initial="hidden"
+              animate="visible"
+            >
+              {filtered.map((client) => (
+                <motion.div key={client.id} variants={cardReveal}>
+                  <ClientCard
+                    client={client}
+                    viewMode={viewMode}
+                    lastContactAt={client.updated_at}
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
           )}
         </div>
 
@@ -209,7 +214,7 @@ export default function ClientsPage() {
               label="Email"
               type="email"
               placeholder="ornek@email.com"
-              hint="Test linki göndermek için"
+              hint="Analiz linki göndermek için"
               error={errors.email?.message}
               {...register("email")}
             />
