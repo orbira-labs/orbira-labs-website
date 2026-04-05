@@ -68,11 +68,30 @@ export function Sidebar() {
         </button>
       </div>
 
-      {/* Sidebar geometric accent */}
-      <svg className="absolute bottom-[120px] left-1/2 -translate-x-1/2 w-[80px] h-[100px] opacity-[0.08] pointer-events-none" viewBox="0 0 80 100" fill="none">
-        <polygon points="40,5 75,25 75,65 40,85 5,65 5,25" stroke="white" strokeWidth="1" fill="none" />
-        <circle cx="40" cy="45" r="12" stroke="white" strokeWidth="0.6" fill="none" />
-        <circle cx="40" cy="45" r="3" fill="white" />
+      {/* AI brain circuit decoration */}
+      <svg className="absolute bottom-[110px] left-1/2 -translate-x-1/2 w-[140px] h-[140px] opacity-[0.12] pointer-events-none" viewBox="0 0 140 140" fill="none">
+        {/* Outer brain shape */}
+        <ellipse cx="70" cy="65" rx="50" ry="45" stroke="white" strokeWidth="1.5" fill="none" />
+        <path d="M45 65 C45 40, 95 40, 95 65" stroke="white" strokeWidth="1.2" fill="none" />
+        {/* Circuit nodes */}
+        <circle cx="70" cy="45" r="4" fill="white" />
+        <circle cx="50" cy="60" r="3" fill="white" />
+        <circle cx="90" cy="60" r="3" fill="white" />
+        <circle cx="55" cy="80" r="3" fill="white" />
+        <circle cx="85" cy="80" r="3" fill="white" />
+        <circle cx="70" cy="70" r="5" fill="white" />
+        {/* Circuit connections */}
+        <line x1="70" y1="45" x2="50" y2="60" stroke="white" strokeWidth="1" />
+        <line x1="70" y1="45" x2="90" y2="60" stroke="white" strokeWidth="1" />
+        <line x1="50" y1="60" x2="70" y2="70" stroke="white" strokeWidth="0.8" />
+        <line x1="90" y1="60" x2="70" y2="70" stroke="white" strokeWidth="0.8" />
+        <line x1="70" y1="70" x2="55" y2="80" stroke="white" strokeWidth="0.8" />
+        <line x1="70" y1="70" x2="85" y2="80" stroke="white" strokeWidth="0.8" />
+        {/* Signal pulses */}
+        <circle cx="70" cy="70" r="10" stroke="white" strokeWidth="0.5" fill="none" opacity="0.5" />
+        <circle cx="70" cy="70" r="18" stroke="white" strokeWidth="0.4" fill="none" opacity="0.3" />
+        {/* AI text */}
+        <text x="70" y="122" textAnchor="middle" fill="white" fontSize="11" fontWeight="600" letterSpacing="3" opacity="0.6">AI</text>
       </svg>
 
       <nav className="flex-1 py-4 px-2.5 space-y-1 relative">
