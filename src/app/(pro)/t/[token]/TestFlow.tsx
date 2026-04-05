@@ -466,6 +466,7 @@ export function TestFlow({ token, clientName }: TestFlowProps) {
                   <LikertScale
                     value={coreAnswers[currentCoreQuestion.id]}
                     onChange={(v) => handleCoreAnswer(currentCoreQuestion.id, v)}
+                    labels={currentCoreQuestion.scale_labels}
                     accentColor={coreTheme.accent}
                   />
                 </div>
@@ -591,6 +592,7 @@ export function TestFlow({ token, clientName }: TestFlowProps) {
                   <LikertScale
                     value={deepDiveAnswers[currentDeepDiveQuestion.id]}
                     onChange={(v) => handleDeepDiveAnswer(currentDeepDiveQuestion.id, v)}
+                    labels={currentDeepDiveQuestion.scale_labels}
                     accentColor={deepDiveTheme.accent}
                   />
                 </div>

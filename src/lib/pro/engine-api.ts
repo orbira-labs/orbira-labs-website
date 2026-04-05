@@ -51,6 +51,7 @@ export interface CoreQuestion {
   id: string;
   text: string;
   dimension: string;
+  scale_labels?: string[];
 }
 
 export interface MeasurementField {
@@ -65,6 +66,7 @@ export interface DeepDiveQuestion {
   id: string;
   text: string;
   pool: string;
+  scale_labels?: string[];
 }
 
 export interface SessionData {
@@ -280,16 +282,16 @@ const MOCK_SESSION_DATA: SessionData = {
     },
   ],
   core_questions: [
-    { id: "sleep_quality", text: "Uyku kalitenizi nasıl değerlendirirsiniz?", dimension: "physical" },
-    { id: "energy_level", text: "Gün içi enerji seviyenizi nasıl değerlendirirsiniz?", dimension: "physical" },
-    { id: "stress_management", text: "Stresinizi yönetebilme düzeyinizi nasıl değerlendirirsiniz?", dimension: "mental" },
-    { id: "emotional_balance", text: "Duygusal olarak ne kadar dengede hissediyorsunuz?", dimension: "mental" },
-    { id: "focus", text: "Zihinsel odaklanma düzeyinizi nasıl değerlendirirsiniz?", dimension: "mental" },
-    { id: "support_access", text: "İhtiyaç duyduğunuzda destek bulabileceğinizi ne kadar hissediyorsunuz?", dimension: "social" },
-    { id: "relationship_quality", text: "Yakın ilişkilerinizin kalitesini nasıl değerlendirirsiniz?", dimension: "social" },
-    { id: "work_life_balance", text: "İş, okul ve özel hayat dengenizi nasıl değerlendirirsiniz?", dimension: "functional" },
-    { id: "life_satisfaction", text: "Genel yaşam memnuniyetinizi nasıl değerlendirirsiniz?", dimension: "general" },
-    { id: "resilience", text: "Zorlandığınızda ne kadar toparlanabiliyorsunuz?", dimension: "mental" },
+    { id: "sleep_quality", text: "Uyku kalitenizi nasıl değerlendirirsiniz?", dimension: "physical", scale_labels: ["Çok kötü", "Kötü", "Orta", "İyi", "Çok iyi"] },
+    { id: "energy_level", text: "Gün içi enerji seviyenizi nasıl değerlendirirsiniz?", dimension: "physical", scale_labels: ["Çok kötü", "Kötü", "Orta", "İyi", "Çok iyi"] },
+    { id: "stress_management", text: "Stresinizi yönetebilme düzeyinizi nasıl değerlendirirsiniz?", dimension: "mental", scale_labels: ["Çok kötü", "Kötü", "Orta", "İyi", "Çok iyi"] },
+    { id: "emotional_balance", text: "Duygusal olarak ne kadar dengede hissediyorsunuz?", dimension: "mental", scale_labels: ["Hiç dengede değilim", "Az dengede", "Orta", "Oldukça dengede", "Tamamen dengede"] },
+    { id: "focus", text: "Zihinsel odaklanma düzeyinizi nasıl değerlendirirsiniz?", dimension: "mental", scale_labels: ["Çok kötü", "Kötü", "Orta", "İyi", "Çok iyi"] },
+    { id: "support_access", text: "İhtiyaç duyduğunuzda destek bulabileceğinizi ne kadar hissediyorsunuz?", dimension: "social", scale_labels: ["Hiç", "Az", "Orta", "Oldukça", "Tamamen"] },
+    { id: "relationship_quality", text: "Yakın ilişkilerinizin kalitesini nasıl değerlendirirsiniz?", dimension: "social", scale_labels: ["Çok kötü", "Kötü", "Orta", "İyi", "Çok iyi"] },
+    { id: "work_life_balance", text: "İş, okul ve özel hayat dengenizi nasıl değerlendirirsiniz?", dimension: "functional", scale_labels: ["Çok kötü", "Kötü", "Orta", "İyi", "Çok iyi"] },
+    { id: "life_satisfaction", text: "Genel yaşam memnuniyetinizi nasıl değerlendirirsiniz?", dimension: "general", scale_labels: ["Çok kötü", "Kötü", "Orta", "İyi", "Çok iyi"] },
+    { id: "resilience", text: "Zorlandığınızda ne kadar toparlanabiliyorsunuz?", dimension: "mental", scale_labels: ["Hiç toparlanamıyorum", "Zor toparlanıyorum", "Orta", "İyi toparlanıyorum", "Çok çabuk toparlanıyorum"] },
   ],
   measurement_context: [
     { id: "height", answer_type: "numeric", text: "Boyunuz? (cm)", numeric_range: { min: 100, max: 250 } },
@@ -310,11 +312,11 @@ const MOCK_SESSION_DATA: SessionData = {
 };
 
 const MOCK_DEEP_DIVE_QUESTIONS: DeepDiveQuestion[] = [
-  { id: "dd1", text: "Zor kararlar almadan önce uzun süre düşünürüm.", pool: "Karar Verme" },
-  { id: "dd2", text: "Eleştirildiğimde savunmaya geçerim.", pool: "Geri Bildirim" },
-  { id: "dd3", text: "Belirsizlik beni rahatsız eder.", pool: "Belirsizlik Toleransı" },
-  { id: "dd4", text: "Başarısızlıklarımı kolay kabullenirim.", pool: "Öz-Kabul" },
-  { id: "dd5", text: "Uzun vadeli hedefler belirlerim.", pool: "Planlama" },
+  { id: "dd1", text: "Zor kararlar almadan önce uzun süre düşünürüm.", pool: "Karar Verme", scale_labels: ["Çok kötü", "Kötü", "Orta", "İyi", "Çok iyi"] },
+  { id: "dd2", text: "Eleştirildiğimde savunmaya geçerim.", pool: "Geri Bildirim", scale_labels: ["Çok kötü", "Kötü", "Orta", "İyi", "Çok iyi"] },
+  { id: "dd3", text: "Belirsizlik beni rahatsız eder.", pool: "Belirsizlik Toleransı", scale_labels: ["Çok kötü", "Kötü", "Orta", "İyi", "Çok iyi"] },
+  { id: "dd4", text: "Başarısızlıklarımı kolay kabullenirim.", pool: "Öz-Kabul", scale_labels: ["Çok kötü", "Kötü", "Orta", "İyi", "Çok iyi"] },
+  { id: "dd5", text: "Uzun vadeli hedefler belirlerim.", pool: "Planlama", scale_labels: ["Çok kötü", "Kötü", "Orta", "İyi", "Çok iyi"] },
 ];
 
 function generateMockResults(): CompleteSessionResponse {
