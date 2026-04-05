@@ -67,7 +67,7 @@ export function WellnessGauge({ score, size = "md" }: WellnessGaugeProps) {
           <span className={`${labelSize} text-gray-500 font-medium`}>{label}</span>
         </div>
       </div>
-      <p className="mt-3 text-sm text-gray-600 font-medium">Wellness Skoru</p>
+      <p className="mt-3 text-sm text-gray-600 font-medium">Genel Skor</p>
     </div>
   );
 }

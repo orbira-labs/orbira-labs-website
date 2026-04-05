@@ -5,7 +5,7 @@ import { Brain, Users, BarChart3, Lock } from "lucide-react";
 const FEATURES = [
   { icon: Brain, text: "Yapay zeka destekli karakter ve davranış analizi" },
   { icon: Users, text: "Danışanlarınızı tek panelden takip edin" },
-  { icon: BarChart3, text: "350+ psikolojik özellik, 10 boyutlu wellness skoru" },
+  { icon: BarChart3, text: "350+ psikolojik özellik, 10 boyutlu karakter analizi" },
   { icon: Lock, text: "Uçtan uca güvenli, KVKK uyumlu altyapı" },
 ];
 

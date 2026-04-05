@@ -6,57 +6,11 @@ import { Container, AtomAnimation, HAELogo } from "@/components/ui";
 import { Header, Footer } from "@/components/sections";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
-const CAPABILITIES = [
-  {
-    title: "Cross-Domain Cascade",
-    description: "Farklı yaşam alanları arasındaki gizli döngüleri tespit eder. Zincir reaksiyonları, kök nedenlere kadar izler.",
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-        <circle cx="12" cy="12" r="3" />
-        <path d="M12 2v4m0 12v4M2 12h4m12 0h4" />
-        <path d="M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" />
-      </svg>
-    ),
-  },
-  {
-    title: "Contradiction Detection",
-    description: "Yüzey ile derinlik arasındaki çelişkileri yakalar. İnsan gözünün kaçırdığını, algoritma bulur.",
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-        <path d="M12 2L2 7l10 5 10-5-10-5z" />
-        <path d="M2 17l10 5 10-5" />
-        <path d="M2 12l10 5 10-5" />
-      </svg>
-    ),
-  },
-  {
-    title: "Hidden Signal Discovery",
-    description: "Her profilde gizli güç sinyalleri bulur. Zorlukların altındaki direnci ortaya çıkarır. Garantili.",
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-        <circle cx="12" cy="12" r="10" />
-        <circle cx="12" cy="12" r="6" />
-        <circle cx="12" cy="12" r="2" />
-      </svg>
-    ),
-  },
-  {
-    title: "Multi-Perspective AI Gate",
-    description: "Çoklu bağımsız AI perspektifi verileri doğrular. Konsensüs olmadan sonuç çıkmaz.",
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-        <path d="M7 11V7a5 5 0 0110 0v4" />
-      </svg>
-    ),
-  },
-];
 
-const ANALYSIS_DOMAINS = [
-  { name: "Trait Universe", desc: "Çok boyutlu psikolojik sinyal uzayı", color: "from-emerald-500/20 to-emerald-500/5", borderColor: "border-emerald-500/30" },
-  { name: "Pattern Engine", desc: "Risk, güç ve çelişki örüntü tespiti", color: "from-violet-500/20 to-violet-500/5", borderColor: "border-violet-500/30" },
-  { name: "Inference Layer", desc: "Cross-domain cascade ve hidden signal analizi", color: "from-amber-500/20 to-amber-500/5", borderColor: "border-amber-500/30" },
-];
+
+
+
+
 
 const SIGNALS = [
   { label: "Behavioral Signals", delay: 0 },
@@ -424,86 +378,75 @@ export default function HAEPage() {
           </Container>
         </section>
 
-        {/* Analysis Domains */}
-        <section className="section-padding relative">
-          <Container>
-            <motion.div className="text-center mb-10 sm:mb-14" {...fadeInUp()}>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Analiz Alanları</h2>
-              <p className="text-foreground-muted max-w-xl mx-auto">
-                Üç temel katman. Her biri kendi içinde derinleşir, birlikte bütünleşir.
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-3 gap-2 sm:gap-6">
-              {ANALYSIS_DOMAINS.map((domain, index) => (
-                <motion.div
-                  key={domain.name}
-                  className={`rounded-xl border bg-gradient-to-b p-3 sm:rounded-2xl sm:p-8 ${domain.color} ${domain.borderColor}`}
-                  {...fadeInUp(index * 0.1)}
-                  whileHover={isMobile ? {} : { y: -5 }}
-                >
-                  <h3 className="text-sm sm:text-2xl font-bold text-foreground mb-1 sm:mb-2">{domain.name}</h3>
-                  <p className="text-[10px] sm:text-base text-foreground-muted leading-snug">{domain.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-          </Container>
-        </section>
-
-        {/* Capabilities */}
+        {/* What You Get */}
         <section className="section-padding relative">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/[0.02] to-transparent pointer-events-none" />
           
           <Container>
             <motion.div className="text-center mb-10 sm:mb-14" {...fadeInUp()}>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Temel Yetenekler</h2>
-              <p className="text-foreground-muted max-w-xl mx-auto">Algoritma hassasiyeti + AI derinliği. Tek sistemde.</p>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Ne Elde Edersiniz?</h2>
+              <p className="text-foreground-muted max-w-2xl mx-auto">
+                Danışanınızın doldurduğu sorular, çok katmanlı analizden geçer. 
+                Çıktı olarak elinize profesyonel bir rapor ve görsel veriler gelir.
+              </p>
             </motion.div>
 
-            <div className="grid grid-cols-2 gap-3 sm:gap-6">
-              {CAPABILITIES.map((cap, index) => (
-                <motion.div
-                  key={cap.title}
-                  className="group rounded-xl border border-white/[0.06] bg-white/[0.02] p-3 transition-all duration-300 hover:border-cyan-500/30 sm:rounded-2xl sm:p-8"
-                  {...fadeInUp(index * 0.1)}
-                  whileHover={isMobile ? {} : { y: -3 }}
-                >
-                  <div className="w-9 h-9 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-2 sm:mb-4 group-hover:bg-cyan-500/15 transition-colors [&>svg]:w-4 [&>svg]:h-4 sm:[&>svg]:w-6 sm:[&>svg]:h-6">
-                    {cap.icon}
-                  </div>
-                  <h3 className="text-sm sm:text-xl font-semibold text-foreground mb-1 sm:mb-2">{cap.title}</h3>
-                  <p className="text-[10px] sm:text-base text-foreground-muted leading-relaxed">{cap.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </Container>
-        </section>
-
-        {/* How it works */}
-        <section className="section-padding relative">
-          <Container size="narrow">
-            <motion.div className="text-center mb-10" {...fadeInUp()}>
-              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">Nasıl Çalışır?</h2>
-            </motion.div>
-
-            <div className="grid grid-cols-4 gap-2 sm:grid-cols-1 sm:gap-0 sm:space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {[
-                { step: "01", title: "Signal Processing", desc: "Ham veriler çok boyutlu psikolojik uzayda normalize edilir. Her sinyal çoklu seviyede skorlanır." },
-                { step: "02", title: "Pattern + Inference", desc: "Davranış örüntüleri ve cross-domain çıkarımlar tespit edilir. Kök neden zincirleri, gizli çelişkiler ortaya çıkar." },
-                { step: "03", title: "AI Validation Gate", desc: "Çoklu bağımsız AI perspektifi sonuçları doğrular. Konsensüs sağlanmadan çıktı üretilmez." },
-                { step: "04", title: "Profile Synthesis", desc: "Çok boyutlu bireysel profil, karakter analizi, gizli dinamikler ve profesyonel yol haritası." },
+                {
+                  title: "Karakter Analizi",
+                  desc: "Danışanınızın psikolojik profilini çizen bütüncül bir metin. İç dinamikleri, davranış kalıpları ve gizli çelişkileri bir bütün olarak anlatır. Seanstan önce okuyun, danışanınızı tanıyın.",
+                  color: "border-cyan-500/20",
+                  iconBg: "bg-cyan-500/10",
+                  iconColor: "text-cyan-400",
+                  icon: <><circle cx="12" cy="12" r="3" /><path d="M12 2v4m0 12v4M2 12h4m12 0h4" /></>,
+                },
+                {
+                  title: "Güçlü ve Zayıf Yanlar",
+                  desc: "En belirgin 5 güçlü özellik ve 5 gelişim alanı. Her biri için kısa açıklama. Danışanınızla neyi konuşacağınızı bilirsiniz.",
+                  color: "border-emerald-500/20",
+                  iconBg: "bg-emerald-500/10",
+                  iconColor: "text-emerald-400",
+                  icon: <><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></>,
+                },
+                {
+                  title: "Farkında Olmadığı Dinamikler",
+                  desc: "Danışanınızın muhtemelen göremediği döngüler, çelişkiler ve gizli güçler. \"Uyku bozukluğunuz aslında stres değil, iş-yaşam dengesizliğinden kaynaklanıyor\" gibi içgörüler.",
+                  color: "border-amber-500/20",
+                  iconBg: "bg-amber-500/10",
+                  iconColor: "text-amber-400",
+                  icon: <><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></>,
+                },
+                {
+                  title: "Koçluk Yol Haritası",
+                  desc: "Acil, kısa ve orta vadeli somut adımlar. Nereden başlayacağınız, hangi tekniği kullanacağınız, hangi sırayla ilerleyeceğiniz. Hemen uygulamaya başlayabilirsiniz.",
+                  color: "border-violet-500/20",
+                  iconBg: "bg-violet-500/10",
+                  iconColor: "text-violet-400",
+                  icon: <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />,
+                },
+                {
+                  title: "Çok Boyutlu Puanlama",
+                  desc: "Her yaşam alanı ayrı ayrı puanlanır. Stres yönetimi, uyku, duygusal denge, enerji, sosyal bağlantı, öz-bakım, beslenme, iş-yaşam dengesi ve daha fazlası. Görsel dashboard ile takip edin.",
+                  color: "border-rose-500/20",
+                  iconBg: "bg-rose-500/10",
+                  iconColor: "text-rose-400",
+                  icon: <><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></>,
+                },
               ].map((item, index) => (
                 <motion.div
-                  key={item.step}
-                  className="flex flex-col items-center text-center sm:flex-row sm:text-left sm:items-start gap-1.5 sm:gap-6 rounded-xl border border-white/[0.06] bg-white/[0.02] p-2.5 sm:border-0 sm:bg-transparent sm:p-0 sm:rounded-none"
-                  {...fadeInUp(index * 0.1)}
+                  key={item.title}
+                  className={`group flex flex-col sm:flex-row gap-4 sm:gap-6 rounded-xl border ${item.color} bg-white/[0.02] p-4 sm:p-6 transition-all duration-300 hover:bg-white/[0.04]`}
+                  {...fadeInUp(index * 0.08)}
                 >
-                  <div className="w-8 h-8 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                    <span className="text-[10px] sm:text-base font-mono font-bold text-cyan-400">{item.step}</span>
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl ${item.iconBg} border ${item.color} flex items-center justify-center ${item.iconColor} flex-shrink-0`}>
+                    <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                      {item.icon}
+                    </svg>
                   </div>
                   <div>
-                    <h3 className="text-[11px] sm:text-lg font-semibold text-foreground sm:mb-1">{item.title}</h3>
-                    <p className="hidden sm:block text-base text-foreground-muted leading-normal">{item.desc}</p>
+                    <h3 className="text-sm sm:text-lg font-semibold text-foreground mb-1 sm:mb-2">{item.title}</h3>
+                    <p className="text-xs sm:text-base text-foreground-muted leading-relaxed">{item.desc}</p>
                   </div>
                 </motion.div>
               ))}

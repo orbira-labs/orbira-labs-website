@@ -226,7 +226,7 @@ export default function TestResultPage() {
                   <WellnessGauge score={analysis.wellness_score} size="lg" />
                 </Card>
                 <Card padding="lg">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">10 Boyut Analizi</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">10 Boyut Karakter Analizi</h3>
                   <DimensionRadar scores={analysis.dimension_scores} />
                 </Card>
               </div>

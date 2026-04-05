@@ -2,52 +2,67 @@
 
 import { useProContext } from "@/lib/pro/context";
 import { TopBar } from "@/components/pro/layout/TopBar";
-import { Button } from "@/components/pro/ui/Button";
 import {
   Sparkles,
   Check,
-  Brain,
-  Target,
-  ShieldCheck,
-  BarChart3,
-  Heart,
-  ArrowRight,
   Zap,
+  FlaskConical,
+  Cpu,
+  FileText,
+  Fingerprint,
+  Eye,
+  Route,
+  ShieldAlert,
+  Layers,
+  ScanSearch,
 } from "lucide-react";
 import { toast } from "sonner";
 
-const FEATURES = [
-  "AQE adaptif soru motoru",
-  "HAE analiz raporu",
-  "Detaylı sonuç görüntüleme",
-  "WhatsApp / Email gönderim",
+const CAPABILITIES = [
+  {
+    icon: FlaskConical,
+    text: "AQE hibrid motoru ile adaptif sorular",
+  },
+  {
+    icon: Cpu,
+    text: "HAE hibrid motoru ile karakter analizi",
+  },
+  {
+    icon: FileText,
+    text: "Gelişmiş rapor sistemi ile çok yönlü çıktı",
+  },
 ];
 
-const BENEFITS = [
+const OUTPUTS = [
   {
-    icon: Brain,
-    title: "350+ Psikolojik Özellik",
-    desc: "Danışanınızın kişilik haritasını en ince detayına kadar görün",
+    icon: Fingerprint,
+    title: "Karakter Haritası",
+    desc: "350+ psikolojik özellik üzerinden kişinin derinlemesine profili",
   },
   {
-    icon: Target,
-    title: "10 Boyutlu Wellness Skoru",
-    desc: "Fiziksel, zihinsel ve duygusal denge tek bakışta anlaşılır",
+    icon: ShieldAlert,
+    title: "Danışana Özel Kritik Rapor",
+    desc: "Güçlü yönler, risk alanları ve çelişkileri tek bir bakışta",
   },
   {
-    icon: BarChart3,
-    title: "Derin Davranış Kalıpları",
-    desc: "Güçlü yönler, risk alanları ve çelişkiler otomatik tespit edilir",
+    icon: Eye,
+    title: "Gizli Katman — Kör Noktalar",
+    desc: "Kişinin farkında olmadığı dinamikler, çıkarım motoru ile tespit edilir",
   },
   {
-    icon: Heart,
-    title: "Kişiye Özel Yönlendirme",
-    desc: "Sonuçlar, birlikte çalışmanızı daha etkili kılacak ipuçları sunar",
+    icon: Route,
+    title: "Koçluk Yol Haritası",
+    desc: "Acil, kısa ve orta vadeli somut müdahale adımları",
   },
   {
-    icon: ShieldCheck,
-    title: "Güvenli ve Gizli",
-    desc: "Tüm veriler şifreli, KVKK uyumlu altyapıda saklanır",
+    icon: Layers,
+    title: "10 Boyutlu Karakter Skoru",
+    desc: "Her boyut ayrı ayrı puanlanır — stres, uyku, empati, enerji ve dahası",
+  },
+  {
+    icon: ScanSearch,
+    title: "Davranış Kalıpları & Çıkarımlar",
+    desc: "Tekrarlayan örüntüler, gizli güçler ve tutarsızlık bayrakları",
   },
 ];
 
@@ -59,7 +74,6 @@ function CubeDNA({ className }: { className?: string }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Helix strand connecting cubes */}
       <path
         d="M120 40 C200 80, 280 120, 200 160 S120 240, 200 280 S280 360, 200 400 S120 480, 200 520"
         stroke="currentColor"
@@ -72,7 +86,6 @@ function CubeDNA({ className }: { className?: string }) {
         strokeWidth="1.5"
         fill="none"
       />
-      {/* Cube nodes along the helix */}
       {[
         { x: 120, y: 40 },
         { x: 260, y: 80 },
@@ -87,25 +100,8 @@ function CubeDNA({ className }: { className?: string }) {
         const s = 12 + (i % 3) * 4;
         return (
           <g key={i} transform={`translate(${pos.x - s / 2}, ${pos.y - s / 2})`}>
-            {/* Back face */}
-            <rect
-              x={s * 0.25}
-              y={0}
-              width={s * 0.75}
-              height={s * 0.75}
-              fill="currentColor"
-              opacity="0.15"
-            />
-            {/* Front face */}
-            <rect
-              x={0}
-              y={s * 0.25}
-              width={s * 0.75}
-              height={s * 0.75}
-              fill="currentColor"
-              opacity="0.3"
-            />
-            {/* Connecting edges */}
+            <rect x={s * 0.25} y={0} width={s * 0.75} height={s * 0.75} fill="currentColor" opacity="0.15" />
+            <rect x={0} y={s * 0.25} width={s * 0.75} height={s * 0.75} fill="currentColor" opacity="0.3" />
             <line x1={0} y1={s * 0.25} x2={s * 0.25} y2={0} stroke="currentColor" strokeWidth="0.8" opacity="0.4" />
             <line x1={s * 0.75} y1={s * 0.25} x2={s} y2={0} stroke="currentColor" strokeWidth="0.8" opacity="0.4" />
             <line x1={0} y1={s} x2={s * 0.25} y2={s * 0.75} stroke="currentColor" strokeWidth="0.8" opacity="0.4" />
@@ -113,19 +109,8 @@ function CubeDNA({ className }: { className?: string }) {
           </g>
         );
       })}
-      {/* Cross-links between strands */}
       {[100, 220, 340, 460].map((y, i) => (
-        <line
-          key={i}
-          x1={150 + (i % 2) * 20}
-          y1={y}
-          x2={250 - (i % 2) * 20}
-          y2={y}
-          stroke="currentColor"
-          strokeWidth="1"
-          strokeDasharray="4 4"
-          opacity="0.5"
-        />
+        <line key={i} x1={150 + (i % 2) * 20} y1={y} x2={250 - (i % 2) * 20} y2={y} stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" opacity="0.5" />
       ))}
     </svg>
   );
@@ -138,171 +123,200 @@ export default function BillingPage() {
     <>
       <TopBar title="Satın Al" />
       <main className="flex-1 p-4 sm:p-6 lg:p-8 relative overflow-hidden">
-        {/* Background cube DNA structures */}
+        {/* Background cube DNA */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
           <CubeDNA className="absolute -left-16 top-0 w-[280px] h-auto text-pro-primary opacity-[0.07]" />
           <CubeDNA className="absolute -right-10 top-20 w-[240px] h-auto text-pro-primary opacity-[0.05] scale-x-[-1]" />
-          <CubeDNA className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[200px] h-auto text-pro-primary opacity-[0.04]" />
         </div>
 
-        <div className="mx-auto max-w-5xl space-y-8 relative">
-          {/* Two pricing cards side-by-side */}
-          <div className="grid md:grid-cols-2 gap-5">
-            {/* Card 1: Tek Test */}
-            <div className="relative overflow-hidden rounded-2xl border border-pro-border bg-pro-surface shadow-[var(--pro-shadow-sm)] flex flex-col">
-              <div className="p-6 sm:p-8 flex-1 flex flex-col">
-                <div className="inline-flex items-center gap-2 bg-pro-primary-light text-pro-primary text-xs font-semibold px-3 py-1.5 rounded-full w-fit">
-                  <Sparkles className="h-3.5 w-3.5" />
-                  Tek Test
-                </div>
-
-                <div className="mt-5">
-                  <p className="text-4xl font-bold text-pro-text">
-                    ₺32<span className="text-xl text-pro-text-secondary">,99</span>
-                  </p>
-                  <p className="text-sm text-pro-text-tertiary mt-1">tek seferlik</p>
-                </div>
-
-                <p className="text-sm text-pro-text-secondary mt-4 leading-relaxed">
-                  Danışanınıza özel, yapay zeka destekli karakter ve wellness analizi.
-                </p>
-
-                <ul className="mt-6 space-y-2.5 flex-1">
-                  {FEATURES.map((f) => (
-                    <li key={f} className="flex items-center gap-2 text-sm text-pro-text-secondary">
-                      <Check className="h-4 w-4 text-pro-success shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-
-                <Button
-                  size="lg"
-                  variant="secondary"
-                  className="mt-6 w-full"
-                  onClick={() => toast.info("Ödeme sistemi yakında aktif olacak")}
-                >
-                  Hemen Al
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
+        <div className="mx-auto max-w-3xl relative space-y-6">
+          {/* Main elevated pricing card */}
+          <div className="rounded-3xl bg-white shadow-[0_8px_40px_-8px_rgba(0,0,0,0.12),0_2px_12px_-2px_rgba(0,0,0,0.06)] border border-gray-100/80 overflow-hidden">
+            {/* Header — capabilities */}
+            <div className="px-6 sm:px-10 pt-8 sm:pt-10 pb-6">
+              <div className="inline-flex items-center gap-2 bg-pro-primary-light text-pro-primary text-xs font-semibold px-3 py-1.5 rounded-full mb-4">
+                <Sparkles className="h-3.5 w-3.5" />
+                Karakter Analiz Testi
               </div>
-            </div>
 
-            {/* Card 2: 10'lu Paket — Gold Gradient with Shine */}
-            <div className="relative overflow-hidden rounded-2xl flex flex-col group">
-              {/* Gold gradient background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#C9A84C] via-[#E8C963] to-[#A67C34]" />
-
-              {/* Subtle shine sweep animation */}
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                style={{
-                  background: "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.15) 45%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.15) 55%, transparent 60%)",
-                  animation: "shine 3s ease-in-out infinite",
-                }}
-              />
-
-              {/* Ambient glow spots */}
-              <div className="absolute top-0 right-0 w-[200px] h-[200px] rounded-full bg-white opacity-[0.08] blur-[60px]" />
-              <div className="absolute bottom-0 left-0 w-[150px] h-[150px] rounded-full bg-[#A67C34] opacity-[0.15] blur-[40px]" />
-
-              <div className="relative p-6 sm:p-8 flex-1 flex flex-col">
-                <div className="flex items-center justify-between">
-                  <div className="inline-flex items-center gap-2 bg-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-full backdrop-blur-sm">
-                    <Zap className="h-3.5 w-3.5" />
-                    En Popüler
-                  </div>
-                  <div className="bg-white/20 backdrop-blur-sm text-white text-xs font-bold px-2.5 py-1 rounded-full">
-                    %9 tasarruf
-                  </div>
-                </div>
-
-                <div className="mt-5">
-                  <p className="text-4xl font-bold text-white">
-                    ₺299<span className="text-xl text-white/70">,90</span>
-                  </p>
-                  <p className="text-sm text-white/60 mt-1">10 test · test başına ₺29,99</p>
-                </div>
-
-                <p className="text-sm text-white/70 mt-4 leading-relaxed">
-                  Toplu alımda her test daha uygun. Danışanlarınızı sürekli takip edin.
-                </p>
-
-                <ul className="mt-6 space-y-2.5 flex-1">
-                  {FEATURES.map((f) => (
-                    <li key={f} className="flex items-center gap-2 text-sm text-white/80">
-                      <Check className="h-4 w-4 text-white shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                  <li className="flex items-center gap-2 text-sm text-white/80">
-                    <Check className="h-4 w-4 text-white shrink-0" />
-                    Öncelikli destek
-                  </li>
-                </ul>
-
-                <button
-                  onClick={() => toast.info("Ödeme sistemi yakında aktif olacak")}
-                  className="mt-6 w-full py-3.5 rounded-xl bg-white text-[#8B6914] font-semibold text-sm shadow-lg shadow-black/10 hover:shadow-xl hover:bg-white/95 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
-                >
-                  <Sparkles className="h-4 w-4" />
-                  10 Test Paketi Al
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Benefits Section */}
-          <div className="rounded-2xl bg-gradient-to-br from-[#4A6A59] via-[#5B7B6A] to-[#4A6A59] p-6 sm:p-8 lg:p-10 text-white relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-[250px] h-[250px] rounded-full bg-white opacity-[0.04] blur-[60px]" />
-            <div className="absolute bottom-0 left-0 w-[200px] h-[200px] rounded-full bg-white opacity-[0.03] blur-[50px]" />
-
-            <div className="relative">
-              <h3 className="text-xl sm:text-2xl font-semibold mb-2">
-                Her analizde ne elde edersiniz?
-              </h3>
-              <p className="text-white/60 text-sm mb-8 max-w-lg">
-                Danışanlarınızı daha iyi anlamak, doğru yönlendirmek ve güven inşa etmek için ihtiyacınız olan her şey tek raporda.
+              <h2 className="text-xl sm:text-2xl font-bold text-pro-text mb-1">
+                Danışanlarınız için derinlemesine analiz
+              </h2>
+              <p className="text-sm text-pro-text-tertiary mb-6">
+                Her test, uçtan uca yapay zeka destekli bir karakter analiz sürecidir.
               </p>
 
-              <div className="grid sm:grid-cols-2 gap-4">
-                {BENEFITS.map((b, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <div className="h-9 w-9 rounded-xl bg-white/10 flex items-center justify-center shrink-0 mt-0.5">
-                      <b.icon className="h-4.5 w-4.5 text-white/80" />
+              <div className="flex flex-col gap-3">
+                {CAPABILITIES.map((cap, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <div className="h-8 w-8 rounded-lg bg-pro-primary-light flex items-center justify-center shrink-0">
+                      <cap.icon className="h-4 w-4 text-pro-primary" />
                     </div>
-                    <div>
-                      <p className="text-sm font-medium text-white">{b.title}</p>
-                      <p className="text-xs text-white/55 leading-relaxed mt-0.5">{b.desc}</p>
-                    </div>
+                    <p className="text-sm font-medium text-pro-text">{cap.text}</p>
                   </div>
                 ))}
               </div>
             </div>
+
+            <div className="mx-6 sm:mx-10 border-t border-gray-100" />
+
+            {/* Pricing cards */}
+            <div className="p-6 sm:p-10 grid sm:grid-cols-2 gap-4">
+              {/* Tek Test */}
+              <div className="rounded-2xl border border-pro-border overflow-hidden flex flex-col">
+                <div className="bg-gradient-to-br from-[#EDF5F0] to-[#E0EDE4] px-5 py-4">
+                  <p className="text-xs font-semibold text-pro-primary uppercase tracking-wide">Tek Test</p>
+                  <div className="mt-2">
+                    <span className="text-3xl font-bold text-pro-text">₺32</span>
+                    <span className="text-lg font-semibold text-pro-text-secondary">,99</span>
+                  </div>
+                  <p className="text-xs text-pro-text-tertiary mt-0.5">tek seferlik</p>
+                </div>
+                <div className="px-5 py-4 flex-1 flex flex-col bg-white">
+                  <ul className="space-y-2 flex-1">
+                    <li className="flex items-center gap-2 text-xs text-pro-text-secondary">
+                      <Check className="h-3.5 w-3.5 text-pro-success shrink-0" />
+                      Tam kapsamlı karakter analizi
+                    </li>
+                    <li className="flex items-center gap-2 text-xs text-pro-text-secondary">
+                      <Check className="h-3.5 w-3.5 text-pro-success shrink-0" />
+                      AI destekli kritik rapor
+                    </li>
+                    <li className="flex items-center gap-2 text-xs text-pro-text-secondary">
+                      <Check className="h-3.5 w-3.5 text-pro-success shrink-0" />
+                      WhatsApp / Email gönderim
+                    </li>
+                  </ul>
+                  <button
+                    onClick={() => toast.info("Ödeme sistemi yakında aktif olacak")}
+                    className="mt-4 w-full py-2.5 rounded-xl border-2 border-pro-primary text-pro-primary text-sm font-semibold hover:bg-pro-primary hover:text-white transition-all active:scale-[0.98]"
+                  >
+                    Satın Al
+                  </button>
+                </div>
+              </div>
+
+              {/* 10'lu Paket — gold */}
+              <div className="rounded-2xl overflow-hidden flex flex-col relative group">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#C9A84C] via-[#E8C963] to-[#A67C34]" />
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                  style={{
+                    background: "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.15) 45%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.15) 55%, transparent 60%)",
+                    animation: "shine 3s ease-in-out infinite",
+                  }}
+                />
+                <div className="absolute top-0 right-0 w-[120px] h-[120px] rounded-full bg-white opacity-[0.08] blur-[40px]" />
+
+                <div className="relative px-5 py-4">
+                  <div className="flex items-center justify-between">
+                    <p className="text-xs font-semibold text-white/90 uppercase tracking-wide">10 Test Paketi</p>
+                    <span className="bg-white/20 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                      %9 tasarruf
+                    </span>
+                  </div>
+                  <div className="mt-2">
+                    <span className="text-3xl font-bold text-white">₺299</span>
+                    <span className="text-lg font-semibold text-white/70">,90</span>
+                  </div>
+                  <p className="text-xs text-white/55 mt-0.5">test başına ₺29,99</p>
+                </div>
+
+                <div className="relative px-5 py-4 flex-1 flex flex-col">
+                  <ul className="space-y-2 flex-1">
+                    <li className="flex items-center gap-2 text-xs text-white/80">
+                      <Check className="h-3.5 w-3.5 text-white shrink-0" />
+                      Tam kapsamlı karakter analizi
+                    </li>
+                    <li className="flex items-center gap-2 text-xs text-white/80">
+                      <Check className="h-3.5 w-3.5 text-white shrink-0" />
+                      AI destekli kritik rapor
+                    </li>
+                    <li className="flex items-center gap-2 text-xs text-white/80">
+                      <Check className="h-3.5 w-3.5 text-white shrink-0" />
+                      WhatsApp / Email gönderim
+                    </li>
+                    <li className="flex items-center gap-2 text-xs text-white/80">
+                      <Check className="h-3.5 w-3.5 text-white shrink-0" />
+                      Öncelikli destek
+                    </li>
+                  </ul>
+                  <button
+                    onClick={() => toast.info("Ödeme sistemi yakında aktif olacak")}
+                    className="mt-4 w-full py-2.5 rounded-xl bg-white text-[#8B6914] text-sm font-semibold shadow-md shadow-black/10 hover:shadow-lg hover:bg-white/95 transition-all active:scale-[0.98] flex items-center justify-center gap-1.5"
+                  >
+                    <Zap className="h-3.5 w-3.5" />
+                    Satın Al
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Outputs — dark card */}
+          <div className="rounded-3xl overflow-hidden relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#1A2E24] via-[#243D30] to-[#1A2E24]" />
+
+            {/* Ambient glow */}
+            <div className="absolute top-[-40px] right-[10%] w-[200px] h-[200px] rounded-full bg-[#5B7B6A] opacity-[0.08] blur-[80px]" />
+            <div className="absolute bottom-[-30px] left-[15%] w-[160px] h-[160px] rounded-full bg-[#E8C963] opacity-[0.04] blur-[60px]" />
+
+            <div className="relative px-6 sm:px-10 py-8 sm:py-10">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                <p className="text-[10px] font-semibold text-white/30 uppercase tracking-[0.2em]">Her analizde elde ettiğiniz</p>
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+              </div>
+
+              <h3 className="text-center text-xl sm:text-2xl font-bold text-white mt-3 mb-1">
+                Tek testle ortaya çıkan katmanlar
+              </h3>
+              <p className="text-center text-sm text-white/40 mb-8 max-w-md mx-auto">
+                Yüzeyde görünenden çok daha fazlası var. Her katman, danışanınızı anlamanın farklı bir boyutunu açar.
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-4">
+                {OUTPUTS.map((item, i) => (
+                  <div
+                    key={i}
+                    className="group/item flex items-start gap-3.5 p-4 rounded-2xl bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.07] hover:border-white/[0.1] transition-all duration-300"
+                  >
+                    <div className="h-9 w-9 rounded-xl bg-white/[0.08] flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-white/[0.12] transition-colors">
+                      <item.icon className="h-[18px] w-[18px] text-white/60 group-hover/item:text-white/80 transition-colors" />
+                    </div>
+                    <div>
+                      <p className="text-[13px] font-semibold text-white/90">{item.title}</p>
+                      <p className="text-[11px] text-white/35 leading-relaxed mt-0.5">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-white/[0.06] flex items-center justify-center gap-3">
+                <div className="flex -space-x-1">
+                  {[0.2, 0.35, 0.5, 0.65, 0.8].map((opacity, i) => (
+                    <div
+                      key={i}
+                      className="h-2 w-2 rounded-full border border-white/10"
+                      style={{ backgroundColor: `rgba(232, 201, 99, ${opacity})` }}
+                    />
+                  ))}
+                </div>
+                <p className="text-[11px] text-white/25 italic">
+                  9 analiz katmanı · 4 yapay zeka denetimi · 1 rapor
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Shine keyframe animation */}
         <style jsx>{`
           @keyframes shine {
-            0% {
-              transform: translateX(-100%);
-              opacity: 0;
-            }
-            10% {
-              opacity: 1;
-            }
-            50% {
-              transform: translateX(100%);
-              opacity: 1;
-            }
-            51% {
-              opacity: 0;
-            }
-            100% {
-              opacity: 0;
-              transform: translateX(100%);
-            }
+            0% { transform: translateX(-100%); opacity: 0; }
+            10% { opacity: 1; }
+            50% { transform: translateX(100%); opacity: 1; }
+            51% { opacity: 0; }
+            100% { opacity: 0; transform: translateX(100%); }
           }
         `}</style>
       </main>
