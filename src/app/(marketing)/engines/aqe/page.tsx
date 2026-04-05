@@ -474,14 +474,11 @@ export default function AQEPage() {
                   </div>
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-3">Hybrid Intelligence Pipeline</h3>
-                <p className="text-foreground-muted max-w-md mx-auto mb-4">
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-3">Hybrid Intelligence</h3>
+                <p className="text-foreground-muted max-w-md mx-auto mb-6">
                   Neden sadece AI değil? Yüksek hata payı ve yoğun maliyet.
                   Deterministik algoritmalar hassasiyeti sağlar, AI derinliği katar.
                   Sonuç: %95 daha düşük maliyet, daha yüksek doğruluk.
-                </p>
-                <p className="text-sm text-foreground-subtle font-mono">
-                  Soru → Trait → Pattern → Inference → AI Validation → Profil → Rapor
                 </p>
               </div>
             </motion.div>

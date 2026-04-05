@@ -236,20 +236,13 @@ export default function HAEPage() {
                     </div>
 
                     {/* Row 1: Deterministic layers */}
-                    <div className="grid grid-cols-3 gap-3 mb-3">
+                    <div className="grid grid-cols-3 gap-3">
                       {[
                         { name: "Signal Normalization", num: 1 },
                         { name: "Trait Activation", num: 2 },
                         { name: "Pattern Detection", num: 3 },
                       ].map((layer, index) => (
-                        <motion.div
-                          key={layer.name}
-                          className="p-3 sm:p-4 rounded-lg bg-white/[0.02] border border-white/[0.06] text-center"
-                          initial={{ opacity: 0, scale: 0.95 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.4, delay: index * 0.08 }}
-                        >
+                        <motion.div key={layer.name} className="p-3 sm:p-4 rounded-lg bg-white/[0.02] border border-white/[0.06] text-center" initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: index * 0.08 }}>
                           <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
                             <span className="text-xs font-mono text-cyan-400">{layer.num}</span>
                           </div>
@@ -258,77 +251,80 @@ export default function HAEPage() {
                       ))}
                     </div>
 
-                    {/* Row 2: AI Pattern Validation (3 perspectives) */}
-                    <div className="grid grid-cols-3 gap-3 mb-3">
-                      {[
-                        { name: "Coherence Gate" },
-                        { name: "Coverage Scan" },
-                        { name: "Quality Shield" },
-                      ].map((layer, index) => (
-                        <motion.div
-                          key={layer.name}
-                          className="relative p-3 sm:p-4 rounded-lg bg-amber-500/[0.06] border border-amber-500/20 text-center overflow-hidden"
-                          initial={{ opacity: 0, scale: 0.95 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.4, delay: 0.3 + index * 0.08 }}
-                        >
-                          {!isMobile && (
-                            <motion.div
-                              className="absolute inset-0 rounded-lg"
-                              style={{ background: "linear-gradient(90deg, transparent, rgba(245,158,11,0.1), transparent)", backgroundSize: "200% 100%" }}
-                              animate={{ backgroundPosition: ["200% 0", "-200% 0"] }}
-                              transition={{ duration: 4, repeat: Infinity, ease: "linear", delay: index * 0.5 }}
-                            />
-                          )}
-                          <div className="relative z-10">
-                            <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
-                              <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                    {/* Arrow down */}
+                    <div className="flex justify-center py-2">
+                      <motion.div className="flex flex-col items-center" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity }}>
+                        <div className="w-px h-6 bg-gradient-to-b from-cyan-500/40 to-amber-500/40" />
+                        <svg className="w-3 h-3 text-amber-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16l-6-6h12l-6 6z" /></svg>
+                      </motion.div>
+                    </div>
+
+                    {/* Row 2: AI Pattern Validation — big cards like AQE */}
+                    <div className="mb-1">
+                      <div className="flex items-center gap-2 mb-4">
+                        <div className="h-px flex-1 bg-gradient-to-r from-transparent to-amber-500/20" />
+                        <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.2em] text-amber-400/60">AI Multi-Perspective Validation</span>
+                        <div className="h-px flex-1 bg-gradient-to-l from-transparent to-amber-500/20" />
+                      </div>
+                      <div className="grid grid-cols-3 gap-3">
+                        {[
+                          { name: "Coherence Gate", desc: "Tutarlılık kontrolü. Çelişen sinyalleri tespit eder, trait skorlarını düzeltir.", color: "amber" },
+                          { name: "Coverage Scan", desc: "Kapsam analizi. Eksik pattern ve trait'leri bulur, gizli bağlantıları ortaya çıkarır.", color: "orange" },
+                          { name: "Quality Shield", desc: "Kalite güvencesi. Genel sağlık kontrolü, ciddi sorunları işaretler.", color: "yellow" },
+                        ].map((layer, index) => (
+                          <motion.div key={layer.name} className="relative rounded-xl border border-amber-500/30 bg-gradient-to-b from-amber-500/10 to-transparent p-3 sm:p-5 overflow-hidden" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}>
+                            {!isMobile && (
+                              <motion.div className="absolute inset-0 rounded-xl" style={{ background: "linear-gradient(90deg, transparent, rgba(245,158,11,0.15), transparent)", backgroundSize: "200% 100%" }} animate={{ backgroundPosition: ["200% 0", "-200% 0"] }} transition={{ duration: 4, repeat: Infinity, ease: "linear", delay: index * 0.5 }} />
+                            )}
+                            <div className="relative z-10">
+                              <div className="flex items-center gap-2 mb-2">
+                                <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                                <span className="text-[8px] sm:text-[10px] font-mono text-amber-400 uppercase tracking-wider">AI Layer</span>
+                              </div>
+                              <h4 className="text-xs sm:text-base font-bold text-amber-200 mb-1">{layer.name}</h4>
+                              <p className="text-[9px] sm:text-xs text-foreground-muted leading-relaxed hidden sm:block">{layer.desc}</p>
                             </div>
-                            <p className="text-xs sm:text-sm font-medium text-amber-300">{layer.name}</p>
-                            <p className="text-[8px] sm:text-[10px] font-mono text-amber-400/60 mt-1">AI LAYER</p>
-                          </div>
-                        </motion.div>
-                      ))}
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Arrow down */}
+                    <div className="flex justify-center py-2">
+                      <motion.div className="flex flex-col items-center" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}>
+                        <div className="w-px h-6 bg-gradient-to-b from-amber-500/40 to-cyan-500/40" />
+                        <svg className="w-3 h-3 text-cyan-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16l-6-6h12l-6 6z" /></svg>
+                      </motion.div>
                     </div>
 
                     {/* Row 3: Inference + AI Guard */}
-                    <div className="grid grid-cols-2 gap-3 mb-3">
-                      <motion.div
-                        className="p-3 sm:p-4 rounded-lg bg-white/[0.02] border border-white/[0.06] text-center"
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0.6 }}
-                      >
+                    <div className="grid grid-cols-2 gap-3">
+                      <motion.div className="p-3 sm:p-4 rounded-lg bg-white/[0.02] border border-white/[0.06] text-center" initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.6 }}>
                         <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
                           <span className="text-xs font-mono text-cyan-400">4</span>
                         </div>
                         <p className="text-xs sm:text-sm font-medium text-foreground">Inference Engine</p>
                       </motion.div>
 
-                      <motion.div
-                        className="relative p-3 sm:p-4 rounded-lg bg-amber-500/[0.06] border border-amber-500/20 text-center overflow-hidden"
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0.68 }}
-                      >
+                      <motion.div className="relative rounded-xl border border-rose-500/30 bg-gradient-to-b from-rose-500/10 to-transparent p-3 sm:p-4 overflow-hidden text-center" initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.68 }}>
                         {!isMobile && (
-                          <motion.div
-                            className="absolute inset-0 rounded-lg"
-                            style={{ background: "linear-gradient(90deg, transparent, rgba(245,158,11,0.1), transparent)", backgroundSize: "200% 100%" }}
-                            animate={{ backgroundPosition: ["200% 0", "-200% 0"] }}
-                            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                          />
+                          <motion.div className="absolute inset-0 rounded-xl" style={{ background: "linear-gradient(90deg, transparent, rgba(244,63,94,0.12), transparent)", backgroundSize: "200% 100%" }} animate={{ backgroundPosition: ["200% 0", "-200% 0"] }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }} />
                         )}
                         <div className="relative z-10">
-                          <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
-                            <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                          <div className="flex items-center justify-center gap-2 mb-2">
+                            <div className="w-2 h-2 rounded-full bg-rose-400 animate-pulse" />
+                            <span className="text-[8px] sm:text-[10px] font-mono text-rose-400 uppercase tracking-wider">AI Layer</span>
                           </div>
-                          <p className="text-xs sm:text-sm font-medium text-amber-300">Inference Guard</p>
-                          <p className="text-[8px] sm:text-[10px] font-mono text-amber-400/60 mt-1">AI LAYER</p>
+                          <p className="text-xs sm:text-sm font-bold text-rose-300">Inference Guard</p>
                         </div>
+                      </motion.div>
+                    </div>
+
+                    {/* Arrow down */}
+                    <div className="flex justify-center py-2">
+                      <motion.div className="flex flex-col items-center" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}>
+                        <div className="w-px h-6 bg-gradient-to-b from-cyan-500/40 to-transparent" />
+                        <svg className="w-3 h-3 text-cyan-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16l-6-6h12l-6 6z" /></svg>
                       </motion.div>
                     </div>
 
@@ -338,14 +334,7 @@ export default function HAEPage() {
                         { name: "Multi-Dim Scoring", num: 5 },
                         { name: "Profile Synthesis", num: 6 },
                       ].map((layer, index) => (
-                        <motion.div
-                          key={layer.name}
-                          className="p-3 sm:p-4 rounded-lg bg-white/[0.02] border border-white/[0.06] text-center"
-                          initial={{ opacity: 0, scale: 0.95 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.4, delay: 0.76 + index * 0.08 }}
-                        >
+                        <motion.div key={layer.name} className="p-3 sm:p-4 rounded-lg bg-white/[0.02] border border-white/[0.06] text-center" initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.76 + index * 0.08 }}>
                           <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
                             <span className="text-xs font-mono text-cyan-400">{layer.num}</span>
                           </div>
