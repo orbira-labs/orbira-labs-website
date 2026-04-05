@@ -6,17 +6,57 @@ import { Badge } from "@/components/pro/ui/Badge";
 import { EmptyState } from "@/components/pro/ui/EmptyState";
 import { Avatar } from "@/components/pro/ui/Avatar";
 import { Skeleton } from "@/components/pro/ui/Skeleton";
-import { Users, Calendar, FlaskConical, CheckCircle2, Eye } from "lucide-react";
+import { Users, Calendar, FlaskConical, CheckCircle2, Eye, Send } from "lucide-react";
 import { useProContext } from "@/lib/pro/context";
 import { useDashboard } from "@/lib/pro/hooks/useDashboard";
 import { formatTime, formatRelative, formatDayLabel } from "@/lib/pro/utils";
 import Link from "next/link";
 
 const STAT_CARDS = [
-  { key: "total_clients" as const, label: "Danışan", icon: Users, href: "/pro/clients", color: "bg-pro-primary-light text-pro-primary" },
-  { key: "todays_appointments" as const, label: "Bugünkü Randevu", icon: Calendar, href: "/pro/appointments", color: "bg-pro-accent-light text-pro-accent" },
-  { key: "remaining_tests" as const, label: "Kalan Test", icon: FlaskConical, href: "/pro/tests", color: "bg-[#E8EDF0] text-[#5B8A9A]" },
-  { key: "completed_tests" as const, label: "Tamamlanan", icon: CheckCircle2, href: "/pro/tests", color: "bg-pro-success-light text-pro-success" },
+  {
+    key: "total_clients" as const,
+    label: "Danışan",
+    icon: Users,
+    href: "/pro/clients",
+    gradient: "from-[#E8F0EB] to-[#D4E5DA]",
+    iconBg: "bg-[#5B7B6A]",
+    iconColor: "text-white",
+    accentBar: "bg-[#5B7B6A]",
+    valueColor: "text-[#3D5A4C]",
+  },
+  {
+    key: "todays_appointments" as const,
+    label: "Bugünkü Randevu",
+    icon: Calendar,
+    href: "/pro/appointments",
+    gradient: "from-[#FDF5EE] to-[#F8EBD9]",
+    iconBg: "bg-[#C4956A]",
+    iconColor: "text-white",
+    accentBar: "bg-[#C4956A]",
+    valueColor: "text-[#8B5E3C]",
+  },
+  {
+    key: "remaining_tests" as const,
+    label: "Kullanılabilir Test",
+    icon: FlaskConical,
+    href: "/pro/tests",
+    gradient: "from-[#EBF0F8] to-[#D8E3F1]",
+    iconBg: "bg-[#5B7BA0]",
+    iconColor: "text-white",
+    accentBar: "bg-[#5B7BA0]",
+    valueColor: "text-[#3A5270]",
+  },
+  {
+    key: "completed_tests" as const,
+    label: "Tamamlanan Test",
+    icon: CheckCircle2,
+    href: "/pro/tests",
+    gradient: "from-[#E9F7EF] to-[#D0EDDB]",
+    iconBg: "bg-[#27AE60]",
+    iconColor: "text-white",
+    accentBar: "bg-[#27AE60]",
+    valueColor: "text-[#1B7A43]",
+  },
 ];
 
 const STATUS_MAP: Record<string, { label: string; variant: "success" | "warning" | "info" | "danger" }> = {
@@ -33,6 +73,14 @@ function getGreeting(): string {
   return "İyi akşamlar";
 }
 
+function formatTodayDate(): string {
+  return new Date().toLocaleDateString("tr-TR", {
+    day: "numeric",
+    month: "long",
+    weekday: "long",
+  });
+}
+
 export default function DashboardPage() {
   const { professional } = useProContext();
   const { stats, upcomingAppointments, recentTests, loading } = useDashboard();
@@ -42,13 +90,27 @@ export default function DashboardPage() {
       <TopBar title="Ofisim" />
       <main className="flex-1 p-4 sm:p-6 lg:p-8">
         <div className="mx-auto max-w-5xl space-y-6">
-          <div className="flex items-center gap-3">
-            <div className="h-1.5 w-1.5 rounded-full bg-pro-primary animate-pulse" />
-            <h2 className="text-xl sm:text-2xl font-semibold text-pro-text">
-              {getGreeting()}, <span className="text-pro-primary">{professional?.first_name || "Hoş geldiniz"}</span> 👋
-            </h2>
+          {/* Greeting + quick action */}
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="flex items-center gap-3">
+                <div className="h-1.5 w-1.5 rounded-full bg-pro-primary animate-pulse" />
+                <h2 className="text-xl sm:text-2xl font-semibold text-pro-text">
+                  {getGreeting()}, <span className="text-pro-primary">{professional?.first_name || "Hoş geldiniz"}</span>
+                </h2>
+              </div>
+              <p className="text-sm text-pro-text-tertiary mt-1 ml-[18px]">{formatTodayDate()}</p>
+            </div>
+            <Link
+              href="/pro/tests"
+              className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-xl bg-pro-primary text-white text-sm font-medium hover:bg-pro-primary-hover transition-colors shadow-sm"
+            >
+              <Send className="h-4 w-4" />
+              Test Gönder
+            </Link>
           </div>
 
+          {/* Stat cards */}
           {loading ? (
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
               {[...Array(4)].map((_, i) => (
@@ -62,22 +124,25 @@ export default function DashboardPage() {
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
               {STAT_CARDS.map((card) => (
                 <Link key={card.key} href={card.href}>
-                  <Card hover padding="md">
-                    <div className="flex items-start justify-between">
+                  <div className={`relative overflow-hidden rounded-xl bg-gradient-to-br ${card.gradient} border border-white/60 p-4 sm:p-5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group`}>
+                    {/* Left accent bar */}
+                    <div className={`absolute left-0 top-3 bottom-3 w-1 rounded-r-full ${card.accentBar}`} />
+                    <div className="flex items-start justify-between pl-2">
                       <div>
-                        <p className="text-xs sm:text-sm text-pro-text-secondary">{card.label}</p>
-                        <p className="text-2xl sm:text-3xl font-bold text-pro-text mt-1">{stats[card.key]}</p>
+                        <p className="text-xs sm:text-sm text-pro-text-secondary font-medium">{card.label}</p>
+                        <p className={`text-2xl sm:text-3xl font-bold mt-1 ${card.valueColor}`}>{stats[card.key]}</p>
                       </div>
-                      <div className={`h-10 w-10 rounded-xl ${card.color} flex items-center justify-center shrink-0`}>
-                        <card.icon className="h-5 w-5" />
+                      <div className={`h-10 w-10 rounded-xl ${card.iconBg} flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform`}>
+                        <card.icon className={`h-5 w-5 ${card.iconColor}`} />
                       </div>
                     </div>
-                  </Card>
+                  </div>
                 </Link>
               ))}
             </div>
           )}
 
+          {/* Bottom panels */}
           <div className="grid lg:grid-cols-2 gap-4 sm:gap-6">
             <Card padding="lg" accent="primary">
               <div className="flex items-center justify-between mb-4">
@@ -124,7 +189,7 @@ export default function DashboardPage() {
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-semibold text-pro-text flex items-center gap-2">
                   <span className="h-4 w-0.5 rounded-full bg-pro-accent" />
-                  Son Test Aktivitesi
+                  Son Testler
                 </h3>
                 <Link href="/pro/tests" className="text-sm text-pro-primary hover:underline">Tümü</Link>
               </div>
@@ -140,7 +205,7 @@ export default function DashboardPage() {
                     </div>
                   ))}
                 </div>
-              )               : recentTests.length === 0 ? (
+              ) : recentTests.length === 0 ? (
                 <EmptyState icon={FlaskConical} title="Henüz test yok" description="İlk karakter analizinizi bir danışanınıza gönderin" actionLabel="Test Gönder" onAction={() => {}} />
               ) : (
                 <div className="space-y-2.5">

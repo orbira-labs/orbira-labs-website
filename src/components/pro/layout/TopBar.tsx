@@ -23,7 +23,7 @@ export function TopBar({ title }: TopBarProps) {
         >
           <FlaskConical className="h-3.5 w-3.5 text-[#5B7B6A]" />
           <span className="text-sm font-semibold text-[#3D5A4C]">{creditBalance}</span>
-          <span className="text-xs text-[#6B8F7B]">test</span>
+          <span className="text-xs text-[#6B8F7B]">kredi</span>
         </Link>
 
         <button className="relative p-2 rounded-xl text-[#6B8F7B] hover:bg-white/60 hover:text-[#3D5A4C] transition-all duration-200">

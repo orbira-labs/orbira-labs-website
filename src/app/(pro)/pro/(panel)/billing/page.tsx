@@ -208,16 +208,16 @@ export default function BillingPage() {
                 />
                 <div className="absolute top-0 right-0 w-[120px] h-[120px] rounded-full bg-white opacity-[0.08] blur-[40px]" />
 
+                {/* Diagonal ribbon */}
+                <div className="absolute -right-[30px] top-[18px] z-10 rotate-45 bg-white shadow-md px-8 py-1">
+                  <span className="text-[11px] font-bold text-[#8B6914] tracking-wide">%9 tasarruf</span>
+                </div>
+
                 <div className="relative px-5 py-4">
                   <p className="text-xs font-semibold text-white/90 uppercase tracking-wide">10 Test Paketi</p>
-                  <div className="mt-2 flex items-baseline gap-3">
-                    <div>
-                      <span className="text-3xl font-bold text-white">₺299</span>
-                      <span className="text-lg font-semibold text-white/70">,90</span>
-                    </div>
-                    <span className="bg-white/25 backdrop-blur-sm text-white text-xs font-bold px-2.5 py-1 rounded-full">
-                      %9 tasarruf
-                    </span>
+                  <div className="mt-2">
+                    <span className="text-3xl font-bold text-white">₺299</span>
+                    <span className="text-lg font-semibold text-white/70">,90</span>
                   </div>
                   <p className="text-xs text-white/55 mt-0.5">test başına ₺29,99</p>
                 </div>
@@ -248,25 +248,25 @@ export default function BillingPage() {
             </div>
           </div>
 
-          {/* Outputs — dark card */}
+          {/* Outputs card */}
           <div className="rounded-3xl overflow-hidden relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#1A2E24] via-[#243D30] to-[#1A2E24]" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#5B7B6A] via-[#6B8D7A] to-[#5B7B6A]" />
 
             {/* Ambient glow */}
-            <div className="absolute top-[-40px] right-[10%] w-[200px] h-[200px] rounded-full bg-[#5B7B6A] opacity-[0.08] blur-[80px]" />
+            <div className="absolute top-[-40px] right-[10%] w-[200px] h-[200px] rounded-full bg-white opacity-[0.06] blur-[80px]" />
             <div className="absolute bottom-[-30px] left-[15%] w-[160px] h-[160px] rounded-full bg-[#E8C963] opacity-[0.04] blur-[60px]" />
 
             <div className="relative px-6 sm:px-10 py-8 sm:py-10">
               <div className="flex items-center gap-2 mb-2">
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-                <p className="text-[10px] font-semibold text-white/30 uppercase tracking-[0.2em]">Her analizde elde ettiğiniz</p>
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+                <p className="text-[10px] font-semibold text-white/40 uppercase tracking-[0.2em]">Her analizde elde ettiğiniz</p>
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
               </div>
 
               <h3 className="text-center text-xl sm:text-2xl font-bold text-white mt-3 mb-1">
                 Tek testle ortaya çıkan katmanlar
               </h3>
-              <p className="text-center text-sm text-white/40 mb-8 max-w-md mx-auto">
+              <p className="text-center text-sm text-white/50 mb-8 max-w-md mx-auto">
                 Yüzeyde görünenden çok daha fazlası var. Her katman, danışanınızı anlamanın farklı bir boyutunu açar.
               </p>
 
@@ -274,30 +274,30 @@ export default function BillingPage() {
                 {OUTPUTS.map((item, i) => (
                   <div
                     key={i}
-                    className="group/item flex items-start gap-3.5 p-4 rounded-2xl bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.07] hover:border-white/[0.1] transition-all duration-300"
+                    className="group/item flex items-start gap-3.5 p-4 rounded-2xl bg-[#3D5A4C] border border-[#4A6A59] shadow-[0_4px_16px_-2px_rgba(0,0,0,0.25),0_1px_4px_-1px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_24px_-2px_rgba(0,0,0,0.3),0_2px_8px_-1px_rgba(0,0,0,0.2)] hover:bg-[#3A5749] hover:border-[#5B7B6A] transition-all duration-300"
                   >
-                    <div className="h-9 w-9 rounded-xl bg-white/[0.08] flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-white/[0.12] transition-colors">
-                      <item.icon className="h-[18px] w-[18px] text-white/60 group-hover/item:text-white/80 transition-colors" />
+                    <div className="h-9 w-9 rounded-xl bg-[#4A6A59] flex items-center justify-center shrink-0 mt-0.5 shadow-inner group-hover/item:bg-[#5B7B6A] transition-colors">
+                      <item.icon className="h-[18px] w-[18px] text-white/70 group-hover/item:text-white/90 transition-colors" />
                     </div>
                     <div>
-                      <p className="text-[13px] font-semibold text-white/90">{item.title}</p>
-                      <p className="text-[11px] text-white/35 leading-relaxed mt-0.5">{item.desc}</p>
+                      <p className="text-[13px] font-semibold text-white/95">{item.title}</p>
+                      <p className="text-[11px] text-white/45 leading-relaxed mt-0.5">{item.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-8 pt-6 border-t border-white/[0.06] flex items-center justify-center gap-3">
+              <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-center gap-3">
                 <div className="flex -space-x-1">
                   {[0.2, 0.35, 0.5, 0.65, 0.8].map((opacity, i) => (
                     <div
                       key={i}
-                      className="h-2 w-2 rounded-full border border-white/10"
+                      className="h-2 w-2 rounded-full border border-white/15"
                       style={{ backgroundColor: `rgba(232, 201, 99, ${opacity})` }}
                     />
                   ))}
                 </div>
-                <p className="text-[11px] text-white/25 italic">
+                <p className="text-[11px] text-white/30 italic">
                   9 analiz katmanı · 4 yapay zeka denetimi · 1 rapor
                 </p>
               </div>

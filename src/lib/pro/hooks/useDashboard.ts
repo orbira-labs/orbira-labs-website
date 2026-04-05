@@ -13,6 +13,7 @@ interface DashboardAppointment {
 
 interface DashboardTest {
   id: string;
+  token: string;
   status: string;
   created_at: string;
   client: { first_name: string; last_name: string } | null;
@@ -49,7 +50,7 @@ export function useDashboard() {
         .limit(5),
       supabase
         .from("test_invitations")
-        .select("id, status, created_at, client:clients(first_name, last_name)")
+        .select("id, token, status, created_at, client:clients(first_name, last_name)")
         .eq("professional_id", user.id)
         .order("created_at", { ascending: false })
         .limit(5),

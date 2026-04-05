@@ -5,9 +5,9 @@ const USE_MOCK = !API_URL || !API_KEY;
 
 export interface ProfileField {
   id: string;
-  type: "single_choice" | "boolean" | "text";
-  label: string;
-  options?: { value: string; label: string }[];
+  answer_type: "single_choice" | "boolean" | "text";
+  text: string;
+  options?: { value: string | boolean; label: string }[];
   required?: boolean;
 }
 
@@ -19,12 +19,10 @@ export interface CoreQuestion {
 
 export interface MeasurementField {
   id: string;
-  type: "number" | "select";
-  label: string;
-  unit?: string;
-  min?: number;
-  max?: number;
-  options?: { value: string; label: string }[];
+  answer_type: "numeric" | "single_choice";
+  text: string;
+  numeric_range?: { min: number; max: number } | null;
+  options?: { value: string; label: string }[] | null;
 }
 
 export interface DeepDiveQuestion {
@@ -172,66 +170,65 @@ const MOCK_SESSION_DATA: SessionData = {
   session_id: `mock_${Date.now()}`,
   profile_fields: [
     {
-      id: "age_range",
-      type: "single_choice",
-      label: "Yaş Aralığınız",
-      options: [
-        { value: "18-24", label: "18-24" },
-        { value: "25-34", label: "25-34" },
-        { value: "35-44", label: "35-44" },
-        { value: "45-54", label: "45-54" },
-        { value: "55+", label: "55 ve üzeri" },
-      ],
-      required: true,
-    },
-    {
       id: "gender",
-      type: "single_choice",
-      label: "Cinsiyet",
+      answer_type: "single_choice",
+      text: "Cinsiyetiniz?",
       options: [
         { value: "female", label: "Kadın" },
         { value: "male", label: "Erkek" },
-        { value: "other", label: "Diğer" },
+        { value: "prefer_not_to_say", label: "Belirtmek istemiyorum" },
       ],
       required: true,
     },
     {
-      id: "education",
-      type: "single_choice",
-      label: "Eğitim Durumu",
+      id: "age_range",
+      answer_type: "single_choice",
+      text: "Yaş aralığınız?",
       options: [
-        { value: "high_school", label: "Lise" },
-        { value: "bachelor", label: "Lisans" },
-        { value: "master", label: "Yüksek Lisans" },
-        { value: "phd", label: "Doktora" },
+        { value: "13_18", label: "13-18" },
+        { value: "18_26", label: "18-26" },
+        { value: "26_40", label: "26-40" },
+        { value: "40_55", label: "40-55" },
+        { value: "55_plus", label: "55+" },
       ],
-      required: false,
+      required: true,
+    },
+    {
+      id: "chronic_condition",
+      answer_type: "boolean",
+      text: "Kronik bir sağlık durumunuz var mı?",
+      options: [
+        { value: true, label: "Evet" },
+        { value: false, label: "Hayır" },
+      ],
+      required: true,
     },
   ],
   core_questions: [
-    { id: "q1", text: "Yeni insanlarla tanışmaktan keyif alırım.", dimension: "Sosyallik" },
-    { id: "q2", text: "Stresli durumlarda sakin kalabilirim.", dimension: "Duygusal Denge" },
-    { id: "q3", text: "Görevlerimi zamanında tamamlarım.", dimension: "Sorumluluk" },
-    { id: "q4", text: "Başkalarının duygularını kolayca anlayabilirim.", dimension: "Empati" },
-    { id: "q5", text: "Yeni fikirlere açığımdır.", dimension: "Açıklık" },
-    { id: "q6", text: "Topluluk içinde rahat hissederim.", dimension: "Sosyallik" },
-    { id: "q7", text: "Duygusal tepkilerimi kontrol edebilirim.", dimension: "Duygusal Denge" },
-    { id: "q8", text: "Detaylara dikkat ederim.", dimension: "Sorumluluk" },
-    { id: "q9", text: "İnsanlara yardım etmekten mutluluk duyarım.", dimension: "Empati" },
-    { id: "q10", text: "Değişime kolayca uyum sağlarım.", dimension: "Açıklık" },
+    { id: "sleep_quality", text: "Uyku kalitenizi nasıl değerlendirirsiniz?", dimension: "physical" },
+    { id: "energy_level", text: "Gün içi enerji seviyenizi nasıl değerlendirirsiniz?", dimension: "physical" },
+    { id: "stress_management", text: "Stresinizi yönetebilme düzeyinizi nasıl değerlendirirsiniz?", dimension: "mental" },
+    { id: "emotional_balance", text: "Duygusal olarak ne kadar dengede hissediyorsunuz?", dimension: "mental" },
+    { id: "focus", text: "Zihinsel odaklanma düzeyinizi nasıl değerlendirirsiniz?", dimension: "mental" },
+    { id: "support_access", text: "İhtiyaç duyduğunuzda destek bulabileceğinizi ne kadar hissediyorsunuz?", dimension: "social" },
+    { id: "relationship_quality", text: "Yakın ilişkilerinizin kalitesini nasıl değerlendirirsiniz?", dimension: "social" },
+    { id: "work_life_balance", text: "İş, okul ve özel hayat dengenizi nasıl değerlendirirsiniz?", dimension: "functional" },
+    { id: "life_satisfaction", text: "Genel yaşam memnuniyetinizi nasıl değerlendirirsiniz?", dimension: "general" },
+    { id: "resilience", text: "Zorlandığınızda ne kadar toparlanabiliyorsunuz?", dimension: "mental" },
   ],
   measurement_context: [
-    { id: "height", type: "number", label: "Boy", unit: "cm", min: 100, max: 250 },
-    { id: "weight", type: "number", label: "Kilo", unit: "kg", min: 30, max: 300 },
+    { id: "height", answer_type: "numeric", text: "Boyunuz? (cm)", numeric_range: { min: 100, max: 250 } },
+    { id: "weight", answer_type: "numeric", text: "Kilonuz? (kg)", numeric_range: { min: 30, max: 300 } },
     {
-      id: "sleep_quality",
-      type: "select",
-      label: "Uyku Kalitesi",
+      id: "water_intake",
+      answer_type: "single_choice",
+      text: "Günlük su tüketiminiz hangisine daha yakın?",
       options: [
-        { value: "poor", label: "Kötü" },
-        { value: "fair", label: "Orta" },
-        { value: "good", label: "İyi" },
-        { value: "excellent", label: "Çok İyi" },
+        { value: "none", label: "Neredeyse hiç" },
+        { value: "low", label: "1-3 bardak" },
+        { value: "medium", label: "4-6 bardak" },
+        { value: "good", label: "7-9 bardak" },
+        { value: "high", label: "10+ bardak" },
       ],
     },
   ],
