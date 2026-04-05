@@ -235,16 +235,16 @@ export default function HAEPage() {
                       <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10" />
                     </div>
 
-                    {/* Row 1: Deterministic layers */}
+                    {/* Row 1: Deterministic layers — different colors */}
                     <div className="grid grid-cols-3 gap-3">
                       {[
-                        { name: "Signal Normalization", num: 1 },
-                        { name: "Trait Activation", num: 2 },
-                        { name: "Pattern Detection", num: 3 },
+                        { name: "Signal Normalization", num: 1, border: "border-emerald-500/20", bg: "bg-emerald-500/10", dot: "text-emerald-400" },
+                        { name: "Trait Activation", num: 2, border: "border-violet-500/20", bg: "bg-violet-500/10", dot: "text-violet-400" },
+                        { name: "Pattern Detection", num: 3, border: "border-cyan-500/20", bg: "bg-cyan-500/10", dot: "text-cyan-400" },
                       ].map((layer, index) => (
-                        <motion.div key={layer.name} className="p-3 sm:p-4 rounded-lg bg-white/[0.02] border border-white/[0.06] text-center" initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: index * 0.08 }}>
-                          <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
-                            <span className="text-xs font-mono text-cyan-400">{layer.num}</span>
+                        <motion.div key={layer.name} className={`p-3 sm:p-4 rounded-lg bg-white/[0.02] border ${layer.border} text-center`} initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: index * 0.08 }}>
+                          <div className={`w-8 h-8 mx-auto mb-2 rounded-full ${layer.bg} border ${layer.border} flex items-center justify-center`}>
+                            <span className={`text-xs font-mono ${layer.dot}`}>{layer.num}</span>
                           </div>
                           <p className="text-xs sm:text-sm font-medium text-foreground">{layer.name}</p>
                         </motion.div>
@@ -259,7 +259,7 @@ export default function HAEPage() {
                       </motion.div>
                     </div>
 
-                    {/* Row 2: AI Pattern Validation — big cards like AQE */}
+                    {/* Row 2: AI Triple Validation — no descriptions */}
                     <div className="mb-1">
                       <div className="flex items-center gap-2 mb-4">
                         <div className="h-px flex-1 bg-gradient-to-r from-transparent to-amber-500/20" />
@@ -268,21 +268,20 @@ export default function HAEPage() {
                       </div>
                       <div className="grid grid-cols-3 gap-3">
                         {[
-                          { name: "Coherence Gate", desc: "Tutarlılık kontrolü. Çelişen sinyalleri tespit eder, trait skorlarını düzeltir.", color: "amber" },
-                          { name: "Coverage Scan", desc: "Kapsam analizi. Eksik pattern ve trait'leri bulur, gizli bağlantıları ortaya çıkarır.", color: "orange" },
-                          { name: "Quality Shield", desc: "Kalite güvencesi. Genel sağlık kontrolü, ciddi sorunları işaretler.", color: "yellow" },
+                          { name: "Coherence Gate" },
+                          { name: "Coverage Scan" },
+                          { name: "Quality Shield" },
                         ].map((layer, index) => (
-                          <motion.div key={layer.name} className="relative rounded-xl border border-amber-500/30 bg-gradient-to-b from-amber-500/10 to-transparent p-3 sm:p-5 overflow-hidden" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}>
+                          <motion.div key={layer.name} className="relative rounded-xl border border-amber-500/30 bg-gradient-to-b from-amber-500/10 to-transparent p-3 sm:p-5 overflow-hidden text-center" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}>
                             {!isMobile && (
                               <motion.div className="absolute inset-0 rounded-xl" style={{ background: "linear-gradient(90deg, transparent, rgba(245,158,11,0.15), transparent)", backgroundSize: "200% 100%" }} animate={{ backgroundPosition: ["200% 0", "-200% 0"] }} transition={{ duration: 4, repeat: Infinity, ease: "linear", delay: index * 0.5 }} />
                             )}
                             <div className="relative z-10">
-                              <div className="flex items-center gap-2 mb-2">
+                              <div className="flex items-center justify-center gap-2 mb-2">
                                 <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
                                 <span className="text-[8px] sm:text-[10px] font-mono text-amber-400 uppercase tracking-wider">AI Layer</span>
                               </div>
-                              <h4 className="text-xs sm:text-base font-bold text-amber-200 mb-1">{layer.name}</h4>
-                              <p className="text-[9px] sm:text-xs text-foreground-muted leading-relaxed hidden sm:block">{layer.desc}</p>
+                              <h4 className="text-xs sm:text-base font-bold text-amber-200">{layer.name}</h4>
                             </div>
                           </motion.div>
                         ))}
@@ -297,11 +296,11 @@ export default function HAEPage() {
                       </motion.div>
                     </div>
 
-                    {/* Row 3: Inference + AI Guard */}
+                    {/* Row 3: Inference + AI Guard — different colors */}
                     <div className="grid grid-cols-2 gap-3">
-                      <motion.div className="p-3 sm:p-4 rounded-lg bg-white/[0.02] border border-white/[0.06] text-center" initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.6 }}>
-                        <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
-                          <span className="text-xs font-mono text-cyan-400">4</span>
+                      <motion.div className="p-3 sm:p-4 rounded-lg bg-white/[0.02] border border-indigo-500/20 text-center" initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.6 }}>
+                        <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
+                          <span className="text-xs font-mono text-indigo-400">4</span>
                         </div>
                         <p className="text-xs sm:text-sm font-medium text-foreground">Inference Engine</p>
                       </motion.div>
@@ -328,15 +327,15 @@ export default function HAEPage() {
                       </motion.div>
                     </div>
 
-                    {/* Row 4: Final deterministic */}
+                    {/* Row 4: Final — different colors */}
                     <div className="grid grid-cols-2 gap-3">
                       {[
-                        { name: "Multi-Dim Scoring", num: 5 },
-                        { name: "Profile Synthesis", num: 6 },
+                        { name: "Multi-Dim Scoring", num: 5, border: "border-teal-500/20", bg: "bg-teal-500/10", dot: "text-teal-400" },
+                        { name: "Profile Synthesis", num: 6, border: "border-purple-500/20", bg: "bg-purple-500/10", dot: "text-purple-400" },
                       ].map((layer, index) => (
-                        <motion.div key={layer.name} className="p-3 sm:p-4 rounded-lg bg-white/[0.02] border border-white/[0.06] text-center" initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.76 + index * 0.08 }}>
-                          <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
-                            <span className="text-xs font-mono text-cyan-400">{layer.num}</span>
+                        <motion.div key={layer.name} className={`p-3 sm:p-4 rounded-lg bg-white/[0.02] border ${layer.border} text-center`} initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.76 + index * 0.08 }}>
+                          <div className={`w-8 h-8 mx-auto mb-2 rounded-full ${layer.bg} border ${layer.border} flex items-center justify-center`}>
+                            <span className={`text-xs font-mono ${layer.dot}`}>{layer.num}</span>
                           </div>
                           <p className="text-xs sm:text-sm font-medium text-foreground">{layer.name}</p>
                         </motion.div>
@@ -344,7 +343,7 @@ export default function HAEPage() {
                     </div>
                   </div>
 
-                  {/* Flow */}
+                  {/* Flow arrow to core */}
                   <div className="flex justify-center mb-6 sm:mb-8">
                     <motion.div className="flex flex-col items-center" animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}>
                       <div className="w-px h-8 sm:h-10 bg-gradient-to-b from-cyan-500/50 to-transparent" />
@@ -352,7 +351,7 @@ export default function HAEPage() {
                     </motion.div>
                   </div>
 
-                  {/* Core Engine */}
+                  {/* Core Engine — Premium with AtomAnimation colors */}
                   <motion.div
                     className="relative max-w-2xl mx-auto mb-6 sm:mb-8"
                     initial={{ opacity: 0, scale: 0.95 }}
@@ -360,24 +359,38 @@ export default function HAEPage() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.3 }}
                   >
-                    <div className="relative p-6 sm:p-8 rounded-2xl border border-cyan-500/30 bg-gradient-to-b from-cyan-500/10 to-transparent overflow-hidden">
+                    <div className="relative p-8 sm:p-10 rounded-2xl border border-cyan-400/40 bg-gradient-to-b from-cyan-500/15 via-cyan-500/5 to-transparent overflow-hidden">
                       {!isMobile && (
-                        <motion.div
-                          className="absolute inset-0 rounded-2xl"
-                          style={{ background: "linear-gradient(90deg, transparent, rgba(122,132,113,0.3), transparent)", backgroundSize: "200% 100%" }}
-                          animate={{ backgroundPosition: ["200% 0", "-200% 0"] }}
-                          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                        />
+                        <>
+                          <motion.div
+                            className="absolute inset-0 rounded-2xl"
+                            style={{ background: "linear-gradient(90deg, transparent, rgba(6,182,212,0.2), transparent)", backgroundSize: "200% 100%" }}
+                            animate={{ backgroundPosition: ["200% 0", "-200% 0"] }}
+                            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                          />
+                          <motion.div
+                            className="absolute inset-0 rounded-2xl"
+                            style={{ background: "radial-gradient(circle at center, rgba(6,182,212,0.1) 0%, transparent 70%)" }}
+                            animate={{ scale: [1, 1.05, 1], opacity: [0.5, 0.8, 0.5] }}
+                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                          />
+                        </>
                       )}
 
                       <div className="relative z-10 text-center">
-                        <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-cyan-500 to-cyan-700 flex items-center justify-center shadow-lg shadow-cyan-500/30">
-                          <svg className="w-7 h-7 sm:w-8 sm:h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-                            <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" />
+                        <motion.div
+                          className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center shadow-lg shadow-cyan-500/40"
+                          animate={isMobile ? {} : { boxShadow: ["0 10px 40px rgba(6,182,212,0.3)", "0 10px 60px rgba(6,182,212,0.5)", "0 10px 40px rgba(6,182,212,0.3)"] }}
+                          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                        >
+                          <svg className="w-8 h-8 sm:w-10 sm:h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                            <circle cx="12" cy="12" r="3" />
+                            <path d="M12 2v4m0 12v4M2 12h4m12 0h4" />
+                            <path d="M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" />
                           </svg>
-                        </div>
-                        <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">Analysis Core</h3>
-                        <p className="text-sm text-foreground-muted">Çok katmanlı hibrit çekirdek. Deterministik hassasiyet + AI derinliği, tek noktada birleşir.</p>
+                        </motion.div>
+                        <h3 className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-cyan-500 mb-2">Synthesis Core</h3>
+                        <p className="text-xs sm:text-sm font-mono text-cyan-400/60">HAE v2.0</p>
                       </div>
                     </div>
                   </motion.div>

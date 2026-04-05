@@ -249,7 +249,7 @@ export default function AQEPage() {
                   </div>
 
                   {/* Question Tiers */}
-                  <div className="mb-8 sm:mb-12">
+                  <div className="mb-4">
                     <div className="flex items-center gap-2 mb-6">
                       <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/10" />
                       <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-foreground-subtle">Soru Katmanları</span>
@@ -276,8 +276,16 @@ export default function AQEPage() {
                     </div>
                   </div>
 
+                  {/* Arrow: Tiers → AI Gate */}
+                  <div className="flex justify-center py-3">
+                    <motion.div className="flex flex-col items-center" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity }}>
+                      <div className="w-px h-8 bg-gradient-to-b from-violet-500/40 to-amber-500/40" />
+                      <svg className="w-4 h-4 text-amber-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16l-6-6h12l-6 6z" /></svg>
+                    </motion.div>
+                  </div>
+
                   {/* AI Gate Layer */}
-                  <div className="mb-8 sm:mb-12">
+                  <div className="mb-4">
                     <div className="flex items-center gap-2 mb-6">
                       <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/10" />
                       <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-foreground-subtle">AI Doğrulama Katmanı</span>
@@ -335,6 +343,14 @@ export default function AQEPage() {
                         </div>
                       </motion.div>
                     </div>
+                  </div>
+
+                  {/* Arrow: AI Gate → Routing Kernel */}
+                  <div className="flex justify-center py-3">
+                    <motion.div className="flex flex-col items-center" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}>
+                      <div className="w-px h-8 bg-gradient-to-b from-amber-500/40 to-violet-500/40" />
+                      <svg className="w-4 h-4 text-violet-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16l-6-6h12l-6 6z" /></svg>
+                    </motion.div>
                   </div>
 
                   {/* Core */}
