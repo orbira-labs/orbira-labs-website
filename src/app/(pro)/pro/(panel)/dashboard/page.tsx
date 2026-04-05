@@ -6,7 +6,7 @@ import { Badge } from "@/components/pro/ui/Badge";
 import { EmptyState } from "@/components/pro/ui/EmptyState";
 import { Avatar } from "@/components/pro/ui/Avatar";
 import { Skeleton } from "@/components/pro/ui/Skeleton";
-import { Users, Calendar, FlaskConical, CheckCircle2 } from "lucide-react";
+import { Users, Calendar, FlaskConical, CheckCircle2, Eye } from "lucide-react";
 import { useProContext } from "@/lib/pro/context";
 import { useDashboard } from "@/lib/pro/hooks/useDashboard";
 import { formatTime, formatRelative, formatDayLabel } from "@/lib/pro/utils";
@@ -140,12 +140,13 @@ export default function DashboardPage() {
                     </div>
                   ))}
                 </div>
-              ) : recentTests.length === 0 ? (
+              )               : recentTests.length === 0 ? (
                 <EmptyState icon={FlaskConical} title="Henüz test yok" description="İlk karakter analizinizi bir danışanınıza gönderin" actionLabel="Test Gönder" onAction={() => {}} />
               ) : (
                 <div className="space-y-2.5">
                   {recentTests.map((test) => {
                     const s = STATUS_MAP[test.status] || STATUS_MAP.sent;
+                    const isCompleted = test.status === "completed";
                     return (
                       <div key={test.id} className="flex items-center gap-3 p-3 rounded-xl bg-pro-surface-alt">
                         <Avatar firstName={test.client?.first_name || "?"} lastName={test.client?.last_name || ""} size="sm" />
@@ -153,7 +154,18 @@ export default function DashboardPage() {
                           <p className="text-sm font-medium text-pro-text truncate">{test.client?.first_name} {test.client?.last_name}</p>
                           <p className="text-xs text-pro-text-tertiary">{formatRelative(test.created_at)}</p>
                         </div>
-                        <Badge variant={s.variant} dot>{s.label}</Badge>
+                        <div className="flex items-center gap-2">
+                          <Badge variant={s.variant} dot>{s.label}</Badge>
+                          {isCompleted && (
+                            <Link
+                              href={`/pro/tests/${test.id}`}
+                              className="p-1.5 rounded-lg text-pro-primary hover:bg-pro-primary-light transition-colors"
+                              title="Sonuçları Gör"
+                            >
+                              <Eye className="h-4 w-4" />
+                            </Link>
+                          )}
+                        </div>
                       </div>
                     );
                   })}

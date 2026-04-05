@@ -108,3 +108,71 @@ export interface DashboardStats {
   remaining_tests: number;
   completed_tests: number;
 }
+
+export interface Trait {
+  id: string;
+  name: string;
+  active: boolean;
+}
+
+export interface Pattern {
+  id: string;
+  type: "risk" | "strength" | "contradiction";
+  description: string;
+}
+
+export interface Inference {
+  id: string;
+  title: string;
+  description: string;
+}
+
+export interface BMIContext {
+  bmi: number;
+  category: string;
+}
+
+export interface AnalysisResults {
+  wellness_score: number;
+  dimension_scores: Record<string, number>;
+  top_strengths: string[];
+  top_risks: string[];
+  traits: Trait[];
+  patterns: Pattern[];
+  inferences: Inference[];
+  bmi_context: BMIContext;
+}
+
+export interface BlindSpot {
+  title: string;
+  insight: string;
+  coach_tip: string;
+}
+
+export interface CoachingRoadmap {
+  immediate: string[];
+  short_term: string[];
+  medium_term: string[];
+}
+
+export interface StrengthWeakness {
+  name: string;
+  insight: string;
+}
+
+export interface Report {
+  character_analysis: string;
+  top5_and_weak5: {
+    top5: StrengthWeakness[];
+    weak5: StrengthWeakness[];
+  };
+  blind_spots: BlindSpot[];
+  coaching_roadmap: CoachingRoadmap;
+  generated_at: string;
+  model: string;
+}
+
+export interface TestResults {
+  analysis: AnalysisResults;
+  report: Report;
+}

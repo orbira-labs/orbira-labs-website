@@ -20,6 +20,7 @@ import {
   Calendar,
   Plus,
   Send,
+  Eye,
 } from "lucide-react";
 import { createClient as createSupabase } from "@/lib/pro/supabase/client";
 import { formatDate, formatDateTime, formatRelative } from "@/lib/pro/utils";
@@ -295,20 +296,32 @@ export default function ClientDetailPage() {
               ) : (
                 tests.map((test) => {
                   const s = TEST_STATUSES.find((ts) => ts.id === test.status);
+                  const isCompleted = test.status === "completed";
                   return (
                     <Card key={test.id} padding="sm">
                       <div className="flex items-center justify-between">
                         <div>
                           <p className="text-sm font-medium text-pro-text">
-                            Wellness Değerlendirmesi
+                            Karakter Analizi
                           </p>
                           <p className="text-xs text-pro-text-tertiary">
                             {formatDate(test.created_at)} · {test.sent_via === "email" ? "Email" : "WhatsApp"}
                           </p>
                         </div>
-                        <Badge variant={s?.color as "success" | "warning" | "info" | "danger" || "muted"} dot>
-                          {s?.label || test.status}
-                        </Badge>
+                        <div className="flex items-center gap-2">
+                          <Badge variant={s?.color as "success" | "warning" | "info" | "danger" || "muted"} dot>
+                            {s?.label || test.status}
+                          </Badge>
+                          {isCompleted && (
+                            <Link
+                              href={`/pro/tests/${test.id}`}
+                              className="flex items-center gap-1.5 px-3 py-1.5 bg-pro-primary text-white text-xs font-medium rounded-lg hover:bg-pro-primary/90 transition-colors"
+                            >
+                              <Eye className="h-3.5 w-3.5" />
+                              Sonucu Gör
+                            </Link>
+                          )}
+                        </div>
                       </div>
                     </Card>
                   );
