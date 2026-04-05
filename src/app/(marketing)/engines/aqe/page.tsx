@@ -8,8 +8,8 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 
 const CAPABILITIES = [
   {
-    title: "Adaptif Routing",
-    description: "Her yanıt, 23 koşul kuralını tetikler. 25 havuz arasından soru akışı gerçek zamanlı yeniden hesaplanır.",
+    title: "Adaptive Routing Engine",
+    description: "Her yanıt yüzlerce koşul kuralını tetikler. Akış gerçek zamanlı yeniden hesaplanır.",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -18,7 +18,7 @@ const CAPABILITIES = [
   },
   {
     title: "Entropy Minimization",
-    description: "Bilgi kazancını maksimize eden soruyu seçer. Gereksiz soru sormaz, her soru bir kararı besler.",
+    description: "Her soru bilgi kazancını maksimize eder. Gereksiz soru yok, her yanıt bir karar besler.",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <path d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -26,8 +26,8 @@ const CAPABILITIES = [
     ),
   },
   {
-    title: "Profil-Driven Selection",
-    description: "Yaş, cinsiyet, yaşam durumu — 82 profil-koşullu soru, her birey için farklı derinleşme yolu.",
+    title: "Context-Aware Selection",
+    description: "Yaş, cinsiyet, yaşam koşulları — yüzlerce koşullu soru. Her birey için farklı derinleşme.",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
@@ -35,8 +35,8 @@ const CAPABILITIES = [
     ),
   },
   {
-    title: "Pipeline Entegrasyon",
-    description: "AQE çıktıları doğrudan 11 katmanlı HAE pipeline'ına akar. Tek istek, tam analiz, AI-generated rapor.",
+    title: "AI Pipeline Fusion",
+    description: "Çıktılar doğrudan çok katmanlı analiz pipeline'ına akar. Tek istek, tam analiz, AI-generated rapor.",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <path d="M12 2L2 7l10 5 10-5-10-5z" />
@@ -49,22 +49,22 @@ const CAPABILITIES = [
 
 const QUESTION_TIERS = [
   { 
-    name: "Temel Katman", 
-    count: "19 core",
+    name: "Core Layer", 
+    count: "L1",
     color: "from-emerald-500/20 to-emerald-500/5",
     borderColor: "border-emerald-500/30",
     dotColor: "bg-emerald-400"
   },
   { 
-    name: "Yönlendirme", 
-    count: "23 kural",
+    name: "Routing Layer", 
+    count: "L2",
     color: "from-violet-500/20 to-violet-500/5",
     borderColor: "border-violet-500/30",
     dotColor: "bg-violet-400"
   },
   { 
-    name: "Derinleşme", 
-    count: "331 soru",
+    name: "Deep Dive Layer", 
+    count: "L3",
     color: "from-amber-500/20 to-amber-500/5",
     borderColor: "border-amber-500/30",
     dotColor: "bg-amber-400"
@@ -72,24 +72,24 @@ const QUESTION_TIERS = [
 ];
 
 const FLOW_STEPS = [
-  { label: "Profil", sublabel: "12 alan, universal baseline" },
-  { label: "Yönlendir", sublabel: "23 kural değerlendirmesi" },
-  { label: "Keşfet", sublabel: "Odaklı derinleşme" },
-  { label: "Analiz", sublabel: "HAE + AI pipeline tetiklenir" },
+  { label: "Profil", sublabel: "Universal baseline" },
+  { label: "Route", sublabel: "Kural değerlendirmesi" },
+  { label: "Deep Dive", sublabel: "Odaklı keşif" },
+  { label: "AI Analiz", sublabel: "Pipeline tetiklenir" },
 ];
 
 const STATS = [
-  { value: "∞", label: "Soru Akışı", desc: "350+ klinik soru, sonsuz kombinasyon" },
-  { value: "25+", label: "Adaptif Havuz", desc: "Dinamik derinleşme alanları" },
-  { value: "<1sn", label: "Yanıt Süresi", desc: "Gerçek zamanlı adaptif akış" },
-  { value: "1M+", label: "Benzersiz Yol", desc: "Hiç kimse aynı testi almaz" },
+  { value: "∞", label: "Soru Akışı", desc: "Sonsuz kombinasyon" },
+  { value: "3.500+", label: "Soru Kütüphanesi", desc: "Klinik tasarımlı" },
+  { value: "<0.5sn", label: "Yanıt Süresi", desc: "Gerçek zamanlı" },
+  { value: "1B+", label: "Benzersiz Yol", desc: "Aynı test yok" },
 ];
 
 const HOW_IT_WORKS = [
-  { step: "01", title: "Profil Oluşturma", desc: "12 profil alanı, 19 temel soru, 5 biyometrik ölçüm. Hiçbir ön bilgi olmadan universal baseline oluşturulur." },
-  { step: "02", title: "Kural Değerlendirme", desc: "23 routing kuralı, 4 severity band. Yanıtlarına göre sana özel derinleşme havuzları açılır." },
-  { step: "03", title: "Odaklı Keşfetme", desc: "25 havuzdan seçilen sorularla derinleşme. Anchor-first, severity-matched, priority-sorted seçim algoritması." },
-  { step: "04", title: "Analiz Tetikleme", desc: "Cevaplar tamamlandığında 11 katmanlı HAE pipeline otomatik çalışır. Çoklu AI doğrulama. Profesyonel rapor." },
+  { step: "01", title: "Profil Oluşturma", desc: "Demografik, yaşamsal ve biyometrik veriler toplanır. Hiçbir ön bilgi olmadan universal baseline oluşturulur." },
+  { step: "02", title: "Adaptive Routing", desc: "Yüzlerce koşul kuralı, çoklu severity band. Yanıtlarına göre benzersiz derinleşme yolu açılır." },
+  { step: "03", title: "Deep Exploration", desc: "Binlerce sorudan seçilen optimal set ile derinleşme. Anchor-first, severity-matched, priority-sorted algoritma." },
+  { step: "04", title: "AI Pipeline Trigger", desc: "Çok katmanlı analiz pipeline'ı otomatik tetiklenir. Deterministik kurallar + çoklu AI doğrulama. Profesyonel rapor." },
 ];
 
 const fadeInUp = (delay = 0) => ({
@@ -152,8 +152,8 @@ export default function AQEPage() {
               </p>
 
               <p className="text-base sm:text-lg text-foreground-muted max-w-2xl mx-auto leading-relaxed mb-10">
-                Klasik anketler herkese aynı soruları sorar. AQE, her yanıtla akışı yeniden şekillendirir.
-                350+ klinik soru, 25 adaptif havuz, 1 milyardan fazla benzersiz test yolu.
+                Deterministik algoritmalar ve yapay zeka birlikte çalışır.
+                %95 daha düşük maliyetle, daha yüksek doğruluk.
                 Hiç kimse aynı testi almaz.
               </p>
 
@@ -298,18 +298,18 @@ export default function AQEPage() {
                             <path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
                         </div>
-                        <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">Yönlendirme Çekirdeği</h3>
-                        <p className="text-sm text-foreground-muted mb-4">Entropi minimizasyonu. Her yanıt bilgi kazancını maksimize eden sonraki soruyu tetikler.</p>
+                        <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">Routing Kernel</h3>
+                        <p className="text-sm text-foreground-muted mb-4">Entropy minimization + probabilistic routing. Optimal yol, gerçek zamanlı hesaplanır.</p>
                         
                         <div className="flex flex-wrap items-center justify-center gap-3 text-xs sm:text-sm">
                           <div className="flex items-center gap-1.5">
                             <div className="w-2 h-2 rounded-full bg-emerald-400" />
-                            <span className="text-foreground-muted">15 soru</span>
+                            <span className="text-foreground-muted">Minimum soru</span>
                           </div>
                           <span className="text-foreground-subtle">•</span>
                           <div className="flex items-center gap-1.5">
                             <div className="w-2 h-2 rounded-full bg-violet-400" />
-                            <span className="text-foreground-muted">Tam profil</span>
+                            <span className="text-foreground-muted">Maksimum bilgi</span>
                           </div>
                         </div>
                       </div>
@@ -327,7 +327,7 @@ export default function AQEPage() {
             <motion.div className="text-center mb-10 sm:mb-14" {...fadeInUp()}>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Nasıl Çalışır?</h2>
               <p className="text-foreground-muted max-w-xl mx-auto">
-                İlk profilden son analize kadar. Her adım bir sonrakini şekillendirir.
+                Her adım bir sonrakini şekillendirir. Algoritma + AI, birlikte.
               </p>
             </motion.div>
 
@@ -358,7 +358,7 @@ export default function AQEPage() {
           <Container>
             <motion.div className="text-center mb-10 sm:mb-14" {...fadeInUp()}>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Temel Yetenekler</h2>
-              <p className="text-foreground-muted max-w-xl mx-auto">Klasik anketlerin ötesinde. Probabilistic routing, entropy minimization, severity-matched selection.</p>
+              <p className="text-foreground-muted max-w-xl mx-auto">Sadece AI değil. Sadece algoritma değil. İkisinin gücü, birlikte.</p>
             </motion.div>
 
             <div className="grid grid-cols-2 gap-3 sm:gap-6">
@@ -411,13 +411,14 @@ export default function AQEPage() {
                   </div>
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-3">Unified Pipeline</h3>
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-3">Hybrid Intelligence Pipeline</h3>
                 <p className="text-foreground-muted max-w-md mx-auto mb-4">
-                  AQE 176 psikolojik trait&apos;e eşlenmiş sorular toplar.
-                  HAE bunları 11 katmandan geçirir. Çoklu AI doğrulama. Profesyonel rapor.
+                  Neden sadece AI değil? Yüksek hata payı ve yoğun maliyet.
+                  Deterministik algoritmalar hassasiyeti sağlar, AI derinliği katar.
+                  Sonuç: %95 daha düşük maliyet, daha yüksek doğruluk.
                 </p>
                 <p className="text-sm text-foreground-subtle font-mono">
-                  Soru → Trait → Pattern → Inference → AI → Profil → Rapor
+                  Soru → Trait → Pattern → Inference → AI Validation → Profil → Rapor
                 </p>
               </div>
             </motion.div>

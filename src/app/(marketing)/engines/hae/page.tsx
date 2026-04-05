@@ -8,8 +8,8 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 
 const CAPABILITIES = [
   {
-    title: "Cross-Domain Detection",
-    description: "Farklı yaşam alanları arasındaki gizli döngüleri tespit eder. Uyku bozulur, stres artar, performans düşer — bu zinciri görür.",
+    title: "Cross-Domain Cascade",
+    description: "Farklı yaşam alanları arasındaki gizli döngüleri tespit eder. Zincir reaksiyonları, kök nedenlere kadar izler.",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <circle cx="12" cy="12" r="3" />
@@ -19,8 +19,8 @@ const CAPABILITIES = [
     ),
   },
   {
-    title: "Contradiction Analysis",
-    description: "\"Güçlü görünüyor ama içten çökmüş\" — yüzey ile derinlik arasındaki çelişkileri yakalar. 5 contradiction pattern.",
+    title: "Contradiction Detection",
+    description: "Yüzey ile derinlik arasındaki çelişkileri yakalar. İnsan gözünün kaçırdığını, algoritma bulur.",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <path d="M12 2L2 7l10 5 10-5-10-5z" />
@@ -30,8 +30,8 @@ const CAPABILITIES = [
     ),
   },
   {
-    title: "Hidden Strength Guarantee",
-    description: "Her profilde en az bir gizli güç bulur. Zorlukların altındaki direnci ortaya çıkarır. 9 hidden strength kuralı.",
+    title: "Hidden Signal Discovery",
+    description: "Her profilde gizli güç sinyalleri bulur. Zorlukların altındaki direnci ortaya çıkarır. Garantili.",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <circle cx="12" cy="12" r="10" />
@@ -41,8 +41,8 @@ const CAPABILITIES = [
     ),
   },
   {
-    title: "Multi-AI Validation",
-    description: "Çoklu AI perspektifi verileri doğrular. Konsensüs gerektiren güvence sistemi. Deterministik + AI hibrit mimari.",
+    title: "Multi-Perspective AI Gate",
+    description: "Çoklu bağımsız AI perspektifi verileri doğrular. Konsensüs olmadan sonuç çıkmaz.",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
@@ -53,33 +53,33 @@ const CAPABILITIES = [
 ];
 
 const ANALYSIS_DOMAINS = [
-  { name: "Trait Katmanı", desc: "183 trait, 5 seviye, 21 yaşam alanı", color: "from-emerald-500/20 to-emerald-500/5", borderColor: "border-emerald-500/30" },
-  { name: "Pattern Katmanı", desc: "35 örüntü: risk, güç ve çelişki tespiti", color: "from-violet-500/20 to-violet-500/5", borderColor: "border-violet-500/30" },
-  { name: "Inference Katmanı", desc: "29 kural: cascade, cross-domain, hidden strength", color: "from-amber-500/20 to-amber-500/5", borderColor: "border-amber-500/30" },
+  { name: "Trait Universe", desc: "Çok boyutlu psikolojik sinyal uzayı", color: "from-emerald-500/20 to-emerald-500/5", borderColor: "border-emerald-500/30" },
+  { name: "Pattern Engine", desc: "Risk, güç ve çelişki örüntü tespiti", color: "from-violet-500/20 to-violet-500/5", borderColor: "border-violet-500/30" },
+  { name: "Inference Layer", desc: "Cross-domain cascade ve hidden signal analizi", color: "from-amber-500/20 to-amber-500/5", borderColor: "border-amber-500/30" },
 ];
 
 const SIGNALS = [
-  { label: "Trait Sinyalleri", delay: 0 },
-  { label: "Pattern Hafızası", delay: 0.1 },
-  { label: "Profil Bağlamı", delay: 0.2 },
+  { label: "Behavioral Signals", delay: 0 },
+  { label: "Pattern Memory", delay: 0.1 },
+  { label: "Context Graph", delay: 0.2 },
 ];
 
 const PROCESSING_LAYERS = [
-  { name: "Normalizasyon" },
-  { name: "Trait Aktivasyonu" },
+  { name: "Signal Normalization" },
+  { name: "Trait Activation" },
   { name: "Pattern Detection" },
-  { name: "Inconsistency Check" },
+  { name: "Inconsistency Gate" },
   { name: "Inference Engine" },
   { name: "AI Cross-Validation" },
-  { name: "Dimension Scoring" },
-  { name: "Profil Sentezi" },
+  { name: "Multi-Dim Scoring" },
+  { name: "Profile Synthesis" },
 ];
 
 const STATS = [
-  { value: "3.000+", label: "Parametre", desc: "Her profil için değerlendirilen psikolojik faktör" },
-  { value: "%92", label: "Kapsam", desc: "21 yaşam alanı kapsama oranı" },
-  { value: "<1sn", label: "Yanıt Süresi", desc: "11 katman, gerçek zamanlı işleme" },
-  { value: "~%96", label: "Doğruluk", desc: "AI-validated profil hassasiyeti" },
+  { value: "3.000+", label: "Parametre", desc: "Psikolojik faktör" },
+  { value: "100+", label: "Analiz Boyutu", desc: "Çok boyutlu profil" },
+  { value: "<1sn", label: "İşlem Süresi", desc: "Gerçek zamanlı" },
+  { value: "~%96", label: "Doğruluk", desc: "AI-validated" },
 ];
 
 const fadeInUp = (delay = 0) => ({
@@ -137,8 +137,9 @@ export default function HAEPage() {
               </p>
 
               <p className="text-base sm:text-lg text-foreground-muted max-w-2xl mx-auto leading-relaxed mb-10">
-                183 psikolojik trait. 35 davranış pattern&apos;i. 29 cross-domain inference.
-                11 işlem katmanı. Çoklu AI doğrulama. Her bireyi benzersiz bir profil olarak modeller.
+                Deterministik algoritmalar hassasiyeti sağlar, yapay zeka derinliği katar.
+                Sadece AI kullansak: yüksek hata payı, yoğun maliyet. Sadece algoritma kullansak: yüzeysel.
+                İkisini birleştirdik. %95 daha düşük maliyetle, daha yüksek doğruluk.
               </p>
 
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20">
@@ -295,8 +296,8 @@ export default function HAEPage() {
                             <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" />
                           </svg>
                         </div>
-                        <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">Analiz Çekirdeği</h3>
-                        <p className="text-sm text-foreground-muted">11 katman, tek çekirdek. Deterministik kurallar ve AI perspektifleri burada birleşir.</p>
+                        <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">Analysis Core</h3>
+                        <p className="text-sm text-foreground-muted">Çok katmanlı hibrit çekirdek. Deterministik hassasiyet + AI derinliği, tek noktada birleşir.</p>
                       </div>
                     </div>
                   </motion.div>
@@ -321,8 +322,8 @@ export default function HAEPage() {
                       <div className="w-2 h-2 rounded-full bg-emerald-400" />
                       <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider">Output Ready</span>
                     </div>
-                    <p className="text-base sm:text-lg font-semibold text-foreground mb-1">10 Boyutlu Wellness Profili</p>
-                    <p className="text-sm text-foreground-muted">Karakter analizi. Gizli dinamikler. Koçluk yol haritası.</p>
+                    <p className="text-base sm:text-lg font-semibold text-foreground mb-1">Çok Boyutlu Bireysel Profil</p>
+                    <p className="text-sm text-foreground-muted">Karakter analizi. Gizli dinamikler. Profesyonel yol haritası.</p>
                   </motion.div>
                 </div>
               </div>
@@ -336,7 +337,7 @@ export default function HAEPage() {
             <motion.div className="text-center mb-10 sm:mb-14" {...fadeInUp()}>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Analiz Alanları</h2>
               <p className="text-foreground-muted max-w-xl mx-auto">
-                Üç temel katman, sonsuz kombinasyon. Her katman kendi içinde derinleşir, birlikte bütünleşir.
+                Üç temel katman. Her biri kendi içinde derinleşir, birlikte bütünleşir.
               </p>
             </motion.div>
 
@@ -363,7 +364,7 @@ export default function HAEPage() {
           <Container>
             <motion.div className="text-center mb-10 sm:mb-14" {...fadeInUp()}>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Temel Yetenekler</h2>
-              <p className="text-foreground-muted max-w-xl mx-auto">Deterministik kurallar ve yapay zeka, tek bir sistemde.</p>
+              <p className="text-foreground-muted max-w-xl mx-auto">Algoritma hassasiyeti + AI derinliği. Tek sistemde.</p>
             </motion.div>
 
             <div className="grid grid-cols-2 gap-3 sm:gap-6">
@@ -394,10 +395,10 @@ export default function HAEPage() {
 
             <div className="grid grid-cols-4 gap-2 sm:grid-cols-1 sm:gap-0 sm:space-y-6">
               {[
-                { step: "01", title: "Trait Aktivasyonu", desc: "AQE'den gelen yanıtlar 183 trait'lik psikolojik evrende normalize edilir. Her trait 5 seviyede skorlanır." },
-                { step: "02", title: "Pattern Detection", desc: "35 davranış örüntüsü geometric mean algoritması ile taranır. Risk, güç ve çelişki pattern'leri tespit edilir." },
-                { step: "03", title: "Inference + AI", desc: "29 çıkarım kuralı çalışır. Ardından çoklu AI perspektifi verileri doğrular ve zenginleştirir." },
-                { step: "04", title: "Profil Çıktısı", desc: "10 boyutlu wellness profili, karakter analizi, gizli dinamikler ve koçluk yol haritası üretilir." },
+                { step: "01", title: "Signal Processing", desc: "Ham veriler çok boyutlu psikolojik uzayda normalize edilir. Her sinyal çoklu seviyede skorlanır." },
+                { step: "02", title: "Pattern + Inference", desc: "Davranış örüntüleri ve cross-domain çıkarımlar tespit edilir. Kök neden zincirleri, gizli çelişkiler ortaya çıkar." },
+                { step: "03", title: "AI Validation Gate", desc: "Çoklu bağımsız AI perspektifi sonuçları doğrular. Konsensüs sağlanmadan çıktı üretilmez." },
+                { step: "04", title: "Profile Synthesis", desc: "Çok boyutlu bireysel profil, karakter analizi, gizli dinamikler ve profesyonel yol haritası." },
               ].map((item, index) => (
                 <motion.div
                   key={item.step}
