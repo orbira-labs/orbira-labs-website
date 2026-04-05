@@ -198,7 +198,6 @@ export default function DashboardPage() {
               {STAT_CARDS.map((card) => (
                 <Link key={card.key} href={card.href}>
                   <div className={`relative overflow-hidden rounded-xl bg-gradient-to-br ${card.gradient} border border-white/60 p-4 sm:p-5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group`}>
-                    {/* Left accent bar */}
                     <div className={`absolute left-0 top-3 bottom-3 w-1 rounded-r-full ${card.accentBar}`} />
                     <div className="flex items-start justify-between pl-2">
                       <div>
@@ -287,7 +286,6 @@ export default function DashboardPage() {
                     const isCompleted = test.status === "completed";
                     const isPending = test.status !== "completed" && test.status !== "expired";
                     const profName = professional ? `${professional.first_name} ${professional.last_name}` : "";
-                    const clientFullName = test.client ? `${test.client.first_name} ${test.client.last_name}`.trim() : "";
 
                     return (
                       <div key={test.id} className="flex items-center gap-3 p-3 rounded-xl bg-pro-surface-alt">
