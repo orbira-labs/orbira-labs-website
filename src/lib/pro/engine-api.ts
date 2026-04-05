@@ -3,12 +3,48 @@ const API_KEY = process.env.NEXT_PUBLIC_ENGINE_API_KEY;
 
 const USE_MOCK = !API_URL || !API_KEY;
 
+export type ProfileCategory = "demographic" | "lifestyle" | "health" | "habit" | "nutrition";
+
 export interface ProfileField {
   id: string;
   answer_type: "single_choice" | "boolean" | "text";
   text: string;
+  category?: ProfileCategory | string;
   options?: { value: string | boolean; label: string }[];
   required?: boolean;
+}
+
+export interface ProfileGroup {
+  category: string;
+  label: string;
+  description: string;
+  fields: ProfileField[];
+}
+
+const CATEGORY_META: Record<string, { label: string; description: string; order: number }> = {
+  demographic: { label: "Temel Bilgiler", description: "Sizi daha iyi tanımamız için birkaç temel bilgi.", order: 0 },
+  lifestyle: { label: "Yaşam Tarzı", description: "Günlük yaşamınızı şekillendiren tercihler.", order: 1 },
+  health: { label: "Sağlık Durumu", description: "Genel sağlık profiliniz hakkında.", order: 2 },
+  habit: { label: "Alışkanlıklar", description: "Günlük alışkanlıklarınız.", order: 3 },
+  nutrition: { label: "Beslenme", description: "Beslenme tercihleriniz.", order: 4 },
+};
+
+export function groupProfileFields(fields: ProfileField[]): ProfileGroup[] {
+  const grouped = new Map<string, ProfileField[]>();
+
+  for (const field of fields) {
+    const cat = field.category ?? "other";
+    if (!grouped.has(cat)) grouped.set(cat, []);
+    grouped.get(cat)!.push(field);
+  }
+
+  return Array.from(grouped.entries())
+    .map(([category, fields]) => {
+      const meta = CATEGORY_META[category] ?? { label: "Diğer", description: "", order: 99 };
+      return { category, label: meta.label, description: meta.description, fields, _order: meta.order };
+    })
+    .sort((a, b) => a._order - b._order)
+    .map(({ _order, ...rest }) => rest);
 }
 
 export interface CoreQuestion {
@@ -173,6 +209,7 @@ const MOCK_SESSION_DATA: SessionData = {
       id: "gender",
       answer_type: "single_choice",
       text: "Cinsiyetiniz?",
+      category: "demographic",
       options: [
         { value: "female", label: "Kadın" },
         { value: "male", label: "Erkek" },
@@ -184,6 +221,7 @@ const MOCK_SESSION_DATA: SessionData = {
       id: "age_range",
       answer_type: "single_choice",
       text: "Yaş aralığınız?",
+      category: "demographic",
       options: [
         { value: "13_18", label: "13-18" },
         { value: "18_26", label: "18-26" },
@@ -194,12 +232,49 @@ const MOCK_SESSION_DATA: SessionData = {
       required: true,
     },
     {
+      id: "relationship_status",
+      answer_type: "single_choice",
+      text: "İlişki durumunuz?",
+      category: "lifestyle",
+      options: [
+        { value: "single", label: "Bekar" },
+        { value: "in_relationship", label: "İlişkim var" },
+        { value: "married", label: "Evli" },
+      ],
+      required: true,
+    },
+    {
       id: "chronic_condition",
       answer_type: "boolean",
       text: "Kronik bir sağlık durumunuz var mı?",
+      category: "health",
       options: [
         { value: true, label: "Evet" },
         { value: false, label: "Hayır" },
+      ],
+      required: true,
+    },
+    {
+      id: "smoking_status",
+      answer_type: "single_choice",
+      text: "Sigara kullanıyor musunuz?",
+      category: "habit",
+      options: [
+        { value: "yes", label: "Evet" },
+        { value: "no", label: "Hayır" },
+        { value: "social", label: "Sosyal içici" },
+      ],
+      required: true,
+    },
+    {
+      id: "nutrition_preference",
+      answer_type: "single_choice",
+      text: "Beslenme tercihiniz hangisine daha yakın?",
+      category: "nutrition",
+      options: [
+        { value: "omnivore", label: "Omnivor" },
+        { value: "vegetarian", label: "Vejetaryen" },
+        { value: "vegan", label: "Vegan" },
       ],
       required: true,
     },
