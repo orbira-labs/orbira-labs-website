@@ -1,15 +1,17 @@
 "use client";
 
+import { useState, useRef, useEffect } from "react";
 import { TopBar } from "@/components/pro/layout/TopBar";
 import { Card } from "@/components/pro/ui/Card";
 import { Badge } from "@/components/pro/ui/Badge";
 import { EmptyState } from "@/components/pro/ui/EmptyState";
 import { Avatar } from "@/components/pro/ui/Avatar";
 import { Skeleton } from "@/components/pro/ui/Skeleton";
-import { Users, Calendar, FlaskConical, CheckCircle2, Eye, Send } from "lucide-react";
+import { Users, Calendar, FlaskConical, CheckCircle2, Eye, Send, Share2, Copy, Mail, MessageCircle, Check } from "lucide-react";
 import { useProContext } from "@/lib/pro/context";
 import { useDashboard } from "@/lib/pro/hooks/useDashboard";
-import { formatTime, formatRelative, formatDayLabel } from "@/lib/pro/utils";
+import { formatTime, formatRelative, formatDayLabel, generateWhatsAppLink, buildTestMessage } from "@/lib/pro/utils";
+import { toast } from "sonner";
 import Link from "next/link";
 
 const STAT_CARDS = [
@@ -81,9 +83,80 @@ function formatTodayDate(): string {
   });
 }
 
+function SharePopover({ testToken, clientName, professionalName, onClose }: {
+  testToken: string;
+  clientName: string;
+  professionalName: string;
+  onClose: () => void;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) onClose();
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [onClose]);
+
+  const testLink = `${window.location.origin}/t/${testToken}`;
+  const message = buildTestMessage(clientName, professionalName, testLink);
+
+  const actions = [
+    {
+      icon: copied ? Check : Copy,
+      label: copied ? "Kopyalandı!" : "Linki Kopyala",
+      onClick: async () => {
+        await navigator.clipboard.writeText(testLink);
+        setCopied(true);
+        toast.success("Link kopyalandı!");
+        setTimeout(() => onClose(), 800);
+      },
+      accent: copied,
+    },
+    {
+      icon: MessageCircle,
+      label: "WhatsApp ile Gönder",
+      onClick: () => {
+        window.open(generateWhatsAppLink("", message), "_blank");
+        onClose();
+      },
+    },
+    {
+      icon: Mail,
+      label: "E-posta Gönder",
+      onClick: () => {
+        const subject = encodeURIComponent("Karakter Analizi Testi");
+        const body = encodeURIComponent(message);
+        window.open(`mailto:?subject=${subject}&body=${body}`, "_blank");
+        onClose();
+      },
+    },
+  ];
+
+  return (
+    <div ref={ref} className="absolute right-0 top-full mt-1 z-50 w-52 bg-white rounded-xl shadow-lg border border-pro-border py-1.5 animate-in fade-in slide-in-from-top-1 duration-150">
+      {actions.map((a) => (
+        <button
+          key={a.label}
+          onClick={a.onClick}
+          className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 text-sm transition-colors ${
+            a.accent ? "text-pro-success bg-pro-success-light/50" : "text-pro-text-secondary hover:bg-pro-surface-alt hover:text-pro-text"
+          }`}
+        >
+          <a.icon className="h-4 w-4 shrink-0" />
+          {a.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 export default function DashboardPage() {
   const { professional } = useProContext();
   const { stats, upcomingAppointments, recentTests, loading } = useDashboard();
+  const [shareOpenId, setShareOpenId] = useState<string | null>(null);
 
   return (
     <>
@@ -212,6 +285,10 @@ export default function DashboardPage() {
                   {recentTests.map((test) => {
                     const s = STATUS_MAP[test.status] || STATUS_MAP.sent;
                     const isCompleted = test.status === "completed";
+                    const isPending = test.status !== "completed" && test.status !== "expired";
+                    const profName = professional ? `${professional.first_name} ${professional.last_name}` : "";
+                    const clientFullName = test.client ? `${test.client.first_name} ${test.client.last_name}`.trim() : "";
+
                     return (
                       <div key={test.id} className="flex items-center gap-3 p-3 rounded-xl bg-pro-surface-alt">
                         <Avatar firstName={test.client?.first_name || "?"} lastName={test.client?.last_name || ""} size="sm" />
@@ -229,6 +306,25 @@ export default function DashboardPage() {
                             >
                               <Eye className="h-4 w-4" />
                             </Link>
+                          )}
+                          {isPending && (
+                            <div className="relative">
+                              <button
+                                onClick={() => setShareOpenId(shareOpenId === test.id ? null : test.id)}
+                                className="p-1.5 rounded-lg text-pro-text-tertiary hover:text-pro-primary hover:bg-pro-primary-light transition-colors"
+                                title="Testi Paylaş"
+                              >
+                                <Share2 className="h-4 w-4" />
+                              </button>
+                              {shareOpenId === test.id && (
+                                <SharePopover
+                                  testToken={test.token}
+                                  clientName={test.client?.first_name || ""}
+                                  professionalName={profName}
+                                  onClose={() => setShareOpenId(null)}
+                                />
+                              )}
+                            </div>
                           )}
                         </div>
                       </div>
