@@ -20,18 +20,24 @@ export async function middleware(request: NextRequest) {
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const isPublicProPath = PUBLIC_PRO_PATHS.some((p) => pathname.startsWith(p));
 
   if (!supabaseUrl || !supabaseKey) {
-    const isPublicProPath = PUBLIC_PRO_PATHS.some((p) => pathname.startsWith(p));
-    if (isPublicProPath) {
-      return NextResponse.next();
-    }
-    const url = request.nextUrl.clone();
-    url.pathname = "/pro/auth/login";
-    return NextResponse.redirect(url);
+    if (isPublicProPath) return NextResponse.next();
+    return NextResponse.redirect(new URL("/pro/auth/login", request.url));
   }
 
-  const isPublicProPath = PUBLIC_PRO_PATHS.some((p) => pathname.startsWith(p));
+  const hasAuthCookie = request.cookies.getAll().some(
+    (c) => c.name.startsWith("sb-") && c.name.endsWith("-auth-token")
+  );
+
+  if (!hasAuthCookie && !isPublicProPath) {
+    return NextResponse.redirect(new URL("/pro/auth/login", request.url));
+  }
+
+  if (hasAuthCookie && isPublicProPath && pathname !== "/pro/auth/callback") {
+    return NextResponse.redirect(new URL("/pro/dashboard", request.url));
+  }
 
   let supabaseResponse = NextResponse.next({ request });
 
@@ -53,56 +59,9 @@ export async function middleware(request: NextRequest) {
     },
   });
 
-  try {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+  await supabase.auth.getSession();
 
-    if (!user && !isPublicProPath) {
-      const url = request.nextUrl.clone();
-      url.pathname = "/pro/auth/login";
-      return NextResponse.redirect(url);
-    }
-
-    if (user && isPublicProPath) {
-      const { data: profile } = await supabase
-        .from("professionals")
-        .select("onboarding_completed")
-        .eq("id", user.id)
-        .single();
-
-      const url = request.nextUrl.clone();
-      if (!profile || !profile.onboarding_completed) {
-        url.pathname = "/pro/onboarding";
-      } else {
-        url.pathname = "/pro/dashboard";
-      }
-      return NextResponse.redirect(url);
-    }
-
-    if (user && !isPublicProPath && pathname !== "/pro/onboarding") {
-      const { data: profile } = await supabase
-        .from("professionals")
-        .select("onboarding_completed")
-        .eq("id", user.id)
-        .single();
-
-      if (!profile || !profile.onboarding_completed) {
-        const url = request.nextUrl.clone();
-        url.pathname = "/pro/onboarding";
-        return NextResponse.redirect(url);
-      }
-    }
-
-    return supabaseResponse;
-  } catch {
-    if (isPublicProPath) {
-      return NextResponse.next();
-    }
-    const url = request.nextUrl.clone();
-    url.pathname = "/pro/auth/login";
-    return NextResponse.redirect(url);
-  }
+  return supabaseResponse;
 }
 
 export const config = {

@@ -5,7 +5,6 @@ import {
   useContext,
   useState,
   useCallback,
-  useEffect,
   type ReactNode,
 } from "react";
 import { useRouter } from "next/navigation";
@@ -15,6 +14,7 @@ import type { Professional } from "@/lib/pro/types";
 interface ProContextValue {
   professional: Professional | null;
   creditBalance: number;
+  setCreditBalance: (balance: number) => void;
   loading: boolean;
   refreshProfile: () => Promise<void>;
   refreshCredits: () => Promise<void>;
@@ -39,39 +39,30 @@ export function ProProvider({
   const [creditBalance, setCreditBalance] = useState(initialCredits);
   const [loading, setLoading] = useState(false);
 
-  const refreshProfile = useCallback(async () => {
+  const refreshCredits = useCallback(async () => {
+    if (!professional?.id) return;
     const supabase = createClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) return;
+    const { data } = await supabase.rpc("get_credit_balance", {
+      p_professional_id: professional.id,
+    });
+    if (typeof data === "number") setCreditBalance(data);
+  }, [professional?.id]);
 
+  const refreshProfile = useCallback(async () => {
+    if (!professional?.id) return;
+    const supabase = createClient();
     const { data } = await supabase
       .from("professionals")
       .select("*")
-      .eq("id", user.id)
+      .eq("id", professional.id)
       .single();
-
     if (data) setProfessional(data);
-  }, []);
-
-  const refreshCredits = useCallback(async () => {
-    const supabase = createClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) return;
-
-    const { data } = await supabase.rpc("get_credit_balance", {
-      p_professional_id: user.id,
-    });
-
-    if (typeof data === "number") setCreditBalance(data);
-  }, []);
+  }, [professional?.id]);
 
   const signOut = useCallback(async () => {
     const supabase = createClient();
     await supabase.auth.signOut();
+    sessionStorage.clear();
     router.push("/pro/auth/login");
   }, [router]);
 
@@ -80,6 +71,7 @@ export function ProProvider({
       value={{
         professional,
         creditBalance,
+        setCreditBalance,
         loading,
         refreshProfile,
         refreshCredits,
