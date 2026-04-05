@@ -209,15 +209,15 @@ export default function BillingPage() {
                 <div className="absolute top-0 right-0 w-[120px] h-[120px] rounded-full bg-white opacity-[0.08] blur-[40px]" />
 
                 <div className="relative px-5 py-4">
-                  <div className="flex items-center justify-between">
-                    <p className="text-xs font-semibold text-white/90 uppercase tracking-wide">10 Test Paketi</p>
-                    <span className="bg-white/20 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                  <p className="text-xs font-semibold text-white/90 uppercase tracking-wide">10 Test Paketi</p>
+                  <div className="mt-2 flex items-baseline gap-3">
+                    <div>
+                      <span className="text-3xl font-bold text-white">₺299</span>
+                      <span className="text-lg font-semibold text-white/70">,90</span>
+                    </div>
+                    <span className="bg-white/25 backdrop-blur-sm text-white text-xs font-bold px-2.5 py-1 rounded-full">
                       %9 tasarruf
                     </span>
-                  </div>
-                  <div className="mt-2">
-                    <span className="text-3xl font-bold text-white">₺299</span>
-                    <span className="text-lg font-semibold text-white/70">,90</span>
                   </div>
                   <p className="text-xs text-white/55 mt-0.5">test başına ₺29,99</p>
                 </div>
@@ -236,16 +236,11 @@ export default function BillingPage() {
                       <Check className="h-3.5 w-3.5 text-white shrink-0" />
                       WhatsApp / Email gönderim
                     </li>
-                    <li className="flex items-center gap-2 text-xs text-white/80">
-                      <Check className="h-3.5 w-3.5 text-white shrink-0" />
-                      Öncelikli destek
-                    </li>
                   </ul>
                   <button
                     onClick={() => toast.info("Ödeme sistemi yakında aktif olacak")}
                     className="mt-4 w-full py-2.5 rounded-xl bg-white text-[#8B6914] text-sm font-semibold shadow-md shadow-black/10 hover:shadow-lg hover:bg-white/95 transition-all active:scale-[0.98] flex items-center justify-center gap-1.5"
                   >
-                    <Zap className="h-3.5 w-3.5" />
                     Satın Al
                   </button>
                 </div>

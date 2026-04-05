@@ -6,46 +6,8 @@ import { Container, QuestionPulseAnimation, AQELogo } from "@/components/ui";
 import { Header, Footer } from "@/components/sections";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
-const CAPABILITIES = [
-  {
-    title: "Adaptive Routing Engine",
-    description: "Her yanıt yüzlerce koşul kuralını tetikler. Akış gerçek zamanlı yeniden hesaplanır.",
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-        <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-      </svg>
-    ),
-  },
-  {
-    title: "Entropy Minimization",
-    description: "Her soru bilgi kazancını maksimize eder. Gereksiz soru yok, her yanıt bir karar besler.",
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-        <path d="M13 10V3L4 14h7v7l9-11h-7z" />
-      </svg>
-    ),
-  },
-  {
-    title: "Context-Aware Selection",
-    description: "Yaş, cinsiyet, yaşam koşulları — yüzlerce koşullu soru. Her birey için farklı derinleşme.",
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-        <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-      </svg>
-    ),
-  },
-  {
-    title: "AI Pipeline Fusion",
-    description: "Çıktılar doğrudan çok katmanlı analiz pipeline'ına akar. Tek istek, tam analiz, AI-generated rapor.",
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-        <path d="M12 2L2 7l10 5 10-5-10-5z" />
-        <path d="M2 17l10 5 10-5" />
-        <path d="M2 12l10 5 10-5" />
-      </svg>
-    ),
-  },
-];
+
+
 
 const QUESTION_TIERS = [
   { 
@@ -87,12 +49,8 @@ const STATS = [
   { value: "1B+", label: "Benzersiz Yol", desc: "Aynı test yok" },
 ];
 
-const HOW_IT_WORKS = [
-  { step: "01", title: "Profil Oluşturma", desc: "Demografik, yaşamsal ve biyometrik veriler toplanır. Hiçbir ön bilgi olmadan universal baseline oluşturulur." },
-  { step: "02", title: "Adaptive Routing", desc: "Yüzlerce koşul kuralı, çoklu severity band. Yanıtlarına göre benzersiz derinleşme yolu açılır." },
-  { step: "03", title: "Deep Exploration", desc: "Binlerce sorudan seçilen optimal set ile derinleşme. Anchor-first, severity-matched, priority-sorted algoritma." },
-  { step: "04", title: "AI Pipeline Trigger", desc: "Çok katmanlı analiz pipeline'ı otomatik tetiklenir. Deterministik kurallar + çoklu AI doğrulama. Profesyonel rapor." },
-];
+
+
 
 const fadeInUp = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
@@ -400,104 +358,79 @@ export default function AQEPage() {
           </Container>
         </section>
 
-        {/* How it works */}
-        <section className="section-padding relative">
-          <Container size="narrow">
-            <motion.div className="text-center mb-10 sm:mb-14" {...fadeInUp()}>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Nasıl Çalışır?</h2>
-              <p className="text-foreground-muted max-w-xl mx-auto">
-                Her adım bir sonrakini şekillendirir. Algoritma + AI, birlikte.
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-4 gap-2 sm:grid-cols-1 sm:gap-0 sm:space-y-6">
-              {HOW_IT_WORKS.map((item, index) => (
-                <motion.div
-                  key={item.step}
-                  className="flex flex-col items-center text-center sm:flex-row sm:text-left sm:items-start gap-1.5 sm:gap-6 rounded-xl border border-white/[0.06] bg-white/[0.02] p-2.5 sm:border-0 sm:bg-transparent sm:p-0 sm:rounded-none"
-                  {...fadeInUp(index * 0.1)}
-                >
-                  <div className="w-8 h-8 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center flex-shrink-0">
-                    <span className="text-[10px] sm:text-base font-mono font-bold text-violet-400">{item.step}</span>
-                  </div>
-                  <div>
-                    <h3 className="text-[11px] sm:text-lg font-semibold text-foreground sm:mb-1">{item.title}</h3>
-                    <p className="hidden sm:block text-base text-foreground-muted leading-normal">{item.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </Container>
-        </section>
-
-        {/* Capabilities */}
+        {/* What You Get */}
         <section className="section-padding relative">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-violet-500/[0.02] to-transparent pointer-events-none" />
           
           <Container>
             <motion.div className="text-center mb-10 sm:mb-14" {...fadeInUp()}>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Temel Yetenekler</h2>
-              <p className="text-foreground-muted max-w-xl mx-auto">Sadece AI değil. Sadece algoritma değil. İkisinin gücü, birlikte.</p>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">Ne Elde Edersiniz?</h2>
+              <p className="text-foreground-muted max-w-2xl mx-auto">
+                Danışanınıza link gönderirsiniz. O soruları yanıtlar.
+                Gerisini AQE halleder — kime hangi soruyu soracağını bilir.
+              </p>
             </motion.div>
 
-            <div className="grid grid-cols-2 gap-3 sm:gap-6">
-              {CAPABILITIES.map((cap, index) => (
+            <div className="space-y-4 sm:space-y-6">
+              {[
+                {
+                  title: "Kişiye Özel Soru Akışı",
+                  desc: "Her danışan farklı sorular alır. Yaşına, cinsiyetine, yaşam koşullarına ve ilk yanıtlarına göre akış şekillenir. Klasik anketlerdeki gereksiz sorular yok.",
+                  color: "border-violet-500/20",
+                  iconBg: "bg-violet-500/10",
+                  iconColor: "text-violet-400",
+                  icon: <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />,
+                },
+                {
+                  title: "Akıllı Derinleşme",
+                  desc: "Stres skoru düşükse uyku ve stres alanlarında derinleşir. İlişki sorunu varsa ilişki havuzunu açar. Sorun olmayan alanları atlar, zamanı boşa harcamaz.",
+                  color: "border-emerald-500/20",
+                  iconBg: "bg-emerald-500/10",
+                  iconColor: "text-emerald-400",
+                  icon: <path d="M13 10V3L4 14h7v7l9-11h-7z" />,
+                },
+                {
+                  title: "AI Doğrulama",
+                  desc: "Yanıtlar arasındaki tutarsızlıkları yakalar. Çelişen cevaplar varsa doğrulama soruları enjekte eder. Hata payını minimize eder, güvenilir veri toplar.",
+                  color: "border-amber-500/20",
+                  iconBg: "bg-amber-500/10",
+                  iconColor: "text-amber-400",
+                  icon: <><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></>,
+                },
+                {
+                  title: "Otomatik Analiz Tetikleme",
+                  desc: "Sorular tamamlandığında çok katmanlı analiz pipeline otomatik çalışır. Siz hiçbir şey yapmadan sonuçlar hazır olur. Tek tıklama, tam analiz.",
+                  color: "border-cyan-500/20",
+                  iconBg: "bg-cyan-500/10",
+                  iconColor: "text-cyan-400",
+                  icon: <><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></>,
+                },
+                {
+                  title: "Danışan Deneyimi",
+                  desc: "Danışanınız sıkılmaz. Ortalama tamamlanma süresi kısadır, sorular ilgi çekicidir ve kişiye özeldir. Her yanıt bir sonraki soruyu şekillendirir.",
+                  color: "border-rose-500/20",
+                  iconBg: "bg-rose-500/10",
+                  iconColor: "text-rose-400",
+                  icon: <><path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></>,
+                },
+              ].map((item, index) => (
                 <motion.div
-                  key={cap.title}
-                  className="group rounded-xl border border-white/[0.06] bg-white/[0.02] p-3 transition-all duration-300 hover:border-violet-500/30 sm:rounded-2xl sm:p-8"
-                  {...fadeInUp(index * 0.1)}
-                  whileHover={isMobile ? {} : { y: -3 }}
+                  key={item.title}
+                  className={`group flex flex-col sm:flex-row gap-4 sm:gap-6 rounded-xl border ${item.color} bg-white/[0.02] p-4 sm:p-6 transition-all duration-300 hover:bg-white/[0.04]`}
+                  {...fadeInUp(index * 0.08)}
                 >
-                  <div className="w-9 h-9 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-400 mb-2 sm:mb-4 group-hover:bg-violet-500/15 transition-colors [&>svg]:w-4 [&>svg]:h-4 sm:[&>svg]:w-6 sm:[&>svg]:h-6">
-                    {cap.icon}
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl ${item.iconBg} border ${item.color} flex items-center justify-center ${item.iconColor} flex-shrink-0`}>
+                    <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                      {item.icon}
+                    </svg>
                   </div>
-                  <h3 className="text-sm sm:text-xl font-semibold text-foreground mb-1 sm:mb-2">{cap.title}</h3>
-                  <p className="text-[10px] sm:text-base text-foreground-muted leading-relaxed">{cap.description}</p>
+                  <div>
+                    <h3 className="text-sm sm:text-lg font-semibold text-foreground mb-1 sm:mb-2">{item.title}</h3>
+                    <p className="text-xs sm:text-base text-foreground-muted leading-relaxed">{item.desc}</p>
+                  </div>
                 </motion.div>
               ))}
             </div>
-          </Container>
-        </section>
-
-        {/* Integration */}
-        <section className="section-padding relative">
-          <Container size="narrow">
-            <motion.div
-              className="relative p-8 sm:p-12 rounded-2xl bg-gradient-to-br from-violet-500/10 via-transparent to-[#7A8471]/10 border border-white/[0.08] text-center overflow-hidden"
-              {...fadeInUp()}
-            >
-              {!isMobile && (
-                <div className="absolute inset-0 opacity-[0.02]" style={{
-                  backgroundImage: `linear-gradient(45deg, rgba(139,92,246,0.5) 25%, transparent 25%), linear-gradient(-45deg, rgba(139,92,246,0.5) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, rgba(122,132,113,0.5) 75%), linear-gradient(-45deg, transparent 75%, rgba(122,132,113,0.5) 75%)`,
-                  backgroundSize: '20px 20px',
-                  backgroundPosition: '0 0, 0 10px, 10px -10px, -10px 0px'
-                }} />
-              )}
-
-              <div className="relative z-10">
-                <div className="mb-6 flex flex-row items-center justify-center gap-3 sm:gap-4">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center flex-shrink-0">
-                    <span className="text-white font-bold text-sm sm:text-base">AQE</span>
-                  </div>
-                  <div className="flex flex-col items-center gap-0.5">
-                    <svg className="w-5 h-5 sm:w-6 sm:h-6 text-foreground-subtle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                    <span className="text-[9px] sm:text-[10px] text-foreground-subtle">veri akışı</span>
-                  </div>
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-[#7A8471] to-[#5C6455] flex items-center justify-center flex-shrink-0">
-                    <span className="text-white font-bold text-sm sm:text-base">HAE</span>
-                  </div>
-                </div>
-
-                <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-3">Hybrid Intelligence</h3>
-                <p className="text-foreground-muted max-w-md mx-auto mb-6">
-                  Neden sadece AI değil? Yüksek hata payı ve yoğun maliyet.
-                  Deterministik algoritmalar hassasiyeti sağlar, AI derinliği katar.
-                  Sonuç: %95 daha düşük maliyet, daha yüksek doğruluk.
-                </p>
-              </div>
-            </motion.div>
           </Container>
         </section>
 
