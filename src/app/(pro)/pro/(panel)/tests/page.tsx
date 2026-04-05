@@ -52,6 +52,7 @@ export default function TestsPage() {
 
   const [newFirstName, setNewFirstName] = useState("");
   const [newLastName, setNewLastName] = useState("");
+  const [newEmail, setNewEmail] = useState("");
   const [newClientId, setNewClientId] = useState<string | null>(null);
 
   const selectedClient = clients.find((c) => c.id === selectedClientId);
@@ -63,6 +64,10 @@ export default function TestsPage() {
     ? { first: selectedClient.first_name, last: selectedClient.last_name }
     : { first: newFirstName, last: newLastName };
 
+  const effectiveClientEmail = clientMode === "existing" && selectedClient
+    ? selectedClient.email
+    : newEmail.trim() || null;
+
   function openSendModal() {
     setStep("client");
     setClientMode("existing");
@@ -71,6 +76,7 @@ export default function TestsPage() {
     setClientSearch("");
     setNewFirstName("");
     setNewLastName("");
+    setNewEmail("");
     setNewClientId(null);
     setShowSendModal(true);
   }
@@ -98,10 +104,13 @@ export default function TestsPage() {
       let firstName: string;
       let lastName: string;
 
+      let clientEmail: string | null = null;
+
       if (clientMode === "existing" && selectedClient) {
         clientId = selectedClient.id;
         firstName = selectedClient.first_name;
         lastName = selectedClient.last_name;
+        clientEmail = selectedClient.email;
       } else {
         const { data: newClient, error: clientError } = await supabase
           .from("clients")
@@ -109,6 +118,7 @@ export default function TestsPage() {
             professional_id: user!.id,
             first_name: newFirstName.trim(),
             last_name: newLastName.trim(),
+            email: newEmail.trim() || null,
             status: "active",
           })
           .select()
@@ -123,6 +133,7 @@ export default function TestsPage() {
         clientId = newClient.id;
         firstName = newClient.first_name;
         lastName = newClient.last_name;
+        clientEmail = newClient.email;
         setNewClientId(newClient.id);
       }
 
@@ -160,9 +171,35 @@ export default function TestsPage() {
       if (sendVia === "whatsapp") {
         const whatsappLink = generateWhatsAppLink("", message);
         window.open(whatsappLink, "_blank");
-      }
+        toast.success("WhatsApp açıldı!");
+      } else if (sendVia === "email" && clientEmail) {
+        try {
+          const emailRes = await fetch("/api/send-test-invitation", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              clientEmail,
+              clientName: `${firstName} ${lastName}`,
+              professionalName: `${professional.first_name} ${professional.last_name}`,
+              testLink,
+            }),
+          });
 
-      toast.success("Test gönderildi!");
+          if (!emailRes.ok) {
+            const err = await emailRes.json();
+            toast.error(err.error || "Email gönderilemedi");
+          } else {
+            toast.success("Email gönderildi!");
+          }
+        } catch {
+          toast.error("Email gönderimi başarısız");
+        }
+      } else if (sendVia === "email" && !clientEmail) {
+        toast.success("Test oluşturuldu! (Email adresi olmadığı için link kopyalandı)");
+        navigator.clipboard.writeText(testLink);
+      } else {
+        toast.success("Test gönderildi!");
+      }
 
       if (clientMode === "new") {
         setStep("save_prompt");
@@ -365,23 +402,37 @@ export default function TestsPage() {
                   </>
                 ) : (
                   <div className="space-y-3">
-                    <div>
-                      <label className="block text-sm font-medium text-pro-text mb-1.5">Ad</label>
-                      <input
-                        type="text"
-                        value={newFirstName}
-                        onChange={(e) => setNewFirstName(e.target.value)}
-                        placeholder="Danışan adı"
-                        className="w-full px-4 py-2.5 rounded-lg border border-pro-border bg-pro-surface text-sm text-pro-text placeholder:text-pro-text-tertiary focus:outline-none focus:ring-2 focus:ring-pro-primary/30 focus:border-pro-primary"
-                      />
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-sm font-medium text-pro-text mb-1.5">Ad</label>
+                        <input
+                          type="text"
+                          value={newFirstName}
+                          onChange={(e) => setNewFirstName(e.target.value)}
+                          placeholder="Danışan adı"
+                          className="w-full px-4 py-2.5 rounded-lg border border-pro-border bg-pro-surface text-sm text-pro-text placeholder:text-pro-text-tertiary focus:outline-none focus:ring-2 focus:ring-pro-primary/30 focus:border-pro-primary"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-pro-text mb-1.5">Soyad</label>
+                        <input
+                          type="text"
+                          value={newLastName}
+                          onChange={(e) => setNewLastName(e.target.value)}
+                          placeholder="Danışan soyadı"
+                          className="w-full px-4 py-2.5 rounded-lg border border-pro-border bg-pro-surface text-sm text-pro-text placeholder:text-pro-text-tertiary focus:outline-none focus:ring-2 focus:ring-pro-primary/30 focus:border-pro-primary"
+                        />
+                      </div>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-pro-text mb-1.5">Soyad</label>
+                      <label className="block text-sm font-medium text-pro-text mb-1.5">
+                        E-posta <span className="text-pro-text-tertiary font-normal">(email ile göndermek için)</span>
+                      </label>
                       <input
-                        type="text"
-                        value={newLastName}
-                        onChange={(e) => setNewLastName(e.target.value)}
-                        placeholder="Danışan soyadı"
+                        type="email"
+                        value={newEmail}
+                        onChange={(e) => setNewEmail(e.target.value)}
+                        placeholder="danisan@email.com"
                         className="w-full px-4 py-2.5 rounded-lg border border-pro-border bg-pro-surface text-sm text-pro-text placeholder:text-pro-text-tertiary focus:outline-none focus:ring-2 focus:ring-pro-primary/30 focus:border-pro-primary"
                       />
                     </div>
@@ -444,6 +495,13 @@ export default function TestsPage() {
                     <span className="text-sm font-medium text-pro-text">WhatsApp</span>
                   </button>
                 </div>
+
+                {sendVia === "email" && !effectiveClientEmail && (
+                  <div className="p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                    <p className="text-sm text-amber-800 font-medium">Email adresi yok</p>
+                    <p className="text-xs text-amber-700/80 mt-1">Test linki clipboard'a kopyalanacak. Manuel olarak göndermeniz gerekecek.</p>
+                  </div>
+                )}
 
                 {creditBalance <= 0 && (
                   <div className="p-3 bg-pro-danger-light rounded-lg">
