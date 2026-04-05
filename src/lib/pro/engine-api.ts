@@ -102,7 +102,7 @@ async function engineFetch<T>(
     method: body ? "POST" : "GET",
     headers: {
       "Content-Type": "application/json",
-      "X-API-Key": API_KEY ?? "",
+      "X-API-Key": API_KEY,
     },
     body: body ? JSON.stringify(body) : undefined,
   });

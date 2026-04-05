@@ -64,18 +64,6 @@ const SIGNALS = [
   { label: "Context Graph", delay: 0.2 },
 ];
 
-const PROCESSING_LAYERS: { name: string; ai?: boolean }[] = [
-  { name: "Signal Normalization" },
-  { name: "Trait Activation" },
-  { name: "Pattern Detection" },
-  { name: "AI Coherence Gate", ai: true },
-  { name: "AI Coverage Scan", ai: true },
-  { name: "AI Quality Shield", ai: true },
-  { name: "Inference Engine" },
-  { name: "AI Inference Guard", ai: true },
-  { name: "Multi-Dim Scoring" },
-  { name: "Profile Synthesis" },
-];
 
 const STATS = [
   { value: "3.000+", label: "Parametre", desc: "Psikolojik faktör" },
@@ -247,25 +235,121 @@ export default function HAEPage() {
                       <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10" />
                     </div>
 
-                    <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
-                      {PROCESSING_LAYERS.map((layer, index) => (
+                    {/* Row 1: Deterministic layers */}
+                    <div className="grid grid-cols-3 gap-3 mb-3">
+                      {[
+                        { name: "Signal Normalization", num: 1 },
+                        { name: "Trait Activation", num: 2 },
+                        { name: "Pattern Detection", num: 3 },
+                      ].map((layer, index) => (
                         <motion.div
                           key={layer.name}
-                          className={`p-3 sm:p-4 rounded-lg text-center ${layer.ai ? "bg-amber-500/[0.06] border border-amber-500/20" : "bg-white/[0.02] border border-white/[0.06]"}`}
+                          className="p-3 sm:p-4 rounded-lg bg-white/[0.02] border border-white/[0.06] text-center"
                           initial={{ opacity: 0, scale: 0.95 }}
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
                           transition={{ duration: 0.4, delay: index * 0.08 }}
                         >
-                          <div className={`w-8 h-8 mx-auto mb-2 rounded-full flex items-center justify-center ${layer.ai ? "bg-amber-500/10 border border-amber-500/20" : "bg-cyan-500/10 border border-cyan-500/20"}`}>
-                            {layer.ai ? (
-                              <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-                            ) : (
-                              <span className="text-xs font-mono text-cyan-400">{index + 1}</span>
-                            )}
+                          <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
+                            <span className="text-xs font-mono text-cyan-400">{layer.num}</span>
                           </div>
-                          <p className={`text-xs sm:text-sm font-medium ${layer.ai ? "text-amber-300" : "text-foreground"}`}>{layer.name}</p>
-                          {layer.ai && <p className="text-[8px] sm:text-[10px] font-mono text-amber-400/60 mt-1">AI LAYER</p>}
+                          <p className="text-xs sm:text-sm font-medium text-foreground">{layer.name}</p>
+                        </motion.div>
+                      ))}
+                    </div>
+
+                    {/* Row 2: AI Pattern Validation (3 perspectives) */}
+                    <div className="grid grid-cols-3 gap-3 mb-3">
+                      {[
+                        { name: "Coherence Gate" },
+                        { name: "Coverage Scan" },
+                        { name: "Quality Shield" },
+                      ].map((layer, index) => (
+                        <motion.div
+                          key={layer.name}
+                          className="relative p-3 sm:p-4 rounded-lg bg-amber-500/[0.06] border border-amber-500/20 text-center overflow-hidden"
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.4, delay: 0.3 + index * 0.08 }}
+                        >
+                          {!isMobile && (
+                            <motion.div
+                              className="absolute inset-0 rounded-lg"
+                              style={{ background: "linear-gradient(90deg, transparent, rgba(245,158,11,0.1), transparent)", backgroundSize: "200% 100%" }}
+                              animate={{ backgroundPosition: ["200% 0", "-200% 0"] }}
+                              transition={{ duration: 4, repeat: Infinity, ease: "linear", delay: index * 0.5 }}
+                            />
+                          )}
+                          <div className="relative z-10">
+                            <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
+                              <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                            </div>
+                            <p className="text-xs sm:text-sm font-medium text-amber-300">{layer.name}</p>
+                            <p className="text-[8px] sm:text-[10px] font-mono text-amber-400/60 mt-1">AI LAYER</p>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+
+                    {/* Row 3: Inference + AI Guard */}
+                    <div className="grid grid-cols-2 gap-3 mb-3">
+                      <motion.div
+                        className="p-3 sm:p-4 rounded-lg bg-white/[0.02] border border-white/[0.06] text-center"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: 0.6 }}
+                      >
+                        <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
+                          <span className="text-xs font-mono text-cyan-400">4</span>
+                        </div>
+                        <p className="text-xs sm:text-sm font-medium text-foreground">Inference Engine</p>
+                      </motion.div>
+
+                      <motion.div
+                        className="relative p-3 sm:p-4 rounded-lg bg-amber-500/[0.06] border border-amber-500/20 text-center overflow-hidden"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: 0.68 }}
+                      >
+                        {!isMobile && (
+                          <motion.div
+                            className="absolute inset-0 rounded-lg"
+                            style={{ background: "linear-gradient(90deg, transparent, rgba(245,158,11,0.1), transparent)", backgroundSize: "200% 100%" }}
+                            animate={{ backgroundPosition: ["200% 0", "-200% 0"] }}
+                            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                          />
+                        )}
+                        <div className="relative z-10">
+                          <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
+                            <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                          </div>
+                          <p className="text-xs sm:text-sm font-medium text-amber-300">Inference Guard</p>
+                          <p className="text-[8px] sm:text-[10px] font-mono text-amber-400/60 mt-1">AI LAYER</p>
+                        </div>
+                      </motion.div>
+                    </div>
+
+                    {/* Row 4: Final deterministic */}
+                    <div className="grid grid-cols-2 gap-3">
+                      {[
+                        { name: "Multi-Dim Scoring", num: 5 },
+                        { name: "Profile Synthesis", num: 6 },
+                      ].map((layer, index) => (
+                        <motion.div
+                          key={layer.name}
+                          className="p-3 sm:p-4 rounded-lg bg-white/[0.02] border border-white/[0.06] text-center"
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.4, delay: 0.76 + index * 0.08 }}
+                        >
+                          <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
+                            <span className="text-xs font-mono text-cyan-400">{layer.num}</span>
+                          </div>
+                          <p className="text-xs sm:text-sm font-medium text-foreground">{layer.name}</p>
                         </motion.div>
                       ))}
                     </div>
