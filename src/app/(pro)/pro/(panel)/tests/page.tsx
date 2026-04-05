@@ -33,7 +33,7 @@ import { TEST_STATUSES, PRO_CONFIG } from "@/lib/pro/constants";
 import { clsx } from "clsx";
 import Link from "next/link";
 
-type SendStep = "client" | "method" | "save_prompt";
+type SendStep = "client" | "method" | "link_ready";
 type ClientMode = "existing" | "new";
 
 export default function TestsPage() {
@@ -54,6 +54,8 @@ export default function TestsPage() {
   const [newLastName, setNewLastName] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [newClientId, setNewClientId] = useState<string | null>(null);
+  const [generatedTestLink, setGeneratedTestLink] = useState<string | null>(null);
+  const [linkCopied, setLinkCopied] = useState(false);
 
   const selectedClient = clients.find((c) => c.id === selectedClientId);
   const filteredClients = clients.filter((c) =>
@@ -78,7 +80,18 @@ export default function TestsPage() {
     setNewLastName("");
     setNewEmail("");
     setNewClientId(null);
+    setGeneratedTestLink(null);
+    setLinkCopied(false);
     setShowSendModal(true);
+  }
+
+  async function copyTestLink() {
+    if (generatedTestLink) {
+      await navigator.clipboard.writeText(generatedTestLink);
+      setLinkCopied(true);
+      toast.success("Link kopyalandı!");
+      setTimeout(() => setLinkCopied(false), 2000);
+    }
   }
 
   async function handleSend() {
@@ -168,44 +181,16 @@ export default function TestsPage() {
         description: `Test: ${firstName} ${lastName}`,
       });
 
+      setGeneratedTestLink(testLink);
+      setStep("link_ready");
+
       if (sendVia === "whatsapp") {
         const whatsappLink = generateWhatsAppLink("", message);
         window.open(whatsappLink, "_blank");
-        toast.success("WhatsApp açıldı!");
-      } else if (sendVia === "email" && clientEmail) {
-        try {
-          const emailRes = await fetch("/api/send-test-invitation", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              clientEmail,
-              clientName: `${firstName} ${lastName}`,
-              professionalName: `${professional.first_name} ${professional.last_name}`,
-              testLink,
-            }),
-          });
-
-          if (!emailRes.ok) {
-            const err = await emailRes.json();
-            toast.error(err.error || "Email gönderilemedi");
-          } else {
-            toast.success("Email gönderildi!");
-          }
-        } catch {
-          toast.error("Email gönderimi başarısız");
-        }
-      } else if (sendVia === "email" && !clientEmail) {
-        toast.success("Test oluşturuldu! (Email adresi olmadığı için link kopyalandı)");
-        navigator.clipboard.writeText(testLink);
-      } else {
-        toast.success("Test gönderildi!");
       }
 
       if (clientMode === "new") {
-        setStep("save_prompt");
         refreshClients();
-      } else {
-        setShowSendModal(false);
       }
 
       refresh();
@@ -526,43 +511,99 @@ export default function TestsPage() {
               </div>
             )}
 
-            {step === "save_prompt" && newClientId && (
-              <div className="space-y-4 text-center">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
-                  <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-pro-text">Test Gönderildi!</h3>
+            {step === "link_ready" && generatedTestLink && (
+              <div className="space-y-5">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold text-pro-text">Test Hazır!</h3>
                   <p className="text-sm text-pro-text-secondary mt-1">
                     {effectiveClientName.first} {effectiveClientName.last} için test linki oluşturuldu.
                   </p>
                 </div>
 
-                <div className="p-4 bg-pro-surface-alt rounded-xl">
-                  <p className="text-sm text-pro-text mb-3">
-                    Bu kişi danışan listenize eklendi. Detaylarını düzenlemek ister misiniz?
-                  </p>
-                  <div className="flex gap-2">
+                <div className="p-4 bg-pro-surface-alt rounded-xl space-y-3">
+                  <p className="text-xs text-pro-text-tertiary font-medium uppercase tracking-wide">Test Linki</p>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      value={generatedTestLink}
+                      readOnly
+                      className="flex-1 px-3 py-2.5 rounded-lg border border-pro-border bg-white text-sm text-pro-text font-mono select-all"
+                      onClick={(e) => (e.target as HTMLInputElement).select()}
+                    />
                     <Button
-                      variant="secondary"
-                      className="flex-1"
-                      onClick={() => setShowSendModal(false)}
+                      variant={linkCopied ? "accent" : "secondary"}
+                      size="sm"
+                      onClick={copyTestLink}
+                      className="shrink-0"
                     >
-                      Şimdilik Değil
+                      {linkCopied ? (
+                        <>
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          Kopyalandı
+                        </>
+                      ) : (
+                        <>
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                          </svg>
+                          Kopyala
+                        </>
+                      )}
                     </Button>
-                    <Button
-                      className="flex-1"
+                  </div>
+                  <p className="text-xs text-pro-text-tertiary">
+                    Bu linki danışanınıza WhatsApp, SMS veya başka bir yolla gönderebilirsiniz.
+                  </p>
+                </div>
+
+                <div className="flex gap-2">
+                  <Button
+                    variant="secondary"
+                    className="flex-1"
+                    onClick={() => {
+                      const whatsappLink = generateWhatsAppLink("", buildTestMessage(
+                        effectiveClientName.first,
+                        `${professional?.first_name} ${professional?.last_name}`,
+                        generatedTestLink
+                      ));
+                      window.open(whatsappLink, "_blank");
+                    }}
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    WhatsApp ile Gönder
+                  </Button>
+                </div>
+
+                {clientMode === "new" && newClientId && (
+                  <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl">
+                    <p className="text-sm text-blue-800">
+                      <strong>{effectiveClientName.first} {effectiveClientName.last}</strong> danışan listenize eklendi.
+                    </p>
+                    <button
                       onClick={() => {
                         setShowSendModal(false);
                         router.push(`/pro/clients/${newClientId}`);
                       }}
+                      className="text-sm text-blue-600 hover:underline mt-1"
                     >
-                      Düzenle
-                    </Button>
+                      Detayları düzenle →
+                    </button>
                   </div>
-                </div>
+                )}
+
+                <Button
+                  className="w-full"
+                  onClick={() => setShowSendModal(false)}
+                >
+                  Tamam
+                </Button>
               </div>
             )}
           </Modal>
