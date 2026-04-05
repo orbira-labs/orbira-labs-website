@@ -67,68 +67,24 @@ export function Sidebar() {
         </button>
       </div>
 
-      {/* Neural network wrapping decoration */}
+      {/* Minimal dot pattern decoration */}
       <svg 
-        className="absolute inset-0 w-full h-full opacity-[0.08] pointer-events-none" 
-        viewBox="0 0 260 800" 
-        fill="none"
-        preserveAspectRatio="xMidYMid slice"
+        className="absolute inset-0 w-full h-full opacity-[0.06] pointer-events-none" 
+        xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Vertical flowing lines - left edge */}
-        <path d="M10 0 Q25 100, 15 200 Q5 300, 20 400 Q35 500, 10 600 Q-5 700, 15 800" stroke="white" strokeWidth="1.5" fill="none" />
-        <path d="M30 0 Q45 120, 35 240 Q25 360, 40 480 Q55 600, 30 720 Q15 800, 35 900" stroke="white" strokeWidth="1" fill="none" />
-        
-        {/* Vertical flowing lines - right edge */}
-        <path d="M250 0 Q235 100, 245 200 Q255 300, 240 400 Q225 500, 250 600 Q265 700, 245 800" stroke="white" strokeWidth="1.5" fill="none" />
-        <path d="M230 0 Q215 120, 225 240 Q235 360, 220 480 Q205 600, 230 720 Q245 800, 225 900" stroke="white" strokeWidth="1" fill="none" />
-        
-        {/* Horizontal connections - creating a web effect */}
-        <path d="M15 120 Q130 100, 245 120" stroke="white" strokeWidth="0.8" fill="none" opacity="0.6" />
-        <path d="M20 250 Q130 230, 240 250" stroke="white" strokeWidth="0.8" fill="none" opacity="0.5" />
-        <path d="M10 380 Q130 400, 250 380" stroke="white" strokeWidth="0.8" fill="none" opacity="0.6" />
-        <path d="M25 510 Q130 490, 235 510" stroke="white" strokeWidth="0.8" fill="none" opacity="0.5" />
-        <path d="M15 640 Q130 660, 245 640" stroke="white" strokeWidth="0.8" fill="none" opacity="0.6" />
-        <path d="M30 770 Q130 750, 230 770" stroke="white" strokeWidth="0.8" fill="none" opacity="0.5" />
-        
-        {/* Center flowing spine */}
-        <path d="M130 0 Q140 100, 125 200 Q110 300, 135 400 Q160 500, 130 600 Q100 700, 130 800" stroke="white" strokeWidth="1.2" fill="none" opacity="0.7" />
-        
-        {/* Neural nodes at intersections */}
-        <circle cx="15" cy="120" r="4" fill="white" opacity="0.5" />
-        <circle cx="130" cy="100" r="5" fill="white" opacity="0.6" />
-        <circle cx="245" cy="120" r="4" fill="white" opacity="0.5" />
-        
-        <circle cx="20" cy="250" r="3" fill="white" opacity="0.4" />
-        <circle cx="130" cy="230" r="4" fill="white" opacity="0.5" />
-        <circle cx="240" cy="250" r="3" fill="white" opacity="0.4" />
-        
-        <circle cx="10" cy="380" r="4" fill="white" opacity="0.5" />
-        <circle cx="130" cy="400" r="5" fill="white" opacity="0.6" />
-        <circle cx="250" cy="380" r="4" fill="white" opacity="0.5" />
-        
-        <circle cx="25" cy="510" r="3" fill="white" opacity="0.4" />
-        <circle cx="130" cy="490" r="4" fill="white" opacity="0.5" />
-        <circle cx="235" cy="510" r="3" fill="white" opacity="0.4" />
-        
-        <circle cx="15" cy="640" r="4" fill="white" opacity="0.5" />
-        <circle cx="130" cy="660" r="5" fill="white" opacity="0.6" />
-        <circle cx="245" cy="640" r="4" fill="white" opacity="0.5" />
-        
-        <circle cx="30" cy="770" r="3" fill="white" opacity="0.4" />
-        <circle cx="130" cy="750" r="4" fill="white" opacity="0.5" />
-        <circle cx="230" cy="770" r="3" fill="white" opacity="0.4" />
-        
-        {/* Diagonal cross connections */}
-        <line x1="15" y1="120" x2="130" y2="230" stroke="white" strokeWidth="0.6" opacity="0.3" />
-        <line x1="245" y1="120" x2="130" y2="230" stroke="white" strokeWidth="0.6" opacity="0.3" />
-        <line x1="20" y1="250" x2="130" y2="400" stroke="white" strokeWidth="0.6" opacity="0.3" />
-        <line x1="240" y1="250" x2="130" y2="400" stroke="white" strokeWidth="0.6" opacity="0.3" />
-        <line x1="10" y1="380" x2="130" y2="490" stroke="white" strokeWidth="0.6" opacity="0.3" />
-        <line x1="250" y1="380" x2="130" y2="490" stroke="white" strokeWidth="0.6" opacity="0.3" />
-        <line x1="25" y1="510" x2="130" y2="660" stroke="white" strokeWidth="0.6" opacity="0.3" />
-        <line x1="235" y1="510" x2="130" y2="660" stroke="white" strokeWidth="0.6" opacity="0.3" />
-        <line x1="15" y1="640" x2="130" y2="750" stroke="white" strokeWidth="0.6" opacity="0.3" />
-        <line x1="245" y1="640" x2="130" y2="750" stroke="white" strokeWidth="0.6" opacity="0.3" />
+        <defs>
+          <pattern 
+            id="sidebarDots" 
+            x="0" 
+            y="0" 
+            width="20" 
+            height="20" 
+            patternUnits="userSpaceOnUse"
+          >
+            <circle cx="2" cy="2" r="1" fill="white" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#sidebarDots)" />
       </svg>
 
       <nav className="flex-1 py-4 px-2.5 space-y-1 relative">
