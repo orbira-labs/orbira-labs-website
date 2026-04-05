@@ -26,6 +26,9 @@ import {
   UserPlus,
   Users,
   Eye,
+  Link2,
+  Copy,
+  Check,
 } from "lucide-react";
 import { createClient as createSupabase } from "@/lib/pro/supabase/client";
 import { formatDate, generateWhatsAppLink, buildTestMessage } from "@/lib/pro/utils";
@@ -56,6 +59,15 @@ export default function TestsPage() {
   const [newClientId, setNewClientId] = useState<string | null>(null);
   const [generatedTestLink, setGeneratedTestLink] = useState<string | null>(null);
   const [linkCopied, setLinkCopied] = useState(false);
+  const [copiedTestId, setCopiedTestId] = useState<string | null>(null);
+
+  async function copyTestLinkById(token: string, testId: string) {
+    const link = `${window.location.origin}/t/${token}`;
+    await navigator.clipboard.writeText(link);
+    setCopiedTestId(testId);
+    toast.success("Link kopyalandı!");
+    setTimeout(() => setCopiedTestId(null), 2000);
+  }
 
   const selectedClient = clients.find((c) => c.id === selectedClientId);
   const filteredClients = clients.filter((c) =>
@@ -266,6 +278,8 @@ export default function TestsPage() {
                   {tests.map((test) => {
                     const s = TEST_STATUSES.find((ts) => ts.id === test.status);
                     const isCompleted = test.status === "completed";
+                    const isPending = test.status === "sent" || test.status === "started";
+                    const isCopied = copiedTestId === test.id;
                     return (
                       <Card key={test.id} padding="sm" hover>
                         <div className="flex items-center gap-3">
@@ -282,10 +296,24 @@ export default function TestsPage() {
                               {formatDate(test.created_at)} · {test.sent_via === "email" ? "Email" : "WhatsApp"}
                             </p>
                           </div>
-                          <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-1.5">
                             <Badge variant={s?.color as "success" | "warning" | "info" | "danger" || "muted"} dot>
                               {s?.label || test.status}
                             </Badge>
+                            {isPending && (
+                              <button
+                                onClick={() => copyTestLinkById(test.token, test.id)}
+                                className={clsx(
+                                  "p-1.5 rounded-lg transition-colors",
+                                  isCopied
+                                    ? "text-pro-success bg-pro-success-light"
+                                    : "text-pro-text-tertiary hover:text-pro-primary hover:bg-pro-primary-light"
+                                )}
+                                title="Test linkini kopyala"
+                              >
+                                {isCopied ? <Check className="h-4 w-4" /> : <Link2 className="h-4 w-4" />}
+                              </button>
+                            )}
                             {isCompleted && (
                               <Link
                                 href={`/pro/tests/${test.id}`}

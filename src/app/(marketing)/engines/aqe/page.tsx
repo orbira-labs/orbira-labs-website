@@ -73,9 +73,11 @@ const QUESTION_TIERS = [
 
 const FLOW_STEPS = [
   { label: "Profil", sublabel: "Universal baseline" },
-  { label: "Route", sublabel: "Kural değerlendirmesi" },
+  { label: "Core", sublabel: "Temel sinyal toplama" },
+  { label: "AI Gate", sublabel: "Coherence + Anomaly" },
+  { label: "Route", sublabel: "Havuz aktivasyonu" },
   { label: "Deep Dive", sublabel: "Odaklı keşif" },
-  { label: "AI Analiz", sublabel: "Pipeline tetiklenir" },
+  { label: "Pipeline", sublabel: "HAE + AI Rapor" },
 ];
 
 const STATS = [
@@ -225,7 +227,7 @@ export default function AQEPage() {
                     <div className="relative">
                       <div className="absolute top-6 left-0 right-0 h-px bg-gradient-to-r from-violet-500/20 via-violet-500/40 to-violet-500/20 hidden sm:block" />
                       
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
+                      <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 sm:gap-4">
                         {FLOW_STEPS.map((step, index) => (
                           <motion.div
                             key={step.label}
@@ -274,6 +276,67 @@ export default function AQEPage() {
                     </div>
                   </div>
 
+                  {/* AI Gate Layer */}
+                  <div className="mb-8 sm:mb-12">
+                    <div className="flex items-center gap-2 mb-6">
+                      <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/10" />
+                      <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-foreground-subtle">AI Doğrulama Katmanı</span>
+                      <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10" />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                      <motion.div
+                        className="relative rounded-xl border border-amber-500/30 bg-gradient-to-b from-amber-500/10 to-transparent p-4 sm:p-6 overflow-hidden"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        {!isMobile && (
+                          <motion.div
+                            className="absolute inset-0 rounded-xl"
+                            style={{ background: "linear-gradient(90deg, transparent, rgba(245,158,11,0.15), transparent)", backgroundSize: "200% 100%" }}
+                            animate={{ backgroundPosition: ["200% 0", "-200% 0"] }}
+                            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                          />
+                        )}
+                        <div className="relative z-10">
+                          <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                            <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                            <span className="text-[9px] sm:text-xs font-mono text-amber-400 uppercase tracking-wider">AI Layer</span>
+                          </div>
+                          <h4 className="text-sm sm:text-lg font-bold text-foreground mb-1 sm:mb-2">Coherence Shield</h4>
+                          <p className="text-[10px] sm:text-sm text-foreground-muted leading-relaxed">Tutarlılık kontrolü. Çelişen yanıtları tespit eder, eksik havuzları açar, yanlış yönlendirmeleri düzeltir.</p>
+                        </div>
+                      </motion.div>
+
+                      <motion.div
+                        className="relative rounded-xl border border-rose-500/30 bg-gradient-to-b from-rose-500/10 to-transparent p-4 sm:p-6 overflow-hidden"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                      >
+                        {!isMobile && (
+                          <motion.div
+                            className="absolute inset-0 rounded-xl"
+                            style={{ background: "linear-gradient(90deg, transparent, rgba(244,63,94,0.15), transparent)", backgroundSize: "200% 100%" }}
+                            animate={{ backgroundPosition: ["200% 0", "-200% 0"] }}
+                            transition={{ duration: 4, repeat: Infinity, ease: "linear", delay: 1 }}
+                          />
+                        )}
+                        <div className="relative z-10">
+                          <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                            <div className="w-2 h-2 rounded-full bg-rose-400 animate-pulse" />
+                            <span className="text-[9px] sm:text-xs font-mono text-rose-400 uppercase tracking-wider">AI Layer</span>
+                          </div>
+                          <h4 className="text-sm sm:text-lg font-bold text-foreground mb-1 sm:mb-2">Anomaly Interceptor</h4>
+                          <p className="text-[10px] sm:text-sm text-foreground-muted leading-relaxed">Tutarsızlık tespiti. Sinyal çelişkilerini yakalar, doğrulama soruları enjekte eder, hata payını minimize eder.</p>
+                        </div>
+                      </motion.div>
+                    </div>
+                  </div>
+
                   {/* Core */}
                   <motion.div
                     className="relative max-w-2xl mx-auto"
@@ -299,7 +362,7 @@ export default function AQEPage() {
                           </svg>
                         </div>
                         <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">Routing Kernel</h3>
-                        <p className="text-sm text-foreground-muted mb-4">Entropy minimization + probabilistic routing. Optimal yol, gerçek zamanlı hesaplanır.</p>
+                        <p className="text-sm text-foreground-muted mb-4">AI doğrulamasından geçen verilerle optimal yol hesaplanır. Entropy minimization + probabilistic routing.</p>
                         
                         <div className="flex flex-wrap items-center justify-center gap-3 text-xs sm:text-sm">
                           <div className="flex items-center gap-1.5">

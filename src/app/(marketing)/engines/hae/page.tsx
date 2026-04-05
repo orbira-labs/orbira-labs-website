@@ -64,13 +64,15 @@ const SIGNALS = [
   { label: "Context Graph", delay: 0.2 },
 ];
 
-const PROCESSING_LAYERS = [
+const PROCESSING_LAYERS: { name: string; ai?: boolean }[] = [
   { name: "Signal Normalization" },
   { name: "Trait Activation" },
   { name: "Pattern Detection" },
-  { name: "Inconsistency Gate" },
+  { name: "AI Coherence Gate", ai: true },
+  { name: "AI Coverage Scan", ai: true },
+  { name: "AI Quality Shield", ai: true },
   { name: "Inference Engine" },
-  { name: "AI Cross-Validation" },
+  { name: "AI Inference Guard", ai: true },
   { name: "Multi-Dim Scoring" },
   { name: "Profile Synthesis" },
 ];
@@ -245,20 +247,25 @@ export default function HAEPage() {
                       <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10" />
                     </div>
 
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
                       {PROCESSING_LAYERS.map((layer, index) => (
                         <motion.div
                           key={layer.name}
-                          className="p-3 sm:p-4 rounded-lg bg-white/[0.02] border border-white/[0.06] text-center"
+                          className={`p-3 sm:p-4 rounded-lg text-center ${layer.ai ? "bg-amber-500/[0.06] border border-amber-500/20" : "bg-white/[0.02] border border-white/[0.06]"}`}
                           initial={{ opacity: 0, scale: 0.95 }}
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
-                          transition={{ duration: 0.4, delay: index * 0.1 }}
+                          transition={{ duration: 0.4, delay: index * 0.08 }}
                         >
-                          <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
-                            <span className="text-xs font-mono text-cyan-400">{index + 1}</span>
+                          <div className={`w-8 h-8 mx-auto mb-2 rounded-full flex items-center justify-center ${layer.ai ? "bg-amber-500/10 border border-amber-500/20" : "bg-cyan-500/10 border border-cyan-500/20"}`}>
+                            {layer.ai ? (
+                              <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                            ) : (
+                              <span className="text-xs font-mono text-cyan-400">{index + 1}</span>
+                            )}
                           </div>
-                          <p className="text-xs sm:text-sm font-medium text-foreground">{layer.name}</p>
+                          <p className={`text-xs sm:text-sm font-medium ${layer.ai ? "text-amber-300" : "text-foreground"}`}>{layer.name}</p>
+                          {layer.ai && <p className="text-[8px] sm:text-[10px] font-mono text-amber-400/60 mt-1">AI LAYER</p>}
                         </motion.div>
                       ))}
                     </div>
