@@ -99,3 +99,35 @@ const DIMENSION_LABELS: Record<string, string> = {
 export function getDimensionLabel(dimension: string): string {
   return DIMENSION_LABELS[dimension] ?? dimension;
 }
+
+const POOL_LABELS: Record<string, string> = {
+  _general: "Genel",
+  sleep: "Uyku",
+  stress: "Stres",
+  emotional: "Duygusal",
+  focus: "Odaklanma",
+  routine: "Düzen",
+  nutrition: "Beslenme",
+  physical_activity: "Fiziksel Aktivite",
+  social_life: "Sosyal Yaşam",
+  self_care: "Öz Bakım",
+  relationship: "İlişki",
+  family: "Aile",
+  communication: "İletişim",
+  financial: "Finansal",
+  work_life_balance: "İş-Yaşam Dengesi",
+  life_satisfaction: "Yaşam Memnuniyeti",
+  parenting: "Ebeveynlik",
+  chronic_health: "Kronik Sağlık",
+  disability: "Engel Durumu",
+  hormonal: "Hormonal",
+  digital_habits: "Dijital Alışkanlıklar",
+  cognitive_style: "Düşünce Tarzı",
+  caregiving: "Bakım Verme",
+  hobbies_leisure: "Hobiler",
+  support: "Destek",
+};
+
+export function getPoolLabel(pool: string): string {
+  return POOL_LABELS[pool] ?? pool;
+}

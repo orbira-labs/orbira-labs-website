@@ -10,7 +10,7 @@ import {
   type DeepDiveQuestion,
   type ProfileGroup,
 } from "@/lib/pro/engine-api";
-import { getDimensionTheme, getPoolTheme, getDimensionLabel } from "@/lib/pro/dimension-colors";
+import { getDimensionTheme, getPoolTheme, getDimensionLabel, getPoolLabel } from "@/lib/pro/dimension-colors";
 import { createClient } from "@/lib/pro/supabase/client";
 import { LikertScale } from "@/components/pro/test/LikertScale";
 import { ProfileField } from "@/components/pro/test/ProfileField";
@@ -497,10 +497,10 @@ export function TestFlow({ token, clientName }: TestFlowProps) {
                   ) : (
                     <button
                       onClick={handleCoreToDone}
-                      disabled={Object.keys(coreAnswers).length < sessionData.core_questions.length}
+                      disabled={!coreAnswers[currentCoreQuestion.id]}
                       className={clsx(
                         "px-6 py-3 rounded-2xl font-semibold text-sm transition-all",
-                        Object.keys(coreAnswers).length >= sessionData.core_questions.length
+                        coreAnswers[currentCoreQuestion.id]
                           ? "bg-[#5B7B6A] text-white shadow-lg shadow-[#5B7B6A]/20 active:scale-[0.98]"
                           : "bg-gray-200 text-gray-400 cursor-not-allowed"
                       )}
@@ -578,7 +578,7 @@ export function TestFlow({ token, clientName }: TestFlowProps) {
                     Neredeyse bitti!
                   </div>
                   <div className={clsx("inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-2", deepDiveTheme.badge, deepDiveTheme.badgeText)}>
-                    {currentDeepDiveQuestion.pool}
+                    {getPoolLabel(currentDeepDiveQuestion.pool)}
                   </div>
                   <div className="text-sm text-gray-400 font-medium">
                     {currentDeepDiveIndex + 1} / {deepDiveQuestions.length}
@@ -623,10 +623,10 @@ export function TestFlow({ token, clientName }: TestFlowProps) {
                   ) : (
                     <button
                       onClick={handleDeepDiveSubmit}
-                      disabled={Object.keys(deepDiveAnswers).length < deepDiveQuestions.length}
+                      disabled={!deepDiveAnswers[currentDeepDiveQuestion.id]}
                       className={clsx(
                         "px-6 py-3 rounded-2xl font-semibold text-sm transition-all",
-                        Object.keys(deepDiveAnswers).length >= deepDiveQuestions.length
+                        deepDiveAnswers[currentDeepDiveQuestion.id]
                           ? "bg-gradient-to-r from-[#5B7B6A] to-[#4A6A59] text-white shadow-lg shadow-[#5B7B6A]/20 active:scale-[0.98]"
                           : "bg-gray-200 text-gray-400 cursor-not-allowed"
                       )}

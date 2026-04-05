@@ -45,13 +45,13 @@ export function LikertScale({ value, onChange, labels = DEFAULT_LABELS, accentCo
           );
         })}
       </div>
-      <div className="flex justify-between px-1">
+      <div className="grid grid-cols-5 gap-1 px-0.5">
         {labels.map((label, idx) => (
           <span
             key={idx}
             className={clsx(
-              "text-[10px] sm:text-xs font-medium transition-all duration-200",
-              value === idx + 1 ? `${SCALE_COLORS[idx].text} font-bold scale-105` : "text-gray-400"
+              "text-[10px] sm:text-xs font-medium transition-all duration-200 text-center leading-tight",
+              value === idx + 1 ? `${SCALE_COLORS[idx].text} font-bold` : "text-gray-400"
             )}
           >
             {label}
