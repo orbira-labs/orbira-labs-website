@@ -68,7 +68,14 @@ export function Sidebar() {
         </button>
       </div>
 
-      <nav className="flex-1 py-4 px-2.5 space-y-1">
+      {/* Sidebar geometric accent */}
+      <svg className="absolute bottom-[120px] left-1/2 -translate-x-1/2 w-[80px] h-[100px] opacity-[0.08] pointer-events-none" viewBox="0 0 80 100" fill="none">
+        <polygon points="40,5 75,25 75,65 40,85 5,65 5,25" stroke="white" strokeWidth="1" fill="none" />
+        <circle cx="40" cy="45" r="12" stroke="white" strokeWidth="0.6" fill="none" />
+        <circle cx="40" cy="45" r="3" fill="white" />
+      </svg>
+
+      <nav className="flex-1 py-4 px-2.5 space-y-1 relative">
         {NAV_ITEMS.map((item) => {
           const isActive = pathname.startsWith(item.href);
           return (

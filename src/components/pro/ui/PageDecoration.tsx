@@ -4,100 +4,104 @@ export function PageDecoration() {
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden hidden lg:block" aria-hidden>
 
-      {/* DNA Helix 1 — Sol alt, büyük */}
+      {/* 1. DNA Helix — Sol alt köşe */}
       <svg
-        className="absolute bottom-0 left-[3%] w-[160px] h-[90vh] opacity-[0.25]"
-        viewBox="0 0 160 800"
+        className="absolute bottom-0 left-[4%] w-[140px] h-[75vh] opacity-[0.22]"
+        viewBox="0 0 140 700"
         fill="none"
         preserveAspectRatio="xMidYMid slice"
       >
-        <path d="M80 0 C120 60,120 120,80 180 C40 240,40 300,80 360 C120 420,120 480,80 540 C40 600,40 660,80 720 C120 780,120 800,80 800" stroke="var(--pro-primary)" strokeWidth="2" fill="none" />
-        <path d="M80 0 C40 60,40 120,80 180 C120 240,120 300,80 360 C40 420,40 480,80 540 C120 600,120 660,80 720 C40 780,40 800,80 800" stroke="var(--pro-primary)" strokeWidth="2" fill="none" />
-        {[45,90,135,180,225,270,315,360,405,450,495,540,585,630,675,720].map((y,i) => (
-          <line key={i} x1={50+(i%2===0?-8:3)} y1={y} x2={110+(i%2===0?8:-3)} y2={y} stroke="var(--pro-primary)" strokeWidth="0.8" />
+        <path d="M70 0 C105 50,105 100,70 150 C35 200,35 250,70 300 C105 350,105 400,70 450 C35 500,35 550,70 600 C105 650,105 700,70 700" stroke="var(--pro-primary)" strokeWidth="1.8" fill="none" />
+        <path d="M70 0 C35 50,35 100,70 150 C105 200,105 250,70 300 C35 350,35 400,70 450 C105 500,105 550,70 600 C35 650,35 700,70 700" stroke="var(--pro-primary)" strokeWidth="1.8" fill="none" />
+        {[37,75,112,150,187,225,262,300,337,375,412,450,487,525,562,600].map((y,i) => (
+          <line key={i} x1={40+(i%2===0?-6:2)} y1={y} x2={100+(i%2===0?6:-2)} y2={y} stroke="var(--pro-primary)" strokeWidth="0.7" />
         ))}
-        {[45,90,135,180,225,270,315,360,405,450,495,540,585,630,675,720].map((y,i) => (
-          <circle key={`n${i}`} cx={i%2===0?42:118} cy={y} r="3.5" fill="var(--pro-primary)" />
+        {[37,75,112,150,187,225,262,300,337,375,412,450,487,525,562,600].map((y,i) => (
+          <circle key={`n${i}`} cx={i%2===0?34:106} cy={y} r="3" fill="var(--pro-primary)" />
         ))}
-        <circle r="3.5" fill="var(--pro-primary)" opacity="0.7">
-          <animateMotion dur="7s" repeatCount="indefinite" path="M80 0 C120 60,120 120,80 180 C40 240,40 300,80 360 C120 420,120 480,80 540 C40 600,40 660,80 720" />
+        <circle r="3" fill="var(--pro-primary)" opacity="0.7">
+          <animateMotion dur="7s" repeatCount="indefinite" path="M70 0 C105 50,105 100,70 150 C35 200,35 250,70 300 C105 350,105 400,70 450 C35 500,35 550,70 600" />
         </circle>
-        <circle r="2.5" fill="var(--pro-accent)" opacity="0.6">
-          <animateMotion dur="9s" repeatCount="indefinite" begin="2s" path="M80 0 C40 60,40 120,80 180 C120 240,120 300,80 360 C40 420,40 480,80 540 C120 600,120 660,80 720" />
-        </circle>
-        <circle r="2" fill="var(--pro-primary)" opacity="0.5">
-          <animateMotion dur="11s" repeatCount="indefinite" begin="5s" path="M80 0 C120 60,120 120,80 180 C40 240,40 300,80 360 C120 420,120 480,80 540 C40 600,40 660,80 720" />
+        <circle r="2" fill="var(--pro-accent)" opacity="0.6">
+          <animateMotion dur="9s" repeatCount="indefinite" begin="3s" path="M70 0 C35 50,35 100,70 150 C105 200,105 250,70 300 C35 350,35 400,70 450 C105 500,105 550,70 600" />
         </circle>
       </svg>
 
-      {/* DNA Helix 2 — Sağ üst, orta boy, terracotta vurgulu */}
+      {/* 2. Beyin / Nöron Ağı — Üst orta */}
       <svg
-        className="absolute -top-[5%] right-[8%] w-[120px] h-[65vh] opacity-[0.18]"
-        viewBox="0 0 120 600"
+        className="absolute top-[8%] left-[35%] w-[450px] h-[300px] opacity-[0.22]"
+        viewBox="0 0 450 300"
         fill="none"
-        preserveAspectRatio="xMidYMid slice"
       >
-        <path d="M60 0 C90 45,90 90,60 135 C30 180,30 225,60 270 C90 315,90 360,60 405 C30 450,30 495,60 540 C90 585,90 600,60 600" stroke="var(--pro-accent)" strokeWidth="1.8" fill="none" opacity="0.5" />
-        <path d="M60 0 C30 45,30 90,60 135 C90 180,90 225,60 270 C30 315,30 360,60 405 C90 450,90 495,60 540 C30 585,30 600,60 600" stroke="var(--pro-primary)" strokeWidth="1.8" fill="none" />
-        {[34,68,102,135,169,203,237,270,304,338,372,405,439,473,507,540].map((y,i) => (
-          <line key={i} x1={35+(i%2===0?-5:2)} y1={y} x2={85+(i%2===0?5:-2)} y2={y} stroke="var(--pro-primary)" strokeWidth="0.6" />
-        ))}
-        {[34,68,102,135,169,203,237,270,304,338,372,405,439,473,507,540].map((y,i) => (
-          <circle key={`n${i}`} cx={i%2===0?30:90} cy={y} r="2.5" fill={i%3===0?"var(--pro-accent)":"var(--pro-primary)"} />
-        ))}
-        <circle r="2.5" fill="var(--pro-accent)" opacity="0.7">
-          <animateMotion dur="8s" repeatCount="indefinite" path="M60 0 C90 45,90 90,60 135 C30 180,30 225,60 270 C90 315,90 360,60 405 C30 450,30 495,60 540" />
-        </circle>
-        <circle r="2" fill="var(--pro-primary)" opacity="0.5">
-          <animateMotion dur="10s" repeatCount="indefinite" begin="4s" path="M60 0 C30 45,30 90,60 135 C90 180,90 225,60 270 C30 315,30 360,60 405 C90 450,90 495,60 540" />
-        </circle>
+        <circle cx="80" cy="60" r="5" fill="var(--pro-primary)" />
+        <circle cx="180" cy="30" r="4" fill="var(--pro-primary)" />
+        <circle cx="270" cy="80" r="6" fill="var(--pro-primary)" />
+        <circle cx="370" cy="45" r="4.5" fill="var(--pro-primary)" />
+        <circle cx="130" cy="150" r="5.5" fill="var(--pro-primary)" />
+        <circle cx="220" cy="180" r="4" fill="var(--pro-primary)" />
+        <circle cx="320" cy="160" r="5" fill="var(--pro-primary)" />
+        <circle cx="400" cy="130" r="3.5" fill="var(--pro-primary)" />
+        <circle cx="50" cy="220" r="4" fill="var(--pro-primary)" />
+        <circle cx="170" cy="260" r="3.5" fill="var(--pro-primary)" />
+        <circle cx="290" cy="250" r="4.5" fill="var(--pro-primary)" />
+
+        <line x1="80" y1="60" x2="180" y2="30" stroke="var(--pro-primary)" strokeWidth="0.8" />
+        <line x1="180" y1="30" x2="270" y2="80" stroke="var(--pro-primary)" strokeWidth="0.8" />
+        <line x1="270" y1="80" x2="370" y2="45" stroke="var(--pro-primary)" strokeWidth="0.7" />
+        <line x1="80" y1="60" x2="130" y2="150" stroke="var(--pro-primary)" strokeWidth="0.7" />
+        <line x1="270" y1="80" x2="320" y2="160" stroke="var(--pro-primary)" strokeWidth="0.7" />
+        <line x1="130" y1="150" x2="220" y2="180" stroke="var(--pro-primary)" strokeWidth="0.6" />
+        <line x1="220" y1="180" x2="320" y2="160" stroke="var(--pro-primary)" strokeWidth="0.6" />
+        <line x1="320" y1="160" x2="400" y2="130" stroke="var(--pro-primary)" strokeWidth="0.6" />
+        <line x1="370" y1="45" x2="400" y2="130" stroke="var(--pro-primary)" strokeWidth="0.5" />
+        <line x1="50" y1="220" x2="130" y2="150" stroke="var(--pro-primary)" strokeWidth="0.5" />
+        <line x1="170" y1="260" x2="220" y2="180" stroke="var(--pro-primary)" strokeWidth="0.5" />
+        <line x1="290" y1="250" x2="320" y2="160" stroke="var(--pro-primary)" strokeWidth="0.5" />
+        <line x1="50" y1="220" x2="170" y2="260" stroke="var(--pro-primary)" strokeWidth="0.4" />
+        <line x1="170" y1="260" x2="290" y2="250" stroke="var(--pro-primary)" strokeWidth="0.4" />
       </svg>
 
-      {/* DNA Helix 3 — Sağ alt, küçük, hafif */}
+      {/* 3. AI Hexagon Grid — Sağ orta */}
       <svg
-        className="absolute bottom-[5%] right-[2%] w-[80px] h-[45vh] opacity-[0.12]"
-        viewBox="0 0 80 400"
+        className="absolute top-[40%] right-[5%] w-[200px] h-[250px] opacity-[0.22]"
+        viewBox="0 0 200 250"
         fill="none"
-        preserveAspectRatio="xMidYMid slice"
       >
-        <path d="M40 0 C60 30,60 60,40 90 C20 120,20 150,40 180 C60 210,60 240,40 270 C20 300,20 330,40 360 C60 390,60 400,40 400" stroke="var(--pro-primary)" strokeWidth="1.5" fill="none" />
-        <path d="M40 0 C20 30,20 60,40 90 C60 120,60 150,40 180 C20 210,20 240,40 270 C60 300,60 330,40 360 C20 390,20 400,40 400" stroke="var(--pro-primary)" strokeWidth="1.5" fill="none" />
-        {[22,45,68,90,112,135,158,180,202,225,248,270,292,315,338,360].map((y,i) => (
-          <line key={i} x1={22+(i%2===0?-3:1)} y1={y} x2={58+(i%2===0?3:-1)} y2={y} stroke="var(--pro-primary)" strokeWidth="0.5" />
-        ))}
-        {[22,45,68,90,112,135,158,180,202,225,248,270,292,315,338,360].map((y,i) => (
-          <circle key={`n${i}`} cx={i%2===0?19:61} cy={y} r="2" fill="var(--pro-primary)" />
-        ))}
-        <circle r="2" fill="var(--pro-primary)" opacity="0.6">
-          <animateMotion dur="6s" repeatCount="indefinite" path="M40 0 C60 30,60 60,40 90 C20 120,20 150,40 180 C60 210,60 240,40 270 C20 300,20 330,40 360" />
-        </circle>
+        <polygon points="100,10 140,30 140,70 100,90 60,70 60,30" stroke="var(--pro-primary)" strokeWidth="1" fill="none" />
+        <polygon points="100,90 140,110 140,150 100,170 60,150 60,110" stroke="var(--pro-primary)" strokeWidth="1" fill="none" />
+        <polygon points="100,170 140,190 140,230 100,250 60,230 60,190" stroke="var(--pro-primary)" strokeWidth="1" fill="none" />
+        <polygon points="155,50 195,70 195,110 155,130 115,110 115,70" stroke="var(--pro-primary)" strokeWidth="0.7" fill="none" opacity="0.6" />
+        <polygon points="45,130 85,150 85,190 45,210 5,190 5,150" stroke="var(--pro-primary)" strokeWidth="0.7" fill="none" opacity="0.6" />
+
+        <circle cx="100" cy="50" r="3" fill="var(--pro-primary)" />
+        <circle cx="100" cy="130" r="3" fill="var(--pro-primary)" />
+        <circle cx="100" cy="210" r="3" fill="var(--pro-accent)" />
+        <circle cx="155" cy="90" r="2.5" fill="var(--pro-primary)" />
+        <circle cx="45" cy="170" r="2.5" fill="var(--pro-primary)" />
+        <line x1="100" y1="50" x2="100" y2="130" stroke="var(--pro-primary)" strokeWidth="0.5" strokeDasharray="4 3" />
+        <line x1="100" y1="130" x2="100" y2="210" stroke="var(--pro-primary)" strokeWidth="0.5" strokeDasharray="4 3" />
       </svg>
 
-      {/* Neuron nodes — scattered connection dots */}
+      {/* 4. Pulse / Dalga — Alt orta */}
       <svg
-        className="absolute top-[10%] left-[40%] w-[400px] h-[300px] opacity-[0.05]"
-        viewBox="0 0 400 300"
+        className="absolute bottom-[8%] left-[30%] w-[400px] h-[80px] opacity-[0.22]"
+        viewBox="0 0 400 80"
         fill="none"
       >
-        <circle cx="50" cy="80" r="4" fill="var(--pro-primary)" />
-        <circle cx="150" cy="40" r="3" fill="var(--pro-primary)" />
-        <circle cx="200" cy="120" r="5" fill="var(--pro-primary)" />
-        <circle cx="300" cy="60" r="3.5" fill="var(--pro-primary)" />
-        <circle cx="350" cy="150" r="4" fill="var(--pro-primary)" />
-        <circle cx="100" cy="200" r="3" fill="var(--pro-primary)" />
-        <circle cx="250" cy="220" r="4.5" fill="var(--pro-primary)" />
-        <line x1="50" y1="80" x2="150" y2="40" stroke="var(--pro-primary)" strokeWidth="0.8" />
-        <line x1="150" y1="40" x2="200" y2="120" stroke="var(--pro-primary)" strokeWidth="0.8" />
-        <line x1="200" y1="120" x2="300" y2="60" stroke="var(--pro-primary)" strokeWidth="0.6" />
-        <line x1="300" y1="60" x2="350" y2="150" stroke="var(--pro-primary)" strokeWidth="0.6" />
-        <line x1="50" y1="80" x2="100" y2="200" stroke="var(--pro-primary)" strokeWidth="0.5" />
-        <line x1="200" y1="120" x2="250" y2="220" stroke="var(--pro-primary)" strokeWidth="0.5" />
-        <line x1="100" y1="200" x2="250" y2="220" stroke="var(--pro-primary)" strokeWidth="0.5" />
+        <path
+          d="M0 40 L60 40 L80 15 L100 65 L120 25 L140 55 L160 35 L180 45 L200 40 L260 40 L280 20 L300 60 L320 30 L340 50 L360 40 L400 40"
+          stroke="var(--pro-primary)"
+          strokeWidth="1.5"
+          fill="none"
+        />
+        <circle r="3" fill="var(--pro-primary)" opacity="0.6">
+          <animateMotion dur="4s" repeatCount="indefinite" path="M0 40 L60 40 L80 15 L100 65 L120 25 L140 55 L160 35 L180 45 L200 40 L260 40 L280 20 L300 60 L320 30 L340 50 L360 40 L400 40" />
+        </circle>
       </svg>
 
       {/* Gradient glows */}
-      <div className="absolute top-[5%] left-[5%] w-[500px] h-[500px] rounded-full bg-[var(--pro-primary)] opacity-[0.04] blur-[120px]" />
-      <div className="absolute bottom-[10%] right-[5%] w-[400px] h-[400px] rounded-full bg-[var(--pro-accent)] opacity-[0.03] blur-[100px]" />
+      <div className="absolute top-[5%] left-[15%] w-[400px] h-[400px] rounded-full bg-[var(--pro-primary)] opacity-[0.03] blur-[100px]" />
+      <div className="absolute bottom-[15%] right-[10%] w-[350px] h-[350px] rounded-full bg-[var(--pro-accent)] opacity-[0.025] blur-[90px]" />
 
       {/* Top gradient band */}
       <div className="absolute top-0 left-0 right-0 h-[200px] bg-gradient-to-b from-[var(--pro-primary-light)] to-transparent opacity-20" />

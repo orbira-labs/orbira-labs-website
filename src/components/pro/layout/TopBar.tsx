@@ -12,7 +12,7 @@ export function TopBar({ title }: TopBarProps) {
   const { professional } = useProContext();
 
   return (
-    <header className="h-16 border-b border-[#C8D8CE] bg-gradient-to-r from-[#E8F0EB] via-[#EEF3F0] to-[#F2F5F3] flex items-center justify-between px-4 sm:px-6 lg:px-8 sticky top-0 z-30">
+    <header className="h-16 border-b border-[#B8CCBE] bg-gradient-to-r from-[#DCE8E0] via-[#E3ECE6] to-[#E8EDE9] flex items-center justify-between px-4 sm:px-6 lg:px-8 sticky top-0 z-30">
       <h1 className="text-lg font-semibold text-[#3D5A4C]">{title}</h1>
 
       <div className="flex items-center gap-3">
