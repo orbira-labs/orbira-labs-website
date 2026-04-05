@@ -1,6 +1,5 @@
 import { createClient } from "@/lib/pro/supabase/server";
 import { redirect } from "next/navigation";
-import { ProProvider } from "@/lib/pro/context";
 import { ProShell } from "@/components/pro/layout/ProShell";
 
 async function getSessionData() {
@@ -38,11 +37,11 @@ export default async function PanelLayout({
   }
 
   return (
-    <ProProvider
+    <ProShell
       initialProfessional={professional}
       initialCredits={credits || 0}
     >
-      <ProShell>{children}</ProShell>
-    </ProProvider>
+      {children}
+    </ProShell>
   );
 }
