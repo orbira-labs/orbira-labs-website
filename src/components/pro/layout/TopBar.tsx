@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Bell, FlaskConical, Send } from "lucide-react";
-import Link from "next/link";
+import { Bell, Send } from "lucide-react";
 import { Avatar } from "../ui/Avatar";
 import { useProContext } from "@/lib/pro/context";
 import { SendTestModal } from "@/components/pro/tests/SendTestModal";
@@ -13,7 +12,7 @@ interface TopBarProps {
 }
 
 export function TopBar({ title, onTestSent }: TopBarProps) {
-  const { professional, creditBalance } = useProContext();
+  const { professional } = useProContext();
   const [showSendModal, setShowSendModal] = useState(false);
 
   const handleTestSent = () => {
@@ -39,16 +38,6 @@ export function TopBar({ title, onTestSent }: TopBarProps) {
             <Send className="h-4 w-4" />
             <span className="hidden sm:inline">Analiz Gönder</span>
           </button>
-
-          {/* Kredi Göstergesi */}
-          <Link
-            href="/pro/billing"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/60 hover:bg-white/80 border border-[#B8CCBE] transition-all duration-200"
-          >
-            <FlaskConical className="h-3.5 w-3.5 text-[#5B7B6A]" />
-            <span className="text-sm font-semibold text-[#3D5A4C]">{creditBalance}</span>
-            <span className="text-xs text-[#6B8F7B] hidden sm:inline">kredi</span>
-          </Link>
 
           {/* Bildirimler */}
           <button className="relative p-2 rounded-xl text-[#6B8F7B] hover:bg-white/60 hover:text-[#3D5A4C] transition-all duration-200">
