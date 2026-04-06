@@ -8,9 +8,8 @@ import { Badge } from "@/components/pro/ui/Badge";
 import { EmptyState } from "@/components/pro/ui/EmptyState";
 import { Avatar } from "@/components/pro/ui/Avatar";
 import { Skeleton } from "@/components/pro/ui/Skeleton";
-import { SendTestModal } from "@/components/pro/tests/SendTestModal";
 import { ActionCenter, InsightCard, QuickStats } from "@/components/pro/dashboard";
-import { Users, Calendar, FlaskConical, CheckCircle2, Eye, Send, Share2, Copy, Mail, MessageCircle, Check } from "lucide-react";
+import { Users, Calendar, FlaskConical, CheckCircle2, Eye, Share2, Copy, Mail, MessageCircle, Check } from "lucide-react";
 import { useProContext } from "@/lib/pro/context";
 import { useDashboard } from "@/lib/pro/hooks/useDashboard";
 import { formatTime, formatRelative, formatDayLabel, generateWhatsAppLink, buildTestMessage } from "@/lib/pro/utils";
@@ -161,7 +160,6 @@ export default function DashboardPage() {
   const { professional } = useProContext();
   const { stats, upcomingAppointments, recentTests, loading, refresh } = useDashboard();
   const [shareOpenId, setShareOpenId] = useState<string | null>(null);
-  const [showSendModal, setShowSendModal] = useState(false);
 
   const pendingReports = recentTests.filter(t => t.status === "completed").length;
   const waitingAnalyses = recentTests.filter(t => t.status === "sent" || t.status === "started").length;
@@ -173,12 +171,7 @@ export default function DashboardPage() {
 
   return (
     <>
-      <TopBar title="Ofisim" />
-      <SendTestModal
-        open={showSendModal}
-        onClose={() => setShowSendModal(false)}
-        onSent={refresh}
-      />
+      <TopBar title="Ofisim" onTestSent={refresh} />
       <main className="flex-1 p-4 sm:p-6 lg:p-8">
         <motion.div 
           className="mx-auto max-w-5xl space-y-6"
@@ -186,24 +179,15 @@ export default function DashboardPage() {
           initial="hidden"
           animate="visible"
         >
-          {/* Greeting + quick action */}
-          <motion.div variants={cardReveal} className="flex items-center justify-between">
-            <div>
-              <div className="flex items-center gap-3">
-                <div className="h-1.5 w-1.5 rounded-full bg-pro-primary animate-pulse" />
-                <h2 className="text-xl sm:text-2xl font-bold text-pro-text tracking-tight">
-                  {getGreeting()}, <span className="text-pro-primary">{professional?.first_name || "Hoş geldiniz"}</span>
-                </h2>
-              </div>
-              <p className="text-sm text-pro-text-tertiary mt-1 ml-[18px]">{formatTodayDate()}</p>
+          {/* Greeting */}
+          <motion.div variants={cardReveal}>
+            <div className="flex items-center gap-3">
+              <div className="h-1.5 w-1.5 rounded-full bg-pro-primary animate-pulse" />
+              <h2 className="text-xl sm:text-2xl font-bold text-pro-text tracking-tight">
+                {getGreeting()}, <span className="text-pro-primary">{professional?.first_name || "Hoş geldiniz"}</span>
+              </h2>
             </div>
-            <button
-              onClick={() => setShowSendModal(true)}
-              className="hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-xl bg-pro-primary text-white text-sm font-medium hover:bg-pro-primary-hover transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5"
-            >
-              <Send className="h-4 w-4" />
-              Analiz Gönder
-            </button>
+            <p className="text-sm text-pro-text-tertiary mt-1 ml-[18px]">{formatTodayDate()}</p>
           </motion.div>
 
           {/* Action Center + Insight - New Premium Section */}
