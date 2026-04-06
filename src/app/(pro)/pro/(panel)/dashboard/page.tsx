@@ -9,6 +9,7 @@ import { EmptyState } from "@/components/pro/ui/EmptyState";
 import { Avatar } from "@/components/pro/ui/Avatar";
 import { Skeleton } from "@/components/pro/ui/Skeleton";
 import { QuickStats } from "@/components/pro/dashboard";
+import { NotesCard } from "@/components/pro/dashboard/NotesCard";
 import { Users, Calendar, FlaskConical, CheckCircle2, Eye, Share2, Copy, Mail, MessageCircle, Check } from "lucide-react";
 import { useProContext } from "@/lib/pro/context";
 import { useDashboard } from "@/lib/pro/hooks/useDashboard";
@@ -70,21 +71,6 @@ const STATUS_MAP: Record<string, { label: string; variant: "success" | "warning"
   completed: { label: "Tamamlandı", variant: "success" },
   expired: { label: "Süresi Doldu", variant: "danger" },
 };
-
-function getGreeting(): string {
-  const h = new Date().getHours();
-  if (h < 12) return "Günaydın";
-  if (h < 18) return "İyi günler";
-  return "İyi akşamlar";
-}
-
-function formatTodayDate(): string {
-  return new Date().toLocaleDateString("tr-TR", {
-    day: "numeric",
-    month: "long",
-    weekday: "long",
-  });
-}
 
 function SharePopover({ testToken, clientName, professionalName, onClose }: {
   testToken: string;
@@ -168,35 +154,24 @@ export default function DashboardPage() {
 
   return (
     <>
-      <TopBar title="Ofisim" onTestSent={refresh} />
-      <main className="flex-1 p-4 sm:p-6 lg:p-8">
+      <TopBar showGreeting onTestSent={refresh} />
+      <main className="flex-1 p-3 sm:p-5 lg:p-6">
         <motion.div 
-          className="mx-auto max-w-5xl space-y-6"
+          className="mx-auto max-w-6xl"
           variants={staggerContainer}
           initial="hidden"
           animate="visible"
         >
-          {/* Greeting */}
-          <motion.div variants={cardReveal}>
-            <div className="flex items-center gap-3">
-              <div className="h-1.5 w-1.5 rounded-full bg-pro-primary animate-pulse" />
-              <h2 className="text-xl sm:text-2xl font-bold text-pro-text tracking-tight">
-                {getGreeting()}, <span className="text-pro-primary">{professional?.first_name || "Hoş geldiniz"}</span>
-              </h2>
-            </div>
-            <p className="text-sm text-pro-text-tertiary mt-1 ml-[18px]">{formatTodayDate()}</p>
-          </motion.div>
-
           {/* Main Dashboard Container */}
           <motion.div 
             variants={cardReveal}
-            className="bg-gradient-to-br from-[#5B7B6A]/10 via-[#5B7B6A]/5 to-transparent rounded-2xl p-4 sm:p-6 space-y-4 sm:space-y-5"
+            className="bg-gradient-to-br from-[#5B7B6A]/20 to-[#5B7B6A]/8 rounded-2xl p-4 sm:p-5 space-y-4"
           >
             {/* Stat cards */}
             <QuickStats stats={statCards} loading={loading} />
 
-            {/* Bottom panels */}
-            <div className="grid lg:grid-cols-2 gap-4 sm:gap-5">
+            {/* Bottom panels - 3 columns */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               <Card padding="lg" accent="primary" variant="elevated">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-semibold text-pro-text flex items-center gap-2">
@@ -312,6 +287,9 @@ export default function DashboardPage() {
                 </div>
               )}
             </Card>
+
+              {/* Notes Card */}
+              <NotesCard />
             </div>
           </motion.div>
         </motion.div>
