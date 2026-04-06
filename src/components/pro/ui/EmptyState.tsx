@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
+import Link from "next/link";
 import { Button } from "./Button";
 import { scaleIn } from "@/lib/pro/animations";
 
@@ -11,6 +12,7 @@ interface EmptyStateProps {
   description: string;
   actionLabel?: string;
   onAction?: () => void;
+  actionHref?: string;
   secondaryActionLabel?: string;
   onSecondaryAction?: () => void;
 }
@@ -21,6 +23,7 @@ export function EmptyState({
   description,
   actionLabel,
   onAction,
+  actionHref,
   secondaryActionLabel,
   onSecondaryAction,
 }: EmptyStateProps) {
@@ -69,7 +72,14 @@ export function EmptyState({
         transition={{ delay: 0.25 }}
         className="flex flex-col sm:flex-row gap-2"
       >
-        {actionLabel && onAction && (
+        {actionLabel && actionHref && (
+          <Link href={actionHref}>
+            <Button variant="primary" size="md">
+              {actionLabel}
+            </Button>
+          </Link>
+        )}
+        {actionLabel && onAction && !actionHref && (
           <Button variant="primary" size="md" onClick={onAction}>
             {actionLabel}
           </Button>

@@ -276,7 +276,7 @@ export default function DashboardPage() {
                   ))}
                 </div>
               ) : recentTests.length === 0 ? (
-                <EmptyState icon={FlaskConical} title="Henüz analiz yok" description="İlk karakter analizinizi gönderin ve danışanlarınızı daha derinden tanıyın" actionLabel="Analiz Gönder" onAction={() => setShowSendModal(true)} />
+                <EmptyState icon={FlaskConical} title="Henüz analiz yok" description="İlk karakter analizinizi gönderin ve danışanlarınızı daha derinden tanıyın" actionLabel="Analiz Gönder" actionHref="/pro/tests" />
               ) : (
                 <div className="space-y-2.5">
                   {recentTests.map((test) => {
