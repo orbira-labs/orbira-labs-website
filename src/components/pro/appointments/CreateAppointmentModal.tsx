@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { toast } from "sonner";
 import { Modal } from "@/components/pro/ui/Modal";
 import { Button } from "@/components/pro/ui/Button";
@@ -15,17 +13,15 @@ import { APPOINTMENT_DURATIONS } from "@/lib/pro/constants";
 import { UserPlus, Users } from "lucide-react";
 import { clsx } from "clsx";
 
-const appointmentSchema = z.object({
-  client_id: z.string().optional(),
-  new_first_name: z.string().optional(),
-  new_last_name: z.string().optional(),
-  starts_at: z.string().min(1, "Tarih seçin"),
-  duration_minutes: z.coerce.number().min(15),
-  subject: z.string().optional(),
-  note: z.string().optional(),
-});
-
-type AppointmentInput = z.infer<typeof appointmentSchema>;
+interface AppointmentInput {
+  client_id?: string;
+  new_first_name?: string;
+  new_last_name?: string;
+  starts_at: string;
+  duration_minutes: number;
+  subject?: string;
+  note?: string;
+}
 
 interface CreateAppointmentModalProps {
   open: boolean;
@@ -42,11 +38,8 @@ export function CreateAppointmentModal({ open, onClose, onCreated }: CreateAppoi
     register,
     handleSubmit,
     reset,
-    watch,
-    setValue,
     formState: { errors },
   } = useForm<AppointmentInput>({
-    resolver: zodResolver(appointmentSchema),
     defaultValues: { duration_minutes: 60 },
   });
 
