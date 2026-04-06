@@ -193,15 +193,15 @@ export default function DashboardPage() {
                   ))}
                 </div>
               ) : upcomingAppointments.length === 0 ? (
-                <EmptyState icon={Calendar} title="Henüz randevu yok" description="İlk randevunuzu oluşturun ve danışanlarınızı takip edin" actionLabel="Randevu Oluştur" onAction={() => {}} />
+                <EmptyState icon={Calendar} title="Henüz randevu yok" description="İlk randevunuzu oluşturun ve danışanlarınızı takip edin" actionLabel="Randevu Oluştur" actionHref="/pro/appointments" />
               ) : (
-                <div className="space-y-2.5">
-                  {upcomingAppointments.map((apt) => (
-                    <div key={apt.id} className="flex items-center gap-3 p-3 rounded-xl bg-pro-surface-alt">
+                <div className="space-y-2">
+                  {upcomingAppointments.slice(0, 3).map((apt) => (
+                    <div key={apt.id} className="flex items-center gap-3 p-2.5 rounded-lg bg-pro-surface-alt">
                       <Avatar firstName={apt.client?.first_name || "?"} lastName={apt.client?.last_name || ""} size="sm" />
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-pro-text truncate">{apt.client?.first_name} {apt.client?.last_name}</p>
-                        <p className="text-xs text-pro-text-secondary">{apt.subject || "Randevu"}</p>
+                        <p className="text-xs text-pro-text-secondary truncate">{apt.subject || "Randevu"}</p>
                       </div>
                       <div className="text-right shrink-0">
                         <p className="text-sm font-medium text-pro-text">{formatTime(apt.starts_at)}</p>
@@ -209,6 +209,15 @@ export default function DashboardPage() {
                       </div>
                     </div>
                   ))}
+                  {upcomingAppointments.length > 0 && (
+                    <Link
+                      href="/pro/appointments"
+                      className="flex items-center justify-center gap-1.5 w-full py-2 mt-1 text-xs font-medium text-pro-primary hover:bg-pro-primary-light rounded-lg transition-colors"
+                    >
+                      <Calendar className="h-3.5 w-3.5" />
+                      Randevu Oluştur
+                    </Link>
+                  )}
                 </div>
               )}
             </Card>
@@ -234,41 +243,41 @@ export default function DashboardPage() {
                   ))}
                 </div>
               ) : recentTests.length === 0 ? (
-                <EmptyState icon={FlaskConical} title="Henüz analiz yok" description="İlk karakter analizinizi gönderin ve danışanlarınızı daha derinden tanıyın" actionLabel="Analiz Gönder" actionHref="/pro/tests" />
+                <EmptyState icon={FlaskConical} title="Henüz analiz yok" description="İlk karakter analizinizi gönderin" actionLabel="Analiz Gönder" actionHref="/pro/tests" />
               ) : (
-                <div className="space-y-2.5">
-                  {recentTests.map((test) => {
+                <div className="space-y-2">
+                  {recentTests.slice(0, 4).map((test) => {
                     const s = STATUS_MAP[test.status] || STATUS_MAP.sent;
                     const isCompleted = test.status === "completed";
                     const isPending = test.status !== "completed" && test.status !== "expired";
                     const profName = professional ? `${professional.first_name} ${professional.last_name}` : "";
 
                     return (
-                      <div key={test.id} className="flex items-center gap-3 p-3 rounded-xl bg-pro-surface-alt">
+                      <div key={test.id} className="flex items-center gap-2 p-2.5 rounded-lg bg-pro-surface-alt">
                         <Avatar firstName={test.client?.first_name || "?"} lastName={test.client?.last_name || ""} size="sm" />
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium text-pro-text truncate">{test.client?.first_name} {test.client?.last_name}</p>
                           <p className="text-xs text-pro-text-tertiary">{formatRelative(test.created_at)}</p>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Badge variant={s.variant} dot>{s.label}</Badge>
+                        <div className="flex items-center gap-1.5">
+                          <Badge variant={s.variant} size="sm" dot>{s.label}</Badge>
                           {isCompleted && (
                             <Link
                               href={`/pro/tests/${test.id}`}
-                              className="p-1.5 rounded-lg text-pro-primary hover:bg-pro-primary-light transition-colors"
+                              className="p-1 rounded-lg text-pro-primary hover:bg-pro-primary-light transition-colors"
                               title="Sonuçları Gör"
                             >
-                              <Eye className="h-4 w-4" />
+                              <Eye className="h-3.5 w-3.5" />
                             </Link>
                           )}
                           {isPending && (
                             <div className="relative">
                               <button
                                 onClick={() => setShareOpenId(shareOpenId === test.id ? null : test.id)}
-                                className="p-1.5 rounded-lg text-pro-text-tertiary hover:text-pro-primary hover:bg-pro-primary-light transition-colors"
+                                className="p-1 rounded-lg text-pro-text-tertiary hover:text-pro-primary hover:bg-pro-primary-light transition-colors"
                                 title="Analizi Paylaş"
                               >
-                                <Share2 className="h-4 w-4" />
+                                <Share2 className="h-3.5 w-3.5" />
                               </button>
                               {shareOpenId === test.id && (
                                 <SharePopover
