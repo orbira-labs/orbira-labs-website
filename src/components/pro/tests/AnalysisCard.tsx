@@ -120,7 +120,7 @@ export function AnalysisCard({ test, onCopyLink, onResend, onPreview }: Analysis
                     "flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors",
                     linkCopied
                       ? "text-pro-success bg-pro-success-light"
-                      : "text-pro-text-secondary hover:text-pro-primary hover:bg-pro-primary-light"
+                      : "text-pro-text-secondary hover:text-[var(--pro-analysis)] hover:bg-[var(--pro-analysis-light)]"
                   )}
                 >
                   {linkCopied ? <Check className="h-3.5 w-3.5" /> : <Link2 className="h-3.5 w-3.5" />}
@@ -144,7 +144,7 @@ export function AnalysisCard({ test, onCopyLink, onResend, onPreview }: Analysis
                 {onPreview && (
                   <button
                     onClick={() => onPreview(test.id)}
-                    className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-pro-text-secondary hover:text-pro-primary hover:bg-pro-primary-light transition-colors"
+                    className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-pro-text-secondary hover:text-[var(--pro-analysis)] hover:bg-[var(--pro-analysis-light)] transition-colors"
                   >
                     <Eye className="h-3.5 w-3.5" />
                     Önizleme
@@ -153,7 +153,7 @@ export function AnalysisCard({ test, onCopyLink, onResend, onPreview }: Analysis
                 
                 <Link
                   href={`/pro/tests/${test.id}`}
-                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-pro-primary hover:bg-pro-primary-light transition-colors ml-auto"
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-[var(--pro-analysis)] hover:bg-[var(--pro-analysis-light)] transition-colors ml-auto"
                 >
                   Raporu Aç
                   <ChevronRight className="h-3.5 w-3.5" />

@@ -43,7 +43,6 @@ export interface Appointment {
   client_id: string;
   starts_at: string;
   duration_minutes: number;
-  subject: string | null;
   note: string | null;
   status: "scheduled" | "completed" | "cancelled";
   created_at: string;

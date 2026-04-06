@@ -118,10 +118,10 @@ export default function BillingPage() {
                 <div className="bg-gradient-to-br from-[#EDF5F0] to-[#E0EDE4] px-6 py-5">
                   <p className="text-xs font-semibold text-pro-primary uppercase tracking-wide mb-2">Başlangıç</p>
                   <div className="flex items-end gap-1">
-                    <span className="text-4xl font-bold text-pro-text">₺164</span>
-                    <span className="text-xl font-semibold text-pro-text-secondary mb-1">,95</span>
+                    <span className="text-4xl font-bold text-pro-text">5</span>
+                    <span className="text-xl font-semibold text-pro-text-secondary mb-1">Analiz Kredisi</span>
                   </div>
-                  <p className="text-xs text-pro-text-tertiary mt-1">5 analiz kredisi · analiz başına ₺32,99</p>
+                  <p className="text-xs text-pro-text-tertiary mt-1">analiz başına ₺32,99</p>
                 </div>
                 <div className="px-6 py-5 flex-1 flex flex-col">
                   <ul className="space-y-2.5 flex-1">
@@ -136,7 +136,7 @@ export default function BillingPage() {
                     onClick={() => toast.info("Ödeme sistemi yakında aktif olacak")}
                     className="mt-5 w-full py-3 rounded-xl border-2 border-pro-primary text-pro-primary font-semibold hover:bg-pro-primary hover:text-white transition-all active:scale-[0.98]"
                   >
-                    Satın Al
+                    Satın Al · ₺164,95
                   </button>
                 </div>
               </div>
@@ -154,10 +154,10 @@ export default function BillingPage() {
                 <div className="relative px-6 py-5">
                   <p className="text-xs font-semibold text-white/80 uppercase tracking-wide mb-2">Profesyonel</p>
                   <div className="flex items-end gap-1">
-                    <span className="text-4xl font-bold text-white">₺540</span>
-                    <span className="text-xl font-semibold text-white/70 mb-1">,00</span>
+                    <span className="text-4xl font-bold text-white">20</span>
+                    <span className="text-xl font-semibold text-white/70 mb-1">Analiz Kredisi</span>
                   </div>
-                  <p className="text-xs text-white/55 mt-1">20 analiz kredisi · analiz başına ₺27,00</p>
+                  <p className="text-xs text-white/55 mt-1">analiz başına ₺27,00</p>
                 </div>
 
                 <div className="relative px-6 py-5 flex-1 flex flex-col">
@@ -177,7 +177,7 @@ export default function BillingPage() {
                     onClick={() => toast.info("Ödeme sistemi yakında aktif olacak")}
                     className="mt-5 w-full py-3 rounded-xl bg-white text-[#8B6914] font-semibold shadow-lg hover:bg-white/95 transition-all active:scale-[0.98]"
                   >
-                    Satın Al
+                    Satın Al · ₺540,00
                   </button>
                 </div>
               </div>

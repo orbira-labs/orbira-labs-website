@@ -4,7 +4,7 @@ import type { HTMLAttributes } from "react";
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
   hover?: boolean;
   padding?: "sm" | "md" | "lg" | "none";
-  accent?: "primary" | "accent" | "none";
+  accent?: "primary" | "accent" | "client" | "appointment" | "analysis" | "none";
   variant?: "default" | "elevated" | "flat";
 }
 
@@ -46,7 +46,10 @@ export function Card({
           className={clsx(
             "absolute top-0 left-0 w-1 h-full rounded-l-2xl",
             accent === "primary" && "bg-gradient-to-b from-pro-primary to-pro-primary-hover",
-            accent === "accent" && "bg-gradient-to-b from-pro-accent to-pro-accent-hover"
+            accent === "accent" && "bg-gradient-to-b from-pro-accent to-pro-accent-hover",
+            accent === "client" && "bg-gradient-to-b from-[var(--pro-client)] to-[var(--pro-client-hover)]",
+            accent === "appointment" && "bg-gradient-to-b from-[var(--pro-appointment)] to-[var(--pro-appointment-hover)]",
+            accent === "analysis" && "bg-gradient-to-b from-[var(--pro-analysis)] to-[var(--pro-analysis-hover)]"
           )}
         />
       )}

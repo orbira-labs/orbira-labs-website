@@ -21,7 +21,6 @@ interface SessionPreviewData {
   clientFirstName: string;
   clientLastName: string;
   startsAt: string;
-  subject?: string;
   hasRecentAnalysis: boolean;
   analysisId?: string;
   analysisHighlights?: string[];
@@ -77,7 +76,7 @@ export function SessionPreviewCard({ session, onViewSummary }: SessionPreviewCar
                   {session.clientName}
                 </p>
                 <p className="text-xs text-pro-text-tertiary mt-0.5">
-                  {session.subject || "Randevu"}
+                  Randevu
                 </p>
               </div>
               {isSoon && (
@@ -102,13 +101,13 @@ export function SessionPreviewCard({ session, onViewSummary }: SessionPreviewCar
             {session.hasRecentAnalysis && session.analysisHighlights && (
               <div className="mt-3 p-3 bg-pro-surface-alt rounded-xl">
                 <div className="flex items-center gap-1.5 text-xs font-medium text-pro-text mb-2">
-                  <FileText className="h-3.5 w-3.5 text-pro-primary" />
+                  <FileText className="h-3.5 w-3.5 text-[var(--pro-analysis)]" />
                   Son Analiz Özeti
                 </div>
                 <div className="space-y-1">
                   {session.analysisHighlights.slice(0, 2).map((highlight, i) => (
                     <div key={i} className="flex items-start gap-2 text-xs text-pro-text-secondary">
-                      <div className="h-1.5 w-1.5 rounded-full bg-pro-primary mt-1.5 shrink-0" />
+                      <div className="h-1.5 w-1.5 rounded-full bg-[var(--pro-analysis)] mt-1.5 shrink-0" />
                       <span>{highlight}</span>
                     </div>
                   ))}

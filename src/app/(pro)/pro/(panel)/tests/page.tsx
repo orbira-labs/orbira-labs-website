@@ -12,7 +12,7 @@ import { Avatar } from "@/components/pro/ui/Avatar";
 import { EmptyState } from "@/components/pro/ui/EmptyState";
 import { Skeleton } from "@/components/pro/ui/Skeleton";
 import { SendTestModal } from "@/components/pro/tests/SendTestModal";
-import { FlaskConical, Eye, Link2, Check, CreditCard } from "lucide-react";
+import { FlaskConical, Eye, Link2, Check, Send } from "lucide-react";
 import { formatDate } from "@/lib/pro/utils";
 import { TEST_STATUSES } from "@/lib/pro/constants";
 import { clsx } from "clsx";
@@ -56,31 +56,57 @@ export default function TestsPage() {
           <div className="bg-gradient-to-br from-[#5B7B6A]/20 to-[#5B7B6A]/8 rounded-2xl p-4 sm:p-5 space-y-4">
             {/* Stats Row */}
             <div className="grid grid-cols-3 gap-3">
-              <Card padding="md" variant="elevated">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-xs text-pro-text-secondary">Kalan Analiz</p>
-                    <p className="text-2xl font-bold text-pro-primary mt-0.5">{creditBalance}</p>
+              {creditBalance > 0 ? (
+                <Card padding="md" variant="elevated">
+                  <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-xl bg-[var(--pro-analysis-light)] flex items-center justify-center">
+                      <FlaskConical className="h-5 w-5 text-[var(--pro-analysis)]" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-pro-text-secondary font-medium">Test Kredisi</p>
+                      <p className="text-2xl font-bold text-[var(--pro-analysis)]">{creditBalance}</p>
+                    </div>
                   </div>
-                  <div className="h-9 w-9 rounded-lg bg-pro-primary-light flex items-center justify-center">
-                    <FlaskConical className="h-4 w-4 text-pro-primary" />
+                </Card>
+              ) : (
+                <Card padding="md" variant="elevated" className="bg-gradient-to-br from-amber-50 to-orange-50 border-amber-200/50">
+                  <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-xl bg-amber-100 flex items-center justify-center">
+                      <FlaskConical className="h-5 w-5 text-amber-600" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs text-amber-700 font-medium">Test Krediniz Bitti</p>
+                      <button
+                        onClick={() => router.push("/pro/billing")}
+                        className="text-sm font-semibold text-amber-600 hover:text-amber-700 transition-colors flex items-center gap-1 mt-0.5"
+                      >
+                        Hemen Al →
+                      </button>
+                    </div>
+                  </div>
+                </Card>
+              )}
+              <Card padding="md" variant="elevated">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-pro-surface-alt flex items-center justify-center">
+                    <Send className="h-5 w-5 text-pro-text-secondary" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-pro-text-secondary font-medium">Gönderilen</p>
+                    <p className="text-2xl font-bold text-pro-text">{tests.length}</p>
                   </div>
                 </div>
-                <button
-                  onClick={() => router.push("/pro/billing")}
-                  className="mt-3 w-full flex items-center justify-center gap-1.5 py-1.5 text-xs font-medium text-pro-accent hover:bg-pro-accent-light rounded-lg transition-colors"
-                >
-                  <CreditCard className="h-3.5 w-3.5" />
-                  Satın Al
-                </button>
               </Card>
               <Card padding="md" variant="elevated">
-                <p className="text-xs text-pro-text-secondary">Gönderilen</p>
-                <p className="text-2xl font-bold text-pro-text mt-0.5">{tests.length}</p>
-              </Card>
-              <Card padding="md" variant="elevated">
-                <p className="text-xs text-pro-text-secondary">Tamamlanan</p>
-                <p className="text-2xl font-bold text-green-600 mt-0.5">{completedCount}</p>
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-green-50 flex items-center justify-center">
+                    <Check className="h-5 w-5 text-green-600" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-pro-text-secondary font-medium">Tamamlanan</p>
+                    <p className="text-2xl font-bold text-green-600">{completedCount}</p>
+                  </div>
+                </div>
               </Card>
             </div>
 
@@ -90,8 +116,8 @@ export default function TestsPage() {
               <div className="flex items-center justify-between mb-5">
                 <div className="flex items-center gap-3">
                   <h2 className="font-semibold text-pro-text flex items-center gap-2">
-                    <span className="h-4 w-0.5 rounded-full bg-pro-primary" />
-                    Analiz Geçmişi
+                    <span className="h-4 w-0.5 rounded-full bg-[var(--pro-analysis)]" />
+                    Test Geçmişi
                   </h2>
                   <div className="flex gap-1 bg-pro-surface-alt rounded-lg p-1">
                     {(["all", "pending", "completed"] as Filter[]).map((f) => (
@@ -110,13 +136,6 @@ export default function TestsPage() {
                     ))}
                   </div>
                 </div>
-                <button
-                  onClick={() => setShowSendModal(true)}
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-pro-primary hover:bg-pro-primary-hover text-white text-sm font-medium transition-all shadow-sm hover:shadow-md"
-                >
-                  <FlaskConical className="h-4 w-4" />
-                  Analiz Gönder
-                </button>
               </div>
 
               {/* Content */}
@@ -136,10 +155,11 @@ export default function TestsPage() {
               ) : filtered.length === 0 ? (
                 <EmptyState
                   icon={FlaskConical}
-                  title={tests.length === 0 ? "Henüz analiz gönderilmemiş" : "Sonuç bulunamadı"}
-                  description={tests.length === 0 ? "Danışanlarınıza analiz göndererek içgörüler elde edin" : "Farklı bir filtre deneyin"}
-                  actionLabel={tests.length === 0 ? "Analiz Gönder" : undefined}
+                  title={tests.length === 0 ? "Henüz test gönderilmemiş" : "Sonuç bulunamadı"}
+                  description={tests.length === 0 ? "Danışanlarınıza test göndererek içgörüler elde edin" : "Farklı bir filtre deneyin"}
+                  actionLabel={tests.length === 0 ? "Test Gönder" : undefined}
                   onAction={tests.length === 0 ? () => setShowSendModal(true) : undefined}
+                  actionVariant={tests.length === 0 ? "blue" : undefined}
                 />
               ) : (
                 <div className="space-y-2">
@@ -178,9 +198,9 @@ export default function TestsPage() {
                                 "p-1.5 rounded-lg transition-colors",
                                 isCopied
                                   ? "text-pro-success bg-pro-success-light"
-                                  : "text-pro-text-tertiary hover:text-pro-primary hover:bg-pro-primary-light"
+                                  : "text-pro-text-tertiary hover:text-[var(--pro-analysis)] hover:bg-[var(--pro-analysis-light)]"
                               )}
-                              title="Analiz linkini kopyala"
+                              title="Test linkini kopyala"
                             >
                               {isCopied ? <Check className="h-4 w-4" /> : <Link2 className="h-4 w-4" />}
                             </button>
@@ -188,7 +208,7 @@ export default function TestsPage() {
                           {isCompleted && (
                             <Link
                               href={`/pro/tests/${test.id}`}
-                              className="p-1.5 rounded-lg text-pro-primary hover:bg-pro-primary-light transition-colors"
+                              className="p-1.5 rounded-lg text-[var(--pro-analysis)] hover:bg-[var(--pro-analysis-light)] transition-colors"
                               title="Sonuçları Gör"
                             >
                               <Eye className="h-4 w-4" />

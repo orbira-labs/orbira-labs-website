@@ -315,7 +315,7 @@ export default function ClientDetailPage() {
                           {isCompleted && (
                             <Link
                               href={`/pro/tests/${test.id}`}
-                              className="flex items-center gap-1.5 px-3 py-1.5 bg-pro-primary text-white text-xs font-medium rounded-lg hover:bg-pro-primary/90 transition-colors"
+                              className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--pro-analysis)] text-white text-xs font-medium rounded-lg hover:bg-[var(--pro-analysis-hover)] transition-colors"
                             >
                               <Eye className="h-3.5 w-3.5" />
                               Sonucu Gör
@@ -346,7 +346,7 @@ export default function ClientDetailPage() {
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="text-sm font-medium text-pro-text">
-                          {apt.subject || "Randevu"}
+                          Randevu
                         </p>
                         <p className="text-xs text-pro-text-tertiary">
                           {formatDateTime(apt.starts_at)} · {apt.duration_minutes} dk

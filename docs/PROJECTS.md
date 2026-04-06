@@ -2,6 +2,17 @@
 
 Bu dokümanda Orbira Labs'ın aktif projeleri ve proje yolları bulunmaktadır.
 
+## Geliştirme kökü (Mac / Windows)
+
+Aşağıdaki yollar **sabit bir diskin harfini veya kullanıcı adını içermez**. Her makinede projeleri nereye klonladığınız o makinenin **geliştirme kökü** olur; burada `<DEV>` ile gösterilir.
+
+| Ortam | Örnek `<DEV>` |
+|--------|----------------|
+| Windows | `C:\dev` |
+| macOS | `~/dev` veya `/Users/<kullanici>/dev` |
+
+Tam yol her zaman: **`<DEV>/<proje-grubu>/<repo-klasörü>`** (ayırıcı olarak Windows `\`, macOS `/` kullanılır; IDE ve Git bunu otomatik yönetir).
+
 ---
 
 ## KasaBende
@@ -12,10 +23,10 @@ Bu dokümanda Orbira Labs'ın aktif projeleri ve proje yolları bulunmaktadır.
 
 **Kategori:** İş & Operasyon
 
-**Proje Path:** `/Users/dilaraaycinakyel/dev/kasabende`
+**Klasör grubu:** `<DEV>/kasabende/`
 
-- Mobile: `/Users/dilaraaycinakyel/dev/kasabende/mobile`
-- Backend: `/Users/dilaraaycinakyel/dev/kasabende/backend`
+- Mobile: `<DEV>/kasabende/kasabende-mobile`
+- Backend: `<DEV>/kasabende/kasabende-backend`
 
 ---
 
@@ -27,7 +38,7 @@ Bu dokümanda Orbira Labs'ın aktif projeleri ve proje yolları bulunmaktadır.
 
 **Kategori:** Sağlık & Yaşam
 
-**Proje Path:** `/Users/dilaraaycinakyel/dev/moodumuz`
+**Klasör grubu:** `<DEV>/moodumuz/`
 
-- Mobile: `/Users/dilaraaycinakyel/dev/moodumuz/mobile`
-- Backend: `/Users/dilaraaycinakyel/dev/moodumuz/backend`
+- Mobile: `<DEV>/moodumuz/moodumuz-mobile`
+- Backend: `<DEV>/moodumuz/moodumuz-backend`

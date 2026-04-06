@@ -18,7 +18,7 @@ export default function ProLayout({
   return (
     <div
       data-theme="pro"
-      className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-[family-name:var(--font-inter)]"
+      className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-[family-name:var(--font-nunito)]"
     >
       {children}
       <Toaster

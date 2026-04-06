@@ -13,6 +13,7 @@ interface EmptyStateProps {
   actionLabel?: string;
   onAction?: () => void;
   actionHref?: string;
+  actionVariant?: "primary" | "blue" | "client" | "appointment" | "analysis";
   secondaryActionLabel?: string;
   onSecondaryAction?: () => void;
 }
@@ -24,6 +25,7 @@ export function EmptyState({
   actionLabel,
   onAction,
   actionHref,
+  actionVariant = "primary",
   secondaryActionLabel,
   onSecondaryAction,
 }: EmptyStateProps) {
@@ -74,13 +76,13 @@ export function EmptyState({
       >
         {actionLabel && actionHref && (
           <Link href={actionHref}>
-            <Button variant="primary" size="md">
+            <Button variant={actionVariant} size="md">
               {actionLabel}
             </Button>
           </Link>
         )}
         {actionLabel && onAction && !actionHref && (
-          <Button variant="primary" size="md" onClick={onAction}>
+          <Button variant={actionVariant} size="md" onClick={onAction}>
             {actionLabel}
           </Button>
         )}

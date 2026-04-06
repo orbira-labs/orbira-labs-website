@@ -11,6 +11,8 @@ import { Skeleton } from "@/components/pro/ui/Skeleton";
 import { QuickStats } from "@/components/pro/dashboard";
 import { NotesCard } from "@/components/pro/dashboard/NotesCard";
 import { CreateAppointmentModal } from "@/components/pro/appointments";
+import { AppointmentDetailModal, type AppointmentSlim } from "@/components/pro/appointments/AppointmentDetailModal";
+import { EditAppointmentModal } from "@/components/pro/appointments/EditAppointmentModal";
 import { Users, Calendar, FlaskConical, CheckCircle2, Eye, Share2, Copy, Mail, MessageCircle, Check, Plus } from "lucide-react";
 import { useProContext } from "@/lib/pro/context";
 import { useDashboard } from "@/lib/pro/hooks/useDashboard";
@@ -148,6 +150,8 @@ export default function DashboardPage() {
   const { stats, upcomingAppointments, recentTests, loading, refresh } = useDashboard();
   const [shareOpenId, setShareOpenId] = useState<string | null>(null);
   const [showAppointmentModal, setShowAppointmentModal] = useState(false);
+  const [selectedApt, setSelectedApt] = useState<AppointmentSlim | null>(null);
+  const [editApt, setEditApt] = useState<AppointmentSlim | null>(null);
 
   const statCards = STAT_CARDS.map(card => ({
     ...card,
@@ -162,6 +166,17 @@ export default function DashboardPage() {
         onClose={() => setShowAppointmentModal(false)}
         onCreated={refresh}
       />
+      <AppointmentDetailModal
+        appointment={selectedApt}
+        onClose={() => setSelectedApt(null)}
+        onUpdated={() => { setSelectedApt(null); refresh(); }}
+        onEditRequest={(apt) => { setSelectedApt(null); setEditApt(apt); }}
+      />
+      <EditAppointmentModal
+        appointment={editApt}
+        onClose={() => setEditApt(null)}
+        onUpdated={() => { setEditApt(null); refresh(); }}
+      />
       <main className="flex-1 p-3 sm:p-5 lg:p-6">
         <motion.div 
           className="mx-auto max-w-6xl"
@@ -169,140 +184,139 @@ export default function DashboardPage() {
           initial="hidden"
           animate="visible"
         >
-          {/* Main Dashboard Container */}
           <motion.div 
             variants={cardReveal}
             className="bg-gradient-to-br from-[#5B7B6A]/20 to-[#5B7B6A]/8 rounded-2xl p-4 sm:p-5 space-y-4"
           >
-            {/* Stat cards */}
             <QuickStats stats={statCards} loading={loading} />
 
-            {/* Bottom panels - 3 columns */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               <Card padding="lg" accent="primary" variant="elevated">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-pro-text flex items-center gap-2">
-                  <span className="h-4 w-0.5 rounded-full bg-pro-primary" />
-                  Yaklaşan Randevular
-                </h3>
-                <Link href="/pro/appointments" className="text-sm text-pro-primary hover:underline">Tümü</Link>
-              </div>
-              {loading ? (
-                <div className="space-y-3">
-                  {[...Array(3)].map((_, i) => (
-                    <div key={i} className="flex items-center gap-3 p-3">
-                      <Skeleton className="h-10 w-10 rounded-full" />
-                      <div className="flex-1 space-y-2">
-                        <Skeleton className="h-4 w-28" />
-                        <Skeleton className="h-3 w-40" />
-                      </div>
-                    </div>
-                  ))}
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-semibold text-pro-text flex items-center gap-2">
+                    <span className="h-4 w-0.5 rounded-full bg-pro-primary" />
+                    Yaklaşan Randevular
+                  </h3>
+                  <Link href="/pro/appointments" className="text-sm text-pro-primary hover:underline">Tümü</Link>
                 </div>
-              ) : upcomingAppointments.length === 0 ? (
-                <EmptyState icon={Calendar} title="Henüz randevu yok" description="İlk randevunuzu oluşturun" actionLabel="Randevu Oluştur" onAction={() => setShowAppointmentModal(true)} />
-              ) : (
-                <div className="space-y-2">
-                  {upcomingAppointments.slice(0, 3).map((apt) => (
-                    <div key={apt.id} className="flex items-center gap-3 p-2.5 rounded-lg bg-pro-surface-alt">
-                      <Avatar firstName={apt.client?.first_name || "?"} lastName={apt.client?.last_name || ""} size="sm" />
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-pro-text truncate">{apt.client?.first_name} {apt.client?.last_name}</p>
-                        <p className="text-xs text-pro-text-secondary truncate">{apt.subject || "Randevu"}</p>
+                {loading ? (
+                  <div className="space-y-3">
+                    {[...Array(3)].map((_, i) => (
+                      <div key={i} className="flex items-center gap-3 p-3">
+                        <Skeleton className="h-10 w-10 rounded-full" />
+                        <div className="flex-1 space-y-2">
+                          <Skeleton className="h-4 w-28" />
+                          <Skeleton className="h-3 w-40" />
+                        </div>
                       </div>
-                      <div className="text-right shrink-0">
-                        <p className="text-sm font-medium text-pro-text">{formatTime(apt.starts_at)}</p>
-                        <p className="text-xs text-pro-text-tertiary">{formatDayLabel(apt.starts_at)}</p>
-                      </div>
-                    </div>
-                  ))}
-                  <button
-                    onClick={() => setShowAppointmentModal(true)}
-                    className="flex items-center justify-center gap-1.5 w-full py-2 mt-1 text-xs font-medium text-pro-primary hover:bg-pro-primary-light rounded-lg transition-colors"
-                  >
-                    <Plus className="h-3.5 w-3.5" />
-                    Randevu Oluştur
-                  </button>
-                </div>
-              )}
-            </Card>
+                    ))}
+                  </div>
+                ) : upcomingAppointments.length === 0 ? (
+                  <EmptyState icon={Calendar} title="Henüz randevu yok" description="İlk randevunuzu oluşturun" actionLabel="Randevu Oluştur" onAction={() => setShowAppointmentModal(true)} />
+                ) : (
+                  <div className="space-y-2">
+                    {upcomingAppointments.slice(0, 3).map((apt) => (
+                      <button
+                        key={apt.id}
+                        onClick={() => setSelectedApt({ id: apt.id, client_id: apt.client_id, starts_at: apt.starts_at, duration_minutes: apt.duration_minutes, note: apt.note ?? null, status: apt.status ?? "scheduled", client: apt.client })}
+                        className="flex items-center gap-3 p-2.5 rounded-lg bg-pro-surface-alt w-full text-left hover:bg-pro-primary-light transition-colors"
+                      >
+                        <Avatar firstName={apt.client?.first_name || "?"} lastName={apt.client?.last_name || ""} size="sm" />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium text-pro-text truncate">{apt.client?.first_name} {apt.client?.last_name}</p>
+                        </div>
+                        <div className="text-right shrink-0">
+                          <p className="text-sm font-medium text-pro-text">{formatTime(apt.starts_at)}</p>
+                          <p className="text-xs text-pro-text-tertiary">{formatDayLabel(apt.starts_at)}</p>
+                        </div>
+                      </button>
+                    ))}
+                    <button
+                      onClick={() => setShowAppointmentModal(true)}
+                      className="flex items-center justify-center gap-1.5 w-full py-2 mt-1 text-xs font-medium text-pro-primary hover:bg-pro-primary-light rounded-lg transition-colors"
+                    >
+                      <Plus className="h-3.5 w-3.5" />
+                      Randevu Oluştur
+                    </button>
+                  </div>
+                )}
+              </Card>
 
               <Card padding="lg" accent="accent" variant="elevated">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-pro-text flex items-center gap-2">
-                  <span className="h-4 w-0.5 rounded-full bg-pro-accent" />
-                  Son Analizler
-                </h3>
-                <Link href="/pro/tests" className="text-sm text-pro-primary hover:underline">Tümü</Link>
-              </div>
-              {loading ? (
-                <div className="space-y-3">
-                  {[...Array(3)].map((_, i) => (
-                    <div key={i} className="flex items-center gap-3 p-3">
-                      <Skeleton className="h-10 w-10 rounded-full" />
-                      <div className="flex-1 space-y-2">
-                        <Skeleton className="h-4 w-28" />
-                        <Skeleton className="h-3 w-40" />
-                      </div>
-                    </div>
-                  ))}
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-semibold text-pro-text flex items-center gap-2">
+                    <span className="h-4 w-0.5 rounded-full bg-pro-accent" />
+                    Son Analizler
+                  </h3>
+                  <Link href="/pro/tests" className="text-sm text-pro-primary hover:underline">Tümü</Link>
                 </div>
-              ) : recentTests.length === 0 ? (
-                <EmptyState icon={FlaskConical} title="Henüz analiz yok" description="İlk karakter analizinizi gönderin" actionLabel="Analiz Gönder" actionHref="/pro/tests" />
-              ) : (
-                <div className="space-y-2">
-                  {recentTests.slice(0, 4).map((test) => {
-                    const s = STATUS_MAP[test.status] || STATUS_MAP.sent;
-                    const isCompleted = test.status === "completed";
-                    const isPending = test.status !== "completed" && test.status !== "expired";
-                    const profName = professional ? `${professional.first_name} ${professional.last_name}` : "";
-
-                    return (
-                      <div key={test.id} className="flex items-center gap-2 p-2.5 rounded-lg bg-pro-surface-alt">
-                        <Avatar firstName={test.client?.first_name || "?"} lastName={test.client?.last_name || ""} size="sm" />
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-pro-text truncate">{test.client?.first_name} {test.client?.last_name}</p>
-                          <p className="text-xs text-pro-text-tertiary">{formatRelative(test.created_at)}</p>
+                {loading ? (
+                  <div className="space-y-3">
+                    {[...Array(3)].map((_, i) => (
+                      <div key={i} className="flex items-center gap-3 p-3">
+                        <Skeleton className="h-10 w-10 rounded-full" />
+                        <div className="flex-1 space-y-2">
+                          <Skeleton className="h-4 w-28" />
+                          <Skeleton className="h-3 w-40" />
                         </div>
-                        <div className="flex items-center gap-1.5">
-                          <Badge variant={s.variant} size="sm" dot>{s.label}</Badge>
-                          {isCompleted && (
-                            <Link
-                              href={`/pro/tests/${test.id}`}
-                              className="p-1 rounded-lg text-pro-primary hover:bg-pro-primary-light transition-colors"
-                              title="Sonuçları Gör"
-                            >
-                              <Eye className="h-3.5 w-3.5" />
-                            </Link>
-                          )}
-                          {isPending && (
-                            <div className="relative">
-                              <button
-                                onClick={() => setShareOpenId(shareOpenId === test.id ? null : test.id)}
-                                className="p-1 rounded-lg text-pro-text-tertiary hover:text-pro-primary hover:bg-pro-primary-light transition-colors"
-                                title="Analizi Paylaş"
+                      </div>
+                    ))}
+                  </div>
+                ) : recentTests.length === 0 ? (
+                  <EmptyState icon={FlaskConical} title="Henüz analiz yok" description="İlk karakter analizinizi gönderin" actionLabel="Analiz Gönder" actionHref="/pro/tests" />
+                ) : (
+                  <div className="space-y-2">
+                    {recentTests.slice(0, 4).map((test) => {
+                      const s = STATUS_MAP[test.status] || STATUS_MAP.sent;
+                      const isCompleted = test.status === "completed";
+                      const isPending = test.status !== "completed" && test.status !== "expired";
+                      const profName = professional ? `${professional.first_name} ${professional.last_name}` : "";
+
+                      return (
+                        <div key={test.id} className="flex items-center gap-2 p-2.5 rounded-lg bg-pro-surface-alt">
+                          <Avatar firstName={test.client?.first_name || "?"} lastName={test.client?.last_name || ""} size="sm" />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-pro-text truncate">{test.client?.first_name} {test.client?.last_name}</p>
+                            <p className="text-xs text-pro-text-tertiary">{formatRelative(test.created_at)}</p>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            <Badge variant={s.variant} size="sm" dot>{s.label}</Badge>
+                            {isCompleted && (
+                              <Link
+                                href={`/pro/tests/${test.id}`}
+                                className="p-1 rounded-lg text-pro-primary hover:bg-pro-primary-light transition-colors"
+                                title="Sonuçları Gör"
                               >
-                                <Share2 className="h-3.5 w-3.5" />
-                              </button>
-                              {shareOpenId === test.id && (
-                                <SharePopover
-                                  testToken={test.token}
-                                  clientName={test.client?.first_name || ""}
-                                  professionalName={profName}
-                                  onClose={() => setShareOpenId(null)}
-                                />
-                              )}
-                            </div>
-                          )}
+                                <Eye className="h-3.5 w-3.5" />
+                              </Link>
+                            )}
+                            {isPending && (
+                              <div className="relative">
+                                <button
+                                  onClick={() => setShareOpenId(shareOpenId === test.id ? null : test.id)}
+                                  className="p-1 rounded-lg text-pro-text-tertiary hover:text-pro-primary hover:bg-pro-primary-light transition-colors"
+                                  title="Analizi Paylaş"
+                                >
+                                  <Share2 className="h-3.5 w-3.5" />
+                                </button>
+                                {shareOpenId === test.id && (
+                                  <SharePopover
+                                    testToken={test.token}
+                                    clientName={test.client?.first_name || ""}
+                                    professionalName={profName}
+                                    onClose={() => setShareOpenId(null)}
+                                  />
+                                )}
+                              </div>
+                            )}
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </Card>
+                      );
+                    })}
+                  </div>
+                )}
+              </Card>
 
-              {/* Notes Card */}
               <NotesCard />
             </div>
           </motion.div>

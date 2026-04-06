@@ -4,7 +4,7 @@ import { forwardRef, type ButtonHTMLAttributes } from "react";
 import { clsx } from "clsx";
 import { Loader2 } from "lucide-react";
 
-type Variant = "primary" | "secondary" | "accent" | "ghost" | "danger";
+type Variant = "primary" | "secondary" | "accent" | "ghost" | "danger" | "blue" | "orange" | "purple" | "client" | "appointment" | "analysis";
 type Size = "sm" | "md" | "lg";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -25,6 +25,18 @@ const variantStyles: Record<Variant, string> = {
     "text-pro-text-secondary hover:bg-pro-surface-alt hover:text-pro-text",
   danger:
     "bg-gradient-to-r from-pro-danger to-[#C0392B] text-white hover:shadow-md",
+  blue:
+    "bg-gradient-to-r from-[var(--pro-analysis)] to-[var(--pro-analysis-hover)] text-white shadow-md hover:shadow-lg hover:brightness-110",
+  orange:
+    "bg-white text-pro-text border border-pro-border shadow-[0_2px_8px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.9)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.9)] hover:bg-gray-50",
+  purple:
+    "bg-gradient-to-r from-[var(--pro-appointment)] to-[var(--pro-appointment-hover)] text-white shadow-sm hover:shadow-md hover:brightness-105",
+  client:
+    "bg-gradient-to-r from-[var(--pro-client)] to-[var(--pro-client-hover)] text-white shadow-sm hover:shadow-md hover:brightness-105",
+  appointment:
+    "bg-gradient-to-r from-[var(--pro-appointment)] to-[var(--pro-appointment-hover)] text-white shadow-sm hover:shadow-md hover:brightness-105",
+  analysis:
+    "bg-gradient-to-r from-[var(--pro-analysis)] to-[var(--pro-analysis-hover)] text-white shadow-sm hover:shadow-md hover:brightness-105",
 };
 
 const sizeStyles: Record<Size, string> = {

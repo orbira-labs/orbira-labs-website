@@ -17,9 +17,9 @@ interface AppointmentInput {
   client_id?: string;
   new_first_name?: string;
   new_last_name?: string;
-  starts_at: string;
+  date: string;
+  time: string;
   duration_minutes: number;
-  subject?: string;
   note?: string;
 }
 
@@ -27,9 +27,25 @@ interface CreateAppointmentModalProps {
   open: boolean;
   onClose: () => void;
   onCreated?: () => void;
+  preselectedDate?: Date;
 }
 
-export function CreateAppointmentModal({ open, onClose, onCreated }: CreateAppointmentModalProps) {
+function formatDateForInput(date: Date): string {
+  return date.toISOString().slice(0, 10);
+}
+
+function getTodayDate(): string {
+  return formatDateForInput(new Date());
+}
+
+function getDefaultTime(): string {
+  const now = new Date();
+  now.setMinutes(0, 0, 0);
+  now.setHours(now.getHours() + 1);
+  return now.toTimeString().slice(0, 5);
+}
+
+export function CreateAppointmentModal({ open, onClose, onCreated, preselectedDate }: CreateAppointmentModalProps) {
   const { clients, refresh: refreshClients } = useClients();
   const [saving, setSaving] = useState(false);
   const [clientMode, setClientMode] = useState<"existing" | "new">("existing");
@@ -40,17 +56,32 @@ export function CreateAppointmentModal({ open, onClose, onCreated }: CreateAppoi
     reset,
     formState: { errors },
   } = useForm<AppointmentInput>({
-    defaultValues: { duration_minutes: 60 },
+    defaultValues: {
+      duration_minutes: 60,
+      date: getTodayDate(),
+      time: getDefaultTime(),
+    },
   });
 
+  const preselectedDateStr = preselectedDate ? formatDateForInput(preselectedDate) : null;
+
   useEffect(() => {
-    if (!open) {
-      reset();
+    if (open) {
+      reset({
+        duration_minutes: 60,
+        date: preselectedDateStr ?? getTodayDate(),
+        time: getDefaultTime(),
+      });
       setClientMode("existing");
     }
-  }, [open, reset]);
+  }, [open, reset, preselectedDateStr]);
 
   async function onSubmit(data: AppointmentInput) {
+    if (!data.date || !data.time) {
+      toast.error("Tarih ve saat gerekli");
+      return;
+    }
+
     setSaving(true);
     try {
       const supabase = createSupabase();
@@ -98,13 +129,14 @@ export function CreateAppointmentModal({ open, onClose, onCreated }: CreateAppoi
         return;
       }
 
+      const startsAt = new Date(`${data.date}T${data.time}:00`).toISOString();
+
       const { error } = await supabase.from("appointments").insert({
         professional_id: user.id,
         client_id: clientId,
-        starts_at: new Date(data.starts_at).toISOString(),
+        starts_at: startsAt,
         duration_minutes: data.duration_minutes,
-        subject: data.subject || null,
-        note: data.note || null,
+        note: data.note?.trim() || null,
       });
 
       if (error) {
@@ -124,14 +156,14 @@ export function CreateAppointmentModal({ open, onClose, onCreated }: CreateAppoi
 
   return (
     <Modal open={open} onClose={onClose} title="Yeni Randevu" size="md">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         {/* Client Mode Toggle */}
-        <div className="flex gap-2 p-1 bg-pro-surface-alt rounded-lg">
+        <div className="flex gap-1.5 p-1 bg-pro-surface-alt rounded-xl">
           <button
             type="button"
             onClick={() => setClientMode("existing")}
             className={clsx(
-              "flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-all",
+              "flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all",
               clientMode === "existing"
                 ? "bg-white text-pro-text shadow-sm"
                 : "text-pro-text-secondary hover:text-pro-text"
@@ -144,7 +176,7 @@ export function CreateAppointmentModal({ open, onClose, onCreated }: CreateAppoi
             type="button"
             onClick={() => setClientMode("new")}
             className={clsx(
-              "flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-all",
+              "flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all",
               clientMode === "new"
                 ? "bg-white text-pro-text shadow-sm"
                 : "text-pro-text-secondary hover:text-pro-text"
@@ -169,26 +201,54 @@ export function CreateAppointmentModal({ open, onClose, onCreated }: CreateAppoi
           />
         ) : (
           <div className="grid grid-cols-2 gap-3">
-            <Input
-              label="Ad"
-              placeholder="Danışan adı"
-              {...register("new_first_name")}
-            />
-            <Input
-              label="Soyad"
-              placeholder="Danışan soyadı"
-              {...register("new_last_name")}
-            />
+            <Input label="Ad" placeholder="Danışan adı" {...register("new_first_name")} />
+            <Input label="Soyad" placeholder="Danışan soyadı" {...register("new_last_name")} />
           </div>
         )}
 
-        <Input
-          label="Tarih ve Saat"
-          type="datetime-local"
-          error={errors.starts_at?.message}
-          {...register("starts_at")}
-        />
+        {/* Date + Time */}
+        <div className="space-y-1.5">
+          <label className="block text-sm font-medium text-pro-text">Tarih ve Saat</label>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-1">
+              <p className="text-xs text-pro-text-tertiary">Tarih</p>
+              <input
+                type="date"
+                className={clsx(
+                  "w-full rounded-lg border px-3.5 py-2.5 text-sm text-pro-text",
+                  "bg-pro-surface",
+                  "transition-colors duration-150",
+                  "focus:outline-none focus:ring-2 focus:ring-pro-primary/30 focus:border-pro-primary",
+                  errors.date
+                    ? "border-pro-danger"
+                    : "border-pro-border hover:border-pro-border-strong"
+                )}
+                {...register("date", { required: true })}
+              />
+            </div>
+            <div className="space-y-1">
+              <p className="text-xs text-pro-text-tertiary">Saat</p>
+              <input
+                type="time"
+                className={clsx(
+                  "w-full rounded-lg border px-3.5 py-2.5 text-sm text-pro-text",
+                  "bg-pro-surface",
+                  "transition-colors duration-150",
+                  "focus:outline-none focus:ring-2 focus:ring-pro-primary/30 focus:border-pro-primary",
+                  errors.time
+                    ? "border-pro-danger"
+                    : "border-pro-border hover:border-pro-border-strong"
+                )}
+                {...register("time", { required: true })}
+              />
+            </div>
+          </div>
+          {(errors.date || errors.time) && (
+            <p className="text-xs text-pro-danger">Tarih ve saat gerekli</p>
+          )}
+        </div>
 
+        {/* Duration */}
         <Select
           label="Süre"
           options={APPOINTMENT_DURATIONS.map((d) => ({
@@ -198,27 +258,29 @@ export function CreateAppointmentModal({ open, onClose, onCreated }: CreateAppoi
           {...register("duration_minutes", { valueAsNumber: true })}
         />
 
-        <Input
-          label="Konu"
-          placeholder="Randevu konusu"
-          hint="Opsiyonel"
-          {...register("subject")}
-        />
+        {/* Note */}
+        <div className="space-y-1.5">
+          <label htmlFor="apt-note" className="block text-sm font-medium text-pro-text">
+            Not
+          </label>
+          <textarea
+            id="apt-note"
+            rows={4}
+            placeholder="Randevuya dair eklemek istediğiniz not..."
+            className={clsx(
+              "w-full rounded-lg border px-3.5 py-2.5 text-sm text-pro-text",
+              "bg-pro-surface placeholder:text-pro-text-tertiary",
+              "transition-colors duration-150 resize-none",
+              "focus:outline-none focus:ring-2 focus:ring-pro-primary/30 focus:border-pro-primary",
+              "border-pro-border hover:border-pro-border-strong"
+            )}
+            {...register("note")}
+          />
+          <p className="text-xs text-pro-text-tertiary">Opsiyonel</p>
+        </div>
 
-        <Input
-          label="Not"
-          placeholder="Eklemek istediğiniz not"
-          hint="Opsiyonel"
-          {...register("note")}
-        />
-
-        <div className="flex gap-3 pt-2">
-          <Button
-            type="button"
-            variant="secondary"
-            className="flex-1"
-            onClick={onClose}
-          >
+        <div className="flex gap-3 pt-1">
+          <Button type="button" variant="secondary" className="flex-1" onClick={onClose}>
             İptal
           </Button>
           <Button type="submit" loading={saving} className="flex-1">

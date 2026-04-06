@@ -67,6 +67,27 @@
   --pro-danger-light: #FDEDEC;
   --pro-info: #5B7B6A;
   --pro-info-light: #E8F0EB;
+  --pro-purple: #7C5CBA;
+  --pro-purple-light: #EDE8F7;
+
+  /* Tema Renkleri - Tutarlı Kullanım */
+  /* Danışan = Pembe/Rose */
+  --pro-client: #E91E8C;
+  --pro-client-hover: #D41A7F;
+  --pro-client-light: #FDF2F8;
+  --pro-client-muted: #FCE7F3;
+  
+  /* Randevu = Mor/Purple */
+  --pro-appointment: #8B5CF6;
+  --pro-appointment-hover: #7C3AED;
+  --pro-appointment-light: #F3E8FF;
+  --pro-appointment-muted: #EDE9FE;
+  
+  /* Analiz/Test = Mavi/Blue */
+  --pro-analysis: #3B82F6;
+  --pro-analysis-hover: #2563EB;
+  --pro-analysis-light: #EFF6FF;
+  --pro-analysis-muted: #DBEAFE;
 
   /* Shadow katmanları - premium his için */
   --pro-shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
@@ -119,6 +140,24 @@
   --color-pro-warning-light: var(--pro-warning-light, #FEF5E7);
   --color-pro-danger: var(--pro-danger, #E74C3C);
   --color-pro-danger-light: var(--pro-danger-light, #FDEDEC);
+  --color-pro-purple: var(--pro-purple, #7C5CBA);
+  --color-pro-purple-light: var(--pro-purple-light, #EDE8F7);
+  
+  /* Tema Renkleri */
+  --color-pro-client: var(--pro-client, #E91E8C);
+  --color-pro-client-hover: var(--pro-client-hover, #D41A7F);
+  --color-pro-client-light: var(--pro-client-light, #FDF2F8);
+  --color-pro-client-muted: var(--pro-client-muted, #FCE7F3);
+  
+  --color-pro-appointment: var(--pro-appointment, #8B5CF6);
+  --color-pro-appointment-hover: var(--pro-appointment-hover, #7C3AED);
+  --color-pro-appointment-light: var(--pro-appointment-light, #F3E8FF);
+  --color-pro-appointment-muted: var(--pro-appointment-muted, #EDE9FE);
+  
+  --color-pro-analysis: var(--pro-analysis, #3B82F6);
+  --color-pro-analysis-hover: var(--pro-analysis-hover, #2563EB);
+  --color-pro-analysis-light: var(--pro-analysis-light, #EFF6FF);
+  --color-pro-analysis-muted: var(--pro-analysis-muted, #DBEAFE);
 }
 
 * {
@@ -144,6 +183,18 @@ body {
 [data-theme="pro"] {
   background: var(--background);
   color: var(--foreground);
+}
+
+/* Pro tema için Nunito font'u zorla uygula */
+[data-theme="pro"],
+[data-theme="pro"] * {
+  font-family: var(--font-nunito), "Nunito", system-ui, -apple-system, sans-serif !important;
+}
+
+[data-theme="pro"] code,
+[data-theme="pro"] pre,
+[data-theme="pro"] .font-mono {
+  font-family: var(--font-geist-mono), ui-monospace, monospace !important;
 }
 
 @keyframes modal-in {

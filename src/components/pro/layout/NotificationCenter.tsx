@@ -2,19 +2,11 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Bell, 
-  FileText, 
-  Calendar, 
-  AlertCircle, 
-  CheckCircle2,
-  X,
-  Clock
-} from "lucide-react";
+import { Bell, FileText, Calendar, AlertCircle, Clock } from "lucide-react";
 import { formatRelative } from "@/lib/pro/utils";
 import { clsx } from "clsx";
 
-interface Notification {
+export interface ProPanelNotification {
   id: string;
   type: "analysis_completed" | "appointment_reminder" | "client_inactive" | "system";
   title: string;
@@ -25,10 +17,11 @@ interface Notification {
 }
 
 interface NotificationCenterProps {
-  notifications: Notification[];
+  notifications: ProPanelNotification[];
   onMarkAsRead?: (id: string) => void;
   onMarkAllAsRead?: () => void;
-  onNotificationClick?: (notification: Notification) => void;
+  onNotificationClick?: (notification: ProPanelNotification) => void;
+  triggerClassName?: string;
 }
 
 const notificationIcons = {
@@ -39,9 +32,9 @@ const notificationIcons = {
 };
 
 const notificationColors = {
-  analysis_completed: "bg-pro-success-light text-pro-success",
-  appointment_reminder: "bg-pro-accent-light text-pro-accent",
-  client_inactive: "bg-pro-warning-light text-pro-warning",
+  analysis_completed: "bg-[var(--pro-analysis-light)] text-[var(--pro-analysis)]",
+  appointment_reminder: "bg-[var(--pro-appointment-light)] text-[var(--pro-appointment)]",
+  client_inactive: "bg-[var(--pro-client-light)] text-[var(--pro-client)]",
   system: "bg-pro-info-light text-pro-info",
 };
 
@@ -50,6 +43,7 @@ export function NotificationCenter({
   onMarkAsRead,
   onMarkAllAsRead,
   onNotificationClick,
+  triggerClassName,
 }: NotificationCenterProps) {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -66,7 +60,7 @@ export function NotificationCenter({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleNotificationClick = (notification: Notification) => {
+  const handleNotificationClick = (notification: ProPanelNotification) => {
     if (!notification.isRead) {
       onMarkAsRead?.(notification.id);
     }
@@ -77,12 +71,16 @@ export function NotificationCenter({
   return (
     <div ref={ref} className="relative">
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         className={clsx(
-          "relative p-2 rounded-lg transition-colors",
-          isOpen 
-            ? "bg-pro-primary-light text-pro-primary" 
-            : "text-pro-text-secondary hover:text-pro-text hover:bg-pro-surface-alt"
+          "relative p-2 transition-colors",
+          triggerClassName ? "rounded-xl" : "rounded-lg",
+          triggerClassName
+            ? clsx(triggerClassName, isOpen && "bg-white/70 text-[#3D5A4C]")
+            : isOpen
+              ? "bg-pro-primary-light text-pro-primary"
+              : "text-pro-text-secondary hover:text-pro-text hover:bg-pro-surface-alt"
         )}
       >
         <Bell className="h-5 w-5" />
@@ -105,10 +103,7 @@ export function NotificationCenter({
             <div className="flex items-center justify-between px-4 py-3 border-b border-pro-border">
               <h3 className="font-semibold text-pro-text">Bildirimler</h3>
               {unreadCount > 0 && (
-                <button
-                  onClick={onMarkAllAsRead}
-                  className="text-xs text-pro-primary hover:underline"
-                >
+                <button onClick={onMarkAllAsRead} className="text-xs text-pro-primary hover:underline">
                   Tümünü okundu işaretle
                 </button>
               )}
@@ -135,27 +130,29 @@ export function NotificationCenter({
                           !notification.isRead && "bg-pro-primary-light/20"
                         )}
                       >
-                        <div className={clsx(
-                          "h-9 w-9 rounded-lg flex items-center justify-center shrink-0",
-                          colorClass
-                        )}>
+                        <div
+                          className={clsx(
+                            "h-9 w-9 rounded-lg flex items-center justify-center shrink-0",
+                            colorClass
+                          )}
+                        >
                           <Icon className="h-4 w-4" />
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-start justify-between gap-2">
-                            <p className={clsx(
-                              "text-sm truncate",
-                              notification.isRead ? "text-pro-text-secondary" : "text-pro-text font-medium"
-                            )}>
+                            <p
+                              className={clsx(
+                                "text-sm truncate",
+                                notification.isRead ? "text-pro-text-secondary" : "text-pro-text font-medium"
+                              )}
+                            >
                               {notification.title}
                             </p>
                             {!notification.isRead && (
                               <span className="h-2 w-2 rounded-full bg-pro-primary shrink-0 mt-1.5" />
                             )}
                           </div>
-                          <p className="text-xs text-pro-text-tertiary mt-0.5 line-clamp-2">
-                            {notification.body}
-                          </p>
+                          <p className="text-xs text-pro-text-tertiary mt-0.5 line-clamp-2">{notification.body}</p>
                           <p className="text-[10px] text-pro-text-tertiary mt-1 flex items-center gap-1">
                             <Clock className="h-3 w-3" />
                             {formatRelative(notification.createdAt)}

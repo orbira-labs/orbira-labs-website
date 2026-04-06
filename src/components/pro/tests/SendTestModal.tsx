@@ -417,6 +417,7 @@ export function SendTestModal({ open, onClose, onSent }: SendTestModalProps) {
               Geri
             </Button>
             <Button
+              variant="blue"
               className="flex-1"
               onClick={handleSend}
               loading={sending}
