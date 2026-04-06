@@ -10,7 +10,8 @@ import { Avatar } from "@/components/pro/ui/Avatar";
 import { Skeleton } from "@/components/pro/ui/Skeleton";
 import { QuickStats } from "@/components/pro/dashboard";
 import { NotesCard } from "@/components/pro/dashboard/NotesCard";
-import { Users, Calendar, FlaskConical, CheckCircle2, Eye, Share2, Copy, Mail, MessageCircle, Check } from "lucide-react";
+import { CreateAppointmentModal } from "@/components/pro/appointments";
+import { Users, Calendar, FlaskConical, CheckCircle2, Eye, Share2, Copy, Mail, MessageCircle, Check, Plus } from "lucide-react";
 import { useProContext } from "@/lib/pro/context";
 import { useDashboard } from "@/lib/pro/hooks/useDashboard";
 import { formatTime, formatRelative, formatDayLabel, generateWhatsAppLink, buildTestMessage } from "@/lib/pro/utils";
@@ -146,6 +147,7 @@ export default function DashboardPage() {
   const { professional } = useProContext();
   const { stats, upcomingAppointments, recentTests, loading, refresh } = useDashboard();
   const [shareOpenId, setShareOpenId] = useState<string | null>(null);
+  const [showAppointmentModal, setShowAppointmentModal] = useState(false);
 
   const statCards = STAT_CARDS.map(card => ({
     ...card,
@@ -155,6 +157,11 @@ export default function DashboardPage() {
   return (
     <>
       <TopBar showGreeting onTestSent={refresh} />
+      <CreateAppointmentModal
+        open={showAppointmentModal}
+        onClose={() => setShowAppointmentModal(false)}
+        onCreated={refresh}
+      />
       <main className="flex-1 p-3 sm:p-5 lg:p-6">
         <motion.div 
           className="mx-auto max-w-6xl"
@@ -193,7 +200,7 @@ export default function DashboardPage() {
                   ))}
                 </div>
               ) : upcomingAppointments.length === 0 ? (
-                <EmptyState icon={Calendar} title="Henüz randevu yok" description="İlk randevunuzu oluşturun ve danışanlarınızı takip edin" actionLabel="Randevu Oluştur" actionHref="/pro/appointments" />
+                <EmptyState icon={Calendar} title="Henüz randevu yok" description="İlk randevunuzu oluşturun" actionLabel="Randevu Oluştur" onAction={() => setShowAppointmentModal(true)} />
               ) : (
                 <div className="space-y-2">
                   {upcomingAppointments.slice(0, 3).map((apt) => (
@@ -209,15 +216,13 @@ export default function DashboardPage() {
                       </div>
                     </div>
                   ))}
-                  {upcomingAppointments.length > 0 && (
-                    <Link
-                      href="/pro/appointments"
-                      className="flex items-center justify-center gap-1.5 w-full py-2 mt-1 text-xs font-medium text-pro-primary hover:bg-pro-primary-light rounded-lg transition-colors"
-                    >
-                      <Calendar className="h-3.5 w-3.5" />
-                      Randevu Oluştur
-                    </Link>
-                  )}
+                  <button
+                    onClick={() => setShowAppointmentModal(true)}
+                    className="flex items-center justify-center gap-1.5 w-full py-2 mt-1 text-xs font-medium text-pro-primary hover:bg-pro-primary-light rounded-lg transition-colors"
+                  >
+                    <Plus className="h-3.5 w-3.5" />
+                    Randevu Oluştur
+                  </button>
                 </div>
               )}
             </Card>
