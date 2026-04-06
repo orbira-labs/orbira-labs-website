@@ -8,7 +8,7 @@ import { Badge } from "@/components/pro/ui/Badge";
 import { EmptyState } from "@/components/pro/ui/EmptyState";
 import { Avatar } from "@/components/pro/ui/Avatar";
 import { Skeleton } from "@/components/pro/ui/Skeleton";
-import { ActionCenter, InsightCard, QuickStats } from "@/components/pro/dashboard";
+import { QuickStats } from "@/components/pro/dashboard";
 import { Users, Calendar, FlaskConical, CheckCircle2, Eye, Share2, Copy, Mail, MessageCircle, Check } from "lucide-react";
 import { useProContext } from "@/lib/pro/context";
 import { useDashboard } from "@/lib/pro/hooks/useDashboard";
@@ -161,9 +161,6 @@ export default function DashboardPage() {
   const { stats, upcomingAppointments, recentTests, loading, refresh } = useDashboard();
   const [shareOpenId, setShareOpenId] = useState<string | null>(null);
 
-  const pendingReports = recentTests.filter(t => t.status === "completed").length;
-  const waitingAnalyses = recentTests.filter(t => t.status === "sent" || t.status === "started").length;
-
   const statCards = STAT_CARDS.map(card => ({
     ...card,
     value: stats[card.key],
@@ -190,23 +187,7 @@ export default function DashboardPage() {
             <p className="text-sm text-pro-text-tertiary mt-1 ml-[18px]">{formatTodayDate()}</p>
           </motion.div>
 
-          {/* Action Center + Insight - New Premium Section */}
-          <div className="grid lg:grid-cols-2 gap-4 sm:gap-5">
-            <ActionCenter
-              pendingReports={pendingReports}
-              upcomingAppointments={stats.todays_appointments}
-              waitingAnalyses={waitingAnalyses}
-              completedToday={0}
-            />
-            <InsightCard
-              insights={[]}
-              completionRateChange={0}
-              activeClients={stats.total_clients}
-              weeklyAnalyses={stats.completed_tests}
-            />
-          </div>
-
-          {/* Stat cards - Enhanced with QuickStats */}
+          {/* Stat cards */}
           <QuickStats stats={statCards} loading={loading} />
 
           {/* Bottom panels */}
