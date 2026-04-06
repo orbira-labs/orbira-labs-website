@@ -117,6 +117,48 @@ export function Sidebar() {
             </Link>
           );
         })}
+
+        {/* AI Brain Illustration */}
+        {!collapsed && (
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[180px] opacity-20 pointer-events-none">
+            <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+              {/* Brain outline */}
+              <path
+                d="M100 20C60 20 35 50 35 85C35 110 50 130 75 135C80 136 85 138 90 142C95 146 100 150 100 150C100 150 105 146 110 142C115 138 120 136 125 135C150 130 165 110 165 85C165 50 140 20 100 20Z"
+                stroke="white"
+                strokeWidth="2"
+                fill="none"
+              />
+              {/* Brain details - left */}
+              <path d="M55 70C65 65 75 70 80 80" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+              <path d="M50 90C60 85 70 90 75 100" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+              <path d="M60 110C70 108 78 112 82 118" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+              {/* Brain details - right */}
+              <path d="M145 70C135 65 125 70 120 80" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+              <path d="M150 90C140 85 130 90 125 100" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+              <path d="M140 110C130 108 122 112 118 118" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+              {/* Center line */}
+              <path d="M100 35V130" stroke="white" strokeWidth="1" strokeDasharray="4 4" opacity="0.5" />
+              {/* Neural nodes */}
+              <circle cx="70" cy="60" r="4" fill="white" opacity="0.6" />
+              <circle cx="130" cy="60" r="4" fill="white" opacity="0.6" />
+              <circle cx="60" cy="95" r="3" fill="white" opacity="0.5" />
+              <circle cx="140" cy="95" r="3" fill="white" opacity="0.5" />
+              <circle cx="85" cy="75" r="3" fill="white" opacity="0.4" />
+              <circle cx="115" cy="75" r="3" fill="white" opacity="0.4" />
+              <circle cx="100" cy="55" r="5" fill="white" opacity="0.7" />
+              {/* Connecting lines */}
+              <path d="M70 60L85 75" stroke="white" strokeWidth="1" opacity="0.3" />
+              <path d="M130 60L115 75" stroke="white" strokeWidth="1" opacity="0.3" />
+              <path d="M85 75L100 55L115 75" stroke="white" strokeWidth="1" opacity="0.3" />
+              {/* Sparkle effects */}
+              <circle cx="100" cy="55" r="8" fill="none" stroke="white" strokeWidth="0.5" opacity="0.3">
+                <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0.3;0.1;0.3" dur="2s" repeatCount="indefinite" />
+              </circle>
+            </svg>
+          </div>
+        )}
       </nav>
 
       <div className="border-t border-white/10 p-2.5">
