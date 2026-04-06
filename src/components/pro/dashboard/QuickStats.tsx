@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Card } from "@/components/pro/ui/Card";
-import { TrendIndicator } from "./TrendIndicator";
-import { staggerContainer, cardReveal } from "@/lib/pro/animations";
+import { cardReveal } from "@/lib/pro/animations";
 import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
 
@@ -14,7 +13,7 @@ interface StatItem {
   icon: LucideIcon;
   href: string;
   trend?: number;
-  gradient: string;
+  gradient?: string;
   iconBg: string;
   iconColor: string;
   accentBar: string;
@@ -29,59 +28,56 @@ interface QuickStatsProps {
 export function QuickStats({ stats, loading = false }: QuickStatsProps) {
   if (loading) {
     return (
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-        {[...Array(4)].map((_, i) => (
-          <div key={i} className="bg-pro-surface rounded-xl border border-pro-border p-4 sm:p-5">
-            <div className="animate-pulse">
-              <div className="h-4 w-20 bg-pro-surface-alt rounded mb-3" />
-              <div className="h-8 w-14 bg-pro-surface-alt rounded" />
+      <Card padding="none" variant="elevated">
+        <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-pro-border">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="p-5">
+              <div className="animate-pulse">
+                <div className="h-4 w-20 bg-pro-surface-alt rounded mb-3" />
+                <div className="h-8 w-14 bg-pro-surface-alt rounded" />
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </Card>
     );
   }
 
   return (
-    <motion.div
-      variants={staggerContainer}
-      initial="hidden"
-      animate="visible"
-      className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4"
-    >
-      {stats.map((stat) => (
-        <motion.div key={stat.key} variants={cardReveal}>
-          <Link href={stat.href}>
-            <Card 
-              hover 
-              padding="none"
-              className={`relative overflow-hidden bg-gradient-to-br ${stat.gradient} border-white/60`}
+    <motion.div variants={cardReveal} initial="hidden" animate="visible">
+      <Card padding="none" variant="elevated" className="overflow-hidden">
+        <div className="grid grid-cols-2 lg:grid-cols-4">
+          {stats.map((stat, index) => (
+            <Link
+              key={stat.key}
+              href={stat.href}
+              className={`
+                group relative p-4 sm:p-5 transition-all duration-200
+                hover:bg-pro-surface-alt/50
+                ${index !== stats.length - 1 ? "border-r border-pro-border" : ""}
+                ${index < 2 ? "border-b border-pro-border lg:border-b-0" : ""}
+              `}
             >
-              <div className={`absolute left-0 top-3 bottom-3 w-1 rounded-r-full ${stat.accentBar}`} />
-              <div className="p-4 sm:p-5">
-                <div className="flex items-start justify-between pl-2">
-                  <div>
-                    <p className="text-xs sm:text-sm text-pro-text-secondary font-medium">
-                      {stat.label}
-                    </p>
-                    <p className={`text-2xl sm:text-3xl font-bold mt-1 ${stat.valueColor}`}>
-                      {stat.value}
-                    </p>
-                    {stat.trend !== undefined && stat.trend !== 0 && (
-                      <div className="mt-1.5">
-                        <TrendIndicator value={stat.trend} label="" />
-                      </div>
-                    )}
-                  </div>
-                  <div className={`h-10 w-10 rounded-xl ${stat.iconBg} flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform`}>
-                    <stat.icon className={`h-5 w-5 ${stat.iconColor}`} />
-                  </div>
+              {/* Accent line on hover */}
+              <div className={`absolute bottom-0 left-4 right-4 h-0.5 rounded-full ${stat.accentBar} scale-x-0 group-hover:scale-x-100 transition-transform duration-300`} />
+              
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs sm:text-sm text-pro-text-secondary font-medium mb-1">
+                    {stat.label}
+                  </p>
+                  <p className={`text-2xl sm:text-3xl font-bold tabular-nums ${stat.valueColor}`}>
+                    {stat.value}
+                  </p>
+                </div>
+                <div className={`h-10 w-10 rounded-xl ${stat.iconBg} flex items-center justify-center shrink-0 shadow-sm group-hover:scale-110 transition-transform duration-200`}>
+                  <stat.icon className={`h-5 w-5 ${stat.iconColor}`} />
                 </div>
               </div>
-            </Card>
-          </Link>
-        </motion.div>
-      ))}
+            </Link>
+          ))}
+        </div>
+      </Card>
     </motion.div>
   );
 }
