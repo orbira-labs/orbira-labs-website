@@ -187,13 +187,17 @@ export default function DashboardPage() {
             <p className="text-sm text-pro-text-tertiary mt-1 ml-[18px]">{formatTodayDate()}</p>
           </motion.div>
 
-          {/* Stat cards */}
-          <QuickStats stats={statCards} loading={loading} />
+          {/* Main Dashboard Container */}
+          <motion.div 
+            variants={cardReveal}
+            className="bg-gradient-to-br from-[#5B7B6A]/10 via-[#5B7B6A]/5 to-transparent rounded-2xl p-4 sm:p-6 space-y-4 sm:space-y-5"
+          >
+            {/* Stat cards */}
+            <QuickStats stats={statCards} loading={loading} />
 
-          {/* Bottom panels */}
-          <div className="grid lg:grid-cols-2 gap-4 sm:gap-6">
-            <motion.div variants={cardReveal}>
-            <Card padding="lg" accent="primary" variant="elevated">
+            {/* Bottom panels */}
+            <div className="grid lg:grid-cols-2 gap-4 sm:gap-5">
+              <Card padding="lg" accent="primary" variant="elevated">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-semibold text-pro-text flex items-center gap-2">
                   <span className="h-4 w-0.5 rounded-full bg-pro-primary" />
@@ -233,10 +237,8 @@ export default function DashboardPage() {
                 </div>
               )}
             </Card>
-            </motion.div>
 
-            <motion.div variants={cardReveal}>
-            <Card padding="lg" accent="accent" variant="elevated">
+              <Card padding="lg" accent="accent" variant="elevated">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-semibold text-pro-text flex items-center gap-2">
                   <span className="h-4 w-0.5 rounded-full bg-pro-accent" />
@@ -310,8 +312,8 @@ export default function DashboardPage() {
                 </div>
               )}
             </Card>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </motion.div>
       </main>
     </>
