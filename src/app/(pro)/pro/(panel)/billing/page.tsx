@@ -128,14 +128,16 @@ export default function BillingPage() {
   return (
     <>
       <TopBar title="Satın Al" />
-      <main className="flex-1 p-4 sm:p-6 lg:p-8 relative overflow-hidden">
+      <main className="flex-1 p-3 sm:p-5 lg:p-6 relative overflow-hidden">
         {/* Background cube DNA */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
           <CubeDNA className="absolute -left-16 top-0 w-[280px] h-auto text-pro-primary opacity-[0.07]" />
           <CubeDNA className="absolute -right-10 top-20 w-[240px] h-auto text-pro-primary opacity-[0.05] scale-x-[-1]" />
         </div>
 
-        <div className="mx-auto max-w-3xl relative space-y-6">
+        <div className="mx-auto max-w-6xl relative">
+          {/* Main Container - like Ofisim */}
+          <div className="bg-gradient-to-br from-[#5B7B6A]/20 to-[#5B7B6A]/8 rounded-2xl p-4 sm:p-5 space-y-4">
           {/* Main elevated pricing card */}
           <div className="rounded-3xl bg-white shadow-[0_8px_40px_-8px_rgba(0,0,0,0.12),0_2px_12px_-2px_rgba(0,0,0,0.06)] border border-gray-100/80 overflow-hidden">
             {/* Header — capabilities */}
@@ -362,17 +364,18 @@ export default function BillingPage() {
               </div>
             </div>
           </div>
-        </div>
 
-        <style jsx>{`
-          @keyframes shine {
-            0% { transform: translateX(-100%); opacity: 0; }
-            10% { opacity: 1; }
-            50% { transform: translateX(100%); opacity: 1; }
-            51% { opacity: 0; }
-            100% { opacity: 0; transform: translateX(100%); }
-          }
-        `}</style>
+          <style jsx>{`
+            @keyframes shine {
+              0% { transform: translateX(-100%); opacity: 0; }
+              10% { opacity: 1; }
+              50% { transform: translateX(100%); opacity: 1; }
+              51% { opacity: 0; }
+              100% { opacity: 0; transform: translateX(100%); }
+            }
+          `}</style>
+        </div>
+        </div>
       </main>
     </>
   );

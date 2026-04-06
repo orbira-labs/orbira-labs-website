@@ -1,52 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { isToday, isFuture, isPast } from "date-fns";
-import { useProContext } from "@/lib/pro/context";
 import { useAppointments } from "@/lib/pro/hooks/useAppointments";
-import { useClients } from "@/lib/pro/hooks/useClients";
 import { TopBar } from "@/components/pro/layout/TopBar";
 import { Card } from "@/components/pro/ui/Card";
 import { Badge } from "@/components/pro/ui/Badge";
-import { Button } from "@/components/pro/ui/Button";
-import { Input } from "@/components/pro/ui/Input";
-import { Select } from "@/components/pro/ui/Select";
-import { Modal } from "@/components/pro/ui/Modal";
 import { Avatar } from "@/components/pro/ui/Avatar";
 import { EmptyState } from "@/components/pro/ui/EmptyState";
-import { Skeleton, ListItemSkeleton } from "@/components/pro/ui/Skeleton";
+import { Skeleton } from "@/components/pro/ui/Skeleton";
+import { CreateAppointmentModal } from "@/components/pro/appointments";
 import { Calendar, Plus, Clock } from "lucide-react";
-import { createClient as createSupabase } from "@/lib/pro/supabase/client";
-import { appointmentSchema, type AppointmentInput } from "@/lib/pro/validations";
-import { APPOINTMENT_DURATIONS } from "@/lib/pro/constants";
 import { formatDateTime } from "@/lib/pro/utils";
 import { clsx } from "clsx";
 
 type Filter = "upcoming" | "past" | "all";
 
 export default function AppointmentsPage() {
-  const router = useRouter();
-  const { professional } = useProContext();
   const { appointments, loading, refresh } = useAppointments();
-  const { clients } = useClients();
-
   const [showModal, setShowModal] = useState(false);
-  const [saving, setSaving] = useState(false);
   const [filter, setFilter] = useState<Filter>("upcoming");
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<AppointmentInput>({
-    resolver: zodResolver(appointmentSchema),
-    defaultValues: { duration_minutes: 60 },
-  });
 
   const filtered = appointments.filter((a) => {
     const d = new Date(a.starts_at);
@@ -55,79 +28,67 @@ export default function AppointmentsPage() {
     return true;
   });
 
-  async function onSubmit(data: AppointmentInput) {
-    setSaving(true);
-    try {
-      const supabase = createSupabase();
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      const { error } = await supabase.from("appointments").insert({
-        professional_id: user!.id,
-        client_id: data.client_id,
-        starts_at: new Date(data.starts_at).toISOString(),
-        duration_minutes: data.duration_minutes,
-        subject: data.subject || null,
-        note: data.note || null,
-      });
-
-      if (error) {
-        toast.error("Randevu oluşturulamadı");
-        return;
-      }
-
-      toast.success("Randevu oluşturuldu");
-      setShowModal(false);
-      reset();
-      refresh();
-    } catch {
-      toast.error("Bir hata oluştu");
-    } finally {
-      setSaving(false);
-    }
-  }
-
   return (
     <>
       <TopBar title="Randevular" />
-      <main className="flex-1 p-4 sm:p-6 lg:p-8">
-        <div className="mx-auto max-w-5xl space-y-6">
-          {loading ? (
-            <>
-              <div className="flex items-center justify-between">
-                <Skeleton className="h-9 w-56" />
-                <Skeleton className="h-9 w-36" />
-              </div>
-              {[...Array(4)].map((_, i) => (
-                <ListItemSkeleton key={i} />
-              ))}
-            </>
-          ) : (
-            <>
-              <div className="flex items-center justify-between">
-                <div className="flex gap-1 bg-pro-surface-alt rounded-lg p-1">
-                  {(["upcoming", "past", "all"] as Filter[]).map((f) => (
-                    <button
-                      key={f}
-                      onClick={() => setFilter(f)}
-                      className={clsx(
-                        "px-3 py-1.5 rounded-md text-xs font-medium transition-colors",
-                        filter === f
-                          ? "bg-pro-surface text-pro-text shadow-[var(--pro-shadow-sm)]"
-                          : "text-pro-text-secondary"
-                      )}
-                    >
-                      {f === "upcoming" ? "Yaklaşan" : f === "past" ? "Geçmiş" : "Tümü"}
-                    </button>
-                  ))}
+      <CreateAppointmentModal
+        open={showModal}
+        onClose={() => setShowModal(false)}
+        onCreated={refresh}
+      />
+      <main className="flex-1 p-3 sm:p-5 lg:p-6">
+        <div className="mx-auto max-w-6xl">
+          {/* Main Container - like Ofisim */}
+          <div className="bg-gradient-to-br from-[#5B7B6A]/20 to-[#5B7B6A]/8 rounded-2xl p-4 sm:p-5">
+            <Card padding="lg" variant="elevated">
+              {/* Header */}
+              <div className="flex items-center justify-between mb-5">
+                <div className="flex items-center gap-3">
+                  <h2 className="font-semibold text-pro-text flex items-center gap-2">
+                    <span className="h-4 w-0.5 rounded-full bg-pro-primary" />
+                    Randevular
+                  </h2>
+                  <div className="flex gap-1 bg-pro-surface-alt rounded-lg p-1">
+                    {(["upcoming", "past", "all"] as Filter[]).map((f) => (
+                      <button
+                        key={f}
+                        onClick={() => setFilter(f)}
+                        className={clsx(
+                          "px-3 py-1.5 rounded-md text-xs font-medium transition-colors",
+                          filter === f
+                            ? "bg-pro-surface text-pro-text shadow-sm"
+                            : "text-pro-text-secondary hover:text-pro-text"
+                        )}
+                      >
+                        {f === "upcoming" ? "Yaklaşan" : f === "past" ? "Geçmiş" : "Tümü"}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-                <Button onClick={() => setShowModal(true)}>
-                  <Plus className="h-4 w-4" /> Randevu Ekle
-                </Button>
+                <button
+                  onClick={() => setShowModal(true)}
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-pro-primary hover:bg-pro-primary-hover text-white text-sm font-medium transition-all shadow-sm hover:shadow-md"
+                >
+                  <Plus className="h-4 w-4" />
+                  Randevu Ekle
+                </button>
               </div>
 
-              {filtered.length === 0 ? (
+              {/* Content */}
+              {loading ? (
+                <div className="space-y-3">
+                  {[...Array(4)].map((_, i) => (
+                    <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-pro-surface-alt">
+                      <Skeleton className="h-10 w-10 rounded-full" />
+                      <div className="flex-1 space-y-2">
+                        <Skeleton className="h-4 w-32" />
+                        <Skeleton className="h-3 w-24" />
+                      </div>
+                      <Skeleton className="h-6 w-20" />
+                    </div>
+                  ))}
+                </div>
+              ) : filtered.length === 0 ? (
                 <EmptyState
                   icon={Calendar}
                   title="Randevu yok"
@@ -136,103 +97,49 @@ export default function AppointmentsPage() {
                   onAction={() => setShowModal(true)}
                 />
               ) : (
-                <div className="space-y-3">
+                <div className="space-y-2">
                   {filtered.map((apt) => (
-                    <Card key={apt.id} padding="sm" hover>
-                      <div className="flex items-center gap-3">
-                        <Avatar
-                          firstName={apt.client?.first_name || "?"}
-                          lastName={apt.client?.last_name || ""}
-                          size="sm"
-                        />
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-pro-text">
-                            {apt.client?.first_name} {apt.client?.last_name}
-                          </p>
-                          <p className="text-xs text-pro-text-tertiary">
-                            {apt.subject || "Randevu"} · {apt.duration_minutes} dk
-                          </p>
-                        </div>
-                        <div className="text-right shrink-0">
+                    <div
+                      key={apt.id}
+                      className="flex items-center gap-3 p-3 rounded-lg bg-pro-surface-alt hover:bg-pro-surface-alt/80 transition-colors"
+                    >
+                      <Avatar
+                        firstName={apt.client?.first_name || "?"}
+                        lastName={apt.client?.last_name || ""}
+                        size="sm"
+                      />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-pro-text">
+                          {apt.client?.first_name} {apt.client?.last_name}
+                        </p>
+                        <p className="text-xs text-pro-text-tertiary">
+                          {apt.subject || "Randevu"} · {apt.duration_minutes} dk
+                        </p>
+                      </div>
+                      <div className="text-right shrink-0 flex items-center gap-3">
+                        <div>
                           <p className="text-sm font-medium text-pro-text flex items-center gap-1">
                             <Clock className="h-3.5 w-3.5" />
                             {formatDateTime(apt.starts_at)}
                           </p>
-                          <Badge
-                            variant={
-                              apt.status === "completed" ? "success" :
-                              apt.status === "cancelled" ? "danger" : "info"
-                            }
-                          >
-                            {apt.status === "scheduled" ? "Planlandı" :
-                             apt.status === "completed" ? "Tamamlandı" : "İptal"}
-                          </Badge>
                         </div>
+                        <Badge
+                          variant={
+                            apt.status === "completed" ? "success" :
+                            apt.status === "cancelled" ? "danger" : "info"
+                          }
+                          size="sm"
+                        >
+                          {apt.status === "scheduled" ? "Planlandı" :
+                           apt.status === "completed" ? "Tamamlandı" : "İptal"}
+                        </Badge>
                       </div>
-                    </Card>
+                    </div>
                   ))}
                 </div>
               )}
-            </>
-          )}
-
-          <Modal
-            open={showModal}
-            onClose={() => { setShowModal(false); reset(); }}
-            title="Yeni Randevu"
-          >
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-              <Select
-                label="Danışan"
-                placeholder="Danışan seçin"
-                options={clients.map((c) => ({
-                  value: c.id,
-                  label: `${c.first_name} ${c.last_name}`,
-                }))}
-                error={errors.client_id?.message}
-                {...register("client_id")}
-              />
-              <Input
-                label="Tarih ve Saat"
-                type="datetime-local"
-                error={errors.starts_at?.message}
-                {...register("starts_at")}
-              />
-              <Select
-                label="Süre"
-                options={APPOINTMENT_DURATIONS.map((d) => ({
-                  value: d.value.toString(),
-                  label: d.label,
-                }))}
-                {...register("duration_minutes", { valueAsNumber: true })}
-              />
-              <Input
-                label="Konu"
-                placeholder="Randevu konusu"
-                hint="Opsiyonel"
-                {...register("subject")}
-              />
-              <Input
-                label="Not"
-                placeholder="Eklemek istediğiniz not"
-                hint="Opsiyonel"
-                {...register("note")}
-              />
-              <div className="flex gap-3 pt-2">
-                <Button
-                  type="button"
-                  variant="secondary"
-                  className="flex-1"
-                  onClick={() => { setShowModal(false); reset(); }}
-                >
-                  İptal
-                </Button>
-                <Button type="submit" loading={saving} className="flex-1">
-                  Oluştur
-                </Button>
-              </div>
-            </form>
-          </Modal>
+            </Card>
+          </div>
         </div>
       </main>
     </>

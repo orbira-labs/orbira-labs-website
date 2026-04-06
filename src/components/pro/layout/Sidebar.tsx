@@ -118,43 +118,140 @@ export function Sidebar() {
           );
         })}
 
-        {/* AI Brain Illustration */}
+        {/* Neural Network Illustration with Flowing Light */}
         {!collapsed && (
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[180px] opacity-20 pointer-events-none">
-            <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
-              {/* Brain outline */}
-              <path
-                d="M100 20C60 20 35 50 35 85C35 110 50 130 75 135C80 136 85 138 90 142C95 146 100 150 100 150C100 150 105 146 110 142C115 138 120 136 125 135C150 130 165 110 165 85C165 50 140 20 100 20Z"
-                stroke="white"
-                strokeWidth="2"
-                fill="none"
-              />
-              {/* Brain details - left */}
-              <path d="M55 70C65 65 75 70 80 80" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-              <path d="M50 90C60 85 70 90 75 100" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-              <path d="M60 110C70 108 78 112 82 118" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-              {/* Brain details - right */}
-              <path d="M145 70C135 65 125 70 120 80" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-              <path d="M150 90C140 85 130 90 125 100" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-              <path d="M140 110C130 108 122 112 118 118" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-              {/* Center line */}
-              <path d="M100 35V130" stroke="white" strokeWidth="1" strokeDasharray="4 4" opacity="0.5" />
-              {/* Neural nodes */}
-              <circle cx="70" cy="60" r="4" fill="white" opacity="0.6" />
-              <circle cx="130" cy="60" r="4" fill="white" opacity="0.6" />
-              <circle cx="60" cy="95" r="3" fill="white" opacity="0.5" />
-              <circle cx="140" cy="95" r="3" fill="white" opacity="0.5" />
-              <circle cx="85" cy="75" r="3" fill="white" opacity="0.4" />
-              <circle cx="115" cy="75" r="3" fill="white" opacity="0.4" />
-              <circle cx="100" cy="55" r="5" fill="white" opacity="0.7" />
-              {/* Connecting lines */}
-              <path d="M70 60L85 75" stroke="white" strokeWidth="1" opacity="0.3" />
-              <path d="M130 60L115 75" stroke="white" strokeWidth="1" opacity="0.3" />
-              <path d="M85 75L100 55L115 75" stroke="white" strokeWidth="1" opacity="0.3" />
-              {/* Sparkle effects */}
-              <circle cx="100" cy="55" r="8" fill="none" stroke="white" strokeWidth="0.5" opacity="0.3">
-                <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite" />
+          <div className="absolute bottom-28 left-1/2 -translate-x-1/2 w-[200px] opacity-30 pointer-events-none">
+            <svg viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+              <defs>
+                {/* Gradient for glowing effect */}
+                <linearGradient id="pulseGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="white" stopOpacity="0" />
+                  <stop offset="50%" stopColor="white" stopOpacity="1" />
+                  <stop offset="100%" stopColor="white" stopOpacity="0" />
+                </linearGradient>
+                {/* Radial glow for nodes */}
+                <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="white" stopOpacity="0.9" />
+                  <stop offset="100%" stopColor="white" stopOpacity="0" />
+                </radialGradient>
+                {/* Filter for soft glow */}
+                <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="2" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+
+              {/* Layer 1 - Input nodes (bottom) */}
+              <circle cx="30" cy="150" r="6" fill="white" opacity="0.5" />
+              <circle cx="70" cy="150" r="6" fill="white" opacity="0.5" />
+              <circle cx="100" cy="150" r="6" fill="white" opacity="0.5" />
+              <circle cx="130" cy="150" r="6" fill="white" opacity="0.5" />
+              <circle cx="170" cy="150" r="6" fill="white" opacity="0.5" />
+
+              {/* Layer 2 - Hidden layer 1 */}
+              <circle cx="50" cy="110" r="5" fill="white" opacity="0.6" />
+              <circle cx="100" cy="110" r="5" fill="white" opacity="0.6" />
+              <circle cx="150" cy="110" r="5" fill="white" opacity="0.6" />
+
+              {/* Layer 3 - Hidden layer 2 */}
+              <circle cx="40" cy="70" r="5" fill="white" opacity="0.6" />
+              <circle cx="80" cy="70" r="5" fill="white" opacity="0.6" />
+              <circle cx="120" cy="70" r="5" fill="white" opacity="0.6" />
+              <circle cx="160" cy="70" r="5" fill="white" opacity="0.6" />
+
+              {/* Layer 4 - Output (top) - Main AI node */}
+              <circle cx="100" cy="30" r="10" fill="url(#nodeGlow)" filter="url(#softGlow)" />
+              <circle cx="100" cy="30" r="6" fill="white" opacity="0.9" />
+
+              {/* Connection lines - Layer 1 to Layer 2 */}
+              <g opacity="0.2">
+                <line x1="30" y1="150" x2="50" y2="110" stroke="white" strokeWidth="1" />
+                <line x1="30" y1="150" x2="100" y2="110" stroke="white" strokeWidth="1" />
+                <line x1="70" y1="150" x2="50" y2="110" stroke="white" strokeWidth="1" />
+                <line x1="70" y1="150" x2="100" y2="110" stroke="white" strokeWidth="1" />
+                <line x1="70" y1="150" x2="150" y2="110" stroke="white" strokeWidth="1" />
+                <line x1="100" y1="150" x2="50" y2="110" stroke="white" strokeWidth="1" />
+                <line x1="100" y1="150" x2="100" y2="110" stroke="white" strokeWidth="1" />
+                <line x1="100" y1="150" x2="150" y2="110" stroke="white" strokeWidth="1" />
+                <line x1="130" y1="150" x2="100" y2="110" stroke="white" strokeWidth="1" />
+                <line x1="130" y1="150" x2="150" y2="110" stroke="white" strokeWidth="1" />
+                <line x1="170" y1="150" x2="100" y2="110" stroke="white" strokeWidth="1" />
+                <line x1="170" y1="150" x2="150" y2="110" stroke="white" strokeWidth="1" />
+              </g>
+
+              {/* Connection lines - Layer 2 to Layer 3 */}
+              <g opacity="0.25">
+                <line x1="50" y1="110" x2="40" y2="70" stroke="white" strokeWidth="1" />
+                <line x1="50" y1="110" x2="80" y2="70" stroke="white" strokeWidth="1" />
+                <line x1="100" y1="110" x2="80" y2="70" stroke="white" strokeWidth="1" />
+                <line x1="100" y1="110" x2="120" y2="70" stroke="white" strokeWidth="1" />
+                <line x1="150" y1="110" x2="120" y2="70" stroke="white" strokeWidth="1" />
+                <line x1="150" y1="110" x2="160" y2="70" stroke="white" strokeWidth="1" />
+              </g>
+
+              {/* Connection lines - Layer 3 to Output */}
+              <g opacity="0.3">
+                <line x1="40" y1="70" x2="100" y2="30" stroke="white" strokeWidth="1.5" />
+                <line x1="80" y1="70" x2="100" y2="30" stroke="white" strokeWidth="1.5" />
+                <line x1="120" y1="70" x2="100" y2="30" stroke="white" strokeWidth="1.5" />
+                <line x1="160" y1="70" x2="100" y2="30" stroke="white" strokeWidth="1.5" />
+              </g>
+
+              {/* Flowing light pulse - Path 1 (left side) */}
+              <circle r="3" fill="white" opacity="0.9" filter="url(#softGlow)">
+                <animateMotion dur="3s" repeatCount="indefinite">
+                  <mpath href="#flowPath1" />
+                </animateMotion>
+                <animate attributeName="opacity" values="0;0.9;0.9;0" dur="3s" repeatCount="indefinite" />
+              </circle>
+              <path id="flowPath1" d="M30 150 L50 110 L40 70 L100 30" fill="none" stroke="none" />
+
+              {/* Flowing light pulse - Path 2 (center) */}
+              <circle r="3" fill="white" opacity="0.9" filter="url(#softGlow)">
+                <animateMotion dur="2.5s" repeatCount="indefinite" begin="0.5s">
+                  <mpath href="#flowPath2" />
+                </animateMotion>
+                <animate attributeName="opacity" values="0;0.9;0.9;0" dur="2.5s" repeatCount="indefinite" begin="0.5s" />
+              </circle>
+              <path id="flowPath2" d="M100 150 L100 110 L80 70 L100 30" fill="none" stroke="none" />
+
+              {/* Flowing light pulse - Path 3 (right side) */}
+              <circle r="3" fill="white" opacity="0.9" filter="url(#softGlow)">
+                <animateMotion dur="3.5s" repeatCount="indefinite" begin="1s">
+                  <mpath href="#flowPath3" />
+                </animateMotion>
+                <animate attributeName="opacity" values="0;0.9;0.9;0" dur="3.5s" repeatCount="indefinite" begin="1s" />
+              </circle>
+              <path id="flowPath3" d="M170 150 L150 110 L160 70 L100 30" fill="none" stroke="none" />
+
+              {/* Flowing light pulse - Path 4 (cross) */}
+              <circle r="2.5" fill="white" opacity="0.8" filter="url(#softGlow)">
+                <animateMotion dur="4s" repeatCount="indefinite" begin="1.5s">
+                  <mpath href="#flowPath4" />
+                </animateMotion>
+                <animate attributeName="opacity" values="0;0.8;0.8;0" dur="4s" repeatCount="indefinite" begin="1.5s" />
+              </circle>
+              <path id="flowPath4" d="M70 150 L100 110 L120 70 L100 30" fill="none" stroke="none" />
+
+              {/* Top node pulsing glow */}
+              <circle cx="100" cy="30" r="14" fill="none" stroke="white" strokeWidth="1" opacity="0.3">
+                <animate attributeName="r" values="14;20;14" dur="2s" repeatCount="indefinite" />
                 <animate attributeName="opacity" values="0.3;0.1;0.3" dur="2s" repeatCount="indefinite" />
+              </circle>
+              <circle cx="100" cy="30" r="10" fill="none" stroke="white" strokeWidth="0.5" opacity="0.2">
+                <animate attributeName="r" values="10;16;10" dur="2s" repeatCount="indefinite" begin="0.3s" />
+                <animate attributeName="opacity" values="0.2;0.05;0.2" dur="2s" repeatCount="indefinite" begin="0.3s" />
+              </circle>
+
+              {/* Subtle sparkles on some nodes */}
+              <circle cx="50" cy="110" r="8" fill="none" stroke="white" strokeWidth="0.5" opacity="0.2">
+                <animate attributeName="opacity" values="0.2;0.4;0.2" dur="1.5s" repeatCount="indefinite" begin="0.2s" />
+              </circle>
+              <circle cx="150" cy="110" r="8" fill="none" stroke="white" strokeWidth="0.5" opacity="0.2">
+                <animate attributeName="opacity" values="0.2;0.4;0.2" dur="1.5s" repeatCount="indefinite" begin="0.7s" />
               </circle>
             </svg>
           </div>
