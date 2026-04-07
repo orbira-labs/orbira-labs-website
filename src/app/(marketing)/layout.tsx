@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     "işletme yönetimi",
     "dijital ürünler",
   ],
-  authors: [{ name: "Eren Kayacan" }],
+  authors: [{ name: "Seyyit Ali Perse" }],
   creator: "Orbira Labs",
   publisher: "Orbira Labs",
   robots: { index: true, follow: true },
@@ -63,7 +63,7 @@ function OrganizationSchema() {
     sameAs: [],
     founder: {
       "@type": "Person",
-      name: "Eren Kayacan",
+      name: "Seyyit Ali Perse",
       jobTitle: "Founder & Developer",
     },
   };
